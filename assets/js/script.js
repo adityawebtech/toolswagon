@@ -1,28 +1,11 @@
-// Load header and footer dynamically
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("/toolswagon/components/header.html")
-    .then((res) => res.text())
-    .then((data) => {
-      document.getElementById("header-placeholder").innerHTML = data;
-      setActiveNavLink(); // Highlight the active nav
-    });
-
-  fetch("/toolswagon/components/footer.html")
-    .then((res) => res.text())
-    .then((data) => {
-      document.getElementById("footer-placeholder").innerHTML = data;
-    });
-});
-
-// Highlight the active navigation link
-function setActiveNavLink() {
-  const links = document.querySelectorAll("#header-placeholder nav a");
-  const currentPath = location.pathname;
-  links.forEach(link => {
-    if (link.getAttribute("href") === currentPath) {
-      link.classList.add("text-primary", "font-semibold");
-    } else {
-      link.classList.remove("text-primary", "font-semibold");
-    }
+fetch("/toolswagon/components/header.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("header-placeholder").innerHTML = data;
   });
-}
+
+fetch("/toolswagon/components/footer.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer-placeholder").innerHTML = data;
+  });
