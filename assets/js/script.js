@@ -1,11 +1,15 @@
-fetch("/toolswagon/components/header.html")
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById("header-placeholder").innerHTML = data;
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  const basePath = "/toolswagon"; // your GitHub repo name
 
-fetch("/toolswagon/components/footer.html")
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById("footer-placeholder").innerHTML = data;
-  });
+  fetch(`${basePath}/components/header.html`)
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("header-placeholder").innerHTML = data;
+    });
+
+  fetch(`${basePath}/components/footer.html`)
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("footer-placeholder").innerHTML = data;
+    });
+});
