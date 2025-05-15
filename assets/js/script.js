@@ -1,13 +1,13 @@
 // Load header and footer dynamically
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("/components/header.html")
+  fetch("/toolswagon/components/header.html")
     .then((res) => res.text())
     .then((data) => {
       document.getElementById("header-placeholder").innerHTML = data;
       setActiveNavLink(); // Highlight the active nav
     });
 
-  fetch("/components/footer.html")
+  fetch("/toolswagon/components/footer.html")
     .then((res) => res.text())
     .then((data) => {
       document.getElementById("footer-placeholder").innerHTML = data;
