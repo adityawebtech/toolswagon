@@ -2,54 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EasyWebToold - All Your Favorite Web Tools</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toolswagon – Free Online Tools for Everyone</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <a href="index.html" class="logo">EasyWebToold</a>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="tools/tool1.html">Tool 1</a></li>
-          <li><a href="tools/tool2.html">Tool 2</a></li>
-          <li><a href="tools/tool3.html">Tool 3</a></li>
-        </ul>
-        <button class="hamburger" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
-      </nav>
-    </div>
-  </header>
+  <div id="header-container"></div>
 
-  <main>
-    <section class="hero container">
-      <h1>Welcome to EasyWebToold</h1>
-      <p>Your one-stop site for free, easy-to-use web tools.</p>
-      <div class="tools-grid">
-        <a href="tools/tool1.html" class="tool-card">Tool 1 Name</a>
-        <a href="tools/tool2.html" class="tool-card">Tool 2 Name</a>
-        <a href="tools/tool3.html" class="tool-card">Tool 3 Name</a>
-      </div>
+  <main class="hero">
+    <h1>Welcome to <span class="highlight">Toolswagon</span></h1>
+    <p>Explore simple, free, and powerful online tools for daily tasks – all in one place.</p>
+
+    <section class="tool-grid">
+      <a class="tool-card" href="tools/text-case-converter/index.html">Text Case Converter</a>
+      <a class="tool-card" href="#">Coming Soon</a>
     </section>
   </main>
 
-  <footer>
-    <div class="container footer-content">
-      <div class="footer-left">
-        © 2025 easywebtoold.site. All Rights Reserved. Created with ❤️ by Aditya in 🇮🇳.
-      </div>
-      <div class="footer-right">
-        <a href="privacy-policy.html">Privacy Policy</a> | 
-        <a href="terms-and-conditions.html">Terms & Conditions</a> | 
-        <a href="disclaimer.html">Disclaimer</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js"></script>
+  <div id="footer-container"></div>
+  <script src="script.js"></script>
 </body>
 </html>
