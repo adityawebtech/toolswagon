@@ -1,49 +1,57 @@
-// Tool Search Functionality
-document.addEventListener("DOMContentLoaded", function () {
-  const searchInput = document.getElementById("searchInput");
-  const toolCards = document.querySelectorAll(".tool-card");
-
-  searchInput.addEventListener("input", function () {
-    const query = this.value.toLowerCase().trim();
-
-    toolCards.forEach(card => {
-      const text = card.textContent.toLowerCase();
-      if (text.includes(query)) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
+// Load header and footer dynamically
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("/components/header.html")
+    .then((res) => res.text())
+    .then((data) => {
+      document.getElementById("header-container").innerHTML = data;
+      initMobileMenu(); // initialize after loading
     });
-  });
+
+  fetch("/components/footer.html")
+    .then((res) => res.text())
+    .then((data) => {
+      document.getElementById("footer-container").innerHTML = data;
+    });
 });
 
-// Optional: Smooth scroll for review slider (on drag)
-const reviewSlider = document.getElementById("reviewSlider");
+// Initialize mobile menu toggle
+function initMobileMenu() {
+  const toggleBtn = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (toggleBtn && mobileMenu) {
+    toggleBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  }
+}
+
+// Scroll review slider (optional buttons logic)
+const reviewSlider = document.querySelector(".review-slider");
 let isDown = false;
 let startX;
 let scrollLeft;
 
-reviewSlider.addEventListener("mousedown", (e) => {
-  isDown = true;
-  reviewSlider.classList.add("grabbing");
-  startX = e.pageX - reviewSlider.offsetLeft;
-  scrollLeft = reviewSlider.scrollLeft;
-});
-
-reviewSlider.addEventListener("mouseleave", () => {
-  isDown = false;
-  reviewSlider.classList.remove("grabbing");
-});
-
-reviewSlider.addEventListener("mouseup", () => {
-  isDown = false;
-  reviewSlider.classList.remove("grabbing");
-});
-
-reviewSlider.addEventListener("mousemove", (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - reviewSlider.offsetLeft;
-  const walk = (x - startX) * 2; // Speed
-  reviewSlider.scrollLeft = scrollLeft - walk;
-});
+if (reviewSlider) {
+  reviewSlider.addEventListener("mousedown", (e) => {
+    isDown = true;
+    reviewSlider.classList.add("active");
+    startX = e.pageX - reviewSlider.offsetLeft;
+    scrollLeft = reviewSlider.scrollLeft;
+  });
+  reviewSlider.addEventListener("mouseleave", () => {
+    isDown = false;
+    reviewSlider.classList.remove("active");
+  });
+  reviewSlider.addEventListener("mouseup", () => {
+    isDown = false;
+    reviewSlider.classList.remove("active");
+  });
+  reviewSlider.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - reviewSlider.offsetLeft;
+    const walk = (x - startX) * 2;
+    reviewSlider.scrollLeft = scrollLeft - walk;
+  });
+}
