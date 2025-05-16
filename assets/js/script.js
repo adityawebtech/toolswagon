@@ -28,17 +28,19 @@ function initMobileMenu() {
 }
 
 // Review Slider
-const reviewTrack = document.querySelector(".review-track");
-const reviews = document.querySelectorAll(".review");
-let index = 0;
+document.addEventListener("DOMContentLoaded", () => {
+  const reviewTrack = document.querySelector(".review-track");
+  const reviews = document.querySelectorAll(".review-card");
+  let index = 0;
 
-function slideReviews() {
-  index++;
-  if (index >= reviews.length) {
-    index = 0;
+  function slideReviews() {
+    index++;
+    if (index >= reviews.length) {
+      index = 0;
+    }
+    const width = reviews[0].offsetWidth;
+    reviewTrack.style.transform = `translateX(-${index * width}px)`;
   }
-  const width = reviews[0].clientWidth + 16; // width + margin (8px each side)
-  reviewTrack.style.transform = `translateX(-${index * width}px)`;
-}
 
-setInterval(slideReviews, 4000);
+  setInterval(slideReviews, 4000);
+});
