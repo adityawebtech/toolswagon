@@ -29,18 +29,14 @@ function initMobileMenu() {
 
 // Review Slider
 document.addEventListener("DOMContentLoaded", () => {
-  const reviewTrack = document.querySelector(".review-track");
-  const reviews = document.querySelectorAll(".review-card");
-  let index = 0;
+  const slider = document.getElementById("reviewSlider");
+  const reviews = slider.children;
+  let currentIndex = 0;
 
-  function slideReviews() {
-    index++;
-    if (index >= reviews.length) {
-      index = 0;
-    }
-    const width = reviews[0].offsetWidth;
-    reviewTrack.style.transform = `translateX(-${index * width}px)`;
+  function showNextReview() {
+    currentIndex = (currentIndex + 1) % reviews.length;
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
   }
 
-  setInterval(slideReviews, 4000);
+  setInterval(showNextReview, 3000); // 3 seconds
 });
