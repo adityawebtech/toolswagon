@@ -1,42 +1,55 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // Load Header
-  fetch("/components/header.html")
-    .then((response) => {
-      if (!response.ok) throw new Error("Header load failed");
-      return response.text();
-    })
-    .then((html) => {
-      document.getElementById("header-placeholder").innerHTML = html;
-      setActiveNavLink();
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+// Dynamically load header and footer
+document.getElementById('header-container').innerHTML = await fetch('/components/header.html').then(res => res.text());
+document.getElementById('footer-container').innerHTML = await fetch('/components/footer.html').then(res => res.text());
 
-  // Load Footer
-  fetch("/components/footer.html")
-    .then((response) => {
-      if (!response.ok) throw new Error("Footer load failed");
-      return response.text();
-    })
-    .then((html) => {
-      document.getElementById("footer-placeholder").innerHTML = html;
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-});
-
-// Highlight active nav link based on current path
+// Update active nav link based on current URL
 function setActiveNavLink() {
-  const navLinks = document.querySelectorAll(".nav-link");
-  const path = window.location.pathname;
-
-  navLinks.forEach((link) => {
-    if (link.getAttribute("href") === path || (path === "/" && link.getAttribute("href") === "/")) {
-      link.classList.add("active");
+  const navLinks = document.querySelectorAll('nav a');
+  const currentPath = window.location.pathname;
+  navLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPath || (link.getAttribute('href') === '/' && currentPath === '/index.html')) {
+      link.classList.add('active');
     } else {
-      link.classList.remove("active");
+      link.classList.remove('active');
     }
   });
 }
+
+// Search icon toggle functionality
+function initSearchToggle() {
+  const searchIcon = document.getElementById('search-icon');
+  const searchInput = document.getElementById('search-input');
+
+  searchIcon.addEventListener('click', () => {
+    if (searchInput.classList.contains('expanded')) {
+      searchInput.classList.remove('expanded');
+      searchInput.value = '';
+    } else {
+      searchInput.classList.add('expanded');
+      searchInput.focus();
+    }
+  });
+
+  // Optional: Collapse search on blur
+  searchInput.addEventListener('blur', () => {
+    setTimeout(() => {
+      searchInput.classList.remove('expanded');
+      searchInput.value = '';
+    }, 200);
+  });
+}
+
+// Run after header/footer loaded
+async function initPage() {
+  // Wait for header and footer to be loaded into DOM
+  await new Promise(r => setTimeout(r, 100));  // slight delay to ensure elements exist
+
+  setActiveNavLink();
+  initSearchToggle();
+
+  // Update footer year dynamically
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+}
+
+initPage();
