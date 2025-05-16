@@ -17,26 +17,24 @@
     <div id="header-container"></div>
 
     <!-- Tool Area -->
-    <section class="py-12">
-      <div class="max-w-4xl mx-auto px-4 text-center">
-        <h1 class="text-3xl font-bold text-blue-600 mb-2">PDF to Word Converter</h1>
-        <p class="text-gray-600 mb-6">Convert your PDF files to editable Word documents with ease.</p>
+    <!-- Tool Area -->
+  <section class="py-12">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-3xl font-bold text-blue-600 mb-2">PDF to Word Converter</h1>
+      <p class="text-gray-600 mb-6">Convert your PDF files to editable Word documents with ease.</p>
 
-        <div class="bg-white rounded-lg shadow-lg p-6 border border-dashed border-blue-300">
-          <label class="block text-gray-700 font-medium mb-2" for="pdfFile">Upload your PDF file</label>
-          <input type="file" id="pdfFile" accept=".pdf" class="w-full border p-3 rounded mb-4" />
+      <div class="bg-white rounded-lg shadow-lg p-6 border border-dashed border-blue-300">
+        <label class="block text-gray-700 font-medium mb-2" for="pdfFile">Upload your PDF file</label>
+        <input type="file" id="pdfFile" accept=".pdf" class="w-full border p-3 rounded mb-4" />
 
-          <button onclick="convertPDFToWord()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded">
-            Convert to Word
-          </button>
+        <button onclick="convertPDFToWord()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded">
+          Convert to Word
+        </button>
 
-          <div id="conversionResult" class="mt-6 hidden">
-            <h2 class="text-lg font-semibold text-green-600 mb-2">Your Word file is ready:</h2>
-            <a id="downloadLink" href="#" download class="inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Download Word File</a>
-          </div>
-        </div>
+        <p id="status" class="mt-4 text-sm text-gray-600"></p>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- SEO Content -->
     <section class="bg-white py-12">
