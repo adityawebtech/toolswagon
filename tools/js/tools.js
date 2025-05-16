@@ -76,3 +76,8 @@ function convertPDFToWord() {
     downloadLink.href = "#"; // Simulated download
   }, 2000);
 }
+
+const response = await fetch("https://your-render-url.onrender.com/convert-pdf", {
+  method: "POST",
+  body: formData,
+});
