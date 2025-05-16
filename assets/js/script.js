@@ -14,9 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Initialize mobile menu toggle
+//Mobile Toggle
+
 function initMobileMenu() {
-  const toggleBtn = document.getElementById("menu-toggle");
+  const toggleBtn = document.getElementById("menuToggle"); // match ID here
   const mobileMenu = document.getElementById("mobileMenu");
 
   if (toggleBtn && mobileMenu) {
