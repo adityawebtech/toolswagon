@@ -1,66 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Toolswagon - Free Online Tools</title>
-  <link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg" />
-
-  <!-- Google Fonts: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind CSS with custom config -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#2563EB', // your vibrant blue
-          },
-          fontFamily: {
-            sans: ['Inter', 'ui-sans-serif', 'system-ui'],
-          },
-        },
-      },
-    }
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Your Custom CSS -->
+  <title>Toolswagon - Home</title>
   <link rel="stylesheet" href="/assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
 </head>
-<body class="bg-white font-sans text-gray-900">
-
-  <!-- Header -->
+<body>
   <div id="header-placeholder"></div>
 
-  <!-- Main Content -->
-  <main class="max-w-7xl mx-auto px-6 py-12">
-    <h1 class="text-4xl font-extrabold text-center text-primary mb-8">Welcome to Toolswagon</h1>
-    <p class="max-w-3xl mx-auto text-center text-gray-700 text-lg">
-      Explore our collection of free, easy-to-use online tools to boost your productivity and creativity.
-    </p>
+  <main class="container">
+    <h1>Welcome to Toolswagon</h1>
+    <p>Your one-stop site for easy and free web tools.</p>
 
-    <div class="mt-12 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
-        <h2 class="text-2xl font-semibold mb-3 text-primary">Text Case Converter</h2>
-        <p class="text-gray-600 mb-5">
-          Convert text to uppercase, lowercase, or title case with ease.
-        </p>
-        <a href="/tools/text-case-converter/" class="inline-block text-primary font-semibold hover:underline">
-          Try Now &rarr;
-        </a>
-      </div>
-      <!-- Add more tools similarly -->
-    </div>
+    <section class="tools-list">
+      <h2>Available Tools</h2>
+      <ul>
+        <li><a href="/tools/text-case-converter/index.html">Text Case Converter</a></li>
+        <!-- Add other tool links here -->
+      </ul>
+    </section>
   </main>
 
-  <!-- Footer -->
   <div id="footer-placeholder"></div>
 
-  <!-- JS Loader -->
   <script src="/assets/js/script.js"></script>
 </body>
 </html>
