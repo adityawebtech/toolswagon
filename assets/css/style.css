@@ -1,68 +1,187 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 :root {
-  --primary: #2563EB;
-  --secondary: #06B6D4;
-  --bg: #f8fafc;
-  --text: #1e293b;
+  --primary-color: #2563eb; /* Vibrant Blue */
+  --secondary-color: #1e40af; /* Darker Blue */
+  --text-color: #333333;
+  --bg-color: #f9fafb;
+  --nav-link-color: #2563eb;
+  --nav-link-active-color: #1e40af;
+  --footer-bg: #1e40af;
+  --footer-text-color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-header, footer {
-  background: white;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-nav a {
-  margin-right: 1.5rem;
-  font-weight: 600;
-  color: var(--text);
-}
-
-nav a.active {
-  color: var(--primary);
-  border-bottom: 2px solid var(--primary);
-}
-
-.hero {
-  text-align: center;
-  padding: 3rem 1rem;
-}
-
-.highlight {
-  color: var(--primary);
-}
-
-.tool-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
-  padding: 2rem;
+.container {
   max-width: 960px;
-  margin: auto;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
-.tool-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease;
-  text-align: center;
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--nav-link-color);
   font-weight: 600;
-  color: var(--primary);
+  padding: 0.5rem;
+  transition: color 0.3s ease;
 }
 
-.tool-card:hover {
-  transform: translateY(-5px);
+.nav-link:hover,
+.nav-link.active {
+  color: var(--nav-link-active-color);
+}
+
+/* Hamburger Menu */
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  display: none;
+  cursor: pointer;
+  width: 30px;
+  height: 25px;
+  position: relative;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: var(--primary-color);
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.nav-toggle-label span {
+  top: 50%;
+  margin-top: -1.5px;
+}
+
+.nav-toggle-label span::before {
+  content: '';
+  top: -10px;
+}
+
+.nav-toggle-label span::after {
+  content: '';
+  top: 10px;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-toggle-label {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: white;
+    width: 100%;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+  }
+
+  .nav-links li {
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  .nav-toggle:checked ~ .nav-links {
+    max-height: 300px;
+  }
+}
+
+/* Footer Styles */
+footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text-color);
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 3rem;
+}
+
+footer a {
+  color: var(--footer-text-color);
+  text-decoration: underline;
+  margin: 0 0.5rem;
+  font-weight: 600;
+}
+
+footer a:hover {
+  color: var(--primary-color);
+}
+
+/* Tools list */
+.tools-list ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.tools-list ul li a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.tools-list ul li a:hover {
+  color: var(--secondary-color);
 }
