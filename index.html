@@ -3,24 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Toolswagon – Free Online Tools for Everyone</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>Toolswagon - Free Online Tools</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Your Custom CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header will load here -->
   <div id="header-placeholder"></div>
 
-  <main class="hero">
-    <h1>Welcome to <span class="highlight">Toolswagon</span></h1>
-    <p>Explore simple, free, and powerful online tools for daily tasks – all in one place.</p>
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold text-center mb-6">Welcome to Toolswagon</h1>
+    <p class="text-center text-lg text-gray-600">
+      Explore our collection of free online tools to boost your productivity.
+    </p>
 
-    <section class="tool-grid">
-      <a class="tool-card" href="tools/text-case-converter/index.html">Text Case Converter</a>
-      <a class="tool-card" href="#">Coming Soon</a>
-    </section>
+    <!-- Tool Cards -->
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white rounded-xl shadow p-6">
+        <h2 class="text-xl font-semibold mb-2">Text Case Converter</h2>
+        <p class="text-gray-600 mb-4">Convert text to uppercase, lowercase, or title case.</p>
+        <a href="/tools/text-case-converter/" class="text-blue-600 hover:underline">Try Now</a>
+      </div>
+      <!-- Add more tools here -->
+    </div>
   </main>
 
+  <!-- Footer will load here -->
   <div id="footer-placeholder"></div>
+
+  <!-- Main JS (including header/footer loader) -->
   <script src="/assets/js/script.js"></script>
 </body>
 </html>
