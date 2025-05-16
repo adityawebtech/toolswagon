@@ -1,3 +1,5 @@
+// TEXT CASE CONVERTER TOOL NO.1
+
 document.addEventListener("DOMContentLoaded", () => {
   const inputText = document.getElementById("inputText");
   const outputText = document.getElementById("outputText");
@@ -55,3 +57,22 @@ document.addEventListener("DOMContentLoaded", () => {
     outputText.value = "";
   });
 });
+
+// PDF TO WORD CONVERTER TOOL No. 2
+
+function convertPDFToWord() {
+  const fileInput = document.getElementById("pdfFile");
+  const result = document.getElementById("conversionResult");
+  const downloadLink = document.getElementById("downloadLink");
+
+  if (!fileInput.files.length) {
+    alert("Please upload a PDF file first.");
+    return;
+  }
+
+  // Simulating file conversion
+  setTimeout(() => {
+    result.classList.remove("hidden");
+    downloadLink.href = "#"; // Simulated download
+  }, 2000);
+}
