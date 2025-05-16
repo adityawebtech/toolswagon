@@ -1,30 +1,27 @@
 <header>
-  <div class="container">
-    <a href="/" class="logo">
-      <img src="/assets/images/logo.svg" alt="Toolswagon Logo">
+  <div class="flex items-center justify-between w-full">
+    <a href="/" class="logo-link">
+      <img src="/assets/logo.svg" alt="Toolswagon Logo" class="h-10 w-auto" />
     </a>
 
-    <div class="nav-toggle" id="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-
-    <nav id="nav-menu">
-      <a href="/" class="nav-link">Home</a>
-      <a href="/#tools" class="nav-link">Tools</a>
-      <a href="/about.html" class="nav-link">About Us</a>
-      <a href="/contact.html" class="nav-link">Contact Us</a>
-      <a href="/report.html" class="nav-link">Report Bug</a>
-    </nav>
-
-    <div class="search-container" id="search-container">
-      <button class="search-icon" id="search-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24" fill="#2563EB">
-          <path d="M21.71 20.29l-3.4-3.4A9 9 0 1018 19l3.4 3.4a1 1 0 001.41-1.41zM11 18a7 7 0 117-7 7 7 0 01-7 7z"/>
+    <div class="relative">
+      <button id="searchToggle" class="text-gray-600 hover:text-blue-600 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/>
         </svg>
       </button>
-      <input type="text" placeholder="Search tools..." id="search-input">
+      <input type="text" id="searchInput" placeholder="Search tools..."
+             class="absolute right-0 top-full mt-2 w-48 px-3 py-2 border border-gray-300 rounded shadow hidden focus:outline-none focus:ring focus:border-blue-500" />
     </div>
   </div>
+
+  <nav class="mt-4 flex flex-wrap gap-4 text-base font-semibold text-gray-700">
+    <a href="/" class="hover:text-blue-600">Home</a>
+    <a href="/#tools" class="hover:text-blue-600">Tools</a>
+    <a href="/about.html" class="hover:text-blue-600">About Us</a>
+    <a href="/contact.html" class="hover:text-blue-600">Contact Us</a>
+    <a href="/report.html" class="hover:text-blue-600">Report Bug</a>
+  </nav>
 </header>
