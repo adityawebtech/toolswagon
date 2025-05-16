@@ -28,15 +28,16 @@ function initMobileMenu() {
 }
 
 // Review Slider
+// Auto-slide reviews
 document.addEventListener("DOMContentLoaded", () => {
   const slider = document.getElementById("reviewSlider");
-  const reviews = slider.children;
-  let currentIndex = 0;
+  const total = slider.children.length;
+  let index = 0;
 
-  function showNextReview() {
-    currentIndex = (currentIndex + 1) % reviews.length;
-    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+  function showNext() {
+    index = (index + 1) % total;
+    slider.style.transform = `translateX(-${index * 100}%)`;
   }
 
-  setInterval(showNextReview, 3000); // 3 seconds
+  setInterval(showNext, 3000);
 });
