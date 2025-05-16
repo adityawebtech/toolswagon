@@ -121,7 +121,6 @@ section p {
 
 /* Review Slider Fix */
 #reviewSlider {
-  display: flex;
   transition: transform 0.6s ease-in-out;
 }
 
