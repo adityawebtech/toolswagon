@@ -1,55 +1,49 @@
-// Dynamically load header and footer
-document.getElementById('header-container').innerHTML = await fetch('/components/header.html').then(res => res.text());
-document.getElementById('footer-container').innerHTML = await fetch('/components/footer.html').then(res => res.text());
+// Tool Search Functionality
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("searchInput");
+  const toolCards = document.querySelectorAll(".tool-card");
 
-// Update active nav link based on current URL
-function setActiveNavLink() {
-  const navLinks = document.querySelectorAll('nav a');
-  const currentPath = window.location.pathname;
-  navLinks.forEach(link => {
-    if (link.getAttribute('href') === currentPath || (link.getAttribute('href') === '/' && currentPath === '/index.html')) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
+  searchInput.addEventListener("input", function () {
+    const query = this.value.toLowerCase().trim();
+
+    toolCards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(query)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
   });
-}
+});
 
-// Search icon toggle functionality
-function initSearchToggle() {
-  const searchIcon = document.getElementById('search-icon');
-  const searchInput = document.getElementById('search-input');
+// Optional: Smooth scroll for review slider (on drag)
+const reviewSlider = document.getElementById("reviewSlider");
+let isDown = false;
+let startX;
+let scrollLeft;
 
-  searchIcon.addEventListener('click', () => {
-    if (searchInput.classList.contains('expanded')) {
-      searchInput.classList.remove('expanded');
-      searchInput.value = '';
-    } else {
-      searchInput.classList.add('expanded');
-      searchInput.focus();
-    }
-  });
+reviewSlider.addEventListener("mousedown", (e) => {
+  isDown = true;
+  reviewSlider.classList.add("grabbing");
+  startX = e.pageX - reviewSlider.offsetLeft;
+  scrollLeft = reviewSlider.scrollLeft;
+});
 
-  // Optional: Collapse search on blur
-  searchInput.addEventListener('blur', () => {
-    setTimeout(() => {
-      searchInput.classList.remove('expanded');
-      searchInput.value = '';
-    }, 200);
-  });
-}
+reviewSlider.addEventListener("mouseleave", () => {
+  isDown = false;
+  reviewSlider.classList.remove("grabbing");
+});
 
-// Run after header/footer loaded
-async function initPage() {
-  // Wait for header and footer to be loaded into DOM
-  await new Promise(r => setTimeout(r, 100));  // slight delay to ensure elements exist
+reviewSlider.addEventListener("mouseup", () => {
+  isDown = false;
+  reviewSlider.classList.remove("grabbing");
+});
 
-  setActiveNavLink();
-  initSearchToggle();
-
-  // Update footer year dynamically
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-}
-
-initPage();
+reviewSlider.addEventListener("mousemove", (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - reviewSlider.offsetLeft;
+  const walk = (x - startX) * 2; // Speed
+  reviewSlider.scrollLeft = scrollLeft - walk;
+});
