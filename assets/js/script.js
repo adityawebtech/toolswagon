@@ -26,32 +26,18 @@ function initMobileMenu() {
   }
 }
 
-// Scroll review slider (optional buttons logic)
-const reviewSlider = document.querySelector(".review-slider");
-let isDown = false;
-let startX;
-let scrollLeft;
+// Review Slider
+const reviewTrack = document.querySelector(".review-track");
+const reviews = document.querySelectorAll(".review");
+let index = 0;
 
-if (reviewSlider) {
-  reviewSlider.addEventListener("mousedown", (e) => {
-    isDown = true;
-    reviewSlider.classList.add("active");
-    startX = e.pageX - reviewSlider.offsetLeft;
-    scrollLeft = reviewSlider.scrollLeft;
-  });
-  reviewSlider.addEventListener("mouseleave", () => {
-    isDown = false;
-    reviewSlider.classList.remove("active");
-  });
-  reviewSlider.addEventListener("mouseup", () => {
-    isDown = false;
-    reviewSlider.classList.remove("active");
-  });
-  reviewSlider.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - reviewSlider.offsetLeft;
-    const walk = (x - startX) * 2;
-    reviewSlider.scrollLeft = scrollLeft - walk;
-  });
+function slideReviews() {
+  index++;
+  if (index >= reviews.length) {
+    index = 0;
+  }
+  const width = reviews[0].clientWidth + 16; // width + margin (8px each side)
+  reviewTrack.style.transform = `translateX(-${index * width}px)`;
 }
+
+setInterval(slideReviews, 4000);
