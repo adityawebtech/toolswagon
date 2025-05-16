@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Text Case Converter - ToolsWagon</title>
+  <meta name="description" content="Easily convert your text to uppercase, lowercase, title case, sentence case, and more with ToolsWagon's free online Text Case Converter." />
+  <meta name="keywords" content="text case converter, convert text case, uppercase converter, lowercase converter, title case converter, sentence case, online text converter" />
+  <link rel="icon" href="/assets/images/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script defer src="/assets/js/script.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <!-- Dynamic header include -->
+  <div id="header-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-12">
+
+    <section class="bg-white p-8 rounded-lg shadow-lg">
+      <h1 class="text-3xl font-bold text-blue-600 mb-4 text-center">Text Case Converter</h1>
+      <p class="mb-6 text-center text-gray-600">Quickly convert your text into uppercase, lowercase, title case, sentence case, and more. Simply paste your text, choose a conversion, and get your results instantly.</p>
+
+      <textarea
+        id="inputText"
+        placeholder="Paste or type your text here..."
+        rows="8"
+        class="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none mb-6"
+      ></textarea>
+
+      <div class="flex flex-wrap gap-3 justify-center mb-8">
+        <button data-case="uppercase" class="case-btn bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded shadow-md transition">UPPERCASE</button>
+        <button data-case="lowercase" class="case-btn bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded shadow-md transition">lowercase</button>
+        <button data-case="titlecase" class="case-btn bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded shadow-md transition">Title Case</button>
+        <button data-case="sentencecase" class="case-btn bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded shadow-md transition">Sentence case</button>
+        <button id="clearBtn" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-5 rounded shadow-md transition">Clear</button>
+      </div>
+
+      <div class="relative">
+        <textarea
+          id="outputText"
+          readonly
+          rows="8"
+          class="w-full p-4 border-2 border-dotted border-blue-500 rounded-md bg-gray-100 resize-none"
+          placeholder="Your converted text will appear here..."
+        ></textarea>
+        <button
+          id="copyBtn"
+          class="absolute top-3 right-3 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm shadow-md transition"
+          title="Copy to clipboard"
+        >Copy</button>
+      </div>
+    </section>
+
+    <section class="mt-12 prose max-w-none text-gray-700 leading-relaxed">
+      <h2>About ToolsWagon's Text Case Converter</h2>
+      <p>In today's digital world, the way text appears matters more than ever. Whether you're drafting emails, creating content for social media, or preparing documents, the correct case format can improve readability and professionalism. ToolsWagon’s <strong>Text Case Converter</strong> is a free, easy-to-use online tool that allows you to instantly change the case of any text to fit your needs.</p>
+
+      <h3>Why Use a Text Case Converter?</h3>
+      <p>Manually converting text to different cases can be time-consuming and error-prone. Our online <em>case converter</em> automates this process, saving you time and effort. You can convert text to uppercase for emphasis, lowercase for a casual tone, or title case to format headings and titles. The <strong>sentence case</strong> option helps you make your text look polished by capitalizing the first letter of every sentence.</p>
+
+      <h3>Features of Our Text Case Converter</h3>
+      <ul>
+        <li><strong>Multiple Case Options:</strong> Easily switch between uppercase, lowercase, title case, and sentence case with a single click.</li>
+        <li><strong>Fast and Accurate:</strong> The conversion happens instantly without any delays, ensuring a smooth user experience.</li>
+        <li><strong>User-Friendly Interface:</strong> The clean design and clear buttons make it simple for everyone, from beginners to experts.</li>
+        <li><strong>Copy Functionality:</strong> Quickly copy your converted text for use in emails, documents, or social media.</li>
+        <li><strong>Free and No Signup Required:</strong> Use the tool without any restrictions or hidden costs.</li>
+      </ul>
+
+      <h3>How to Use the Text Case Converter</h3>
+      <p>Just paste your text into the input box, choose the desired case by clicking one of the buttons, and view your converted text in the output box. You can then copy the result with the copy button for immediate use.</p>
+
+      <h3>Who Can Benefit from This Tool?</h3>
+      <p>Students, writers, marketers, social media managers, and professionals who regularly deal with text formatting will find this tool invaluable. It’s perfect for quickly cleaning up text, formatting titles, or preparing content for publication.</p>
+
+      <h3>SEO Benefits of Using Proper Text Case</h3>
+      <p>Using appropriate text case enhances content readability, which can indirectly improve SEO rankings. Clean and well-formatted text is more engaging for readers and helps search engines understand your content better. ToolsWagon’s Text Case Converter supports your content strategy by helping you maintain consistent text formatting.</p>
+
+      <h3>Try ToolsWagon's Text Case Converter Today!</h3>
+      <p>Whether you need to convert a few lines or large paragraphs, our tool provides a reliable and fast solution to your text case needs. Experience the convenience and power of online text conversion — free, easy, and accessible anywhere.</p>
+    </section>
+
+  </main>
+
+  <!-- Dynamic footer include -->
+  <div id="footer-container"></div>
+
+</body>
+</html>
