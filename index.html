@@ -1,58 +1,134 @@
-<!DOCTYPE html><html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ToolsWagon - Your ultimate destination for free and fast online tools. Access text utilities, converters, finders, and more in one place!" />
-  <meta name="keywords" content="ToolsWagon, online tools, text tools, converter, SEO tools, PDF tools, free tools" />
-  <meta name="author" content="Aditya Pal" />
-  <title>ToolsWagon - All Tools in One Place</title>  <!-- Favicon -->  <link rel="icon" type="image/png" href="/assets/favicon.png" />  <!-- Google Font -->  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">  <!-- Tailwind CSS CDN -->  <script src="https://cdn.tailwindcss.com"></script>  <!-- Main Styles -->  <link rel="stylesheet" href="/assets/css/style.css" />
-</head>
-<body>  <!-- Header (loaded dynamically) -->  <div id="header-container"></div>  <main>
-    <section class="welcome">
-      <h1>Welcome to <span class="highlight">ToolsWagon</span></h1>
-      <p>Your one-stop destination for free, fast, and reliable online tools for personal and professional use.</p>
-    </section><section class="tools">
-  <h2>Our Tools</h2>
-  <div class="tool-grid">
-    <div class="tool-card">Text Case Converter</div>
-    <div class="tool-card">PDF Translator</div>
-    <div class="tool-card">IFSC Finder</div>
-    <div class="tool-card">YouTube MP3 Downloader</div>
-    <div class="tool-card">YouTube Thumbnail Downloader</div>
-    <div class="tool-card">Vocal Remover</div>
-  </div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ToolsWagon – A hub of free online tools to boost your productivity. Access converters, generators, utilities, and more all in one place." />
+    <meta name="keywords" content="free tools, online tools, converter, generator, utilities, ToolsWagon" />
+    <meta name="author" content="Aditya Pal" />
+    <title>ToolsWagon – Free Online Tools for Everyone</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
 
-<section>
-  <h2>How ToolsWagon is Better Than Others?</h2>
-  <p>We focus on speed, user privacy, modern UI, and a no-ads policy. Every tool is optimized for performance and usability, ensuring a smooth experience on all devices.</p>
-</section>
+  <body>
+    <!-- Dynamic Header -->
+    <div id="header-container"></div>
 
-<section>
-  <h2>What Tools Are Available?</h2>
-  <p>From text formatting tools to PDF converters, and YouTube downloaders to SEO utilities — our collection is constantly growing to meet your needs.</p>
-</section>
+    <!-- Hero Section -->
+    <section class="hero text-center py-12">
+      <h1 class="text-4xl font-bold text-blue-600">Welcome to <span class="text-cyan-500">ToolsWagon</span></h1>
+      <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
+        ToolsWagon is your one-stop solution for all essential online tools. Whether you're a student, developer, designer, or marketer, our platform offers powerful tools to save your time and boost productivity – 100% free.
+      </p>
+    </section>
 
-<section>
-  <h2>Are the Tools Paid?</h2>
-  <p>No! All our tools are absolutely <strong>free</strong> to use — forever. We believe in providing value without charging our users.</p>
-</section>
+    <!-- Tools Section -->
+    <section class="py-10 bg-white">
+      <div class="container mx-auto text-center">
+        <h2 class="text-2xl font-semibold mb-6">Our Tools</h2>
+        <input type="text" id="searchInput" class="mb-6 px-4 py-2 border rounded shadow" placeholder="Search tools...">
+        <div class="tool-grid">
+          <a class="tool-card" href="#">YouTube Thumbnail Downloader</a>
+          <a class="tool-card" href="#">IFSC Code Finder</a>
+          <a class="tool-card" href="#">PDF Translator</a>
+          <a class="tool-card" href="#">Text Case Converter</a>
+          <a class="tool-card" href="#">Unit Converter</a>
+          <a class="tool-card" href="#">QR Code Generator</a>
+          <a class="tool-card" href="#">Word Counter</a>
+          <a class="tool-card" href="#">Password Generator</a>
+          <a class="tool-card" href="#">Image Compressor</a>
+        </div>
+      </div>
+    </section>
 
-<section>
-  <h2>What Our Users Say</h2>
-  <div class="reviews-slider">
-    <div class="review-card">“ToolsWagon saved me hours every week. Simple and efficient!” — <strong>Ravi, India</strong></div>
-    <div class="review-card">“Clean design and super fast. Love it!” — <strong>Emily, USA</strong></div>
-    <div class="review-card">“Great variety of tools. Everything in one place.” — <strong>Arjun, India</strong></div>
-    <div class="review-card">“My go-to site for converting files.” — <strong>Sofia, Spain</strong></div>
-    <div class="review-card">“Accurate and helpful, especially the IFSC Finder.” — <strong>Rahul, India</strong></div>
-    <div class="review-card">“So many useful features and totally free!” — <strong>Mike, UK</strong></div>
-    <div class="review-card">“Highly recommend to bloggers and students.” — <strong>Ananya, India</strong></div>
-    <div class="review-card">“ToolsWagon never disappoints!” — <strong>Lucas, Brazil</strong></div>
-    <div class="review-card">“The UI is beautiful and everything works smoothly.” — <strong>Ayesha, UAE</strong></div>
-    <div class="review-card">“Great initiative, hope you keep expanding.” — <strong>Dev, India</strong></div>
-  </div>
-</section>
+    <!-- Why ToolsWagon -->
+    <section class="py-12 bg-gray-50">
+      <div class="container mx-auto text-center px-4">
+        <h2 class="text-2xl font-semibold mb-4">Why ToolsWagon is Better Than Others?</h2>
+        <p class="text-gray-700 max-w-3xl mx-auto">
+          Unlike other websites cluttered with ads, login walls, or limited access, ToolsWagon delivers a seamless, fast, and distraction-free experience. All tools are developed with simplicity and speed in mind, optimized for both desktop and mobile users. No signup. No fees. Just productivity.
+        </p>
+      </div>
+    </section>
 
-  </main>  <!-- Footer (loaded dynamically) -->  <div id="footer-container"></div>  <!-- JavaScript -->  <script src="/assets/js/script.js"></script></body>
+    <!-- FAQs -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-semibold text-center mb-6">FAQs</h2>
+        <div class="max-w-2xl mx-auto space-y-4">
+          <div>
+            <h3 class="font-semibold text-blue-600">What tools are available?</h3>
+            <p>From text converters and generators to utility tools like YouTube thumbnail downloader or IFSC finder – everything is covered.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-blue-600">Are these tools free to use?</h3>
+            <p>Absolutely! All tools on ToolsWagon are completely free – no hidden charges or subscriptions.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-blue-600">Can I use ToolsWagon on mobile?</h3>
+            <p>Yes, every tool is mobile-optimized and works seamlessly on smartphones, tablets, and desktops.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="py-12 bg-gray-100">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-2xl font-semibold mb-6">What Our Users Say</h2>
+        <div id="reviewSlider" class="overflow-x-auto flex space-x-4 snap-x scroll-smooth px-2">
+          <!-- Review Cards (x10) -->
+          <div class="review-card snap-start bg-white p-4 rounded shadow min-w-[280px]">
+            <p>"Absolutely love ToolsWagon. Saved me hours!"</p>
+            <span class="text-sm text-gray-500">– Priya (India)</span>
+          </div>
+          <div class="review-card snap-start bg-white p-4 rounded shadow min-w-[280px]">
+            <p>"So many tools in one place. And it's free!"</p>
+            <span class="text-sm text-gray-500">– Jake (USA)</span>
+          </div>
+          <div class="review-card snap-start bg-white p-4 rounded shadow min-w-[280px]">
+            <p>"Great UI, fast, and no popups."</p>
+            <span class="text-sm text-gray-500">– Aditi (India)</span>
+          </div>
+          <div class="review-card snap-start bg-white p-4 rounded shadow min-w-[280px]">
+            <p>"Best platform for small utility tasks."</p>
+            <span class="text-sm text-gray-500">– Mark (UK)</span>
+          </div>
+          <div class="review-card snap-start bg-white p-4 rounded shadow min-w-[280px]">
+            <p>"Loved the PDF translation tool!"</p>
+            <span class="text-sm text-gray-500">– Kavita (India)</span>
+          </div>
+          <div class="review-card snap-start bg-white p-4 rounded shadow min-w-[280px]">
+            <p>"Neat layout and super fast tools."</p>
+            <span class="text-sm text-gray-500">– Leo (Brazil)</span>
+          </div>
+          <div class="review-card snap-start bg-white p-4 rounded shadow min-w-[280px]">
+            <p>"No ads, no clutter. Just awesome!"</p>
+            <span class="text-sm text-gray-500">– Suresh (India)</span>
+          </div>
+          <div class="review-card snap-start bg-white p-4 rounded shadow min-w-[280px]">
+            <p>"Saved my day with quick thumbnail download."</p>
+            <span class="text-sm text-gray-500">– Fatima (UAE)</span>
+          </div>
+          <div class="review-card snap-start bg-white p-4 rounded shadow min-w-[280px]">
+            <p>"Love the variety. Waiting for more!"</p>
+            <span class="text-sm text-gray-500">– Ethan (Australia)</span>
+          </div>
+          <div class="review-card snap-start bg-white p-4 rounded shadow min-w-[280px]">
+            <p>"Perfect for students and freelancers."</p>
+            <span class="text-sm text-gray-500">– Shreya (India)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/script.js" defer></script>
+  </body>
 </html>
