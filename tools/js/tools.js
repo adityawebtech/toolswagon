@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // PDF TO WORD CONVERTER TOOL No. 2
 
-function convertPDFToWord() {
+async function convertPDFToWord() {
   const fileInput = document.getElementById("pdfFile");
   const result = document.getElementById("conversionResult");
   const downloadLink = document.getElementById("downloadLink");
@@ -70,14 +70,28 @@ function convertPDFToWord() {
     return;
   }
 
-  // Simulating file conversion
-  setTimeout(() => {
-    result.classList.remove("hidden");
-    downloadLink.href = "#"; // Simulated download
-  }, 2000);
-}
+  const formData = new FormData();
+  formData.append("file", fileInput.files[0]);
 
-const response = await fetch("https://your-render-url.onrender.com/convert-pdf", {
-  method: "POST",
-  body: formData,
-});
+  try {
+    const response = await fetch("https://pdf-to-word-api-315i.onrender.com", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to convert PDF");
+    }
+
+    // Convert response to a blob and create download link
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+
+    downloadLink.href = url;
+    downloadLink.download = "converted.docx";
+    result.classList.remove("hidden");
+  } catch (error) {
+    alert("Conversion failed. Please try again.");
+    console.error(error);
+  }
+}
