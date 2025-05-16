@@ -1,3 +1,6 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 /* Root Theme Variables */
 :root {
   --primary: #2563EB;
@@ -20,7 +23,6 @@ body {
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
-  scroll-behavior: smooth;
 }
 
 a {
@@ -29,50 +31,32 @@ a {
   transition: all 0.2s ease-in-out;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Header */
+/* Header Styles */
 header {
   background-color: var(--white);
-  padding: 1rem 2rem;
   box-shadow: 0 2px 4px var(--shadow);
-}
-
-.logo-link img {
-  height: 2.5rem;
-}
-
-/* Navigation */
-nav {
-  margin-top: 1rem;
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  z-index: 50;
+  position: relative;
 }
 
 nav a {
   font-weight: 600;
-  color: var(--text);
-  position: relative;
+  transition: color 0.3s ease;
 }
 
 nav a:hover {
   color: var(--primary);
 }
 
-/* Search Input */
-#searchInput {
-  z-index: 10;
-  background: var(--white);
+/* Mobile Nav Toggle */
+#mobileMenu a {
+  border-bottom: 1px solid #e5e7eb;
 }
 
 /* Hero Section */
 .hero {
+  padding: 4rem 1rem;
   text-align: center;
-  padding: 3rem 1rem;
   max-width: 960px;
   margin: auto;
 }
@@ -80,50 +64,46 @@ nav a:hover {
 .hero h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 1rem;
   color: var(--primary);
-}
-
-.hero .highlight {
-  color: var(--secondary);
 }
 
 .hero p {
   font-size: 1.1rem;
   max-width: 700px;
-  margin: 1rem auto 2rem;
+  margin: 1rem auto;
 }
 
-/* Sections */
-.section {
+/* Section Styles */
+section {
   padding: 3rem 1rem;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: auto;
 }
 
-.section h2 {
-  font-size: 2rem;
+section h2 {
+  font-size: 1.8rem;
   font-weight: 700;
-  color: var(--primary);
   margin-bottom: 1rem;
+  color: var(--primary);
 }
 
-.section p {
-  margin-bottom: 1.5rem;
+section p {
   font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #334155;
 }
 
-/* Tools Grid */
+/* Tool Grid */
 .tool-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
-  margin-top: 2rem;
+  padding-top: 1rem;
 }
 
 .tool-card {
   background-color: var(--white);
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 6px var(--shadow);
   text-align: center;
@@ -138,92 +118,76 @@ nav a:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Reviews Section */
+/* Review Slider */
 .review-slider {
-  margin-top: 2rem;
-  display: flex;
   overflow-x: auto;
-  gap: 1rem;
-  scroll-snap-type: x mandatory;
+  display: flex;
+  gap: 1.2rem;
+  scroll-behavior: smooth;
   padding-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .review-card {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-  background: var(--white);
-  border-radius: 10px;
-  padding: 1.25rem;
   min-width: 280px;
-  max-width: 320px;
-  box-shadow: 0 2px 4px var(--shadow);
+  flex: 0 0 auto;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--shadow);
+}
+
+.review-card h4 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
 }
 
 .review-card p {
   font-size: 0.95rem;
-  margin-bottom: 0.75rem;
-  color: #374151;
-}
-
-.review-author {
-  font-weight: bold;
-  color: var(--primary);
-  font-size: 0.9rem;
+  color: #475569;
 }
 
 /* Footer */
 footer {
-  background-color: var(--white);
-  padding: 2rem;
+  background-color: var(--primary);
+  color: white;
+  padding: 2rem 1rem;
   margin-top: 4rem;
-  box-shadow: 0 -2px 4px var(--shadow);
-  font-size: 0.9rem;
 }
 
-.footer-left a {
-  margin-right: 1.5rem;
-  color: var(--primary);
-  font-weight: 500;
+footer h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
-.footer-left a:hover {
-  text-decoration: underline;
+footer a {
+  color: #ffffffcc;
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
 }
 
-.footer-right a {
-  color: var(--primary);
-  font-weight: 500;
-}
-
-.footer-right a:hover {
+footer a:hover {
   text-decoration: underline;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  header {
-    padding: 1rem;
+  .hero h1 {
+    font-size: 2rem;
   }
 
-  nav {
-    flex-direction: column;
-    margin-top: 1rem;
+  .tool-grid {
+    grid-template-columns: 1fr;
   }
 
-  .section h2 {
-    font-size: 1.6rem;
-  }
-
-  .review-slider {
-    padding: 0 1rem 1rem;
+  .review-card {
+    min-width: 220px;
   }
 
   footer {
     text-align: center;
-  }
-
-  .footer-left,
-  .footer-right {
-    margin-top: 1rem;
   }
 }
