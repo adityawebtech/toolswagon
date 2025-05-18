@@ -24,21 +24,30 @@
   <!-- Dynamic header include -->
   <div id="header-container"></div>
 
-  <!-- Tool Area -->
+   <!-- Tool Area -->
   <main class="flex-grow container mx-auto px-4 py-10">
-    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow p-6">
-      <h1 class="text-2xl font-semibold mb-4 text-blue-600">Convert Your Image to Base64</h1>
+    <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-6 space-y-6 border border-gray-200">
+      <h1 class="text-xl sm:text-2xl font-semibold text-blue-600 text-center">Convert Your Image to Base64</h1>
 
-      <input type="file" id="imageInput" accept="image/*" class="mb-4 w-full" />
+      <input type="file" id="imageInput" accept="image/*" class="block w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
 
-      <div id="preview" class="mb-4 hidden">
-        <img id="previewImage" src="" alt="Preview" class="max-w-xs mx-auto rounded shadow mb-4">
-        <p class="text-center text-sm text-gray-600">Image Preview</p>
+      <button id="convertBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-200">
+        Convert Image
+      </button>
+
+      <div id="preview" class="hidden text-center">
+        <img id="previewImage" src="" alt="Preview" class="max-w-xs mx-auto rounded shadow mb-2">
+        <p class="text-sm text-gray-500">Image Preview</p>
       </div>
 
-      <textarea id="base64Output" class="w-full h-48 p-2 border rounded mb-4 text-sm" readonly placeholder="Base64 will appear here..."></textarea>
+      <div>
+        <label for="base64Output" class="block font-medium mb-1 text-sm">Base64 Output:</label>
+        <textarea id="base64Output" class="w-full h-48 p-3 border rounded-lg text-sm resize-none" readonly placeholder="Your Base64 string will appear here..."></textarea>
+      </div>
 
-      <button id="copyBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Copy Base64</button>
+      <button id="copyBtn" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition duration-200">
+        Copy Base64 to Clipboard
+      </button>
     </div>
   </main>
 
