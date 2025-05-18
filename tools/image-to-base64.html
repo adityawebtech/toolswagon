@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Image to Base64 Converter - Toolswagon</title>
+  <meta name="description" content="Convert any image to Base64 instantly using our free, secure, and browser-based Image to Base64 Converter tool. No uploads needed.">
+  <meta name="keywords" content="Image to Base64, Base64 Converter, PNG to Base64, JPG to Base64, Free tool, Online tool">
+  <meta name="author" content="Toolswagon">
+  <link rel="canonical" href="https://toolswagon.site/tools/image-to-base64.html">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="/assets/css/tool.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+  <!-- Dynamic header include -->
+  <div id="header-container"></div>
+
+  <!-- Tool Area -->
+  <main class="flex-grow container mx-auto px-4 py-10">
+    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow p-6">
+      <h1 class="text-2xl font-semibold mb-4 text-blue-600">Convert Your Image to Base64</h1>
+
+      <input type="file" id="imageInput" accept="image/*" class="mb-4 w-full" />
+
+      <div id="preview" class="mb-4 hidden">
+        <img id="previewImage" src="" alt="Preview" class="max-w-xs mx-auto rounded shadow mb-4">
+        <p class="text-center text-sm text-gray-600">Image Preview</p>
+      </div>
+
+      <textarea id="base64Output" class="w-full h-48 p-2 border rounded mb-4 text-sm" readonly placeholder="Base64 will appear here..."></textarea>
+
+      <button id="copyBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Copy Base64</button>
+    </div>
+  </main>
+
+  <!-- SEO Content Section -->
+  <section class="bg-white border-t mt-10 py-10">
+    <div class="container mx-auto px-4 max-w-4xl text-gray-800">
+      <h2 class="text-2xl font-bold mb-4">What is Image to Base64 Converter Tool?</h2>
+      <p class="mb-4">The Image to Base64 Converter tool by Toolswagon allows you to convert any image (JPG, PNG, WEBP, SVG, etc.) into Base64 format instantly. It's completely browser-based, ensuring your image never leaves your device. Base64 encoding is widely used in web development, email embedding, and CSS styling where inline image code is required.</p>
+
+      <h2 class="text-xl font-semibold mb-2">How to use the Image to Base64 tool?</h2>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Click the file input area and choose your image.</li>
+        <li>Wait for the tool to generate the preview and Base64 output.</li>
+        <li>Copy the generated Base64 string using the copy button.</li>
+      </ul>
+
+      <h2 class="text-xl font-semibold mb-2">Is this tool free to use?</h2>
+      <p class="mb-4">Yes, this tool is 100% free, and there's no upload or server processing involved. It's safe, fast, and unlimited.</p>
+
+      <h2 class="text-xl font-semibold mb-2">What image formats are supported?</h2>
+      <p class="mb-4">You can upload <strong>JPG, PNG, SVG, GIF, WEBP</strong>, and other common image formats. The tool automatically converts them to a valid Base64 Data URI.</p>
+
+      <h2 class="text-xl font-semibold mb-2">How is this better than other converters?</h2>
+      <p class="mb-4">Unlike other converters, Toolswagon's Image to Base64 tool processes everything locally in your browser. It’s faster, doesn’t store or upload your data, and works seamlessly on all devices.</p>
+
+      <h2 class="text-xl font-semibold mb-2">10 Reasons to Use This Tool:</h2>
+      <ol class="list-decimal pl-6 space-y-1 mb-4">
+        <li>100% browser-based & private</li>
+        <li>No internet or upload required</li>
+        <li>Supports all major image formats</li>
+        <li>Instant output without delay</li>
+        <li>Copy-ready Base64 code</li>
+        <li>Works on mobile and desktop</li>
+        <li>Free for unlimited conversions</li>
+        <li>Lightweight and fast performance</li>
+        <li>No ads, no spam, no tracking</li>
+        <li>Ideal for developers, bloggers, designers</li>
+      </ol>
+
+      <p class="text-gray-700">Whether you're embedding images in HTML, CSS, JSON, or APIs, this tool will save your time and simplify your workflow.</p>
+    </div>
+  </section>
+
+  <!-- Dynamic footer include -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script defer src="/assets/js/tools.js"></script>
+  <script defer src="/assets/js/script.js"></script>
+</body>
+</html>
