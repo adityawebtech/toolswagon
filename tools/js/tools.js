@@ -189,16 +189,24 @@ function displayThumbnails(videoID) {
     downloadBtn.className = "inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded";
 
     downloadBtn.onclick = () => {
-      showModal(15, () => {
-        const link = document.createElement("a");
-        link.href = thumb.url;
-        link.download = `${videoID}_${thumb.label.replace(/\s+/g, "_")}.jpg`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+      showModal(15, async () => {
+        try {
+          const response = await fetch(thumb.url);
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
 
-        showToast("Download started!");
-        window.location.href = "https://toolswagon.site/tools/";
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `${videoID}_${thumb.label.replace(/\s+/g, "_")}.jpg`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          window.URL.revokeObjectURL(url);
+
+          window.location.href = "https://toolswagon.site/tools/";
+        } catch (err) {
+          showToast("Download failed. Please try again.");
+        }
       }, () => {
         document.getElementById("fallbackButton").classList.remove("hidden");
       });
