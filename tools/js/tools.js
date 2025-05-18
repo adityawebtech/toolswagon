@@ -102,42 +102,62 @@ async function convertPDFToWord() {
 
 // YOUTUBE THUMBNAIL DOWNLOADER TOOL SCRIPT
 
-function generateThumbnails() {
-  const url = document.getElementById("youtubeURL").value;
-  const videoID = extractYouTubeID(url);
-  const resultArea = document.getElementById("thumbnailResults");
+function extractYouTubeID(url) {
+      const regex = /(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+      const match = url.match(regex);
+      return match ? match[1] : null;
+    }
 
-  if (!videoID) {
-    alert("Please enter a valid YouTube URL.");
-    return;
-  }
+    function generateThumbnails() {
+      const url = document.getElementById("youtubeURL").value;
+      const videoID = extractYouTubeID(url);
+      const resultArea = document.getElementById("thumbnailResults");
 
-  const base = `https://img.youtube.com/vi/${videoID}`;
-  const thumbnails = [
-    { label: "HD Thumbnail", url: `${base}/maxresdefault.jpg` },
-    { label: "SD Thumbnail", url: `${base}/sddefault.jpg` },
-    { label: "Medium Quality", url: `${base}/mqdefault.jpg` }
-  ];
+      if (!videoID) {
+        alert("Please enter a valid YouTube URL.");
+        return;
+      }
 
-  resultArea.innerHTML = "";
+      const base = `https://img.youtube.com/vi/${videoID}`;
+      const thumbnails = [
+        { label: "HD (maxresdefault)", url: `${base}/maxresdefault.jpg` },
+        { label: "SD (sddefault)", url: `${base}/sddefault.jpg` },
+        { label: "Medium (mqdefault)", url: `${base}/mqdefault.jpg` },
+        { label: "High (hqdefault)", url: `${base}/hqdefault.jpg` },
+        { label: "Default (default)", url: `${base}/default.jpg` },
+        { label: "Start Frame (0.jpg)", url: `${base}/0.jpg` },
+        { label: "Second Frame (1.jpg)", url: `${base}/1.jpg` },
+        { label: "Third Frame (2.jpg)", url: `${base}/2.jpg` },
+        { label: "Fourth Frame (3.jpg)", url: `${base}/3.jpg` }
+      ];
 
-  thumbnails.forEach(thumb => {
-    const thumbBlock = document.createElement("div");
-    thumbBlock.className = "bg-white rounded-lg shadow-lg p-4 mb-4";
+      resultArea.innerHTML = "";
 
-    const img = document.createElement("img");
-    img.src = thumb.url;
-    img.alt = thumb.label;
-    img.className = "w-full rounded";
+      thumbnails.forEach(thumb => {
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-lg shadow-lg p-4 text-center border";
 
-    const downloadBtn = document.createElement("a");
-    downloadBtn.href = thumb.url;
-    downloadBtn.download = `${videoID}_${thumb.label.replace(/\s+/g, "_")}.jpg`;
-    downloadBtn.textContent = `Download ${thumb.label}`;
-    downloadBtn.className = "mt-2 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700";
+        const img = document.createElement("img");
+        img.src = thumb.url;
+        img.alt = thumb.label;
+        img.className = "w-full h-auto mb-4 rounded shadow";
 
-    thumbBlock.appendChild(img);
-    thumbBlock.appendChild(downloadBtn);
-    resultArea.appendChild(thumbBlock);
-  });
-}
+        const label = document.createElement("p");
+        label.textContent = thumb.label;
+        label.className = "font-semibold text-gray-700 mb-2";
+
+        const downloadBtn = document.createElement("a");
+        downloadBtn.href = thumb.url;
+        downloadBtn.download = `${videoID}_${thumb.label.replace(/\s+/g, "_")}.jpg`;
+        downloadBtn.textContent = "Download";
+        downloadBtn.className = "inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded";
+
+        card.appendChild(img);
+        card.appendChild(label);
+        card.appendChild(downloadBtn);
+        resultArea.appendChild(card);
+      });
+
+      // Optional: Scroll to results
+      resultArea.scrollIntoView({ behavior: "smooth" });
+    }
