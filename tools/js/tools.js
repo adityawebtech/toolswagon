@@ -218,8 +218,7 @@ function displayThumbnails(videoID) {
     resultArea.appendChild(card);
   });
 }
-
-// IMAGE TO BASE64 TOOL SCRIPT 
+  // IMAGE TO BASE64 TOOL SCRIPT
 
   const imageInput = document.getElementById("imageInput");
   const convertBtn = document.getElementById("convertBtn");
@@ -252,21 +251,24 @@ function displayThumbnails(videoID) {
         const reader = new FileReader();
         reader.onload = function (e) {
           const base64String = e.target.result;
+
+          // Update preview and output
           base64Output.value = base64String;
           previewImage.src = base64String;
           previewContainer.classList.remove("hidden");
           copyBtn.classList.remove("hidden");
         };
+
         reader.readAsDataURL(file);
       }
     }, 1000);
   });
 
   copyBtn.addEventListener("click", () => {
-    base64Output.select();
-    document.execCommand("copy");
-    copyBtn.textContent = "Copied!";
-    setTimeout(() => {
-      copyBtn.textContent = "Copy Base64 to Clipboard";
-    }, 2000);
+    navigator.clipboard.writeText(base64Output.value).then(() => {
+      copyBtn.textContent = "Copied!";
+      setTimeout(() => {
+        copyBtn.textContent = "Copy Base64 to Clipboard";
+      }, 2000);
+    });
   });
