@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en">
+s<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,28 +19,18 @@
   <section class="py-12">
     <div class="max-w-4xl mx-auto px-4 text-center">
       <h1 class="text-3xl font-bold text-blue-600 mb-2">YouTube Thumbnail Downloader</h1>
-      <p class="text-gray-600 mb-6">Paste any YouTube video URL below and download all available thumbnail versions instantly.</p><div class="bg-white rounded-lg shadow-lg p-6 border border-dashed border-blue-300">
-    <input type="text" id="youtubeUrl" placeholder="Paste YouTube video URL here..." class="w-full border p-3 rounded mb-4" />
-    <button onclick="fetchThumbnails()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded">Generate Thumbnails</button>
+      <p class="text-gray-600 mb-6">Paste any YouTube video URL below and download all available thumbnail versions instantly.</p>
+      <div class="bg-white rounded-lg shadow-lg p-6 border border-dashed border-blue-300">
+  <label class="block text-gray-700 font-medium mb-2" for="youtubeURL">Enter YouTube URL</label>
+  <input type="text" id="youtubeURL" placeholder="Paste any YouTube video, short or live URL" class="w-full border p-3 rounded mb-4" />
 
-    <div id="thumbnails" class="mt-6 hidden">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div>
-          <img id="thumbHD" class="rounded shadow" alt="HD Thumbnail">
-          <a id="downloadHD" download class="block mt-2 bg-green-600 text-white py-2 rounded hover:bg-green-700">Download HD</a>
-        </div>
-        <div>
-          <img id="thumbSD" class="rounded shadow" alt="SD Thumbnail">
-          <a id="downloadSD" download class="block mt-2 bg-green-600 text-white py-2 rounded hover:bg-green-700">Download SD</a>
-        </div>
-        <div>
-          <img id="thumbMQ" class="rounded shadow" alt="Medium Quality Thumbnail">
-          <a id="downloadMQ" download class="block mt-2 bg-green-600 text-white py-2 rounded hover:bg-green-700">Download MQ</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <button onclick="generateThumbnails()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded">
+    Generate Thumbnails
+  </button>
+
+  <div id="thumbnailResults" class="mt-6 space-y-4"></div>
 </div>
+
 
   </section>  <section class="py-12 px-4 max-w-4xl mx-auto text-justify text-gray-800">
     <h2 class="text-2xl font-bold mb-4 text-blue-600">About Our YouTube Thumbnail Downloader Tool</h2>
