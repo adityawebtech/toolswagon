@@ -218,3 +218,36 @@ function displayThumbnails(videoID) {
     resultArea.appendChild(card);
   });
 }
+
+// IMAGE TO BASE64 TOOL SCRIPT 
+
+document.getElementById("imageInput").addEventListener("change", function () {
+  const file = this.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function (e) {
+    const base64 = e.target.result;
+
+    // Set image preview
+    document.getElementById("previewImage").src = base64;
+    document.getElementById("preview").classList.remove("hidden");
+
+    // Set base64 in textarea
+    document.getElementById("base64Output").value = base64;
+  };
+
+  reader.readAsDataURL(file);
+});
+
+document.getElementById("copyBtn").addEventListener("click", () => {
+  const base64 = document.getElementById("base64Output").value;
+  if (!base64) return;
+
+  navigator.clipboard.writeText(base64).then(() => {
+    alert("Base64 copied to clipboard!");
+  }).catch(() => {
+    alert("Failed to copy Base64. Try manually.");
+  });
+});
