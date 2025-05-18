@@ -227,31 +227,31 @@ function displayThumbnails(videoID) {
   const base64Output = document.getElementById("base64Output");
   const previewImage = document.getElementById("previewImage");
   const previewContainer = document.getElementById("preview");
-  const modal = document.getElementById("modal");
-  const countdown = document.getElementById("countdown");
+  const modal = document.getElementById("countdownModal");
+  const countdownValue = document.getElementById("countdownValue");
 
   convertBtn.addEventListener("click", () => {
     const file = imageInput.files[0];
     if (!file) {
-      alert("Please select an image first.");
+      alert("Please select an image.");
       return;
     }
 
-    modal.classList.remove("hidden");
     let timeLeft = 15;
-    countdown.textContent = timeLeft;
+    countdownValue.textContent = timeLeft;
+    modal.classList.remove("hidden");
 
     const timer = setInterval(() => {
       timeLeft--;
-      countdown.textContent = timeLeft;
+      countdownValue.textContent = timeLeft;
 
       if (timeLeft <= 0) {
         clearInterval(timer);
         modal.classList.add("hidden");
 
         const reader = new FileReader();
-        reader.onload = () => {
-          const base64String = reader.result;
+        reader.onload = function (e) {
+          const base64String = e.target.result;
           base64Output.value = base64String;
           previewImage.src = base64String;
           previewContainer.classList.remove("hidden");
@@ -266,5 +266,7 @@ function displayThumbnails(videoID) {
     base64Output.select();
     document.execCommand("copy");
     copyBtn.textContent = "Copied!";
-    setTimeout(() => (copyBtn.textContent = "Copy Base64 to Clipboard"), 2000);
+    setTimeout(() => {
+      copyBtn.textContent = "Copy Base64 to Clipboard";
+    }, 2000);
   });
