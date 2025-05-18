@@ -102,23 +102,42 @@ async function convertPDFToWord() {
 
 // YOUTUBE THUMBNAIL DOWNLOADER TOOL SCRIPT
 
-function fetchThumbnails() {
-      const url = document.getElementById("youtubeUrl").value.trim();
-      const videoID = url.split("v=")[1]?.split("&")[0] || url.split("youtu.be/")[1];
-      if (!videoID) return alert("Invalid YouTube URL");
+function generateThumbnails() {
+  const url = document.getElementById("youtubeURL").value;
+  const videoID = extractYouTubeID(url);
+  const resultArea = document.getElementById("thumbnailResults");
 
-      const baseUrl = `https://img.youtube.com/vi/${videoID}`;
-      const hd = `${baseUrl}/maxresdefault.jpg`;
-      const sd = `${baseUrl}/sddefault.jpg`;
-      const mq = `${baseUrl}/mqdefault.jpg`;
+  if (!videoID) {
+    alert("Please enter a valid YouTube URL.");
+    return;
+  }
 
-      document.getElementById("thumbHD").src = hd;
-      document.getElementById("thumbSD").src = sd;
-      document.getElementById("thumbMQ").src = mq;
+  const base = `https://img.youtube.com/vi/${videoID}`;
+  const thumbnails = [
+    { label: "HD Thumbnail", url: `${base}/maxresdefault.jpg` },
+    { label: "SD Thumbnail", url: `${base}/sddefault.jpg` },
+    { label: "Medium Quality", url: `${base}/mqdefault.jpg` }
+  ];
 
-      document.getElementById("downloadHD").href = hd;
-      document.getElementById("downloadSD").href = sd;
-      document.getElementById("downloadMQ").href = mq;
+  resultArea.innerHTML = "";
 
-      document.getElementById("thumbnails").classList.remove("hidden");
+  thumbnails.forEach(thumb => {
+    const thumbBlock = document.createElement("div");
+    thumbBlock.className = "bg-white rounded-lg shadow-lg p-4 mb-4";
+
+    const img = document.createElement("img");
+    img.src = thumb.url;
+    img.alt = thumb.label;
+    img.className = "w-full rounded";
+
+    const downloadBtn = document.createElement("a");
+    downloadBtn.href = thumb.url;
+    downloadBtn.download = `${videoID}_${thumb.label.replace(/\s+/g, "_")}.jpg`;
+    downloadBtn.textContent = `Download ${thumb.label}`;
+    downloadBtn.className = "mt-2 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700";
+
+    thumbBlock.appendChild(img);
+    thumbBlock.appendChild(downloadBtn);
+    resultArea.appendChild(thumbBlock);
+  });
 }
