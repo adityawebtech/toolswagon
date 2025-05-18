@@ -227,6 +227,8 @@ const imageInput = document.getElementById("imageInput");
     const base64Output = document.getElementById("base64Output");
     const previewImage = document.getElementById("previewImage");
     const previewContainer = document.getElementById("preview");
+    const modal = document.getElementById("modal");
+    const countdown = document.getElementById("countdown");
 
     convertBtn.addEventListener("click", () => {
       const file = imageInput.files[0];
@@ -235,13 +237,27 @@ const imageInput = document.getElementById("imageInput");
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = () => {
-        base64Output.value = reader.result;
-        previewImage.src = reader.result;
-        previewContainer.classList.remove("hidden");
-      };
-      reader.readAsDataURL(file);
+      modal.classList.remove("hidden");
+      let timer = 5;
+      countdown.textContent = timer;
+
+      const countdownInterval = setInterval(() => {
+        timer--;
+        countdown.textContent = timer;
+        if (timer <= 0) {
+          clearInterval(countdownInterval);
+          modal.classList.add("hidden");
+
+          const reader = new FileReader();
+          reader.onload = () => {
+            base64Output.value = reader.result;
+            previewImage.src = reader.result;
+            previewContainer.classList.remove("hidden");
+            copyBtn.classList.remove("hidden");
+          };
+          reader.readAsDataURL(file);
+        }
+      }, 1000);
     });
 
     copyBtn.addEventListener("click", () => {
