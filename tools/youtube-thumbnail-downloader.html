@@ -72,6 +72,27 @@
       Use our <strong>free YouTube thumbnail grabber</strong> anytime without limits. We focus on simplicity, speed, and high-quality results.
     </p>
   </section>  
+  <!-- Modal for Countdown -->
+<div id="countdownModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+  <div class="bg-white rounded-lg p-6 shadow-lg text-center max-w-sm w-full">
+    <h2 class="text-xl font-bold mb-2">Your download will begin shortly</h2>
+    <p class="mb-4">Please wait <span id="countdownValue">15</span> seconds...</p>
+    <div class="loader mx-auto mb-4"></div>
+    <button id="cancelDownload" class="bg-red-600 text-white px-4 py-2 rounded">Cancel</button>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="fixed bottom-6 right-6 bg-green-600 text-white px-4 py-2 rounded shadow hidden z-50">
+  Download started!
+</div>
+
+<!-- Fallback Button -->
+<div id="fallbackButton" class="text-center mt-6 hidden">
+  <a href="https://toolswagon.site/tools/" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded">
+    Try out more tools
+  </a>
+</div>
   <!-- Dynamic footer include -->
   <div id="footer-container"></div>
 <script defer src="/assets/js/script.js"></script>
