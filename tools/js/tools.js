@@ -221,33 +221,32 @@ function displayThumbnails(videoID) {
 
 // IMAGE TO BASE64 TOOL SCRIPT 
 
-document.getElementById("imageInput").addEventListener("change", function () {
-  const file = this.files[0];
-  if (!file) return;
+const imageInput = document.getElementById("imageInput");
+    const convertBtn = document.getElementById("convertBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const base64Output = document.getElementById("base64Output");
+    const previewImage = document.getElementById("previewImage");
+    const previewContainer = document.getElementById("preview");
 
-  const reader = new FileReader();
+    convertBtn.addEventListener("click", () => {
+      const file = imageInput.files[0];
+      if (!file) {
+        alert("Please select an image first.");
+        return;
+      }
 
-  reader.onload = function (e) {
-    const base64 = e.target.result;
+      const reader = new FileReader();
+      reader.onload = () => {
+        base64Output.value = reader.result;
+        previewImage.src = reader.result;
+        previewContainer.classList.remove("hidden");
+      };
+      reader.readAsDataURL(file);
+    });
 
-    // Set image preview
-    document.getElementById("previewImage").src = base64;
-    document.getElementById("preview").classList.remove("hidden");
-
-    // Set base64 in textarea
-    document.getElementById("base64Output").value = base64;
-  };
-
-  reader.readAsDataURL(file);
-});
-
-document.getElementById("copyBtn").addEventListener("click", () => {
-  const base64 = document.getElementById("base64Output").value;
-  if (!base64) return;
-
-  navigator.clipboard.writeText(base64).then(() => {
-    alert("Base64 copied to clipboard!");
-  }).catch(() => {
-    alert("Failed to copy Base64. Try manually.");
-  });
-});
+    copyBtn.addEventListener("click", () => {
+      base64Output.select();
+      document.execCommand("copy");
+      copyBtn.textContent = "Copied!";
+      setTimeout(() => (copyBtn.textContent = "Copy Base64 to Clipboard"), 1500);
+    });
