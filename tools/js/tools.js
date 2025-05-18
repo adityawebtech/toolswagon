@@ -99,3 +99,26 @@ async function convertPDFToWord() {
         status.textContent = "An error occurred: " + error.message;
       }
     }
+
+// YOUTUBE THUMBNAIL DOWNLOADER TOOL SCRIPT
+
+function fetchThumbnails() {
+      const url = document.getElementById("youtubeUrl").value.trim();
+      const videoID = url.split("v=")[1]?.split("&")[0] || url.split("youtu.be/")[1];
+      if (!videoID) return alert("Invalid YouTube URL");
+
+      const baseUrl = `https://img.youtube.com/vi/${videoID}`;
+      const hd = `${baseUrl}/maxresdefault.jpg`;
+      const sd = `${baseUrl}/sddefault.jpg`;
+      const mq = `${baseUrl}/mqdefault.jpg`;
+
+      document.getElementById("thumbHD").src = hd;
+      document.getElementById("thumbSD").src = sd;
+      document.getElementById("thumbMQ").src = mq;
+
+      document.getElementById("downloadHD").href = hd;
+      document.getElementById("downloadSD").href = sd;
+      document.getElementById("downloadMQ").href = mq;
+
+      document.getElementById("thumbnails").classList.remove("hidden");
+}
