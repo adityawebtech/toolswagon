@@ -1,0 +1,35 @@
+name: Generate Sitemap
+
+on:
+  push:
+    branches: [main]  # Change this if your default branch is different
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install sitemap-generator-cli
+        run: npm install -g sitemap-generator-cli
+
+      - name: Generate sitemap.xml at root
+        run: |
+          npx sitemap-generator https://toolswagon.site \
+            --output ./sitemap.xml \
+            --strip-querystring \
+            --max-depth 0
+
+      - name: Commit sitemap.xml
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add sitemap.xml
+          git commit -m "Auto-update sitemap.xml"
+          git push
