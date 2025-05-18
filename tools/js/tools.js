@@ -102,62 +102,90 @@ async function convertPDFToWord() {
 
 // YOUTUBE THUMBNAIL DOWNLOADER TOOL SCRIPT
 
-function extractYouTubeID(url) {
-      const regex = /(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-      const match = url.match(regex);
-      return match ? match[1] : null;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.remove("hidden");
+  setTimeout(() => {
+    toast.classList.add("hidden");
+  }, 3000);
+}
+
+function showModal(seconds, onConfirm, onCancel) {
+  const modal = document.getElementById("countdownModal");
+  const countdownEl = document.getElementById("countdownValue");
+  const cancelBtn = document.getElementById("cancelDownload");
+
+  modal.classList.remove("hidden");
+  countdownEl.textContent = seconds;
+
+  let interval = setInterval(() => {
+    seconds--;
+    countdownEl.textContent = seconds;
+    if (seconds <= 0) {
+      clearInterval(interval);
+      modal.classList.add("hidden");
+      onConfirm();
     }
+  }, 1000);
 
-    function generateThumbnails() {
-      const url = document.getElementById("youtubeURL").value;
-      const videoID = extractYouTubeID(url);
-      const resultArea = document.getElementById("thumbnailResults");
+  cancelBtn.onclick = () => {
+    clearInterval(interval);
+    modal.classList.add("hidden");
+    onCancel();
+  };
+}
 
-      if (!videoID) {
-        alert("Please enter a valid YouTube URL.");
-        return;
-      }
+function displayThumbnails(videoID) {
+  const resultArea = document.getElementById("thumbnailResult");
+  resultArea.innerHTML = "";
 
-      const base = `https://img.youtube.com/vi/${videoID}`;
-      const thumbnails = [
-        { label: "HD (maxresdefault)", url: `${base}/maxresdefault.jpg` },
-        { label: "SD (sddefault)", url: `${base}/sddefault.jpg` },
-        { label: "Medium (mqdefault)", url: `${base}/mqdefault.jpg` },
-        { label: "High (hqdefault)", url: `${base}/hqdefault.jpg` },
-        { label: "Default (default)", url: `${base}/default.jpg` },
-        { label: "Start Frame (0.jpg)", url: `${base}/0.jpg` },
-        { label: "Second Frame (1.jpg)", url: `${base}/1.jpg` },
-        { label: "Third Frame (2.jpg)", url: `${base}/2.jpg` },
-        { label: "Fourth Frame (3.jpg)", url: `${base}/3.jpg` }
-      ];
+  const baseURL = `https://img.youtube.com/vi/${videoID}`;
+  const thumbnails = [
+    { label: "Default", url: `${baseURL}/default.jpg` },
+    { label: "Medium Quality", url: `${baseURL}/mqdefault.jpg` },
+    { label: "High Quality", url: `${baseURL}/hqdefault.jpg` },
+    { label: "Standard Definition", url: `${baseURL}/sddefault.jpg` },
+    { label: "Maximum Resolution", url: `${baseURL}/maxresdefault.jpg` }
+  ];
 
-      resultArea.innerHTML = "";
+  thumbnails.forEach((thumb) => {
+    const card = document.createElement("div");
+    card.className = "bg-white rounded-lg shadow-lg p-4 text-center border";
 
-      thumbnails.forEach(thumb => {
-        const card = document.createElement("div");
-        card.className = "bg-white rounded-lg shadow-lg p-4 text-center border";
+    const img = document.createElement("img");
+    img.src = thumb.url;
+    img.alt = thumb.label;
+    img.className = "w-full h-auto mb-4 rounded shadow";
 
-        const img = document.createElement("img");
-        img.src = thumb.url;
-        img.alt = thumb.label;
-        img.className = "w-full h-auto mb-4 rounded shadow";
+    const label = document.createElement("p");
+    label.textContent = thumb.label;
+    label.className = "font-semibold text-gray-700 mb-2";
 
-        const label = document.createElement("p");
-        label.textContent = thumb.label;
-        label.className = "font-semibold text-gray-700 mb-2";
+    const downloadBtn = document.createElement("button");
+    downloadBtn.textContent = "Download";
+    downloadBtn.className = "inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded";
 
-        const downloadBtn = document.createElement("a");
-        downloadBtn.href = thumb.url;
-        downloadBtn.download = `${videoID}_${thumb.label.replace(/\s+/g, "_")}.jpg`;
-        downloadBtn.textContent = "Download";
-        downloadBtn.className = "inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded";
+    downloadBtn.onclick = () => {
+      showModal(15, () => {
+        const link = document.createElement("a");
+        link.href = thumb.url;
+        link.download = `${videoID}_${thumb.label.replace(/\s+/g, "_")}.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
 
-        card.appendChild(img);
-        card.appendChild(label);
-        card.appendChild(downloadBtn);
-        resultArea.appendChild(card);
+        showToast("Download started!");
+        window.location.href = "https://toolswagon.site/tools/";
+      }, () => {
+        document.getElementById("fallbackButton").classList.remove("hidden");
       });
+    };
 
-      // Optional: Scroll to results
-      resultArea.scrollIntoView({ behavior: "smooth" });
-    }
+    card.appendChild(img);
+    card.appendChild(label);
+    card.appendChild(downloadBtn);
+    resultArea.appendChild(card);
+  });
+}
