@@ -16,24 +16,40 @@
 <body>
   <!-- Dynamic header include -->
   <div id="header-container"></div>
+<!-- Tool Area -->
+<section class="py-12 px-4">
+  <div class="max-w-4xl mx-auto text-center">
+    <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">YouTube Thumbnail Downloader</h1>
+    <p class="text-gray-600 mb-6">Paste any YouTube video, short, or live URL and download thumbnails in all available sizes including HD.</p>
 
-      <!-- Tool Area -->
-  <section class="py-12 px-4">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">YouTube Thumbnail Downloader</h1>
-      <p class="text-gray-600 mb-6">Paste any YouTube video, short, or live URL and download thumbnails in all available sizes including HD.</p>
+    <div class="bg-white shadow-md rounded-lg p-6 border border-dashed border-blue-300">
+      <input type="text" id="youtubeURL" placeholder="Paste YouTube URL here..." class="w-full border p-3 rounded mb-4" />
 
-      <div class="bg-white shadow-md rounded-lg p-6 border border-dashed border-blue-300">
-        <input type="text" id="youtubeURL" placeholder="Paste YouTube URL here..." class="w-full border p-3 rounded mb-4" />
+      <button onclick="generateThumbnails()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded">
+        Generate Thumbnails
+      </button>
 
-        <button onclick="generateThumbnails()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded">
-          Generate Thumbnails
-        </button>
-
-        <div id="thumbnailResults" class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
-      </div>
+      <div id="thumbnailResults" class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- Toast Notification -->
+<div id="toast" class="fixed top-5 right-5 bg-green-600 text-white py-2 px-4 rounded shadow hidden z-50"></div>
+
+<!-- Modal Countdown -->
+<div id="countdownModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+  <div class="bg-white p-6 rounded-lg text-center max-w-sm w-full shadow-lg">
+    <h2 class="text-xl font-bold mb-4 text-gray-800">Preparing Download...</h2>
+    <p class="mb-4 text-gray-600">Your download will start in <span id="countdownValue" class="font-bold text-blue-600 text-lg">15</span> seconds.</p>
+    <button id="cancelDownload" class="mt-2 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded">Cancel</button>
+  </div>
+</div>
+
+<!-- Fallback Button -->
+<div class="text-center mt-4">
+  <a href="https://toolswagon.site/tools/" id="fallbackButton" class="hidden bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded">Try Out More Tools</a>
+</div>
 
 <section class="py-12 px-4 max-w-4xl mx-auto text-justify text-gray-800">
     <h2 class="text-2xl font-bold mb-4 text-blue-600">About Our YouTube Thumbnail Downloader Tool</h2>
@@ -72,27 +88,6 @@
       Use our <strong>free YouTube thumbnail grabber</strong> anytime without limits. We focus on simplicity, speed, and high-quality results.
     </p>
   </section>  
-  <!-- Modal for Countdown -->
-<div id="countdownModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-  <div class="bg-white rounded-lg p-6 shadow-lg text-center max-w-sm w-full">
-    <h2 class="text-xl font-bold mb-2">Your download will begin shortly</h2>
-    <p class="mb-4">Please wait <span id="countdownValue">15</span> seconds...</p>
-    <div class="loader mx-auto mb-4"></div>
-    <button id="cancelDownload" class="bg-red-600 text-white px-4 py-2 rounded">Cancel</button>
-  </div>
-</div>
-
-<!-- Toast Notification -->
-<div id="toast" class="fixed bottom-6 right-6 bg-green-600 text-white px-4 py-2 rounded shadow hidden z-50">
-  Download started!
-</div>
-
-<!-- Fallback Button -->
-<div id="fallbackButton" class="text-center mt-6 hidden">
-  <a href="https://toolswagon.site/tools/" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded">
-    Try out more tools
-  </a>
-</div>
   <!-- Dynamic footer include -->
   <div id="footer-container"></div>
 <script defer src="/assets/js/script.js"></script>
