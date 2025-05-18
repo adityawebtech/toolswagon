@@ -27,28 +27,36 @@
  <!-- Tool Area -->
   <main class="flex-grow container mx-auto px-4 py-10">
     <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-6 space-y-6 border border-gray-200">
-      <h1 class="text-xl sm:text-2xl font-semibold text-blue-600 text-center">Convert Your Image to Base64</h1>
+  <h1 class="text-xl sm:text-2xl font-semibold text-blue-600 text-center">Convert Your Image to Base64</h1>
 
-      <input type="file" id="imageInput" accept="image/*" class="block w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+  <input type="file" id="imageInput" accept="image/*" class="block w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
 
-      <button id="convertBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-200">
-        Convert Image
-      </button>
+  <button id="convertBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-200">
+    Convert Image
+  </button>
 
-      <div id="preview" class="hidden text-center">
-        <img id="previewImage" src="" alt="Preview" class="max-w-xs mx-auto rounded shadow mb-2">
-        <p class="text-sm text-gray-500">Image Preview</p>
-      </div>
+  <div id="preview" class="hidden text-center">
+    <img id="previewImage" src="" alt="Preview" class="max-w-xs mx-auto rounded shadow mb-2">
+    <p class="text-sm text-gray-500">Image Preview</p>
+  </div>
 
-      <div>
-        <label for="base64Output" class="block font-medium mb-1 text-sm">Base64 Output:</label>
-        <textarea id="base64Output" class="w-full h-48 p-3 border rounded-lg text-sm resize-none" readonly placeholder="Your Base64 string will appear here..."></textarea>
-      </div>
+  <div>
+    <label for="base64Output" class="block font-medium mb-1 text-sm">Base64 Output:</label>
+    <textarea id="base64Output" class="w-full h-48 p-3 border rounded-lg text-sm resize-none" readonly placeholder="Your Base64 string will appear here..."></textarea>
+  </div>
 
-      <button id="copyBtn" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition duration-200 hidden">
-        Copy Base64 to Clipboard
-      </button>
-    </div>
+  <button id="copyBtn" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition duration-200 hidden">
+    Copy Base64 to Clipboard
+  </button>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+  <div class="bg-white rounded-xl p-6 max-w-md w-full text-center shadow-lg">
+    <h3 class="text-xl font-semibold text-blue-600 mb-2">Processing Image...</h3>
+    <p class="text-gray-600 mb-4">Please wait <span id="countdown">15</span> seconds while we convert your image.</p>
+  </div>
+</div>
   </main>
 
   <!-- Modal -->
