@@ -16,23 +16,26 @@ s<!DOCTYPE html><html lang="en">
 <body>
   <!-- Dynamic header include -->
   <div id="header-container"></div>
-  <section class="py-12">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h1 class="text-3xl font-bold text-blue-600 mb-2">YouTube Thumbnail Downloader</h1>
-      <p class="text-gray-600 mb-6">Paste any YouTube video URL below and download all available thumbnail versions instantly.</p>
-      <div class="bg-white rounded-lg shadow-lg p-6 border border-dashed border-blue-300">
-  <label class="block text-gray-700 font-medium mb-2" for="youtubeURL">Enter YouTube URL</label>
-  <input type="text" id="youtubeURL" placeholder="Paste any YouTube video, short or live URL" class="w-full border p-3 rounded mb-4" />
 
-  <button onclick="generateThumbnails()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded">
-    Generate Thumbnails
-  </button>
+      <!-- Tool Area -->
+  <section class="py-12 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">YouTube Thumbnail Downloader</h1>
+      <p class="text-gray-600 mb-6">Paste any YouTube video, short, or live URL and download thumbnails in all available sizes including HD.</p>
 
-  <div id="thumbnailResults" class="mt-6 space-y-4"></div>
-</div>
+      <div class="bg-white shadow-md rounded-lg p-6 border border-dashed border-blue-300">
+        <input type="text" id="youtubeURL" placeholder="Paste YouTube URL here..." class="w-full border p-3 rounded mb-4" />
 
+        <button onclick="generateThumbnails()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded">
+          Generate Thumbnails
+        </button>
 
-  </section>  <section class="py-12 px-4 max-w-4xl mx-auto text-justify text-gray-800">
+        <div id="thumbnailResults" class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+      </div>
+    </div>
+  </section>
+
+<section class="py-12 px-4 max-w-4xl mx-auto text-justify text-gray-800">
     <h2 class="text-2xl font-bold mb-4 text-blue-600">About Our YouTube Thumbnail Downloader Tool</h2>
     <p>
       Our <strong>YouTube Thumbnail Downloader</strong> is a free online tool designed to help users in India download thumbnails from any YouTube video. Whether you're a content creator, designer, or marketer, having quick access to high-resolution thumbnails can be crucial for your work.
