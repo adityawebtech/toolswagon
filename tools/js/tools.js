@@ -221,48 +221,50 @@ function displayThumbnails(videoID) {
 
 // IMAGE TO BASE64 TOOL SCRIPT 
 
-const imageInput = document.getElementById("imageInput");
-    const convertBtn = document.getElementById("convertBtn");
-    const copyBtn = document.getElementById("copyBtn");
-    const base64Output = document.getElementById("base64Output");
-    const previewImage = document.getElementById("previewImage");
-    const previewContainer = document.getElementById("preview");
-    const modal = document.getElementById("modal");
-    const countdown = document.getElementById("countdown");
+  const imageInput = document.getElementById("imageInput");
+  const convertBtn = document.getElementById("convertBtn");
+  const copyBtn = document.getElementById("copyBtn");
+  const base64Output = document.getElementById("base64Output");
+  const previewImage = document.getElementById("previewImage");
+  const previewContainer = document.getElementById("preview");
+  const modal = document.getElementById("modal");
+  const countdown = document.getElementById("countdown");
 
-    convertBtn.addEventListener("click", () => {
-      const file = imageInput.files[0];
-      if (!file) {
-        alert("Please select an image first.");
-        return;
+  convertBtn.addEventListener("click", () => {
+    const file = imageInput.files[0];
+    if (!file) {
+      alert("Please select an image first.");
+      return;
+    }
+
+    modal.classList.remove("hidden");
+    let timeLeft = 15;
+    countdown.textContent = timeLeft;
+
+    const timer = setInterval(() => {
+      timeLeft--;
+      countdown.textContent = timeLeft;
+
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        modal.classList.add("hidden");
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64String = reader.result;
+          base64Output.value = base64String;
+          previewImage.src = base64String;
+          previewContainer.classList.remove("hidden");
+          copyBtn.classList.remove("hidden");
+        };
+        reader.readAsDataURL(file);
       }
+    }, 1000);
+  });
 
-      modal.classList.remove("hidden");
-      let timer = 5;
-      countdown.textContent = timer;
-
-      const countdownInterval = setInterval(() => {
-        timer--;
-        countdown.textContent = timer;
-        if (timer <= 0) {
-          clearInterval(countdownInterval);
-          modal.classList.add("hidden");
-
-          const reader = new FileReader();
-          reader.onload = () => {
-            base64Output.value = reader.result;
-            previewImage.src = reader.result;
-            previewContainer.classList.remove("hidden");
-            copyBtn.classList.remove("hidden");
-          };
-          reader.readAsDataURL(file);
-        }
-      }, 1000);
-    });
-
-    copyBtn.addEventListener("click", () => {
-      base64Output.select();
-      document.execCommand("copy");
-      copyBtn.textContent = "Copied!";
-      setTimeout(() => (copyBtn.textContent = "Copy Base64 to Clipboard"), 1500);
-    });
+  copyBtn.addEventListener("click", () => {
+    base64Output.select();
+    document.execCommand("copy");
+    copyBtn.textContent = "Copied!";
+    setTimeout(() => (copyBtn.textContent = "Copy Base64 to Clipboard"), 2000);
+  });
