@@ -137,8 +137,29 @@ function showModal(seconds, onConfirm, onCancel) {
   };
 }
 
+function extractYouTubeVideoID(url) {
+  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/i;
+  const match = url.match(regex);
+  return match ? match[1] : null;
+}
+
+function generateThumbnails() {
+  const url = document.getElementById("youtubeURL").value.trim();
+  const videoID = extractYouTubeVideoID(url);
+  const resultArea = document.getElementById("thumbnailResults");
+
+  if (!videoID) {
+    showToast("Invalid YouTube URL. Please try again.");
+    return;
+  }
+
+  resultArea.innerHTML = '<div class="loader my-6"></div>';
+
+  setTimeout(() => displayThumbnails(videoID), 500); // Optional: simulate loading delay
+}
+
 function displayThumbnails(videoID) {
-  const resultArea = document.getElementById("thumbnailResult");
+  const resultArea = document.getElementById("thumbnailResults");
   resultArea.innerHTML = "";
 
   const baseURL = `https://img.youtube.com/vi/${videoID}`;
