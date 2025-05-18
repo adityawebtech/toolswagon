@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Thumbnail Downloader | Toolswagon</title>
+  <meta name="description" content="Download YouTube video thumbnails in high quality instantly. Get HD, SD, and medium-size thumbnails of any YouTube video with Toolswagon." />
+  <meta name="keywords" content="YouTube thumbnail downloader, download YouTube thumbnail, HD YouTube thumbnail, YouTube thumbnail India, online thumbnail grabber, Toolswagon tools" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Toolswagon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/tools/css/tools.css" />
+</head>
+<body>
+  <!-- Dynamic header include -->
+  <div id="header-container"></div>
+  <section class="py-12">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-3xl font-bold text-blue-600 mb-2">YouTube Thumbnail Downloader</h1>
+      <p class="text-gray-600 mb-6">Paste any YouTube video URL below and download all available thumbnail versions instantly.</p><div class="bg-white rounded-lg shadow-lg p-6 border border-dashed border-blue-300">
+    <input type="text" id="youtubeUrl" placeholder="Paste YouTube video URL here..." class="w-full border p-3 rounded mb-4" />
+    <button onclick="fetchThumbnails()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded">Generate Thumbnails</button>
+
+    <div id="thumbnails" class="mt-6 hidden">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <img id="thumbHD" class="rounded shadow" alt="HD Thumbnail">
+          <a id="downloadHD" download class="block mt-2 bg-green-600 text-white py-2 rounded hover:bg-green-700">Download HD</a>
+        </div>
+        <div>
+          <img id="thumbSD" class="rounded shadow" alt="SD Thumbnail">
+          <a id="downloadSD" download class="block mt-2 bg-green-600 text-white py-2 rounded hover:bg-green-700">Download SD</a>
+        </div>
+        <div>
+          <img id="thumbMQ" class="rounded shadow" alt="Medium Quality Thumbnail">
+          <a id="downloadMQ" download class="block mt-2 bg-green-600 text-white py-2 rounded hover:bg-green-700">Download MQ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </section>  <section class="py-12 px-4 max-w-4xl mx-auto text-justify text-gray-800">
+    <h2 class="text-2xl font-bold mb-4 text-blue-600">About Our YouTube Thumbnail Downloader Tool</h2>
+    <p>
+      Our <strong>YouTube Thumbnail Downloader</strong> is a free online tool designed to help users in India download thumbnails from any YouTube video. Whether you're a content creator, designer, or marketer, having quick access to high-resolution thumbnails can be crucial for your work.
+    </p>
+    <p class="mt-4">
+      With our tool, you can extract and download all available thumbnail versions of a YouTube video, including:
+    </p>
+    <ul class="list-disc list-inside mt-2">
+      <li><strong>HD (High Definition)</strong> - Perfect for presentations and banners</li>
+      <li><strong>SD (Standard Definition)</strong> - Useful for general web use</li>
+      <li><strong>MQ (Medium Quality)</strong> - Ideal for previews and mobile screens</li>
+    </ul>
+    <p class="mt-4">
+      Unlike many other thumbnail downloaders, Toolswagon’s tool is lightning-fast and user-friendly. We don't ask for unnecessary permissions or install any software. Just paste the URL, and get what you need!
+    </p>
+    <h3 class="text-xl font-semibold mt-6 mb-2">How to Use the Tool:</h3>
+    <ol class="list-decimal list-inside">
+      <li>Copy the URL of the YouTube video you want the thumbnail from.</li>
+      <li>Paste it into the input box above and click on “Generate Thumbnails.”</li>
+      <li>All available thumbnails will appear with download buttons.</li>
+      <li>Click any download button to get the image instantly.</li>
+    </ol>
+    <p class="mt-4">
+      This tool supports almost all Indian creators and viewers, allowing seamless access without login or registration. Whether you’re in Mumbai, Delhi, Bengaluru, or a small town — this tool works just the same. You can use the thumbnails for educational projects, memes, marketing, or research.
+    </p>
+    <h3 class="text-xl font-semibold mt-6 mb-2">Why Choose Toolswagon?</h3>
+    <ul class="list-disc list-inside">
+      <li>Instant and free YouTube thumbnail download</li>
+      <li>Fully responsive and mobile-friendly</li>
+      <li>No watermark or limitations</li>
+      <li>Perfect for digital marketers, bloggers, and video creators in India</li>
+    </ul>
+    <p class="mt-4">
+      Use our <strong>free YouTube thumbnail grabber</strong> anytime without limits. We focus on simplicity, speed, and high-quality results.
+    </p>
+  </section>  
+  <!-- Dynamic footer include -->
+  <div id="footer-container"></div>
+<script defer src="/assets/js/script.js"></script>
+<script defer src="/tools/js/tools.js"></script>
+</body>
+</html>
