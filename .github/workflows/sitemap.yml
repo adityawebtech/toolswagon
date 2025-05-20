@@ -26,7 +26,8 @@ jobs:
             --strip-querystring \
             --max-depth 0 \
             --verbose
-- name: Commit sitemap.xml
+
+      - name: Commit sitemap.xml
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
