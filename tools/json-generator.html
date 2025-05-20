@@ -29,34 +29,38 @@
   <!-- Header Include -->
   <div id="header-container"></div>
 
-  <div class="w-full max-w-3xl bg-gray-50 p-6 rounded-xl shadow-lg">
-    <div id="fields" class="space-y-4">
-      <div class="flex space-x-2">
-        <input type="text" placeholder="name" class="key w-1/2 px-3 py-2 border rounded" />
-        <input type="text" placeholder="John Doe" class="value w-1/2 px-3 py-2 border rounded" />
-      </div>
-      <div class="flex space-x-2">
-        <input type="text" placeholder="age" class="key w-1/2 px-3 py-2 border rounded" />
-        <input type="text" placeholder="30" class="value w-1/2 px-3 py-2 border rounded" />
-      </div>
-      <div class="flex space-x-2">
-        <input type="text" placeholder="isAdmin" class="key w-1/2 px-3 py-2 border rounded" />
-        <input type="text" placeholder="true" class="value w-1/2 px-3 py-2 border rounded" />
-      </div>
-    </div>
+  <div class="max-w-5xl mx-auto p-4">
+  <h1 class="text-3xl font-bold mb-4 text-blue-600">Advanced JSON Generator Tool</h1>
+  <p class="mb-6 text-gray-700">
+    Create structured and randomized JSON data effortlessly using this dynamic JSON Generator tool. Perfect for developers, testers, and data scientists, this tool allows you to customize your fields, data types, formats, and preview live results with the option to download instantly.
+  </p>
 
-    <div class="mt-4 flex gap-3 flex-wrap">
-      <button onclick="addField()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Field</button>
-      <button onclick="resetFields()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Clear All</button>
-      <button onclick="copyJSON()" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Copy JSON</button>
-      <button onclick="downloadJSON()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Download JSON</button>
-    </div>
-
-    <div class="mt-6">
-      <h2 class="font-semibold text-lg mb-2 text-blue-700">Generated JSON:</h2>
-      <pre id="jsonOutput" class="bg-white border p-4 rounded text-sm overflow-auto h-64"></pre>
-    </div>
+  <div class="mb-6">
+    <label class="block font-semibold mb-2">Number of Records</label>
+    <input type="number" id="recordCount" value="5" class="border p-2 w-full rounded" min="1">
   </div>
+
+  <div id="fieldsContainer" class="space-y-4">
+    <!-- Dynamic fields will appear here -->
+  </div>
+
+  <button onclick="addField()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-6">
+    + Add Field
+  </button>
+
+  <div>
+    <button onclick="generateJSON()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+      Generate JSON
+    </button>
+  </div>
+
+  <h2 class="text-xl font-semibold mt-8 mb-2">Generated JSON Preview</h2>
+  <pre id="jsonPreview" class="bg-gray-100 p-4 rounded text-sm overflow-auto"></pre>
+
+  <button onclick="downloadJSON()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+    Download JSON
+  </button>
+</div>
 <!-- Dynamic footer include -->
   <div id="footer-container"></div>
 <script defer src="/assets/js/script.js"></script>
