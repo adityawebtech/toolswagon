@@ -1,57 +1,63 @@
-function parseValue(val) {
-      if (val === "true") return true;
-      if (val === "false") return false;
-      if (val === "null") return null;
-      if (!isNaN(val) && val.trim() !== "") return parseFloat(val);
-      return val;
-    }
+let fieldCount = 0;
 
-    function generateJSON() {
-      const keys = document.querySelectorAll(".key");
-      const values = document.querySelectorAll(".value");
+  function addField() {
+    fieldCount++;
+    const container = document.getElementById('fieldsContainer');
+    const fieldRow = document.createElement('div');
+    fieldRow.classList.add('grid', 'grid-cols-5', 'gap-4', 'items-center');
+    fieldRow.innerHTML = `
+      <input type="text" placeholder="Field Name" class="border p-2 rounded col-span-1" id="name-${fieldCount}">
+      <select class="border p-2 rounded col-span-1" id="type-${fieldCount}">
+        <option value="string">String</option>
+        <option value="number">Number</option>
+        <option value="boolean">Boolean</option>
+        <option value="date">Date</option>
+      </select>
+      <input type="text" placeholder="Example / Format (opt)" class="border p-2 rounded col-span-2" id="option-${fieldCount}">
+      <button onclick="this.parentElement.remove()" class="text-red-600">Remove</button>
+    `;
+    container.appendChild(fieldRow);
+  }
+
+  function generateJSON() {
+    const count = parseInt(document.getElementById('recordCount').value);
+    const fields = document.querySelectorAll('#fieldsContainer > div');
+    const result = [];
+
+    for (let i = 0; i < count; i++) {
       const obj = {};
-      for (let i = 0; i < keys.length; i++) {
-        const k = keys[i].value.trim();
-        const v = values[i].value.trim();
-        if (k) obj[k] = parseValue(v);
-      }
-      document.getElementById("jsonOutput").textContent = JSON.stringify(obj, null, 2);
+      fields.forEach((field, index) => {
+        const name = field.querySelector(`#name-${index + 1}`)?.value || `field${index+1}`;
+        const type = field.querySelector(`#type-${index + 1}`)?.value || 'string';
+        const opt = field.querySelector(`#option-${index + 1}`)?.value || '';
+        obj[name] = mockValue(type, opt);
+      });
+      result.push(obj);
     }
 
-    function addField() {
-      const field = document.createElement("div");
-      field.className = "flex space-x-2 mt-2";
-      field.innerHTML = `
-        <input type="text" placeholder="key" class="key w-1/2 px-3 py-2 border rounded" />
-        <input type="text" placeholder="value" class="value w-1/2 px-3 py-2 border rounded" />
-      `;
-      document.getElementById("fields").appendChild(field);
-      field.querySelector(".key").addEventListener("input", generateJSON);
-      field.querySelector(".value").addEventListener("input", generateJSON);
-    }
+    document.getElementById('jsonPreview').textContent = JSON.stringify(result, null, 2);
+  }
 
-    function copyJSON() {
-      const text = document.getElementById("jsonOutput").textContent;
-      navigator.clipboard.writeText(text).then(() => alert("JSON copied to clipboard"));
+  function mockValue(type, opt) {
+    switch(type) {
+      case 'string': return opt || 'Example Text';
+      case 'number': return Math.floor(Math.random() * 1000);
+      case 'boolean': return Math.random() < 0.5;
+      case 'date': return new Date().toISOString();
+      default: return 'Value';
     }
+  }
 
-    function downloadJSON() {
-      const data = document.getElementById("jsonOutput").textContent;
-      const blob = new Blob([data], { type: "application/json" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "generated.json";
-      link.click();
-    }
+  function downloadJSON() {
+    const data = document.getElementById('jsonPreview').textContent;
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'mock-data.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
 
-    function resetFields() {
-      document.getElementById("fields").innerHTML = "";
-      addField();
-      document.getElementById("jsonOutput").textContent = "";
-    }
-
-    // Initialize
-    document.querySelectorAll(".key, .value").forEach(el =>
-      el.addEventListener("input", generateJSON)
-    );
-    generateJSON();
+  // Add a sample field by default
+  addField();
