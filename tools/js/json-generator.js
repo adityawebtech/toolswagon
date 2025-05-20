@@ -1,32 +1,61 @@
 // json-generator.js
 
-// Dependencies: jsoneditor, faker.js
+let fields = []; const fieldsContainer = document.getElementById('fields-container'); const addFieldBtn = document.getElementById('add-field'); const generateBtn = document.getElementById('generate-json'); const outputContainer = document.getElementById('json-output'); const copyBtn = document.getElementById('copy-json'); const downloadBtn = document.getElementById('download-json'); const formatSelect = document.getElementById('format-json');
 
-let editor; const container = document.getElementById("jsoneditor"); const options = { mode: "tree", modes: ["code", "tree"], onChange: syncPreview, }; editor = new JSONEditor(container, options);
+function createFieldElement(index, field = { key: '', type: 'string', value: '' }) { const wrapper = document.createElement('div'); wrapper.className = 'field-group'; wrapper.innerHTML = <input class="field-key" placeholder="Key" value="${field.key}" /> <select class="field-type"> <option value="string" ${field.type === 'string' ? 'selected' : ''}>String</option> <option value="number" ${field.type === 'number' ? 'selected' : ''}>Number</option> <option value="boolean" ${field.type === 'boolean' ? 'selected' : ''}>Boolean</option> <option value="array" ${field.type === 'array' ? 'selected' : ''}>Array</option> <option value="object" ${field.type === 'object' ? 'selected' : ''}>Object</option> <option value="null" ${field.type === 'null' ? 'selected' : ''}>Null</option> </select> <input class="field-value" placeholder="Value" value="${field.value}" ${field.type === 'object' || field.type === 'array' ? 'disabled' : ''} /> <button class="remove-field">Remove</button>;
 
-const preview = document.getElementById("jsonPreview"); const darkToggle = document.getElementById("darkToggle"); const importFile = document.getElementById("importFile"); const exportBtn = document.getElementById("exportBtn"); const importBtn = document.getElementById("importBtn"); const templateSelect = document.getElementById("templateSelect"); const bookmarkBtn = document.getElementById("bookmarkBtn"); const snippetList = document.getElementById("snippetList");
+wrapper.querySelector('.remove-field').onclick = () => { fields.splice(index, 1); renderFields(); };
 
-// Dark/Light Mode Toggle darkToggle.addEventListener("click", () => { document.body.classList.toggle("dark"); editor.setOptions({ theme: document.body.classList.contains("dark") ? "ace/theme/twilight" : "ace/theme/github" }); });
+wrapper.querySelector('.field-type').onchange = (e) => { const selected = e.target.value; const valueInput = wrapper.querySelector('.field-value'); if (selected === 'object' || selected === 'array' || selected === 'null') { valueInput.disabled = true; valueInput.value = ''; } else { valueInput.disabled = false; } };
 
-// Sync Preview Panel function syncPreview() { try { const json = editor.get(); preview.textContent = JSON.stringify(json, null, 2); preview.classList.remove("text-red-500"); } catch (e) { preview.textContent = e.toString(); preview.classList.add("text-red-500"); } }
+fieldsContainer.appendChild(wrapper); }
 
-// Import from file importFile.addEventListener("change", function () { const file = this.files[0]; const reader = new FileReader(); reader.onload = function (e) { try { const json = JSON.parse(e.target.result); editor.set(json); } catch (err) { alert("Invalid JSON"); } }; reader.readAsText(file); });
+function renderFields() { fieldsContainer.innerHTML = ''; fields.forEach((field, index) => createFieldElement(index, field)); }
 
-// Export JSON document.getElementById("exportPretty").onclick = () => { const data = JSON.stringify(editor.get(), null, 2); download("json-pretty.json", data); };
+addFieldBtn.addEventListener('click', () => { fields.push({ key: '', type: 'string', value: '' }); renderFields(); });
 
-document.getElementById("exportMinified").onclick = () => { const data = JSON.stringify(editor.get()); download("json-minified.json", data); };
+generateBtn.addEventListener('click', () => { const json = {}; let valid = true;
 
-function download(filename, text) { const blob = new Blob([text], { type: "application/json" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = filename; a.click(); }
+const fieldElements = fieldsContainer.querySelectorAll('.field-group');
 
-// Templates const templates = { user: { name: "John Doe", age: 30, email: "john@example.com", address: { city: "New York", zip: "10001" } }, array: [ { id: 1, item: "Apple" }, { id: 2, item: "Banana" } ] }; templateSelect.addEventListener("change", () => { const val = templateSelect.value; if (val && templates[val]) editor.set(templates[val]); });
+fieldElements.forEach((group, i) => { const key = group.querySelector('.field-key').value.trim(); const type = group.querySelector('.field-type').value; const val = group.querySelector('.field-value').value.trim();
 
-// Bookmark snippets bookmarkBtn.addEventListener("click", () => { const json = JSON.stringify(editor.get()); const timestamp = new Date().toISOString(); localStorage.setItem("json_snippet_" + timestamp, json); loadSnippets(); });
+if (!key) {
+  alert(`Key missing at row ${i + 1}`);
+  valid = false;
+  return;
+}
 
-function loadSnippets() { snippetList.innerHTML = ""; Object.keys(localStorage) .filter(k => k.startsWith("json_snippet_")) .forEach(k => { const li = document.createElement("li"); li.className = "text-sm cursor-pointer hover:underline"; li.textContent = k.replace("json_snippet_", ""); li.onclick = () => editor.set(JSON.parse(localStorage[k])); snippetList.appendChild(li); }); } loadSnippets();
+let parsedValue;
+switch (type) {
+  case 'number':
+    parsedValue = Number(val);
+    break;
+  case 'boolean':
+    parsedValue = val.toLowerCase() === 'true';
+    break;
+  case 'null':
+    parsedValue = null;
+    break;
+  case 'array':
+    parsedValue = [];
+    break;
+  case 'object':
+    parsedValue = {};
+    break;
+  default:
+    parsedValue = val;
+}
 
-// Use faker.js for mock data document.getElementById("generateMock").onclick = () => { const mock = { name: faker.name.findName(), email: faker.internet.email(), address: faker.address.streetAddress(), phone: faker.phone.phoneNumber() }; editor.set(mock); };
+json[key] = parsedValue;
 
-// Undo/Redo window.addEventListener("keydown", (e) => { if (e.ctrlKey && e.key === "z") editor.undo(); if (e.ctrlKey && (e.key === "y" || (e.shiftKey && e.key === "z"))) editor.redo(); });
+});
 
-// Live validation and error display is built-in via JSONEditor.
+if (valid) { const output = formatSelect.value === 'pretty' ? JSON.stringify(json, null, 2) : JSON.stringify(json); outputContainer.value = output; copyBtn.style.display = 'inline-block'; downloadBtn.style.display = 'inline-block'; } });
+
+copyBtn.addEventListener('click', () => { outputContainer.select(); document.execCommand('copy'); alert('JSON copied to clipboard'); });
+
+downloadBtn.addEventListener('click', () => { const blob = new Blob([outputContainer.value], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'generated.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a); });
+
+// Initial render renderFields();
 
