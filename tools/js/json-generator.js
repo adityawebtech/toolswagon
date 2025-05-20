@@ -1,42 +1,57 @@
-function addField() {
-        const container = document.getElementById('fields');
-        const div = document.createElement('div');
-        div.className = 'flex gap-2 mb-2';
-        div.innerHTML = `
-          <input type="text" class="key border rounded p-2 w-1/2" placeholder="Key" />
-          <input type="text" class="value border rounded p-2 w-1/2" placeholder="Value" />
-          <button onclick="this.parentElement.remove()" class="text-red-500">Remove</button>
-        `;
-        container.appendChild(div);
-      }function generateJSON() {
-    const keys = document.querySelectorAll('.key');
-    const values = document.querySelectorAll('.value');
-    const obj = {};
+function parseValue(val) {
+      if (val === "true") return true;
+      if (val === "false") return false;
+      if (val === "null") return null;
+      if (!isNaN(val) && val.trim() !== "") return parseFloat(val);
+      return val;
+    }
 
-    keys.forEach((key, i) => {
-      const k = key.value;
-      const v = values[i].value;
-      if (k) obj[k] = parseValue(v);
-    });
+    function generateJSON() {
+      const keys = document.querySelectorAll(".key");
+      const values = document.querySelectorAll(".value");
+      const obj = {};
+      for (let i = 0; i < keys.length; i++) {
+        const k = keys[i].value.trim();
+        const v = values[i].value.trim();
+        if (k) obj[k] = parseValue(v);
+      }
+      document.getElementById("jsonOutput").textContent = JSON.stringify(obj, null, 2);
+    }
 
-    document.getElementById('output').textContent = JSON.stringify(obj, null, 2);
-  }
+    function addField() {
+      const field = document.createElement("div");
+      field.className = "flex space-x-2 mt-2";
+      field.innerHTML = `
+        <input type="text" placeholder="key" class="key w-1/2 px-3 py-2 border rounded" />
+        <input type="text" placeholder="value" class="value w-1/2 px-3 py-2 border rounded" />
+      `;
+      document.getElementById("fields").appendChild(field);
+      field.querySelector(".key").addEventListener("input", generateJSON);
+      field.querySelector(".value").addEventListener("input", generateJSON);
+    }
 
-  function parseValue(val) {
-    if (!isNaN(val)) return Number(val);
-    if (val.toLowerCase() === 'true') return true;
-    if (val.toLowerCase() === 'false') return false;
-    if (val.toLowerCase() === 'null') return null;
-    return val;
-  }
+    function copyJSON() {
+      const text = document.getElementById("jsonOutput").textContent;
+      navigator.clipboard.writeText(text).then(() => alert("JSON copied to clipboard"));
+    }
 
-  function downloadJSON() {
-    const json = document.getElementById('output').textContent;
-    const blob = new Blob([json], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'generated.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  }
+    function downloadJSON() {
+      const data = document.getElementById("jsonOutput").textContent;
+      const blob = new Blob([data], { type: "application/json" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "generated.json";
+      link.click();
+    }
+
+    function resetFields() {
+      document.getElementById("fields").innerHTML = "";
+      addField();
+      document.getElementById("jsonOutput").textContent = "";
+    }
+
+    // Initialize
+    document.querySelectorAll(".key, .value").forEach(el =>
+      el.addEventListener("input", generateJSON)
+    );
+    generateJSON();
