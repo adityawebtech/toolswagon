@@ -1,57 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
+<?xml version="1.0" encoding="UTF-8"?>
+		<!--	created with www.toolswagon.site	-->
+		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-  <loc>http://toolswagon.site/tools/text-case-converter.html</loc>
-  <priority>1.0</priority>
-  <changefreq>weekly</changefreq>
+	<loc>https://toolswagon.site/</loc>
+	<lastmod>2025-05-20T14:02:06+01:00</lastmod>
+	<priority>1.0</priority>
 </url>
 <url>
-  <loc>http://toolswagon.site/tools/pdf-to-word.html</loc>
-  <priority>1.0</priority>
-  <changefreq>weekly</changefreq>
+	<loc>https://toolswagon.site/tools/text-case-converter.html</loc>
+	<lastmod>2025-05-20T14:02:06+01:00</lastmod>
+	<priority>0.8</priority>
 </url>
 <url>
-  <loc>http://toolswagon.site/tools/ifsc-code-finder.html</loc>
-  <priority>1.0</priority>
-  <changefreq>weekly</changefreq>
+	<loc>https://toolswagon.site/tools/pdf-to-word.html</loc>
+	<lastmod>2025-05-20T14:02:06+01:00</lastmod>
+	<priority>0.8</priority>
 </url>
 <url>
-  <loc>http://toolswagon.site/tools/youtube-thumbnail-downloader.html</loc>
-  <priority>1.0</priority>
-  <changefreq>weekly</changefreq>
+	<loc>https://toolswagon.site/tools/youtube-thumbnail-downloader.html</loc>
+	<lastmod>2025-05-20T14:02:06+01:00</lastmod>
+	<priority>0.8</priority>
 </url>
 <url>
-  <loc>http://toolswagon.site/tools/youtube-to-mp3.html</loc>
-  <priority>1.0</priority>
-  <changefreq>weekly</changefreq>
+	<loc>https://toolswagon.site/tools/image-to-base64.html</loc>
+	<lastmod>2025-05-20T14:02:06+01:00</lastmod>
+	<priority>0.8</priority>
 </url>
-<url>
-  <loc>http://toolswagon.site/tools/image-to-base64.html</loc>
-  <priority>1.0</priority>
-  <changefreq>weekly</changefreq>
-</url>
-<url>
-  <loc>http://toolswagon.site/tools/qr-code-generator.html</loc>
-  <priority>1.0</priority>
-  <changefreq>weekly</changefreq>
-</url>
-<url>
-  <loc>http://toolswagon.site/tools/json-formatter.html</loc>
-  <priority>1.0</priority>
-  <changefreq>weekly</changefreq>
-</url>
-<url>
-  <loc>http://toolswagon.site/tools/url-encode-decode.html</loc>
-  <priority>1.0</priority>
-  <changefreq>weekly</changefreq>
-</url>
-<url>
-  <loc></loc>
-  <priority>1.0</priority>
-  <changefreq>weekly</changefreq>
-</url>
-<url>
-  <loc>https://toolswagon.site/tools/</loc>
-  <priority>1.0</priority>
-  <changefreq>weekly</changefreq>
-</url>
+</urlset>
