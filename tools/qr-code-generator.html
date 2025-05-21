@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Free QR Code Generator Tool – Toolswagon</title>
-  <meta name="description" content="Generate QR Codes instantly for free. No watermark. Download PNG QR codes easily. Best QR Code Generator online by Toolswagon.">
-      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QR Code Generator - Toolswagon | Free Online QR Code Maker</title>
+  <meta name="description" content="Generate high-quality QR Codes instantly with Toolswagon’s free QR Code Generator. Customize, preview, download and share your QR codes easily without any backend or installation." />
+  <meta name="keywords" content="QR Code Generator, free QR code maker, online QR code generator, QR code creator, QR code download, QR code share, custom QR codes, Toolswagon QR code tool" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
   <!-- Favicon links -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
@@ -25,73 +26,139 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/assets/css/style.css" />
   </head>
-<body class="bg-white text-gray-800 font-sans">
+  <body class="bg-slate-50 text-slate-800 font-[Poppins]">
 <div id="header-container"></div>
-  <main class="max-w-4xl mx-auto px-4 py-10">
-    <h1 class="text-4xl font-bold text-blue-600 mb-6 text-center">Free Online QR Code Generator</h1>
-    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-10 shadow-md">
-      <label for="qrInput" class="block text-lg font-medium mb-2">Enter text or URL:</label>
-      <input type="text" id="qrInput" placeholder="https://example.com"
-             class="w-full p-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"/>
 
-      <div class="flex flex-col items-center gap-4">
-        <canvas id="qrCanvas" class="bg-white p-2 border border-gray-200 rounded-lg shadow"></canvas>
-        <div class="flex gap-3">
-          <button onclick="downloadQR()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Download</button>
-          <button onclick="copyQR()" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">Copy</button>
+  <main class="max-w-4xl mx-auto px-6 py-12">
+
+    <h1 class="text-4xl font-extrabold text-blue-600 text-center mb-8">Free QR Code Generator</h1>
+
+    <!-- Input Section -->
+    <section class="bg-blue-50 border border-blue-200 rounded-xl p-6 shadow mb-12">
+      <label for="qrText" class="block text-lg font-semibold mb-2">Enter URL or Text to Generate QR Code</label>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <input type="text" id="qrText" placeholder="https://example.com or any text"
+               class="flex-1 px-4 py-3 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <button onclick="generateQRCode()"
+                class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition">Generate QR Code</button>
+      </div>
+    </section>
+
+    <!-- Result Section -->
+    <section id="qrResult" class="hidden mb-16">
+      <h2 class="text-2xl font-semibold mb-6 text-center text-gray-800">Your QR Code</h2>
+      <div class="flex flex-col items-center gap-6">
+        <canvas id="qrCanvas" class="bg-white border border-gray-300 rounded shadow-lg"></canvas>
+        <div class="flex gap-5">
+          <button onclick="downloadQR()" class="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700 transition">Download</button>
+          <button onclick="shareQR()" class="bg-gray-700 text-white px-5 py-2 rounded hover:bg-gray-800 transition">Share</button>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- SEO Content -->
-    <article class="prose max-w-none">
-      <h2>What Is a QR Code?</h2>
-      <p>A QR Code (Quick Response Code) is a type of matrix barcode invented in 1994 by Japanese company Denso Wave. It stores data like URLs, contact info, payments, and much more, scannable via smartphone cameras.</p>
+    <!-- SEO Content Section -->
+    <article class="prose max-w-none text-gray-800">
+      <h2>Why Choose Toolswagon’s Free QR Code Generator?</h2>
+      <p>
+        In today’s digital age, QR codes have become an indispensable tool for sharing information quickly and efficiently. Whether you’re a business owner wanting to link customers to your website, an event organizer distributing tickets, or an individual sharing contact information, QR codes offer a seamless solution. Toolswagon’s free QR Code Generator provides a fast, reliable, and user-friendly way to create custom QR codes without any technical hassle.
+      </p>
 
-      <h2>Features of Toolswagon’s QR Code Generator Tool</h2>
+      <h3>What is a QR Code and How Does It Work?</h3>
+      <p>
+        A QR code, short for Quick Response code, is a two-dimensional barcode that can store various types of data such as URLs, text, contact details, and more. When scanned by a smartphone or QR code reader, it instantly directs the user to the encoded information. This eliminates the need to manually type long URLs or information, saving time and reducing errors.
+      </p>
+
+      <h3>Features of Our Online QR Code Generator</h3>
       <ul>
-        <li><strong>No Sign-Up Required</strong> – Use instantly, no account needed.</li>
-        <li><strong>No Watermarks</strong> – Clean QR codes, perfect for branding.</li>
-        <li><strong>Free Forever</strong> – No premium upgrade required.</li>
-        <li><strong>Real-Time Preview</strong> – See your QR code as you type.</li>
-        <li><strong>Downloadable PNG</strong> – Print and share high-quality images.</li>
-        <li><strong>Privacy-Friendly</strong> – No tracking or data storage.</li>
+        <li><strong>Instant Generation:</strong> Simply enter your URL or text, click the generate button, and your QR code is ready in seconds.</li>
+        <li><strong>Custom Watermark:</strong> Each QR code includes a subtle watermark at the center reading "created at www.toolswagon.site" to showcase authenticity without compromising scannability.</li>
+        <li><strong>Preview and Edit:</strong> The tool displays the QR code preview instantly so you can confirm before downloading or sharing.</li>
+        <li><strong>Easy Download:</strong> Download your QR code as a high-quality PNG image with a single click for use on websites, flyers, posters, or social media.</li>
+        <li><strong>Sharing Made Simple:</strong> Share your QR code directly from the tool via native device sharing options, making it perfect for mobile and desktop users alike.</li>
+        <li><strong>No Backend Required:</strong> Completely client-side operation means no file uploads or server processing, ensuring your data stays private and the tool is lightning-fast.</li>
       </ul>
 
-      <h2>How to Use the QR Code Generator</h2>
+      <h3>How to Use the QR Code Generator</h3>
+      <p>
+        Using Toolswagon’s QR Code Generator is straightforward and requires no prior experience:
+      </p>
       <ol>
-        <li>Enter your text, URL, or data above.</li>
-        <li>Preview your QR code in real time.</li>
-        <li>Download or copy the image for use anywhere.</li>
+        <li>Enter the URL, text, or any information you want to convert into a QR code in the input box.</li>
+        <li>Click the <em>Generate QR Code</em> button.</li>
+        <li>View your generated QR code in the preview section.</li>
+        <li>Download the QR code as an image or share it instantly using the available buttons.</li>
       </ol>
 
-      <h2>Popular Use Cases for QR Codes</h2>
+      <h3>Applications of QR Codes</h3>
+      <p>
+        QR codes are incredibly versatile and widely used in various fields, including:
+      </p>
       <ul>
-        <li>Business cards with LinkedIn or portfolio links</li>
-        <li>Restaurant menus for touchless dining</li>
-        <li>Event ticketing systems</li>
-        <li>Product packaging instructions or promos</li>
-        <li>Contactless payment links (UPI, PayPal, etc.)</li>
-        <li>Wi-Fi sharing for cafes, homes, hotels</li>
+        <li><strong>Marketing & Advertising:</strong> Link potential customers to your website, social media, or promotional content.</li>
+        <li><strong>Event Management:</strong> Distribute tickets, event details, and registrations easily and securely.</li>
+        <li><strong>Payments & Banking:</strong> Enable quick mobile payments with scanned QR codes for faster transactions.</li>
+        <li><strong>Education:</strong> Share class materials, links, or resources with students digitally.</li>
+        <li><strong>Personal Use:</strong> Share contact details, Wi-Fi passwords, or location information with friends and family.</li>
       </ul>
 
-      <h2>Why Choose Toolswagon’s QR Code Generator?</h2>
-      <p>Unlike other QR tools, we offer fast performance, zero ads, no watermark, and a responsive layout. Your data stays private, and your QR code is ready to use or print immediately.</p>
+      <h3>Benefits of Using Online QR Code Generators</h3>
+      <p>
+        Unlike complicated software or apps, online QR code generators like Toolswagon’s provide quick access without installation. Benefits include:
+      </p>
+      <ul>
+        <li>No technical skills needed.</li>
+        <li>Accessible from any device with internet access.</li>
+        <li>Secure and private since data processing happens locally in your browser.</li>
+        <li>Cost-effective with absolutely free usage.</li>
+      </ul>
 
-      <h2>FAQs</h2>
-      <p><strong>Q: Is this QR code generator free?</strong><br>A: Yes, it's 100% free and always will be.</p>
-      <p><strong>Q: Is my data stored?</strong><br>A: No. Everything runs in your browser.</p>
-      <p><strong>Q: Can I print my QR code?</strong><br>A: Yes. You can download the PNG and print it as needed.</p>
+      <h3>Tips for Effective QR Code Usage</h3>
+      <p>
+        To get the best results from your QR codes, keep these tips in mind:
+      </p>
+      <ul>
+        <li><strong>Test Your QR Code:</strong> Always scan your QR code with multiple devices to ensure it works correctly.</li>
+        <li><strong>Use Clear Context:</strong> Accompany QR codes with clear instructions or calls-to-action.</li>
+        <li><strong>Choose the Right Size:</strong> Larger QR codes scan more easily, especially on printed materials.</li>
+        <li><strong>Track Usage:</strong> If possible, use URLs with tracking parameters to measure engagement.</li>
+      </ul>
 
-      <h2>Keywords:</h2>
-      <p>QR Code Generator online free, no watermark QR code maker, QR code PNG download, generate QR code instantly, best QR code generator site, create QR code for URL, secure QR code creator.</p>
+      <h3>Why Toolswagon is Your Best Choice</h3>
+      <p>
+        At Toolswagon, we prioritize simplicity, speed, and user privacy. Our QR Code Generator tool offers a hassle-free experience with instant results, no ads, and a clean interface. Whether you're creating QR codes for business or personal use, our tool delivers reliable performance every time.
+      </p>
+
+      <h3>Frequently Asked Questions (FAQs)</h3>
+      <h4>Is this QR Code Generator free to use?</h4>
+      <p>Yes, our tool is 100% free with no hidden charges or registration required.</p>
+
+      <h4>Can I generate QR codes for any type of data?</h4>
+      <p>Absolutely! You can generate QR codes for URLs, plain text, contact info, phone numbers, or any string.</p>
+
+      <h4>Is the generated QR code safe and private?</h4>
+      <p>Yes. All generation happens in your browser locally. We do not store or transmit your data anywhere.</p>
+
+      <h4>Can I customize the QR code design?</h4>
+      <p>Currently, the tool includes a watermark for authenticity but doesn’t support other customization. We plan to add more options soon.</p>
+
+      <h4>How do I share my QR code?</h4>
+      <p>You can use the share button to open your device's native sharing interface or download the QR code image for offline sharing.</p>
+
+      <h3>Start Generating Your QR Codes Now!</h3>
+      <p>
+        Don’t wait — create your customized QR codes instantly with Toolswagon’s free QR Code Generator. Whether for business promotions, event passes, or personal use, our tool is designed to make your digital sharing fast, secure, and effective.
+      </p>
+      <p class="font-semibold text-center mt-8">Generate your first QR code above and experience the simplicity today!</p>
     </article>
+
   </main>
 
   <!-- Dynamic Footer -->
   <div id="footer-container"></div>
-
-  <script defer src="/assets/js/script.js"></script>
-    <script defer src="/tools/js/qr-code-generator.js"></script>
-</body>
-        </html>
+<script defer src="/assets/js/script.js"></script>
+    <script defer src="/tools/js/json-generator.js"></script>
+    <!-- QR Code JS & Tool Functionality -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  
+  </body>
+</html>
