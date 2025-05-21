@@ -32,38 +32,50 @@
     Easily create JSON objects with custom key-value pairs. Choose types, preview output live, copy or download the result.
   </p>
 
-  <!-- Input fields -->
-  <div id="fields" class="space-y-2 mb-4"></div>
-  <button id="add-field" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded">
-    + Add Field
-  </button>
+  <div class="p-4 md:p-8 max-w-7xl mx-auto text-gray-800 dark:text-gray-100">
+  <h1 class="text-3xl md:text-4xl font-bold mb-4">Advanced JSON Generator Tool</h1>
+  <p class="mb-6 text-lg">Create custom JSON structures with auto field generation, live preview, and mock data support using a user-friendly interface. Switch between tree and code views, validate schemas, and export with ease.</p>
 
-  <!-- Options -->
-  <div class="flex items-center justify-between mt-6 mb-4">
-    <label class="flex items-center space-x-2 text-sm text-gray-700">
-      <input type="checkbox" id="format" class="form-checkbox h-4 w-4 text-blue-600">
-      <span>Pretty Format</span>
-    </label>
-    <div class="space-x-2">
-      <button id="copy-btn" class="bg-gray-100 hover:bg-gray-200 px-4 py-1 rounded border border-gray-300 text-sm">
-        Copy JSON
-      </button>
-      <button id="download-btn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded text-sm">
-        Download JSON
-      </button>
+  <!-- Settings Panel -->
+  <div class="bg-white dark:bg-gray-800 rounded-xl p-4 shadow mb-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">Fields Configuration</h2>
+      <button id="addFieldBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">+ Add Field</button>
+    </div>
+
+    <div id="fieldsContainer" class="space-y-4">
+      <!-- Field Rows will be injected here -->
     </div>
   </div>
 
-  <!-- Output -->
-  <div class="bg-gray-50 border border-gray-300 rounded p-4 overflow-auto">
-    <pre id="result" class="text-sm text-gray-800 whitespace-pre-wrap"></pre>
+  <!-- JSON Output -->
+  <div class="bg-white dark:bg-gray-800 rounded-xl p-4 shadow mb-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">Generated JSON</h2>
+      <div class="space-x-2">
+        <button id="beautifyBtn" class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded">Beautify</button>
+        <button id="minifyBtn" class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded">Minify</button>
+        <button id="copyBtn" class="bg-green-600 text-white px-3 py-1 rounded">Copy</button>
+        <button id="downloadBtn" class="bg-indigo-600 text-white px-3 py-1 rounded">Download</button>
+      </div>
+    </div>
+    <textarea id="jsonOutput" class="w-full h-80 bg-gray-100 dark:bg-gray-900 text-sm font-mono p-3 rounded resize-none"></textarea>
   </div>
 
-  <!-- Note -->
-  <p class="text-xs text-gray-500 mt-4">
-    Tip: Select the correct data type for each value (string, number, boolean, array, object) to auto-validate and generate correct JSON structure.
-  </p>
-</section>
+  <!-- Schema Validation (Optional) -->
+  <div class="bg-white dark:bg-gray-800 rounded-xl p-4 shadow mb-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">JSON Schema (Optional)</h2>
+      <button id="validateBtn" class="bg-blue-500 text-white px-4 py-1 rounded">Validate</button>
+    </div>
+    <textarea id="jsonSchema" placeholder="Paste your JSON Schema here to validate..." class="w-full h-48 bg-gray-100 dark:bg-gray-900 text-sm font-mono p-3 rounded resize-none"></textarea>
+    <div id="validationResult" class="mt-2 text-sm"></div>
+  </div>
+</div>
+
+<!-- Placeholder Script for Future JS Injections -->
+<script src="/assets/js/json-generator.js"></script>
+
 <!-- Dynamic Footer -->
   <div id="footer-container"></div>
 <script defer src="/assets/js/script.js"></script>
