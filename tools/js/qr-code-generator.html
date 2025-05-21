@@ -1,0 +1,29 @@
+const input = document.getElementById("qrInput");
+    const canvas = document.getElementById("qrCanvas");
+
+    input.addEventListener("input", () => {
+      const value = input.value.trim();
+      if (value !== "") {
+        QRCode.toCanvas(canvas, value, { width: 200 }, err => {
+          if (err) console.error(err);
+        });
+      } else {
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    });
+
+    function downloadQR() {
+      const link = document.createElement('a');
+      link.download = "qr-code.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
+
+    function copyQR() {
+      canvas.toBlob(blob => {
+        const item = new ClipboardItem({ "image/png": blob });
+        navigator.clipboard.write([item]);
+        alert("QR code copied to clipboard!");
+      });
+    }
