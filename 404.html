@@ -105,9 +105,23 @@
     </div>
   </main>
 
-    <!-- Dynamic footer include -->
-  <div id="footer-container"></div>
-<script defer src="/assets/js/script.js"></script>
+  <!-- Dynamic Footer Include -->
+  <footer>
+    <div id="footer-container"></div>
+  </footer>
+
+  <script>
+    // Load dynamic header and footer
+    window.addEventListener("DOMContentLoaded", () => {
+      fetch("/components/header.html")
+        .then(res => res.text())
+        .then(data => document.getElementById("header-container").innerHTML = data);
+
+      fetch("/components/footer.html")
+        .then(res => res.text())
+        .then(data => document.getElementById("footer-container").innerHTML = data);
+    });
+  </script>
 
 </body>
 </html>
