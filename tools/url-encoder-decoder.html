@@ -5,31 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free URL Encoder & Decoder Online | Toolswagon</title>
   <meta name="description" content="Easily encode or decode URLs with Toolswagon's free online tool. 100% secure, browser-based, and perfect for web developers, SEO, or digital marketers.">
+  <meta name="keywords" content="URL encoder, URL decoder, online tool, free URL encoder decoder, encode decode link, Toolswagon tools">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://toolswagon.site/tools/url-encoder-decoder/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolswagon.site/tools/url-encoder-decoder/">
+  <meta property="og:title" content="Free URL Encoder & Decoder Online | Toolswagon">
+  <meta property="og:description" content="Encode or decode any URL instantly using Toolswagon's free browser-based tool. No data saved, 100% secure.">
+  <meta property="og:image" content="https://toolswagon.site/assets/img/url-encoder-og.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://toolswagon.site/tools/url-encoder-decoder/">
+  <meta name="twitter:title" content="Free URL Encoder & Decoder Online | Toolswagon">
+  <meta name="twitter:description" content="Encode or decode any URL instantly using Toolswagon's free browser-based tool. No data saved, 100% secure.">
+  <meta name="twitter:image" content="https://toolswagon.site/assets/img/url-encoder-og.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Header -->
-  <header class="bg-blue-600 text-white py-4">
-    <div class="max-w-6xl mx-auto px-4">
-      <h1 class="text-2xl font-semibold">URL Encoder & Decoder Tool - Toolswagon</h1>
-    </div>
-  </header>
+  <!-- Dynamic Header -->
+  <div id="header-container"></div>
 
   <!-- Tool Section -->
   <main class="px-4 py-10">
     <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
-      <h2 class="text-xl font-bold mb-4 text-blue-600">Encode or Decode a URL</h2>
-      <textarea id="input" class="w-full h-32 p-2 border rounded mb-4" placeholder="Paste your URL or text here..."></textarea>
+      <h1 class="text-2xl font-bold text-blue-600 mb-4">Free URL Encoder & Decoder</h1>
+      <textarea id="input" class="w-full h-32 p-3 border rounded mb-4" placeholder="Paste your URL or text here..."></textarea>
       <div class="flex flex-wrap gap-4 mb-4">
         <button onclick="encodeURL()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Encode URL</button>
         <button onclick="decodeURL()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Decode URL</button>
         <button onclick="clearFields()" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">Clear</button>
       </div>
-      <textarea id="output" class="w-full h-32 p-2 border rounded" placeholder="Your result will appear here..." readonly></textarea>
+      <textarea id="output" class="w-full h-32 p-3 border rounded mb-2" placeholder="Your result will appear here..." readonly></textarea>
+      <button onclick="copyOutput()" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Copy Result</button>
     </div>
   </main>
-
   <!-- SEO Content Section -->
   <section class="px-4 py-10 bg-white border-t">
     <div class="max-w-4xl mx-auto">
@@ -91,11 +111,8 @@
       </p>
     </div>
   </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-100 text-center text-sm py-4 mt-10">
-    &copy; 2025 Toolswagon. All rights reserved.
-  </footer>
+  <!-- Dynamic Footer -->
+  <div id="footer-container"></div>
 
   <!-- Scripts -->
   <script>
@@ -113,6 +130,27 @@
       document.getElementById("input").value = '';
       document.getElementById("output").value = '';
     }
+
+    function copyOutput() {
+      const output = document.getElementById("output");
+      output.select();
+      output.setSelectionRange(0, 99999); // For mobile devices
+      navigator.clipboard.writeText(output.value).then(() => {
+        alert("Copied to clipboard!");
+      });
+    }
+
+    // Load header and footer dynamically
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('/components/header.html')
+        .then(res => res.text())
+        .then(data => document.getElementById('header-container').innerHTML = data);
+
+      fetch('/components/footer.html')
+        .then(res => res.text())
+        .then(data => document.getElementById('footer-container').innerHTML = data);
+    });
   </script>
+
 </body>
 </html>
