@@ -48,19 +48,25 @@
   <div id="header-container"></div>
 
   <!-- Tool Section -->
-  <main class="px-4 py-10">
-    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
-      <h1 class="text-2xl font-bold text-blue-600 mb-4">Free URL Encoder & Decoder</h1>
-      <textarea id="input" class="w-full h-32 p-3 border rounded mb-4" placeholder="Paste your URL or text here..."></textarea>
-      <div class="flex flex-wrap gap-4 mb-4">
-        <button onclick="encodeURL()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Encode URL</button>
-        <button onclick="decodeURL()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Decode URL</button>
-        <button onclick="clearFields()" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">Clear</button>
-      </div>
+<main class="px-4 py-10">
+  <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+    <h1 class="text-2xl font-bold text-blue-600 mb-4">Free URL Encoder & Decoder</h1>
+    <textarea id="input" class="w-full h-32 p-3 border rounded mb-4" placeholder="Paste your URL or text here..."></textarea>
+    
+    <div class="flex flex-wrap gap-4 mb-4">
+      <button onclick="encodeURL()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Encode URL</button>
+      <button onclick="decodeURL()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Decode URL</button>
+      <button onclick="clearFields()" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">Clear</button>
+    </div>
+    
+    <!-- Result Box: hidden by default -->
+    <div id="resultBox" class="hidden">
       <textarea id="output" class="w-full h-32 p-3 border rounded mb-2" placeholder="Your result will appear here..." readonly></textarea>
       <button onclick="copyOutput()" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Copy Result</button>
     </div>
-  </main>
+  </div>
+</main>
+  
   <!-- SEO Content Section -->
   <section class="px-4 py-10 bg-white border-t">
     <div class="max-w-4xl mx-auto">
@@ -130,39 +136,33 @@
   
   <script>
     function encodeURL() {
-      const input = document.getElementById("input").value;
-      document.getElementById("output").value = encodeURIComponent(input);
-    }
+  const input = document.getElementById("input").value;
+  document.getElementById("output").value = encodeURIComponent(input);
+  document.getElementById("resultBox").classList.remove("hidden");
+}
 
-    function decodeURL() {
-      const input = document.getElementById("input").value;
-      document.getElementById("output").value = decodeURIComponent(input);
-    }
+function decodeURL() {
+  const input = document.getElementById("input").value;
+  try {
+    document.getElementById("output").value = decodeURIComponent(input);
+  } catch (e) {
+    document.getElementById("output").value = "Invalid URL encoding.";
+  }
+  document.getElementById("resultBox").classList.remove("hidden");
+}
 
-    function clearFields() {
-      document.getElementById("input").value = '';
-      document.getElementById("output").value = '';
-    }
+function clearFields() {
+  document.getElementById("input").value = "";
+  document.getElementById("output").value = "";
+  document.getElementById("resultBox").classList.add("hidden");
+}
 
-    function copyOutput() {
-      const output = document.getElementById("output");
-      output.select();
-      output.setSelectionRange(0, 99999); // For mobile devices
-      navigator.clipboard.writeText(output.value).then(() => {
-        alert("Copied to clipboard!");
-      });
-    }
-
-    // Load header and footer dynamically
-    window.addEventListener('DOMContentLoaded', () => {
-      fetch('/components/header.html')
-        .then(res => res.text())
-        .then(data => document.getElementById('header-container').innerHTML = data);
-
-      fetch('/components/footer.html')
-        .then(res => res.text())
-        .then(data => document.getElementById('footer-container').innerHTML = data);
-    });
+function copyOutput() {
+  const output = document.getElementById("output");
+  output.select();
+  output.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+}
   </script>
 
 </body>
