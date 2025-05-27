@@ -10,6 +10,26 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/assets/css/style.css" />
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <!-- Standard favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+
+<!-- Apple Touch Icon (iOS Safari) -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+
+<!-- Android Chrome -->
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/images/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/images/android-chrome-512x512.png">
+
+<!-- Web App Manifest (optional for PWA support) -->
+<link rel="manifest" href="/site.webmanifest">
+
+<!-- Safari pinned tab (macOS Safari) -->
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#2563EB">
+
+<!-- Theme color for mobile browsers -->
+<meta name="theme-color" content="#2563EB">
 </head>
 <body class="bg-gray-50 text-gray-800 font-[Poppins]">
   <!-- Header Include -->
@@ -191,7 +211,57 @@
   </p>
     </section>
 
-  </section>  <!-- Footer Include -->  <div id="footer-container"></div>  <script defer src="/assets/js/script.js"></script>  <script>
+  </section>  <!-- Footer Include -->  <div id="footer-container"></div>  
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this tool really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. Toolswagon provides 100% free online tools with no hidden costs or sign-ups."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I generate a QR code for Wi-Fi or contact details?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Just paste the formatted text or vCard info. We’ll add more formats soon."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do QR codes expire?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The QR code is permanent as long as the embedded data stays valid."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this for commercial purposes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, feel free to use the generated codes in your business projects."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data stored?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Everything is processed locally in your browser, ensuring full privacy."
+      }
+    }
+  ]
+}
+  </script>
+  
+  <script defer src="/assets/js/script.js"></script>  <script>
     const form = document.getElementById('qr-form');
     const canvas = document.getElementById('qr-canvas');
     const downloadBtn = document.getElementById('qr-download');
