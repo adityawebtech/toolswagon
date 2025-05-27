@@ -46,14 +46,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("toolSearch");
+    const searchButton = document.getElementById("searchButton");
     const toolCards = document.querySelectorAll(".tool-card");
 
-    searchInput.addEventListener("input", function () {
-      const query = this.value.toLowerCase();
-
+    function filterTools() {
+      const query = searchInput.value.toLowerCase().trim();
       toolCards.forEach(card => {
         const text = card.textContent.toLowerCase();
         card.style.display = text.includes(query) ? "block" : "none";
       });
+    }
+
+    // Live filtering on typing
+    searchInput.addEventListener("input", filterTools);
+
+    // Trigger filtering on Search button click
+    searchButton.addEventListener("click", function (e) {
+      e.preventDefault(); // prevent form submission if inside a form
+      filterTools();
     });
   });
