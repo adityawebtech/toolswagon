@@ -41,3 +41,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setInterval(showNext, 3000);
 });
+
+//Search Bar
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("toolSearch");
+    const toolCards = document.querySelectorAll(".tool-card");
+
+    searchInput.addEventListener("input", function () {
+      const query = this.value.toLowerCase();
+
+      toolCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? "block" : "none";
+      });
+    });
+  });
