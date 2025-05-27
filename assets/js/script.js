@@ -60,3 +60,34 @@ document.addEventListener("DOMContentLoaded", () => {
     // Live filtering on typing
     searchInput.addEventListener("input", filterTools);
   });
+
+// Star Rating Star Script 
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('.rating-box').forEach(box => {
+    const stars = box.querySelectorAll('.stars span');
+    const result = box.querySelector('.rating-result');
+    const id = box.id;
+    const savedRating = localStorage.getItem(id);
+
+    if (savedRating) {
+      stars.forEach(s => {
+        if (+s.dataset.star <= +savedRating) s.classList.add('selected');
+      });
+      result.textContent = `You rated this ${savedRating} star${savedRating > 1 ? 's' : ''}.`;
+    }
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const rating = star.dataset.star;
+        localStorage.setItem(id, rating);
+
+        stars.forEach(s => s.classList.remove('selected'));
+        stars.forEach(s => {
+          if (+s.dataset.star <= +rating) s.classList.add('selected');
+        });
+
+        result.textContent = `You rated this ${rating} star${rating > 1 ? 's' : ''}.`;
+      });
+    });
+  });
+});
