@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Encoder & Decoder | Toolswagon</title>
+  <meta name="description" content="Encode or decode your URLs instantly using Toolswagon's free URL Encoder & Decoder tool. A perfect solution for developers and digital marketers!">
+  <meta name="keywords" content="URL Encoder, URL Decoder, Encode URL, Decode URL, Online URL Tool, Toolswagon">
+  <meta name="author" content="Toolswagon">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head><body class="bg-white text-gray-800">
+  <include src="/components/header.html"></include>  <main class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-6 text-blue-700">URL Encoder & Decoder</h1>
+    <p class="mb-6 text-lg leading-relaxed">
+      In the world of web development and digital marketing, URL encoding and decoding play a vital role in ensuring data is transmitted correctly through URLs. When you share data in a URL, certain characters must be encoded to avoid conflicts or misinterpretations by web browsers and servers. Toolswagon's URL Encoder & Decoder is a powerful, free tool designed to simplify this task for developers, digital marketers, SEO experts, and anyone working with web addresses.
+    </p><div class="mb-4">
+  <textarea id="input" class="w-full border border-gray-300 rounded-lg p-3 text-base min-h-[120px] resize-y" placeholder="Paste your text or URL here..."></textarea>
+</div>
+
+<div class="flex flex-wrap gap-4 mb-4">
+  <button onclick="encodeURL()" class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700">Encode URL</button>
+  <button onclick="decodeURL()" class="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700">Decode URL</button>
+  <button onclick="clearText()" class="bg-gray-500 text-white px-4 py-2 rounded-xl hover:bg-gray-600">Clear</button>
+</div>
+
+<div>
+  <label for="output" class="block mb-2 font-semibold">Result:</label>
+  <textarea id="output" readonly class="w-full border border-gray-300 rounded-lg p-3 text-base min-h-[120px] resize-y bg-gray-50"></textarea>
+</div>
+
+<section class="mt-10 prose max-w-none">
+  <h2>What is URL Encoding?</h2>
+  <p>
+    URL encoding, also known as percent-encoding, is the process of converting characters into a format that can be transmitted over the Internet. It ensures that special characters like spaces, ampersands (&), question marks (?), and slashes (/) don't interfere with the structure of a URL.
+  </p>
+
+  <h2>When Do You Need URL Encoding?</h2>
+  <ul>
+    <li>When adding query parameters to a URL</li>
+    <li>When passing special characters like #, &, ?, = in a URL</li>
+    <li>When embedding URLs into JavaScript or JSON</li>
+    <li>When sending data in HTTP GET requests</li>
+  </ul>
+
+  <h2>How Does URL Encoding Work?</h2>
+  <p>
+    In URL encoding, unsafe ASCII characters are replaced with a "%" followed by two hexadecimal digits that represent the character in the UTF-8 format. For example:
+    <br>
+    <code>Space = %20</code><br>
+    <code>& = %26</code><br>
+    <code>" = %22</code>
+  </p>
+
+  <h2>What is URL Decoding?</h2>
+  <p>
+    URL decoding is the reverse process. It transforms encoded characters back to their original form, making the URL or string human-readable again. This is essential when extracting data from web requests or when interpreting encoded links.
+  </p>
+
+  <h2>Why Use Toolswagon's URL Encoder & Decoder?</h2>
+  <ul>
+    <li><strong>Instant Results:</strong> Encode or decode on the fly without refreshing the page.</li>
+    <li><strong>No Backend Required:</strong> 100% frontend-powered tool for speed and privacy.</li>
+    <li><strong>Free & Easy:</strong> Use it without limits, registrations, or installations.</li>
+    <li><strong>SEO Friendly:</strong> Helps SEO experts fine-tune URL structures easily.</li>
+    <li><strong>Privacy Focused:</strong> Your data never leaves your browser.</li>
+  </ul>
+
+  <h2>Common Use Cases</h2>
+  <ul>
+    <li>Creating UTM links for marketing</li>
+    <li>Fixing broken URLs</li>
+    <li>Debugging web app queries</li>
+    <li>Cleaning up dynamic links</li>
+  </ul>
+
+  <h2>Conclusion</h2>
+  <p>
+    Whether you're a developer debugging parameters, an SEO expert optimizing links, or a digital marketer crafting UTM-tagged URLs, Toolswagon's URL Encoder & Decoder is the perfect utility for your toolkit. It's fast, reliable, and entirely browser-based, making it the ideal tool for anyone who deals with web links regularly.
+  </p>
+</section>
+
+  </main><include src="/components/footer.html"></include>
+
+  <script>
+    function encodeURL() {
+      const input = document.getElementById("input").value;
+      document.getElementById("output").value = encodeURIComponent(input);
+    }
+
+    function decodeURL() {
+      const input = document.getElementById("input").value;
+      document.getElementById("output").value = decodeURIComponent(input);
+    }
+
+    function clearText() {
+      document.getElementById("input").value = "";
+      document.getElementById("output").value = "";
+    }
+</script>
+</body>
+</html>
