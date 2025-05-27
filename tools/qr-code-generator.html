@@ -41,7 +41,7 @@
   gtag('config', 'G-ZHNQLH6PNG');
 </script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-[Poppins]">
+<body class="bg-gray-50 text-gray-800 font-[Poppins]" data-tool-name="qr-code-generator">
   <!-- Header Include -->
   <div id="header-container"></div>  
   <!-- QR Code Generator Tool Section -->  
@@ -94,6 +94,7 @@
   </div>
 </div>
   </section>
+  <div id="ratingContainer"></div>
     <section>
   <h1 class="text-3xl font-bold mb-6">Everything You Need to Know About the Toolswagon QR Code Generator Tool</h1>
 
@@ -272,7 +273,8 @@
 }
   </script>
   
-  <script defer src="/assets/js/script.js"></script>  <script>
+  <script defer src="/assets/js/script.js"></script>  
+  <script>
     const form = document.getElementById('qr-form');
     const canvas = document.getElementById('qr-canvas');
     const downloadBtn = document.getElementById('qr-download');
@@ -300,5 +302,7 @@
       downloadBtn.href = dataURL;
       downloadBtn.classList.remove('hidden');
     });
-  </script></body>
+  </script>
+  <script defer src="/tools/js/star-rating.js"></script>
+</body>
 </html>
