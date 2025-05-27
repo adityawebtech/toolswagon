@@ -167,35 +167,3 @@ footer a:hover {
     text-align: center;
   }
 }
-
-
-/* STAT RATING*/
-
-.rating-box-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.rating-box {
-  text-align: center;
-  border-top: 1px solid #e5e7eb; /* Tailwind gray-200 */
-  padding-top: 1.5rem;
-}
-
-.stars {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.stars span {
-  font-size: 2rem;
-  color: #d1d5db; /* Tailwind gray-400 */
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.stars span.selected {
-  color: #facc15; /* Tailwind amber-400 */
-}
