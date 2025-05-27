@@ -59,10 +59,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Live filtering on typing
     searchInput.addEventListener("input", filterTools);
-
-    // Trigger filtering on Search button click
-    searchButton.addEventListener("click", function (e) {
-      e.preventDefault(); // prevent form submission if inside a form
-      filterTools();
-    });
   });
