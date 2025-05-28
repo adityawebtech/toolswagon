@@ -73,15 +73,19 @@
     </h3>
 <!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
   <div id="ratingContainer"></div>
-<div id="exitIntentShare" style="display: none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%);
-     background: white; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.2); z-index: 9999; border-radius: 8px;">
-  <h3 style="text-align: center; font-size: 1.25rem; margin-bottom: 10px;">
-    Wait! Before you go, follow us and share with friends 👇
-  </h3>
-  <!-- ShareThis BEGIN -->
-  <div class="sharethis-inline-follow-buttons"></div>
-  <!-- ShareThis END -->
-</div>
+<!-- Follow -->
+  <div id="exitIntentShare" style="display: none;" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+  <div class="bg-gray-900 text-white p-6 rounded-xl shadow-lg max-w-sm w-full text-center relative">
+    <button id="closeExitShare" class="absolute top-3 right-3 text-white text-xl hover:text-red-400">&times;</button>
+    <h3 class="text-xl font-semibold mb-4">
+      Wait! Before you go...
+    </h3>
+    <p class="mb-4">If you liked this tool, follow us and share it with your friends 👇</p>
+    <!-- ShareThis BEGIN -->
+    <div class="sharethis-inline-follow-buttons"></div>
+    <!-- ShareThis END -->
+  </div>
+  </div>
 <!-- Dynamic Footer -->
   <div id="footer-container"></div>
   <script defer src="/assets/js/script.js"></script>
