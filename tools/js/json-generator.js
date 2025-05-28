@@ -122,21 +122,37 @@ renderFields();
 
 // Follow Buttons 
 
+  
   let exitIntentShown = false;
 
+  // Desktop: Detect mouse leaving the top
   document.addEventListener("mouseout", function (e) {
     if (e.clientY < 50 && !exitIntentShown) {
-      document.getElementById("exitIntentShare").style.display = "flex";
-      exitIntentShown = true;
+      showExitIntent();
     }
   });
 
-  // Close modal when clicking the close button
+  // Mobile: Detect fast scroll up
+  let lastScroll = 0;
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.pageYOffset;
+    if (currentScroll < lastScroll - 40 && !exitIntentShown) {
+      // Scrolled up fast
+      showExitIntent();
+    }
+    lastScroll = currentScroll;
+  });
+
+  function showExitIntent() {
+    document.getElementById("exitIntentShare").style.display = "flex";
+    exitIntentShown = true;
+  }
+
+  // Close modal
   document.getElementById("closeExitShare").addEventListener("click", function () {
     document.getElementById("exitIntentShare").style.display = "none";
   });
 
-  // Optional: Close modal when clicking outside the content box
   document.getElementById("exitIntentShare").addEventListener("click", function (e) {
     if (e.target === this) {
       this.style.display = "none";
