@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 // Follow Button 
+
 (function () {
   if (window.followWidgetAppended) return;
   window.followWidgetAppended = true;
@@ -86,47 +87,47 @@ document.addEventListener("DOMContentLoaded", () => {
     .follow-button-sticky {
       position: fixed;
       top: 50%;
-      right: 0;
+      left: 0;
       transform: translateY(-50%);
       background: #2563eb;
       color: #fff;
-      padding: 12px 16px;
-      border-radius: 8px 0 0 8px;
+      padding: 10px 12px;
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
       font-weight: 600;
       font-family: 'Segoe UI', sans-serif;
       z-index: 9999;
       cursor: pointer;
-      transition: background 0.3s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       writing-mode: vertical-rl;
       text-orientation: mixed;
-      animation: pulseText 1.5s infinite;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      animation: bounce 1.5s infinite;
     }
 
-    @keyframes pulseText {
-      0%, 100% { transform: translateY(-50%) scale(1); }
-      50% { transform: translateY(-50%) scale(1.05); }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(-50%) translateX(0); }
+      50% { transform: translateY(-50%) translateX(5px); }
     }
 
     .follow-us-slider {
       position: fixed;
-      right: -280px;
+      left: -280px;
       top: 50%;
       transform: translateY(-50%);
       background: #fff;
       color: #111827;
       padding: 18px 16px;
-      border-left: 4px solid #2563eb;
-      border-radius: 12px 0 0 12px;
+      border-right: 4px solid #2563eb;
+      border-radius: 0 12px 12px 0;
       box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-      transition: right 0.4s ease;
+      transition: left 0.4s ease;
       z-index: 9998;
       width: 250px;
       font-family: 'Segoe UI', sans-serif;
     }
 
     .follow-us-slider.show {
-      right: 0;
+      left: 0;
     }
 
     .follow-us-slider h3 {
@@ -170,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const button = document.createElement('div');
   button.className = 'follow-button-sticky';
-  button.innerText = 'Follow for Updates';
+  button.innerText = 'Follow\nfor\nUpdates';
   document.body.appendChild(button);
 
   const slider = document.createElement('div');
