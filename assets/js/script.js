@@ -77,13 +77,37 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 // Follow Button 
-
 (function () {
   if (window.followWidgetAppended) return;
   window.followWidgetAppended = true;
 
   const style = document.createElement('style');
   style.textContent = `
+    .follow-button-sticky {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background: #2563eb;
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 8px 0 0 8px;
+      font-weight: 600;
+      font-family: 'Segoe UI', sans-serif;
+      z-index: 9999;
+      cursor: pointer;
+      transition: background 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      animation: pulseText 1.5s infinite;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(1.05); }
+    }
+
     .follow-us-slider {
       position: fixed;
       right: -280px;
@@ -96,13 +120,15 @@ document.addEventListener("DOMContentLoaded", () => {
       border-radius: 12px 0 0 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.15);
       transition: right 0.4s ease;
-      z-index: 9999;
+      z-index: 9998;
       width: 250px;
       font-family: 'Segoe UI', sans-serif;
     }
+
     .follow-us-slider.show {
       right: 0;
     }
+
     .follow-us-slider h3 {
       font-size: 1rem;
       font-weight: 600;
@@ -110,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
       text-align: center;
       color: #1f2937;
     }
+
     .follow-us-slider a {
       display: flex;
       align-items: center;
@@ -120,13 +147,16 @@ document.addEventListener("DOMContentLoaded", () => {
       font-weight: 500;
       transition: all 0.2s ease;
     }
+
     .follow-us-slider a:hover {
       color: #2563eb;
     }
+
     .follow-us-slider a img {
       width: 22px;
       height: 22px;
     }
+
     .follow-us-close {
       position: absolute;
       top: 8px;
@@ -137,6 +167,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   `;
   document.head.appendChild(style);
+
+  const button = document.createElement('div');
+  button.className = 'follow-button-sticky';
+  button.innerText = 'Follow for Updates';
+  document.body.appendChild(button);
 
   const slider = document.createElement('div');
   slider.className = 'follow-us-slider';
@@ -158,43 +193,13 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
   document.body.appendChild(slider);
 
-  const showSlider = () => slider.classList.add('show');
-  const hideSlider = () => slider.classList.remove('show');
-
-  // Show after 5 seconds
-  setTimeout(showSlider, 2000);
-
-  // Close handler with auto re-show
-  slider.querySelector('.follow-us-close').addEventListener('click', () => {
-    hideSlider();
-    setTimeout(showSlider, 8000); // Auto show after 15 seconds
+  // Toggle panel on button click
+  button.addEventListener('click', () => {
+    slider.classList.toggle('show');
   });
 
-  // Scroll behavior
-  let lastScrollY = window.scrollY;
-  let scrollTimer = null;
-  let cooldownTimer = null;
-
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-
-    if (scrollTimer) clearTimeout(scrollTimer);
-    if (cooldownTimer) return;
-
-    if (scrollY < lastScrollY) {
-      scrollTimer = setTimeout(() => {
-        hideSlider();
-        cooldownTimer = setTimeout(() => {
-          showSlider();
-          cooldownTimer = null;
-        }, 10000);
-      }, 5000);
-    } else {
-      if (!slider.classList.contains('show')) {
-        scrollTimer = setTimeout(showSlider, 5000);
-      }
-    }
-
-    lastScrollY = scrollY;
+  // Close button inside slider
+  slider.querySelector('.follow-us-close').addEventListener('click', () => {
+    slider.classList.remove('show');
   });
 })();
