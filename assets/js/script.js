@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
   slider.className = 'follow-us-slider';
   slider.innerHTML = `
     <div class="follow-us-close" title="Close">&times;</div>
-    <h3>Follow Us for Updates</h3>
+    <u><h3>Follow ToolsWagon for Updates</h3></u>
     <a href="https://whatsapp.com/channel/0029VbAhDlmAYlUFo8RuCi38" target="_blank" rel="noopener">
       <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" /> WhatsApp
     </a>
