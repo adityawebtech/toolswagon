@@ -85,28 +85,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const style = document.createElement('style');
   style.textContent = `
     .follow-button-sticky {
-      position: fixed;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      background: #2563eb;
-      color: #fff;
-      padding: 10px 6px;
-      border-radius: 0 10px 10px 0;
-      font-size: 12px;
-      font-weight: 600;
-      font-family: 'Segoe UI', sans-serif;
-      z-index: 9999;
-      cursor: pointer;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      animation: bounce 1.5s infinite;
-      height: 120px;
-      width: 26px;
-      text-align: center;
-      line-height: 1.1;
-    }
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background: #2563eb;
+  color: #fff;
+  padding: 10px 4px;
+  border-radius: 0 10px 10px 0;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'Segoe UI', sans-serif;
+  z-index: 9999;
+  cursor: pointer;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  animation: bounce 1.5s infinite;
+  height: 120px;
+  width: 24px;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1;
+  overflow: hidden;
+}
 
     @keyframes bounce {
       0%, 100% { transform: translateY(-50%) translateX(0); }
