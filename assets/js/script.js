@@ -162,10 +162,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const hideSlider = () => slider.classList.remove('show');
 
   // Show after 5 seconds
-  setTimeout(showSlider, 5000);
+  setTimeout(showSlider, 2000);
 
-  // Close handler
-  slider.querySelector('.follow-us-close').addEventListener('click', hideSlider);
+  // Close handler with auto re-show
+  slider.querySelector('.follow-us-close').addEventListener('click', () => {
+    hideSlider();
+    setTimeout(showSlider, 8000); // Auto show after 15 seconds
+  });
 
   // Scroll behavior
   let lastScrollY = window.scrollY;
