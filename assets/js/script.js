@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const button = document.createElement('div');
   button.className = 'follow-button-sticky';
-  button.innerText = 'Follow\nfor\nUpdates';
+  button.innerText = 'Follow Us';
   document.body.appendChild(button);
 
   const slider = document.createElement('div');
