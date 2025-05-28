@@ -119,3 +119,23 @@ downloadBtn.addEventListener('click', () => {
 
 // Initial field render
 renderFields();
+
+// Follow Buttons 
+
+  let exitIntentShown = false;
+
+  document.addEventListener("mouseout", function(e) {
+    if (e.clientY < 50 && !exitIntentShown) {
+      document.getElementById("exitIntentShare").style.display = "block";
+      exitIntentShown = true;
+    }
+  });
+
+  // Optional: Hide on click outside
+  document.addEventListener("click", function(e) {
+    const box = document.getElementById("exitIntentShare");
+    if (box && !box.contains(e.target)) {
+      box.style.display = "none";
+    }
+  });
+
