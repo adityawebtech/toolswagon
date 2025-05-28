@@ -91,9 +91,9 @@ document.addEventListener("DOMContentLoaded", () => {
       transform: translateY(-50%);
       background: #2563eb;
       color: #fff;
-      padding: 10px 12px;
-      border-radius: 0 8px 8px 0;
-      font-size: 14px;
+      padding: 10px 6px;
+      border-radius: 0 10px 10px 0;
+      font-size: 12px;
       font-weight: 600;
       font-family: 'Segoe UI', sans-serif;
       z-index: 9999;
@@ -102,6 +102,10 @@ document.addEventListener("DOMContentLoaded", () => {
       text-orientation: mixed;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       animation: bounce 1.5s infinite;
+      height: 120px;
+      width: 26px;
+      text-align: center;
+      line-height: 1.1;
     }
 
     @keyframes bounce {
@@ -194,13 +198,15 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
   document.body.appendChild(slider);
 
-  // Toggle panel on button click
+  // Open slider and hide button
   button.addEventListener('click', () => {
-    slider.classList.toggle('show');
+    slider.classList.add('show');
+    button.style.display = 'none';
   });
 
-  // Close button inside slider
+  // Close slider and show button again
   slider.querySelector('.follow-us-close').addEventListener('click', () => {
     slider.classList.remove('show');
+    button.style.display = 'block';
   });
 })();
