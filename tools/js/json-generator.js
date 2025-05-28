@@ -124,18 +124,21 @@ renderFields();
 
   let exitIntentShown = false;
 
-  document.addEventListener("mouseout", function(e) {
+  document.addEventListener("mouseout", function (e) {
     if (e.clientY < 50 && !exitIntentShown) {
-      document.getElementById("exitIntentShare").style.display = "block";
+      document.getElementById("exitIntentShare").style.display = "flex";
       exitIntentShown = true;
     }
   });
 
-  // Optional: Hide on click outside
-  document.addEventListener("click", function(e) {
-    const box = document.getElementById("exitIntentShare");
-    if (box && !box.contains(e.target)) {
-      box.style.display = "none";
-    }
+  // Close modal when clicking the close button
+  document.getElementById("closeExitShare").addEventListener("click", function () {
+    document.getElementById("exitIntentShare").style.display = "none";
   });
 
+  // Optional: Close modal when clicking outside the content box
+  document.getElementById("exitIntentShare").addEventListener("click", function (e) {
+    if (e.target === this) {
+      this.style.display = "none";
+    }
+  });
