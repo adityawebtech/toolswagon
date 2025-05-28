@@ -91,10 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
   transform: translateY(-50%);
   background: #2563eb;
   color: #fff;
-  padding: 10px 4px;
+  padding: 10px 6px;
   border-radius: 0 10px 10px 0;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 800;
   font-family: 'Segoe UI', sans-serif;
   z-index: 9999;
   cursor: pointer;
