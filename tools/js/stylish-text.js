@@ -1,13 +1,111 @@
-// stylish-text.js
+const input = document.getElementById('stylishInput');
+const outputContainer = document.getElementById('stylishOutput');
 
-const stylishInput = document.getElementById("stylishInput"); const stylishOutput = document.getElementById("stylishOutput");
+const styles = [
+  {
+    name: "Bold",
+    transform: (text) => text.replace(/[a-z]/gi, (c) =>
+      String.fromCodePoint(c.charCodeAt(0) + (c === c.toUpperCase() ? 119743 : 119737))
+    )
+  },
+  {
+    name: "Italic",
+    transform: (text) => text.replace(/[a-z]/gi, (c) =>
+      String.fromCodePoint(c.charCodeAt(0) + (c === c.toUpperCase() ? 119795 : 119789))
+    )
+  },
+  {
+    name: "Monospace",
+    transform: (text) => text.replace(/[a-z0-9]/gi, (c) =>
+      String.fromCodePoint(c.charCodeAt(0) + (c >= 'a' ? 120319 - 97 : (c >= 'A' ? 120223 - 65 : 120822 - 48)))
+    )
+  },
+  {
+    name: "Small Caps",
+    transform: (text) => text.toLowerCase().replace(/[a-z]/g, c =>
+      String.fromCharCode("ᴀ".charCodeAt(0) + c.charCodeAt(0) - 97)
+    )
+  },
+  {
+    name: "Cursive",
+    transform: (text) => text.replace(/[a-z]/gi, (c) =>
+      String.fromCodePoint(c.charCodeAt(0) + (c === c.toUpperCase() ? 119867 : 119861))
+    )
+  },
+  {
+    name: "Wide",
+    transform: (text) => text.split("").join(" ")
+  },
+  {
+    name: "Flipped",
+    transform: (text) =>
+      text.split('').reverse().map(c => flipMap[c] || c).join('')
+  },
+  {
+    name: "Bubble",
+    transform: (text) => text.replace(/[a-z0-9]/gi, (c) => bubbleMap[c] || c)
+  },
+  {
+    name: "Glitch",
+    transform: (text) => text.split('').map(c => c + '͜').join('')
+  },
+  {
+    name: "Upside Down",
+    transform: (text) => text.split('').reverse().map(c => upsideMap[c] || c).join('')
+  }
+];
 
-const styles = [ text => text, // Plain text => [...text].map(c => c + "̶").join(""), // Strikethrough text => [...text].map(c => c + "̲").join(""), // Underline text => [...text].map(c => c + "̅").join(""), // Overline text => [...text].map(c => c + "́").join(""), // Accent text => text.split("").reverse().join(""), // Reversed text => [...text].map(c => c.toUpperCase()).join(" "), // Spaced Caps text => text.toUpperCase(), // All Caps text => text.toLowerCase(), // All Lower text => *${text}*, text => ~${text}~, text => _${text}_, text => **${text}**, text => [...text].map(c => "𝐀".charCodeAt(0) + (c.charCodeAt(0) - 97)).map(c => String.fromCharCode(c)).join(""), // Bold serif lowercase (a-z) text => [...text].map(c => "ᵀ0".charCodeAt(0) + (c.charCodeAt(0) - 65)).map(c => String.fromCharCode(c)).join(""), // Bold serif uppercase (A-Z) text => [...text].map(c => String.fromCodePoint(c.codePointAt(0) + 0x1D400 - 0x41)).join(""), // Unicode math bold (A-Z) text => [...text].map(c => String.fromCodePoint(c.codePointAt(0) + 0x1D41A - 0x61)).join(""), // Unicode math italic (a-z) text => [...text].map(c => (${c})).join(""), // Circled text => [...text].map(c => 🅰.charAt(0) === c ? 🅰 : c).join(""), // A enclosed text => text.split('').map(c => String.fromCharCode(0x1D670 + c.charCodeAt(0) - 65)).join(''), // Sans-serif caps text => text.split('').map(c => 𝔊𝔞𝔢.includes(c.toUpperCase()) ? 𝓐 : c).join(''), // Fancy fallback text => [...text].map(c => 𝒜.charCodeAt(0) + (c.toLowerCase().charCodeAt(0) - 97)).map(c => String.fromCharCode(c)).join(""), // Script text => text.split('').map(c => c + '̱').join(''), // Double underline text => [...text].map(c => c + "̀").join(""), // Grave accent text => [...text].map(c => c + "̃").join(""), // Tilde accent text => [...text].map(c => \u{1D5A0}.charAt(0) === c ? \u{1D5A0} : c).join(""), text => text.split('').map(c => 𝘺.charCodeAt(0) + (c.toLowerCase().charCodeAt(0) - 97)).map(c => String.fromCharCode(c)).join(''), text => text.split('').map(c => 𝔸.charCodeAt(0) + (c.toLowerCase().charCodeAt(0) - 97)).map(c => String.fromCharCode(c)).join(''), text => text.split('').map(c => c + '̴').join(''), text => text.split('').map(c => c + '̤').join(''), text => text.split('').map(c => c + '⃤').join(''), text => text.split('').map(c => c + '̋').join(''), text => text.split('').map(c => c + '̈').join(''), text => text.split('').map(c => c + '͜').join(''), text => [...text].map(c => 𝒶.charCodeAt(0) + (c.toLowerCase().charCodeAt(0) - 97)).map(c => String.fromCharCode(c)).join(''), text => [...text].map(c => 𝔊.charCodeAt(0) + (c.toUpperCase().charCodeAt(0) - 65)).map(c => String.fromCharCode(c)).join(''), text => [...text].map(c => c + "͙").join(""), // Dot below text => [...text].map(c => c + "͡").join(""), // Inverted breve text => [...text].map(c => c + "̂").join(""), // Circumflex text => [...text].map(c => c + "͟").join(""), // Double low line text => [...text].map(c => 【${c}】).join(""), text => [...text].map(c => 『${c}』).join(""), text => [...text].map(c => 《${c}》).join(""), text => [...text].map(c => 〘${c}〙).join(""), text => [...text].map(c => ✪${c}✪).join(""), text => [...text].map(c => *${c}*).join(""), text => [...text].map(c => ¤${c}¤).join(""), text => [...text].map(c => ⟦${c}⟧).join(""), text => [...text].map(c => ⧼${c}⧽).join(""), text => [...text].map(c => ⧙${c}⧘).join(""), text => [...text].map(c => ◉${c}◉).join(""), text => [...text].map(c => ⫷${c}⫸).join(""), text => [...text].map(c => ⟨${c}⟩).join(""), ];
+// Special character maps
+const flipMap = {
+  a: "ɐ", b: "q", c: "ɔ", d: "p", e: "ǝ", f: "ɟ", g: "ƃ", h: "ɥ", i: "ᴉ",
+  j: "ɾ", k: "ʞ", l: "ʃ", m: "ɯ", n: "u", o: "o", p: "d", q: "b", r: "ɹ",
+  s: "s", t: "ʇ", u: "n", v: "ʌ", w: "ʍ", x: "x", y: "ʎ", z: "z"
+};
 
-function updateStylishOutput() { const inputText = stylishInput.value; stylishOutput.innerHTML = "";
+const bubbleMap = {
+  a: "ⓐ", b: "ⓑ", c: "ⓒ", d: "ⓓ", e: "ⓔ", f: "ⓕ", g: "ⓖ", h: "ⓗ", i: "ⓘ", j: "ⓙ",
+  k: "ⓚ", l: "ⓛ", m: "ⓜ", n: "ⓝ", o: "ⓞ", p: "ⓟ", q: "ⓠ", r: "ⓡ", s: "ⓢ", t: "ⓣ",
+  u: "ⓤ", v: "ⓥ", w: "ⓦ", x: "ⓧ", y: "ⓨ", z: "ⓩ", 0: "⓪", 1: "①", 2: "②", 3: "③",
+  4: "④", 5: "⑤", 6: "⑥", 7: "⑦", 8: "⑧", 9: "⑨"
+};
 
-styles.forEach(style => { const styledText = style(inputText); const div = document.createElement("div"); div.className = "bg-gray-100 p-3 rounded-lg border text-sm flex justify-between items-center"; div.innerHTML = <span class="font-mono truncate">${styledText}</span> <button class="text-blue-600 hover:underline ml-4" onclick="copyToClipboard('${styledText.replace(/'/g, "\\'")}')">Copy</button>; stylishOutput.appendChild(div); }); }
+const upsideMap = {
+  a: "ɐ", b: "q", c: "ɔ", d: "p", e: "ǝ", f: "ɟ", g: "ƃ", h: "ɥ", i: "ᴉ",
+  j: "ɾ", k: "ʞ", l: "l", m: "ɯ", n: "u", o: "o", p: "d", q: "b", r: "ɹ",
+  s: "s", t: "ʇ", u: "n", v: "ʌ", w: "ʍ", x: "x", y: "ʎ", z: "z"
+};
 
-function copyToClipboard(text) { navigator.clipboard.writeText(text).then(() => { alert("Copied to clipboard!"); }); }
+function generateStyles(text) {
+  outputContainer.innerHTML = '';
+  styles.forEach(style => {
+    const transformed = style.transform(text);
+    const wrapper = document.createElement('div');
+    wrapper.className = "mb-4 p-3 border rounded-lg bg-gray-100 flex justify-between items-center";
 
-stylishInput.addEventListener("input", updateStylishOutput);
+    const textEl = document.createElement('span');
+    textEl.className = "flex-1 mr-2 font-mono break-words text-sm sm:text-base";
+    textEl.innerText = transformed;
+
+    const btn = document.createElement('button');
+    btn.className = "bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm";
+    btn.innerText = "Copy";
+    btn.onclick = () => {
+      navigator.clipboard.writeText(transformed);
+      btn.innerText = "Copied!";
+      setTimeout(() => btn.innerText = "Copy", 1500);
+    };
+
+    wrapper.appendChild(textEl);
+    wrapper.appendChild(btn);
+    outputContainer.appendChild(wrapper);
+  });
+}
+
+input.addEventListener('input', () => {
+  const text = input.value.trim();
+  if (text.length) {
+    generateStyles(text);
+  } else {
+    outputContainer.innerHTML = '';
+  }
+});
