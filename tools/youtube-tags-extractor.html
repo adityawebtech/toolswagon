@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Tags Extractor | Toolswagon</title>
+  <meta name="description" content="Extract tags from any YouTube video instantly. Get SEO-friendly keywords used in YouTube videos with the YouTube Tags Extractor by Toolswagon." />
+  <meta name="keywords" content="YouTube tags extractor, extract YouTube video tags, get YouTube keywords, SEO tags from video, Toolswagon tools" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Toolswagon" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/tools/css/tools.css" />
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHNQLH6PNG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-ZHNQLH6PNG');
+  </script>
+</head>
+<body data-tool-name="youtube-tags-extractor">
+  <!-- Header -->
+  <div id="header-container"></div>
+
+  <!-- Tool Area -->
+  <section class="py-12 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">YouTube Tags Extractor</h1>
+      <p class="text-gray-600 mb-6">Paste any YouTube video URL to extract SEO-friendly tags used in the video metadata.</p>
+
+      <div class="bg-white shadow-md rounded-lg p-6 border border-dashed border-blue-300">
+        <input type="text" id="youtubeURL" placeholder="Paste YouTube URL here..." class="w-full border p-3 rounded mb-4" />
+
+        <button onclick="extractTags()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded">
+          Extract Tags
+        </button>
+
+        <div id="tagsResults" class="mt-8 flex flex-wrap gap-2 justify-center"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed top-5 right-5 bg-green-600 text-white py-2 px-4 rounded shadow hidden z-50"></div>
+
+  <!-- Optional Countdown Modal -->
+  <div id="countdownModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+    <div class="bg-white p-6 rounded-lg text-center max-w-sm w-full shadow-lg">
+      <h2 class="text-xl font-bold mb-4 text-gray-800">Extracting Tags...</h2>
+      <p class="mb-4 text-gray-600">Please wait <span id="countdownValue" class="font-bold text-blue-600 text-lg">5</span> seconds.</p>
+      <button id="cancelDownload" class="mt-2 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Fallback Button -->
+  <div class="text-center mt-4">
+    <a href="https://toolswagon.site/tools/" id="fallbackButton" class="hidden bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded">Try Out More Tools</a>
+  </div>
+
+  <!-- Tool Description Section -->
+  <div id="ratingContainer"></div>
+  <section class="prose max-w-full px-4">
+    <h2>What is the "YouTube Tags Extractor" Tool?</h2>
+    <p>
+      The <strong>YouTube Tags Extractor</strong> is a simple online tool that fetches hidden tags or keywords embedded in YouTube videos. These tags are often used for search engine optimization (SEO) and can provide insights into the keywords a video is trying to rank for.
+    </p>
+
+    <h2>How to Use It?</h2>
+    <ol>
+      <li>Copy the YouTube video URL.</li>
+      <li>Paste it into the input field above.</li>
+      <li>Click <strong>"Extract Tags"</strong>.</li>
+      <li>Tags will appear in colored pill format for easy copying and usage.</li>
+    </ol>
+
+    <h2>Is It Free?</h2>
+    <p>Yes, 100% free. No registration or payment required.</p>
+
+    <h2>Use Cases:</h2>
+    <ul>
+      <li><strong>SEO research</strong> for YouTube videos</li>
+      <li><strong>Competitor analysis</strong> for content creators</li>
+      <li><strong>Hashtag generation</strong> for Instagram/YouTube</li>
+      <li><strong>Optimization ideas</strong> for your own videos</li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script defer src="/assets/js/script.js"></script>
+  <script defer src="/tools/js/youtube-tags-extractor.js"></script>
+  <script defer type="module" src="/tools/js/star-rating.js"></script>
+</body>
+</html>
