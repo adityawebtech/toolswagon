@@ -1,5 +1,4 @@
-<script>
-  const toast = document.getElementById("toast");
+ const toast = document.getElementById("toast");
   const modal = document.getElementById("countdownModal");
   const countdownValue = document.getElementById("countdownValue");
   const cancelBtn = document.getElementById("cancelDownload");
@@ -105,4 +104,3 @@
       fallbackBtn.classList.remove("hidden");
     }
   }
-</script>
