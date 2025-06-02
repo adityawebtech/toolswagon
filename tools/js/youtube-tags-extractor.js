@@ -1,8 +1,9 @@
- const toast = document.getElementById("toast");
+  const toast = document.getElementById("toast");
   const modal = document.getElementById("countdownModal");
   const countdownValue = document.getElementById("countdownValue");
   const cancelBtn = document.getElementById("cancelDownload");
   const fallbackBtn = document.getElementById("fallbackButton");
+  const tagsResults = document.getElementById("tagsResults");
 
   let cancelRequested = false;
 
@@ -52,9 +53,22 @@
     cancelRequested = true;
   });
 
+  function createCopyButton(tags) {
+    const button = document.createElement("button");
+    button.textContent = "Copy All Tags";
+    button.className =
+      "mt-4 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded";
+    button.onclick = () => {
+      const allTags = tags.join(", ");
+      navigator.clipboard.writeText(allTags).then(() => {
+        showToast("✅ Tags copied to clipboard!");
+      });
+    };
+    tagsResults.appendChild(button);
+  }
+
   async function extractTags() {
     const urlInput = document.getElementById("youtubeURL");
-    const tagsResults = document.getElementById("tagsResults");
     const videoURL = urlInput.value.trim();
     const videoId = extractVideoId(videoURL);
 
@@ -84,7 +98,6 @@
       const tags = data.items[0].snippet.tags;
 
       if (tags && tags.length > 0) {
-        tagsResults.innerHTML = "";
         tags.forEach((tag) => {
           const tagElement = document.createElement("span");
           tagElement.className =
@@ -92,6 +105,7 @@
           tagElement.textContent = tag;
           tagsResults.appendChild(tagElement);
         });
+        createCopyButton(tags);
         showToast("✅ Tags extracted successfully!");
         fallbackBtn.classList.add("hidden");
       } else {
@@ -104,3 +118,16 @@
       fallbackBtn.classList.remove("hidden");
     }
   }
+
+  // ✅ Auto-paste valid YouTube URL from clipboard on page load
+  window.addEventListener("load", async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (extractVideoId(text)) {
+        document.getElementById("youtubeURL").value = text;
+        showToast("📋 Pasted URL from clipboard");
+      }
+    } catch (err) {
+      console.warn("Clipboard access denied or unsupported", err);
+    }
+  });
