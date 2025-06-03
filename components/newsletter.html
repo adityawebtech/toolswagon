@@ -42,70 +42,78 @@
 
   <!-- JS Logic -->
   <script>
-    function toggleNewsletter() {
-      document.getElementById("newsletterModal").classList.toggle("hidden");
+  function toggleNewsletter() {
+    document.getElementById("newsletterModal").classList.toggle("hidden");
+  }
+
+  function setCookie(name, value, days = 365) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+  }
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    return parts.length === 2 ? parts.pop().split(';').shift() : null;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("#newsletterForm");
+    const formContent = document.getElementById("formContent");
+    const successMessage = document.getElementById("successMessage");
+    const countdown = document.getElementById("countdown");
+
+    const isSubscribed = localStorage.getItem("newsletter_subscribed") || getCookie("newsletter_subscribed");
+
+    if (isSubscribed) {
+      // Optionally hide the button if already subscribed
+      // document.querySelector("button[onclick='toggleNewsletter()']").style.display = "none";
     }
 
-    function setCookie(name, value, days = 365) {
-      const date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
-    }
-
-    function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      return parts.length === 2 ? parts.pop().split(';').shift() : null;
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      const form = document.querySelector("#newsletterForm");
-      const formContent = document.getElementById("formContent");
-      const successMessage = document.getElementById("successMessage");
-      const countdown = document.getElementById("countdown");
-      const isSubscribed = localStorage.getItem("newsletter_subscribed") || getCookie("newsletter_subscribed");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // prevent default redirect
 
       if (isSubscribed) {
-        // Optional: hide button if already subscribed
-        // document.querySelector("button[onclick='toggleNewsletter()']").style.display = "none";
+        alert("You've already subscribed.");
+        toggleNewsletter();
+        return;
       }
 
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        if (isSubscribed) {
-          alert("You've already subscribed with this browser.");
-          toggleNewsletter();
-          return;
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
         }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success === "true") {
+          localStorage.setItem("newsletter_subscribed", "true");
+          setCookie("newsletter_subscribed", "true");
 
-        const formData = new FormData(form);
-        fetch(form.action, {
-          method: "POST",
-          body: formData
-        })
-          .then(response => {
-            if (response.ok) {
-              localStorage.setItem("newsletter_subscribed", "true");
-              setCookie("newsletter_subscribed", "true");
+          formContent.classList.add("hidden");
+          successMessage.classList.remove("hidden");
 
-              formContent.classList.add("hidden");
-              successMessage.classList.remove("hidden");
-
-              let timeLeft = 5;
-              const timer = setInterval(() => {
-                timeLeft--;
-                countdown.textContent = timeLeft;
-                if (timeLeft <= 0) {
-                  clearInterval(timer);
-                  window.location.href = "https://toolswagon.site/tools/youtube-thumbnail-downloader.html";
-                }
-              }, 1000);
-            } else {
-              alert("There was a problem. Please try again.");
+          let timeLeft = 5;
+          const timer = setInterval(() => {
+            timeLeft--;
+            countdown.textContent = timeLeft;
+            if (timeLeft <= 0) {
+              clearInterval(timer);
+              window.location.href = "https://toolswagon.site/tools/youtube-thumbnail-downloader.html";
             }
-          })
-          .catch(() => alert("Failed to submit. Please try again."));
+          }, 1000);
+        } else {
+          alert("Submission failed. Please try again.");
+        }
+      })
+      .catch(error => {
+        console.error("Error submitting form:", error);
+        alert("An error occurred. Please try again.");
       });
     });
-  </script>
+  });
+</script>
