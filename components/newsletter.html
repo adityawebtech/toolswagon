@@ -1,119 +1,39 @@
-  <button onclick="toggleNewsletter()" class="fixed bottom-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-full shadow-lg font-medium">
-    📬 Subscribe
-  </button>
+<!-- Floating Subscribe Button -->
+<button onclick="toggleNewsletter()" class="fixed bottom-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-full shadow-lg font-medium">
+  📬 Subscribe
+</button>
 
-  <!-- Newsletter Modal -->
-  <div id="newsletterModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center px-4">
-    <div class="bg-white rounded-xl shadow-lg p-8 max-w-md w-full relative">
-      <!-- Close Button -->
-      <button onclick="toggleNewsletter()" class="absolute top-3 right-4 text-gray-500 hover:text-gray-800 text-xl">&times;</button>
+<!-- Newsletter Modal -->
+<div id="newsletterModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center px-4">
+  <div class="bg-white rounded-xl shadow-lg p-8 max-w-md w-full relative">
+    <button onclick="toggleNewsletter()" class="absolute top-3 right-4 text-gray-500 hover:text-gray-800 text-xl">&times;</button>
+    <h2 class="text-2xl font-bold text-blue-600 mb-2 text-center">Get Free Tools Premium Access</h2>
+    <p class="text-gray-600 text-sm mb-6 text-center">Subscribe to receive exclusive premium tools access and free resources directly to your inbox.</p>
+    
+    <form action="https://formsubmit.co/globalwebkraftofficial@gmail.com" method="POST" class="space-y-4">
+      <!-- FormSubmit Hidden Fields -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="New Toolswagon Subscriber!">
+      <input type="hidden" name="_template" value="table">
+      
+      <!-- Redirect After Submission -->
+      <input type="hidden" name="_next" value="https://toolswagon.site/tools/youtube-thumbnail-downloader.html">
 
-      <!-- Form Content -->
-      <div id="formContent">
-        <h2 class="text-2xl font-bold text-blue-600 mb-2 text-center">Get Free Tools Premium Access</h2>
-        <p class="text-gray-600 text-sm mb-6 text-center">Subscribe to receive exclusive premium tools and resources directly to your inbox.</p>
+      <!-- Email Field -->
+      <input type="email" name="email" required placeholder="Enter your email..." class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
 
-        <form id="newsletterForm" action="https://formsubmit.co/ajax/globalwebkraftofficial@gmail.com" method="POST" class="space-y-4">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_subject" value="New ToolsWagon Subscriber!">
-          <input type="hidden" name="_template" value="table">
-
-          <input type="text" name="name" required placeholder="Your name..." class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-          <input type="email" name="email" required placeholder="Enter your email..." class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-          
-          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md">
-            🚀 Subscribe Now
-          </button>
-        </form>
-      </div>
-
-      <!-- Thank You Message -->
-      <div id="successMessage" class="hidden text-center space-y-4 py-8">
-        <div class="text-green-600 text-5xl">✅</div>
-        <h2 class="text-2xl font-bold text-gray-800">Thank You for Subscribing!</h2>
-        <p class="text-gray-600">You've successfully joined ToolsWagon and unlocked free premium tools access.</p>
-        <p class="text-sm text-gray-500">Redirecting to ToolsWagon in <span id="countdown">5</span> seconds...</p>
-        <a href="https://toolswagon.site/tools/youtube-thumbnail-downloader.html" class="text-blue-600 underline hover:text-blue-800 text-sm">
-          Click here if not redirected automatically
-        </a>
-      </div>
-    </div>
+      <!-- Submit Button -->
+      <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md">
+        🚀 Subscribe Now
+      </button>
+    </form>
   </div>
+</div>
 
-  <!-- JS Logic -->
-  <script>
+<!-- Toggle Script -->
+<script>
   function toggleNewsletter() {
-    document.getElementById("newsletterModal").classList.toggle("hidden");
+    const modal = document.getElementById("newsletterModal");
+    modal.classList.toggle("hidden");
   }
-
-  function setCookie(name, value, days = 365) {
-    const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
-  }
-
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    return parts.length === 2 ? parts.pop().split(';').shift() : null;
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("#newsletterForm");
-    const formContent = document.getElementById("formContent");
-    const successMessage = document.getElementById("successMessage");
-    const countdown = document.getElementById("countdown");
-
-    const isSubscribed = localStorage.getItem("newsletter_subscribed") || getCookie("newsletter_subscribed");
-
-    if (isSubscribed) {
-      // Optionally hide the button if already subscribed
-      // document.querySelector("button[onclick='toggleNewsletter()']").style.display = "none";
-    }
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault(); // prevent default redirect
-
-      if (isSubscribed) {
-        alert("You've already subscribed.");
-        toggleNewsletter();
-        return;
-      }
-
-      const formData = new FormData(form);
-      fetch(form.action, {
-        method: "POST",
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success === "true") {
-          localStorage.setItem("newsletter_subscribed", "true");
-          setCookie("newsletter_subscribed", "true");
-
-          formContent.classList.add("hidden");
-          successMessage.classList.remove("hidden");
-
-          let timeLeft = 5;
-          const timer = setInterval(() => {
-            timeLeft--;
-            countdown.textContent = timeLeft;
-            if (timeLeft <= 0) {
-              clearInterval(timer);
-              window.location.href = "https://toolswagon.site/tools/youtube-thumbnail-downloader.html";
-            }
-          }, 1000);
-        } else {
-          alert("Submission failed. Please try again.");
-        }
-      })
-      .catch(error => {
-        console.error("Error submitting form:", error);
-        alert("An error occurred. Please try again.");
-      });
-    });
-  });
 </script>
