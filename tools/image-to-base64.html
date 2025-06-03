@@ -114,7 +114,14 @@
   </section>
   <!-- Dynamic footer include -->
   <div id="footer-container"></div>
-
+    <div id="newsletter-container"></div>
+<script>
+  fetch("/components/newsletter.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("newsletter-container").innerHTML = data;
+    });
+</script>
   <!-- Scripts -->
   <script defer src="/tools/js/image-to-64.js"></script>
   <script defer src="/assets/js/script.js"></script>
