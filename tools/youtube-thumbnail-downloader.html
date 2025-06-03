@@ -122,8 +122,8 @@
 <script defer src="/assets/js/script.js"></script>
 <script defer src="/tools/js/youtube-thumbnail-downloader.js"></script>
 <script defer type="module" src="/tools/js/star-rating.js"></script>  
-<!-- Toast Container -->
-<div id="subscribeToast" class="fixed bottom-6 right-6 z-50 hidden bg-green-600 text-white px-6 py-4 rounded-xl shadow-lg flex items-center space-x-3">
+<!-- Toast Notification -->
+<div id="subscribeToast" class="fixed bottom-6 right-6 z-50 hidden bg-green-600 text-white px-6 py-4 rounded-xl shadow-lg flex items-center space-x-3 transition-opacity duration-300">
   <span>✅ You've successfully registered with ToolsWagon! Your premium access is coming to your inbox. 🎁</span>
   <button onclick="document.getElementById('subscribeToast').classList.add('hidden')" class="text-white font-bold text-xl leading-none">&times;</button>
 </div>
@@ -134,8 +134,13 @@
     if (params.get('subscribed') === '1') {
       const toast = document.getElementById('subscribeToast');
       toast.classList.remove('hidden');
+
+      // Auto-hide after 6 seconds
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4000);
     }
   });
-</script>  
+</script>
 </body>
 </html>
