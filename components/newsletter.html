@@ -7,42 +7,93 @@
 <div id="newsletterModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center px-4">
   <div class="bg-white rounded-xl shadow-lg p-8 max-w-md w-full relative">
     <button onclick="toggleNewsletter()" class="absolute top-3 right-4 text-gray-500 hover:text-gray-800 text-xl">&times;</button>
-    <h2 class="text-2xl font-bold text-blue-600 mb-2 text-center">Get Free Tools Premium Access</h2>
-    <p class="text-gray-600 text-sm mb-6 text-center">Subscribe to receive exclusive premium tools access and free resources directly to your inbox.</p>
     
-    <form id="newsletterForm" action="https://formsubmit.co/globalwebkraftofficial@gmail.com" method="POST" class="space-y-4">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_subject" value="New Toolswagon Subscriber!">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://toolswagon.site/tools/youtube-tags-extractor.html">
+    <div id="formContent">
+      <h2 class="text-2xl font-bold text-blue-600 mb-2 text-center">Get Free Tools Premium Access</h2>
+      <p class="text-gray-600 text-sm mb-6 text-center">Subscribe to receive exclusive premium tools access and free resources directly to your inbox.</p>
 
-      <input type="text" name="name" required placeholder="Your name..." class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-      <input type="email" name="email" required placeholder="Enter your email..." class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-      <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md">
-        🚀 Subscribe Now
-      </button>
-    </form>
+      <form id="newsletterForm" action="https://formsubmit.co/ajax/globalwebkraftofficial@gmail.com" method="POST" class="space-y-4">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New Toolswagon Subscriber!">
+        <input type="hidden" name="_template" value="table">
+
+        <input type="text" name="name" required placeholder="Your name..." class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+        <input type="email" name="email" required placeholder="Enter your email..." class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+        
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md">
+          🚀 Subscribe Now
+        </button>
+      </form>
+    </div>
+
+    <div id="successMessage" class="hidden text-center">
+      <h2 class="text-2xl font-bold text-green-600 mb-4">🎉 Successfully Registered!</h2>
+      <p class="text-gray-700">Redirecting you to your premium tool...</p>
+    </div>
   </div>
 </div>
 
-<!-- Toggle + Limit Script -->
+<!-- Toggle + Limit + AJAX Submit Script -->
 <script>
   function toggleNewsletter() {
     const modal = document.getElementById("newsletterModal");
     modal.classList.toggle("hidden");
   }
 
+  function setCookie(name, value, days = 365) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days*24*60*60*1000));
+    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+  }
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    return parts.length === 2 ? parts.pop().split(';').shift() : null;
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("#newsletterForm");
+    const formContent = document.getElementById("formContent");
+    const successMessage = document.getElementById("successMessage");
+
+    const isSubscribed = localStorage.getItem("newsletter_subscribed") || getCookie("newsletter_subscribed");
+
+    if (isSubscribed) {
+      // Already subscribed, optionally hide the button
+      // document.querySelector("button[onclick='toggleNewsletter()']").style.display = "none";
+    }
 
     form.addEventListener("submit", function (e) {
-      if (localStorage.getItem("newsletter_subscribed")) {
-        e.preventDefault();
+      e.preventDefault();
+
+      if (isSubscribed) {
         alert("You've already subscribed with this browser.");
         toggleNewsletter();
-      } else {
-        localStorage.setItem("newsletter_subscribed", "true");
+        return;
       }
+
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: "POST",
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          localStorage.setItem("newsletter_subscribed", "true");
+          setCookie("newsletter_subscribed", "true");
+
+          formContent.classList.add("hidden");
+          successMessage.classList.remove("hidden");
+
+          setTimeout(() => {
+            window.location.href = "https://toolswagon.site/tools/youtube-thumbnail-downloader.html";
+          }, 2000);
+        } else {
+          alert("There was a problem. Please try again.");
+        }
+      })
+      .catch(() => alert("Failed to submit. Please try again."));
     });
   });
 </script>
