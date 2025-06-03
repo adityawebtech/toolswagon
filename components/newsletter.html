@@ -10,19 +10,14 @@
     <h2 class="text-2xl font-bold text-blue-600 mb-2 text-center">Get Free Tools Premium Access</h2>
     <p class="text-gray-600 text-sm mb-6 text-center">Subscribe to receive exclusive premium tools access and free resources directly to your inbox.</p>
     
-    <form action="https://formsubmit.co/globalwebkraftofficial@gmail.com" method="POST" class="space-y-4">
-      <!-- FormSubmit Hidden Fields -->
+    <form id="newsletterForm" action="https://formsubmit.co/globalwebkraftofficial@gmail.com" method="POST" class="space-y-4">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_subject" value="New Toolswagon Subscriber!">
       <input type="hidden" name="_template" value="table">
-      
-      <!-- Redirect After Submission -->
       <input type="hidden" name="_next" value="https://toolswagon.site/tools/youtube-tags-extractor.html">
 
-      <!-- Email Field -->
+      <input type="text" name="name" required placeholder="Your name..." class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
       <input type="email" name="email" required placeholder="Enter your email..." class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-
-      <!-- Submit Button -->
       <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md">
         🚀 Subscribe Now
       </button>
@@ -30,10 +25,24 @@
   </div>
 </div>
 
-<!-- Toggle Script -->
+<!-- Toggle + Limit Script -->
 <script>
   function toggleNewsletter() {
     const modal = document.getElementById("newsletterModal");
     modal.classList.toggle("hidden");
   }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("#newsletterForm");
+
+    form.addEventListener("submit", function (e) {
+      if (localStorage.getItem("newsletter_subscribed")) {
+        e.preventDefault();
+        alert("You've already subscribed with this browser.");
+        toggleNewsletter();
+      } else {
+        localStorage.setItem("newsletter_subscribed", "true");
+      }
+    });
+  });
 </script>
