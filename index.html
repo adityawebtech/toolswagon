@@ -331,7 +331,6 @@
 
   <!-- Footer Include -->
   <div id="footer-container"></div>
-  <div id="newsletter-container"></div>
   <!-- Script -->
   <script src="/assets/js/script.js"></script>
 <script type="application/ld+json">
@@ -406,11 +405,18 @@
   ]
 }
 </script>
+<div id="newsletter-container"></div>
 <script>
   fetch("/components/newsletter.html")
     .then(res => res.text())
     .then(data => {
       document.getElementById("newsletter-container").innerHTML = data;
+
+      // Now attach the toggle function
+      window.toggleNewsletter = function () {
+        const modal = document.getElementById("newsletterModal");
+        if (modal) modal.classList.toggle("hidden");
+      };
     });
 </script>
 </body>
