@@ -15,10 +15,23 @@
       <input type="hidden" name="_subject" value="New Toolswagon Subscriber!">
       <input type="hidden" name="_template" value="table">
 
+      <!-- Name Field -->
+      <input type="text" name="name" required placeholder="Enter your name..." class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+
+      <!-- Email Field -->
       <input type="email" name="email" required placeholder="Enter your email..." class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+
       <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md">
         🚀 Subscribe Now
       </button>
     </form>
   </div>
 </div>
+
+<!-- Toggle Script -->
+<script>
+  function toggleNewsletter() {
+    const modal = document.getElementById("newsletterModal");
+    modal.classList.toggle("hidden");
+  }
+</script>
