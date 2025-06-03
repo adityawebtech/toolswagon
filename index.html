@@ -406,6 +406,13 @@
   ]
 }
 </script>
-  
+  <div id="newsletter-container"></div>
+<script>
+  fetch("/components/newsletter.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("newsletter-container").innerHTML = data;
+    });
+</script>
 </body>
 </html>
