@@ -1,24 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Determine base path relative to the current file
+  const depth = location.pathname.split('/').filter(Boolean).length;
+  const basePath = '../'.repeat(depth - 1);  // -1 because root file like index.html has depth 1
+
   // Load Header
   const headerPlaceholder = document.getElementById('header-container');
   if (headerPlaceholder) {
-    fetch('${basePath}/components/header.html')  // Use relative path
+    fetch(`${basePath}components/header.html`)
       .then(res => res.text())
       .then(data => {
         headerPlaceholder.innerHTML = data;
-        initHeaderFeatures();
-      });
+        initHeaderFeatures(); // call only after header is loaded
+      })
+      .catch(err => console.error('Header load error:', err));
   }
 
   // Load Footer
   const footerPlaceholder = document.getElementById('footer-container');
   if (footerPlaceholder) {
-    fetch('${basePath}/components/footer.html')  // Use relative path
+    fetch(`${basePath}components/footer.html`)
       .then(res => res.text())
       .then(data => {
         footerPlaceholder.innerHTML = data;
-      });
+      })
+      .catch(err => console.error('Footer load error:', err));
   }
+});
 
   function initHeaderFeatures() {
     // Hamburger Toggle
