@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Determine base path relative to the current file
-  const depth = location.pathname.split('/').filter(Boolean).length;
-  const basePath = '../'.repeat(depth - 1);  // -1 because root file like index.html has depth 1
+  const pathSegments = location.pathname.split('/').filter(Boolean);
+  const basePath = pathSegments.length > 1 ? '../'.repeat(pathSegments.length - 1) : './';
 
   // Load Header
   const headerPlaceholder = document.getElementById('header-container');
@@ -10,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(res => res.text())
       .then(data => {
         headerPlaceholder.innerHTML = data;
-        initHeaderFeatures(); // call only after header is loaded
+        initHeaderFeatures?.(); // safe call
       })
       .catch(err => console.error('Header load error:', err));
   }
