@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .then(data => {
         headerPlaceholder.innerHTML = data;
-        initHeaderFeatures?.(); // only if it exists
+        initHeaderFeatures(); // now correctly scoped
       })
       .catch(err => console.error('Header load error:', err));
   }
@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch(err => console.error('Footer load error:', err));
   }
-});
 
   function initHeaderFeatures() {
     // Hamburger Toggle
@@ -95,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.scrollY > 300) backToTop?.classList.remove('hidden');
     else backToTop?.classList.add('hidden');
   });
+
   backToTop?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
