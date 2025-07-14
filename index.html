@@ -134,4 +134,64 @@
         <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
-  </section>
+  </section>  <!-- Report a Bug -->  <section id="report" class="bg-gray-50 dark:bg-gray-800 py-12 px-4 text-center">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-4">Report A Bug</h2>
+      <form id="bugForm" class="grid grid-cols-1 gap-4">
+        <input type="text" placeholder="Your Name" class="px-4 py-2 rounded border dark:bg-gray-700 dark:border-gray-600" required>
+        <input type="email" placeholder="Your Email" class="px-4 py-2 rounded border dark:bg-gray-700 dark:border-gray-600" required>
+        <textarea rows="4" placeholder="Describe the bug..." class="px-4 py-2 rounded border dark:bg-gray-700 dark:border-gray-600" required></textarea>
+        <button type="submit" class="bg-primary text-white py-2 rounded hover:bg-red-700">Submit Bug</button>
+      </form>
+      <p id="successMessage" class="mt-4 text-green-600 font-medium hidden">✅ Bug report submitted successfully!</p>
+    </div>
+  </section>  <!-- Footer -->  <footer id="footer" class="bg-black text-white py-8 px-4 mt-auto">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <h4 class="font-semibold mb-2">ToolsWagon.site</h4>
+        <p class="text-sm">© 2025 ToolsWagon. All rights reserved.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Important Links</h4>
+        <ul class="text-sm space-y-1">
+          <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+          <li><a href="#" class="hover:underline">Terms of Use</a></li>
+          <li><a href="#report" class="hover:underline">Report Bug</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Contact</h4>
+        <p class="text-sm">Email: support@toolswagon.site</p>
+      </div>
+    </div>
+  </footer>  <!-- Back to Top Button --><button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow-lg hidden">↑</button>
+
+  <script>
+    const toggle = document.getElementById('darkModeToggle');
+    const mobileToggle = document.getElementById('mobileDarkModeToggle');
+    toggle?.addEventListener('click', () => document.documentElement.classList.toggle('dark'));
+    mobileToggle?.addEventListener('click', () => document.documentElement.classList.toggle('dark'));
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('block');
+    });
+
+    document.getElementById('bugForm')?.addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('successMessage').classList.remove('hidden');
+      this.reset();
+    });
+
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTop.classList.remove('hidden');
+      else backToTop.classList.add('hidden');
+    });
+    backToTop?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script></body>
+</html>
