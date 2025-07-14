@@ -1,423 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ToolsWagon - A powerful collection of online tools to simplify your tasks. Convert, analyze, optimize and automate easily." />
-  <meta name="keywords" content="online tools, free tools, text tools, PDF tools, SEO tools, ToolsWagon" />
-  <meta name="author" content="ToolsWagon" />
-  <title>ToolsWagon - Free Online Tools for Everyone</title>
-
-  <!-- Favicon links -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<!DOCTYPE html><html lang="en"><head>
+  <meta name="title" content="Tools Wagon - Access YouTube, Pinterest & Instagram Easily">
+<meta name="description" content="To download shorts, reels videos, thumbnail, extract and generate tags or keywords you can simply do it with ToolsWagon. ">
+<meta name="keywords" content="youtube downloader, instagram downloader, pinterest downloader">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="language" content="English">
+<meta name="author" content="Aditya Pal">  <!-- Favicon links -->  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
   <link rel="manifest" href="/assets/images/site.webmanifest">
   <link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#2563eb">
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="theme-color" content="#ffffff">
-
-  <!-- Tailwind CSS -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToolsWagon - Free Online Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css" />
-  <!-- Google tag (gtag.js) -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif']
+          },
+          colors: {
+            primary: '#DC2626', // Red
+            black: '#000000',
+            white: '#ffffff'
+          }
+        }
+      }
+    };
+  </script>
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHNQLH6PNG"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  gtag('js', new Date());gtag('config', 'G-ZHNQLH6PNG'); </script>
 
-  gtag('config', 'G-ZHNQLH6PNG');
-</script>
-  <!-- PushAlert -->
-<script type="text/javascript">
+<!-- PushAlert --><script type="text/javascript">
         (function(d, t) {
                 var g = d.createElement(t),
                 s = d.getElementsByTagName(t)[0];
                 g.src = "https://cdn.pushalert.co/integrate_aa5185f5440830a483ba994933449000.js";
                 s.parentNode.insertBefore(g, s);
         }(document, "script"));
-</script>
-<!-- End PushAlert -->
-</head>
-  <!-- Trigger sitemap generation -->
-<body class="bg-slate-50 text-slate-800 font-[Poppins]">
-
-  <!-- Header Include -->
-  <div id="header-container"></div>
-  <!-- Hero Section -->
-<section class="hero text-center py-16 px-4 max-w-4xl mx-auto">
-  <h1 class="text-4xl sm:text-5xl font-bold text-blue-600">Welcome to <span class="highlight text-cyan-500">ToolsWagon</span></h1>
-  <p class="mt-6 text-lg text-slate-700 text-justify text-left sm:text-center sm:text-justify">
-    ToolsWagon is your one-stop destination for a wide range of free online tools designed to save you time and enhance your productivity. Whether you're a student, developer, marketer, or business owner, ToolsWagon helps simplify tasks like text formatting, PDF conversions, SEO analysis, and much more. All our tools are browser-based, privacy-friendly, and completely free to use — no logins, no ads, no distractions.
-  </p>
-</section>
-<div class="mb-6">
-<div class="relative w-full sm:max-w-md mx-auto flex items-center px-4">
-    <input 
-      type="text" 
-      id="toolSearch" 
-      placeholder="Search for a tool..." 
-      class="w-full px-5 py-3 pl-12 pr-24 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"/>
-    <svg 
-      class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" 
-      fill="none" 
-      stroke="currentColor" 
-      stroke-width="2" 
-      viewBox="0 0 24 24" 
-      xmlns="http://www.w3.org/2000/svg">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z"></path>
-    </svg>
-  </div>
-</div>
-  <!-- Tools Grid Section -->
-<section class="max-w-6xl mx-auto px-4 py-12">
-  <h2 class="text-3xl font-bold text-center text-blue-600 mb-10">Our Tools</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-    <div class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between tool-card">
-      <div>
-        <h3 class="text-xl font-semibold text-slate-800 mb-2">Text Case Converter</h3>
-        <p class="text-slate-600 text-sm mb-4">Convert text between uppercase, lowercase, title case, and more.</p>
-      </div>
-      <a href="/tools/text-case-converter.html" target="_blank" class="mt-auto inline-block text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded-lg text-center">Try Tool</a>
-    </div>
-
-    <div class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between tool-card">
-      <div>
-        <h3 class="text-xl font-semibold text-slate-800 mb-2">PDF to Word</h3>
-        <p class="text-slate-600 text-sm mb-4">Convert PDFs into editable Word documents quickly and easily.</p>
-      </div>
-      <a href="/tools/pdf-to-word.html" target="_blank" class="mt-auto inline-block text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded-lg text-center">Try Tool</a>
-    </div>
-
-    <div class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between tool-card">
-      <div>
-        <h3 class="text-xl font-semibold text-slate-800 mb-2">IFSC Code Finder</h3>
-        <p class="text-slate-600 text-sm mb-4">Find the IFSC code of any bank branch in India instantly.</p>
-      </div>
-      <a href="/tools/ifsc-code-finder.html" target="_blank" class="mt-auto inline-block text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded-lg text-center">Try Tool</a>
-    </div>
-
-    <div class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between tool-card">
-      <div>
-        <h3 class="text-xl font-semibold text-slate-800 mb-2">YouTube Thumbnail Downloader</h3>
-        <p class="text-slate-600 text-sm mb-4">Download high-quality thumbnails from any YouTube video URL.</p>
-      </div>
-      <a href="/tools/youtube-thumbnail-downloader.html" target="_blank" class="mt-auto inline-block text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded-lg text-center">Try Tool</a>
-    </div>
-
-   <div class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between tool-card">
-      <div>
-        <h3 class="text-xl font-semibold text-slate-800 mb-2">YouTube Tags Extractor</h3>
-        <p class="text-slate-600 text-sm mb-4">Want to know what tags are being used on a viral YouTube Video just copy the link we will tell you everything.</p>
-      </div>
-      <a href="/tools/youtube-tags-extractor.html" target="_blank" class="mt-auto inline-block text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded-lg text-center">Try Tool</a>
-   </div>
-    
-    <div class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between tool-card">
-      <div>
-        <h3 class="text-xl font-semibold text-slate-800 mb-2">YouTube MP3 Downloader</h3>
-        <p class="text-slate-600 text-sm mb-4">Extract audio from YouTube videos and download MP3 files easily.</p>
-      </div>
-      <a href="/tools/youtube-to-mp3.html" target="_blank" class="mt-auto inline-block text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded-lg text-center">Try Tool</a>
-    </div>
-
-    <div class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between tool-card">
-      <div>
-        <h3 class="text-xl font-semibold text-slate-800 mb-2">Image to Base64</h3>
-        <p class="text-slate-600 text-sm mb-4">Convert images to Base64 encoded strings for easy embedding.</p>
-      </div>
-      <a href="/tools/image-to-base64.html" target="_blank" class="mt-auto inline-block text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded-lg text-center">Try Tool</a>
-    </div>
-
-    <div class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between tool-card">
-      <div>
-        <h3 class="text-xl font-semibold text-slate-800 mb-2">QR Code Generator</h3>
-        <p class="text-slate-600 text-sm mb-4">Generate custom QR codes for URLs, text, and more in seconds.</p>
-      </div>
-      <a href="/tools/qr-code-generator.html" target="_blank" class="mt-auto inline-block text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded-lg text-center">Try Tool</a>
-    </div>
-
-    <div class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between tool-card">
-      <div>
-        <h3 class="text-xl font-semibold text-slate-800 mb-2">URL Encoder/Decoder</h3>
-        <p class="text-slate-600 text-sm mb-4">Encode or decode URLs safely for sharing and embedding.</p>
-      </div>
-      <a href="/tools/url-encoder-decoder.html" target="_blank" class="mt-auto inline-block text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded-lg text-center">Try Tool</a>
-    </div>
-
-    <div class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between tool-card">
-      <div>
-        <h3 class="text-xl font-semibold text-slate-800 mb-2">JSON Generator</h3>
-        <p class="text-slate-600 text-sm mb-4">Create and format JSON data effortlessly for your projects.</p>
-      </div>
-      <a href="/tools/json-generator.html" target="_blank" class="mt-auto inline-block text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded-lg text-center">Try Tool</a>
-    </div>
-    <div class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between tool-card">
-      <div>
-        <h3 class="text-xl font-semibold text-slate-800 mb-2">Word & Character Counter</h3>
-        <p class="text-slate-600 text-sm mb-4">Count your words and character effortlessly with our free word counter tool. </p>
-      </div>
-      <a href="/tools/word-counter.html" target="_blank" class="mt-auto inline-block text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded-lg text-center">Try Tool</a>
-    </div>
-    <div class="bg-white shadow-md rounded-xl p-6 flex flex-col justify-between tool-card">
-      <div>
-        <h3 class="text-xl font-semibold text-slate-800 mb-2">Stylish Text Generator Generator</h3>
-        <p class="text-slate-600 text-sm mb-4">Generate stylish font from any text and rock as The Rock!! </p>
-      </div>
-      <a href="/tools/stylish-text-generator.html" target="_blank" class="mt-auto inline-block text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded-lg text-center">Try Tool</a>
-    </div>
-    
-  </div>
-</section>
-  
-  <!-- Why ToolsWagon -->  
-<section class="max-w-5xl mx-auto px-4 py-12">  
-  <h2 class="text-3xl font-bold text-center mb-6 text-blue-600">Why Choose ToolsWagon Over Other Online Tools?</h2>  
-  
-  <p class="text-slate-700 text-lg mb-6 text-justify">  
-    ToolsWagon stands out as the ultimate platform for anyone who needs fast, free, and user-friendly online tools. Whether you're a student formatting assignments, a marketer optimizing URLs, a developer generating JSON data, or a business professional converting PDFs — ToolsWagon empowers you with high-performance tools that are lightweight, privacy-first, and distraction-free.  
-  </p>  
-  
-  <p class="text-slate-700 text-lg mb-6 text-justify">  
-    Unlike most online tool sites cluttered with ads and confusing layouts, ToolsWagon is built with simplicity and speed in mind. Every tool is mobile-responsive, works instantly without sign-ups, and is updated regularly based on real user feedback. Our no-login and ad-free policy ensures that your tasks are completed without delay or tracking.  
-  </p>  
-  
-  <p class="text-slate-700 text-lg mb-6 text-justify">  
-    We are constantly expanding our collection with essential utilities tailored to your daily productivity needs. Whether it's text formatting, PDF conversions, YouTube downloads, QR code generation, or encoding tasks — ToolsWagon helps you get the job done with just a few clicks.  
-  </p>  
-  
-  <h3 class="text-xl font-semibold text-center mt-10 mb-4 text-cyan-600">Comparison: ToolsWagon vs Other Free Tool Sites</h3>  
-  
-  <div class="overflow-x-auto">  
-    <table class="min-w-full border border-slate-300 text-left text-slate-700">  
-      <thead class="bg-slate-100 text-sm uppercase text-slate-600">  
-        <tr>  
-          <th class="py-3 px-4 border border-slate-300">Features</th>  
-          <th class="py-3 px-4 border border-slate-300">ToolsWagon</th>  
-          <th class="py-3 px-4 border border-slate-300">Other Tool Websites</th>  
-        </tr>  
-      </thead>  
-      <tbody class="text-sm">  
-        <tr>  
-          <td class="py-3 px-4 border border-slate-300 font-medium">Ad-Free Experience</td>  
-          <td class="py-3 px-4 border border-slate-300 text-green-600 font-semibold">Yes</td>  
-          <td class="py-3 px-4 border border-slate-300 text-red-600">Often filled with ads</td>  
-        </tr>  
-        <tr>  
-          <td class="py-3 px-4 border border-slate-300 font-medium">Sign-Up Required</td>  
-          <td class="py-3 px-4 border border-slate-300 text-green-600 font-semibold">No</td>  
-          <td class="py-3 px-4 border border-slate-300">Sometimes mandatory</td>  
-        </tr>  
-        <tr>  
-          <td class="py-3 px-4 border border-slate-300 font-medium">Mobile Friendly</td>  
-          <td class="py-3 px-4 border border-slate-300 text-green-600 font-semibold">Fully Responsive</td>  
-          <td class="py-3 px-4 border border-slate-300">Not always optimized</td>  
-        </tr>  
-        <tr>  
-          <td class="py-3 px-4 border border-slate-300 font-medium">Tool Variety</td>  
-          <td class="py-3 px-4 border border-slate-300 text-green-600 font-semibold">Wide & Growing</td>  
-          <td class="py-3 px-4 border border-slate-300">Limited or outdated</td>  
-        </tr>  
-        <tr>  
-          <td class="py-3 px-4 border border-slate-300 font-medium">Speed & Performance</td>  
-          <td class="py-3 px-4 border border-slate-300 text-green-600 font-semibold">Blazing Fast</td>  
-          <td class="py-3 px-4 border border-slate-300">May lag due to scripts</td>  
-        </tr>  
-        <tr>  
-          <td class="py-3 px-4 border border-slate-300 font-medium">Privacy Respect</td>  
-          <td class="py-3 px-4 border border-slate-300 text-green-600 font-semibold">No Data Tracking</td>  
-          <td class="py-3 px-4 border border-slate-300">Often track users</td>  
-        </tr>  
-        <tr>  
-          <td class="py-3 px-4 border border-slate-300 font-medium">User Support & Feedback</td>  
-          <td class="py-3 px-4 border border-slate-300 text-green-600 font-semibold">Always Open</td>  
-          <td class="py-3 px-4 border border-slate-300">Rarely Considered</td>  
-        </tr>  
-      </tbody>  
-    </table>  
-  </div>  
-</section>
-
-  <!-- FAQs -->
-<section class="max-w-4xl mx-auto px-4 py-12 space-y-6">
-  <h2 class="text-2xl font-semibold text-blue-600">Frequently Asked Questions</h2>
-
-  <div>
-    <h3 class="font-semibold text-lg">What is ToolsWagon?</h3>
-    <p class="text-slate-700">ToolsWagon is a free online platform offering various utility tools like PDF converters, text formatters, SEO checkers, and more—all accessible without logins or installations.</p>
-  </div>
-
-  <div>
-    <h3 class="font-semibold text-lg">Is ToolsWagon completely free to use?</h3>
-    <p class="text-slate-700">Yes, all tools on ToolsWagon are 100% free to use. There are no hidden charges, subscriptions, or usage limits.</p>
-  </div>
-
-  <div>
-    <h3 class="font-semibold text-lg">Do I need to sign up to use the tools?</h3>
-    <p class="text-slate-700">No. ToolsWagon is fully accessible without any login or registration, making your experience simple and secure.</p>
-  </div>
-
-  <div>
-    <h3 class="font-semibold text-lg">What kind of tools does ToolsWagon offer?</h3>
-    <p class="text-slate-700">We offer a wide range of tools including text converters, PDF to Word, IFSC finder, YouTube downloaders, QR code generator, and many more utilities useful for students, marketers, and developers.</p>
-  </div>
-
-  <div>
-    <h3 class="font-semibold text-lg">Can I use ToolsWagon tools on mobile devices?</h3>
-    <p class="text-slate-700">Absolutely! All our tools are mobile responsive and work smoothly on smartphones, tablets, and desktops.</p>
-  </div>
-
-  <div>
-    <h3 class="font-semibold text-lg">Are my files or data stored?</h3>
-    <p class="text-slate-700">No. We do not store or log any files, user inputs, or outputs. Everything happens in your browser, ensuring your privacy and security.</p>
-  </div>
-
-  <div>
-    <h3 class="font-semibold text-lg">How often are new tools added?</h3>
-    <p class="text-slate-700">We frequently update our toolset based on user suggestions and industry demand. Stay tuned for new features regularly.</p>
-  </div>
-
-  <div>
-    <h3 class="font-semibold text-lg">Can I request a new tool?</h3>
-    <p class="text-slate-700">Yes, we welcome suggestions! Use our contact page to request features or new tools you'd like to see on ToolsWagon.</p>
-  </div>
-</section>
-
-  <!-- Reviews Slider -->
-  <section class="bg-white py-12">
-  <div class="max-w-4xl mx-auto px-4">
-    <h2 class="text-2xl font-bold text-center text-blue-600 mb-2">Our Users Speak for Us</h2>
-    <p class="text-center text-gray-600 mb-10">We don’t promote ourselves — our users do. Real feedback from real people who trust ToolsWagon every day.</p>
-
-    <div class="relative overflow-hidden w-full">
-      <div id="reviewSlider" class="flex w-full">
-        
-        <!-- Each review block -->
-        <div class="w-full flex-shrink-0 p-6 bg-slate-100 rounded-xl shadow text-center mx-auto">
-          <p class="text-gray-700 italic mb-4">“ToolsWagon is a daily essential for me. Everything loads fast, and I get my work done in seconds!”</p>
-          <h4 class="font-semibold text-blue-700">Priya Sharma <span class="text-sm text-gray-500">— India</span></h4>
-        </div>
-
-        <div class="w-full flex-shrink-0 p-6 bg-slate-100 rounded-xl shadow text-center mx-auto">
-          <p class="text-gray-700 italic mb-4">“I found ToolsWagon through a friend and now I use it for all my online tools. Amazing experience!”</p>
-          <h4 class="font-semibold text-blue-700">Mark Thompson <span class="text-sm text-gray-500">— USA</span></h4>
-        </div>
-
-        <div class="w-full flex-shrink-0 p-6 bg-slate-100 rounded-xl shadow text-center mx-auto">
-          <p class="text-gray-700 italic mb-4">“Clean design, quick tools, and no ads — finally a website that gets it right!”</p>
-          <h4 class="font-semibold text-blue-700">Ayesha Khan <span class="text-sm text-gray-500">— UAE</span></h4>
-        </div>
-
-        <div class="w-full flex-shrink-0 p-6 bg-slate-100 rounded-xl shadow text-center mx-auto">
-          <p class="text-gray-700 italic mb-4">“From file converters to calculators, ToolsWagon has saved me so much time. Highly recommended!”</p>
-          <h4 class="font-semibold text-blue-700">Raj Mehta <span class="text-sm text-gray-500">— India</span></h4>
-        </div>
-
-        <div class="w-full flex-shrink-0 p-6 bg-slate-100 rounded-xl shadow text-center mx-auto">
-          <p class="text-gray-700 italic mb-4">“All-in-one utility site that actually performs. It’s part of my daily toolkit now.”</p>
-          <h4 class="font-semibold text-blue-700">Sofia Müller <span class="text-sm text-gray-500">— Germany</span></h4>
-        </div>
-
+</script><!-- End PushAlert --></head><body class="font-inter bg-white text-black dark:bg-black dark:text-white">
+  <!-- Header -->
+  <header class="bg-white dark:bg-black shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold text-primary">ToolsWagon</a>
+      <nav class="hidden md:flex gap-6">
+        <a href="#trending" class="hover:text-primary">Trending</a>
+        <a href="#tools" class="hover:text-primary">Tools</a>
+        <a href="#report" class="hover:text-primary">Report Bug</a>
+        <a href="#footer" class="hover:text-primary">Contact</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <input type="text" placeholder="Search tools..." class="px-3 py-1 rounded border dark:bg-gray-700 dark:border-gray-600">
+        <button id="darkModeToggle" class="text-xl">🌙</button>
       </div>
     </div>
-  </div>
-</section>
-
-  <!-- Footer Include -->
-  <div id="footer-container"></div>
-  <!-- Script -->
-  <script src="/assets/js/script.js"></script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is ToolsWagon?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "ToolsWagon is a free online platform offering various utility tools like PDF converters, text formatters, SEO checkers, and more—all accessible without logins or installations."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is ToolsWagon completely free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, all tools on ToolsWagon are 100% free to use. There are no hidden charges, subscriptions, or usage limits."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need to sign up to use the tools?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. ToolsWagon is fully accessible without any login or registration, making your experience simple and secure."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What kind of tools does ToolsWagon offer?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We offer a wide range of tools including text converters, PDF to Word, IFSC finder, YouTube downloaders, QR code generator, and many more utilities useful for students, marketers, and developers."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I use ToolsWagon tools on mobile devices?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Absolutely! All our tools are mobile responsive and work smoothly on smartphones, tablets, and desktops."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are my files or data stored?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. We do not store or log any files, user inputs, or outputs. Everything happens in your browser, ensuring your privacy and security."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How often are new tools added?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We frequently update our toolset based on user suggestions and industry demand. Stay tuned for new features regularly."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I request a new tool?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, we welcome suggestions! Use our contact page to request features or new tools you'd like to see on ToolsWagon."
-      }
-    }
-  ]
-}
-</script>
-<div id="newsletter-container"></div>
-<script>
-  fetch("/components/newsletter.html")
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById("newsletter-container").innerHTML = data;
-
-      // Now attach the toggle function
-      window.toggleNewsletter = function () {
-        const modal = document.getElementById("newsletterModal");
-        if (modal) modal.classList.toggle("hidden");
-      };
+  </header>  <!-- Introduction -->  <section class="py-12 px-4 max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl font-semibold mb-4">Welcome to ToolsWagon</h2>
+    <p class="text-lg text-gray-600 dark:text-gray-300">[Dummy text for ToolsWagon introduction]</p>
+  </section>  <!-- Trending Tools -->  <section id="trending" class="bg-gray-50 dark:bg-gray-800 py-12 px-4 text-center">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-4">Trending Tools</h2>
+      <p class="mb-6">Check out the most popular tools of this week.</p>
+    </div>
+  </section>  <!-- Tool Categories -->  <section id="tools" class="py-12 px-4 max-w-6xl mx-auto text-center">
+    <h2 class="text-2xl font-semibold mb-6">Explore Tool Categories</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white dark:bg-gray-700 shadow-xl rounded-lg p-6 text-center">
+        <img src="/assets/images/instagram.png" alt="Instagram Tools" class="w-20 mx-auto mb-4">
+        <h3 class="text-xl font-semibold mb-2">Instagram Tools</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Access various Instagram-related tools here.</p>
+        <a href="/tools/instagram" class="inline-block px-4 py-2 bg-primary text-white rounded hover:bg-red-700">Open Tool</a>
+      </div>
+      <div class="bg-white dark:bg-gray-700 shadow-xl rounded-lg p-6 text-center">
+        <img src="/assets/images/pinterest.png" alt="Pinterest Tools" class="w-20 mx-auto mb-4">
+        <h3 class="text-xl font-semibold mb-2">Pinterest Tools</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Explore all Pinterest utilities and tools here.</p>
+        <a href="/tools/pinterest" class="inline-block px-4 py-2 bg-primary text-white rounded hover:bg-red-700">Open Tool</a>
+      </div>
+      <div class="bg-white dark:bg-gray-700 shadow-xl rounded-lg p-6 text-center">
+        <img src="/assets/images/youtube.png" alt="YouTube Tools" class="w-20 mx-auto mb-4">
+        <h3 class="text-xl font-semibold mb-2">YouTube Tools</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Find helpful tools for YouTube creators here.</p>
+        <a href="/tools/youtube" class="inline-block px-4 py-2 bg-primary text-white rounded hover:bg-red-700">Open Tool</a>
+      </div>
+    </div>
+  </section>  <!-- Why ToolsWagon -->  <section class="bg-gray-100 dark:bg-gray-900 py-12 px-4 text-center">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-4">Why Use ToolsWagon.site?</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300">[Dummy text explaining why to use ToolsWagon]</p>
+    </div>
+  </section>  <!-- Promoted Videos / Ads -->  <section class="py-12 px-4 text-center">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-4">Promoted Videos</h2>
+      <div class="text-red-600 font-semibold mb-2 animate-pulse">📢 Book your ads space now!</div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <iframe class="w-full h-48" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+        <iframe class="w-full h-48" src="https://www.youtube.com/embed/3JZ_D3ELwOQ" frameborder="0" allowfullscreen></iframe>
+        <iframe class="w-full h-48" src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>  <!-- Report a Bug -->  <section id="report" class="bg-gray-50 dark:bg-gray-800 py-12 px-4 text-center">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-4">Report A Bug</h2>
+      <form class="grid grid-cols-1 gap-4">
+        <input type="text" placeholder="Your Name" class="px-4 py-2 rounded border dark:bg-gray-700 dark:border-gray-600">
+        <input type="email" placeholder="Your Email" class="px-4 py-2 rounded border dark:bg-gray-700 dark:border-gray-600">
+        <textarea rows="4" placeholder="Describe the bug..." class="px-4 py-2 rounded border dark:bg-gray-700 dark:border-gray-600"></textarea>
+        <button type="submit" class="bg-primary text-white py-2 rounded hover:bg-red-700">Submit Bug</button>
+      </form>
+    </div>
+  </section>  <!-- Footer -->  <footer id="footer" class="bg-black text-white py-8 px-4">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <h4 class="font-semibold mb-2">ToolsWagon.site</h4>
+        <p class="text-sm">© 2025 ToolsWagon. All rights reserved.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Important Links</h4>
+        <ul class="text-sm space-y-1">
+          <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+          <li><a href="#" class="hover:underline">Terms of Use</a></li>
+          <li><a href="#report" class="hover:underline">Report Bug</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Contact</h4>
+        <p class="text-sm">Email: support@toolswagon.site</p>
+      </div>
+    </div>
+  </footer>  <!-- Dark Mode Toggle Script -->  <script>
+    const toggle = document.getElementById('darkModeToggle');
+    toggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
     });
-</script>
-</body>
-</html>
+  </script></body></html>
