@@ -212,3 +212,21 @@ document.addEventListener("DOMContentLoaded", () => {
     button.style.display = 'block';
   });
 })();
+
+    // Bug Report Form
+    document.getElementById('bugForm')?.addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('successMessage').classList.remove('hidden');
+      this.reset();
+    });
+
+    // Back to Top Button
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTop.classList.remove('hidden');
+      else backToTop.classList.add('hidden');
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  
