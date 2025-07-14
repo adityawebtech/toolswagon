@@ -99,3 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
+
+// Load Overlays
+const overlayContainer = document.createElement('div');
+document.body.appendChild(overlayContainer);
+fetch('/components/overlays.html')
+  .then(res => res.text())
+  .then(html => overlayContainer.innerHTML = html)
+  .catch(err => console.error('Overlay load error:', err));
