@@ -11,23 +11,28 @@
       </span>
     </a>
 
-    <!-- Right Controls -->
+    <!-- Controls: Language, Theme, Hamburger -->
     <div class="flex items-center gap-4">
 
       <!-- Language Selector -->
-      <div class="flex items-center gap-1 text-sm cursor-pointer">
-        <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="w-5 h-3 rounded-sm">
-        <span class="text-black dark:text-white">EN</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-600 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <div class="relative">
+        <button id="langToggle" class="flex items-center gap-1 text-sm cursor-pointer">
+          <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="w-5 h-3 rounded-sm">
+          <span class="text-black dark:text-white">EN</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-600 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div id="langMenu" class="absolute right-0 mt-2 bg-white dark:bg-gray-800 border dark:border-gray-700 shadow rounded hidden z-50">
+          <button class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">🇬🇧 English</button>
+          <button class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">🇮🇳 Hindi</button>
+          <button class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">🇫🇷 French</button>
+        </div>
       </div>
 
       <!-- Dark Mode Toggle -->
       <button id="themeToggle" class="w-9 h-9 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 flex items-center justify-center transition-colors">
-        <!-- Icon will switch dynamically -->
-        <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor">
-        </svg>
+        <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor"></svg>
       </button>
 
       <!-- Hamburger Menu -->
