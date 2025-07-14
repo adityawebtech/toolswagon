@@ -100,10 +100,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Load Overlays
-const overlayContainer = document.createElement('div');
-document.body.appendChild(overlayContainer);
-fetch('/components/overlays.html')
-  .then(res => res.text())
-  .then(html => overlayContainer.innerHTML = html)
-  .catch(err => console.error('Overlay load error:', err));
+// Load Overlay SVGs
+const overlayContainer = document.getElementById('overlay-container');
+if (overlayContainer) {
+  fetch('/components/overlays.html')
+    .then(res => res.text())
+    .then(html => {
+      overlayContainer.innerHTML = html;
+    })
+    .catch(err => console.error('Overlay load error:', err));
+}
