@@ -17,20 +17,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullText = wordObj.text;
 
     if (!isErasing && currentChar <= fullText.length) {
-      typingText.innerHTML = `<span class="${wordObj.class}">${fullText.substring(0, currentChar)}</span>`;
+      typingText.textContent = fullText.substring(0, currentChar);
+      typingText.className = wordObj.class; // Apply class during typing
       currentChar++;
-      setTimeout(typeLoop, 180); // slower typing
+      setTimeout(typeLoop, 180);
     } else if (!isErasing) {
-      isErasing = true;
-      setTimeout(typeLoop, 1500); // pause after full word
+      setTimeout(() => {
+        isErasing = true;
+        typeLoop();
+      }, 1500);
     } else if (isErasing && currentChar >= 0) {
-      typingText.innerHTML = `<span class="${wordObj.class}">${fullText.substring(0, currentChar)}</span>`;
+      typingText.textContent = fullText.substring(0, currentChar);
       currentChar--;
-      setTimeout(typeLoop, 80); // slower erasing
+      setTimeout(typeLoop, 80);
     } else {
       isErasing = false;
       currentWordIndex = (currentWordIndex + 1) % words.length;
-      setTimeout(typeLoop, 500); // pause before next word starts
+      setTimeout(typeLoop, 500);
     }
   }
 
