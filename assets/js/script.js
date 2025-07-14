@@ -229,4 +229,20 @@ document.addEventListener("DOMContentLoaded", () => {
     backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-  
+
+
+//dark light toggle
+const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  const toggleDark = () => {
+    document.documentElement.classList.toggle('dark');
+  };
+
+  document.getElementById('darkModeToggle')?.addEventListener('click', toggleDark);
+  document.getElementById('darkModeToggleMobile')?.addEventListener('click', toggleDark);
+
