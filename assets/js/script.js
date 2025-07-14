@@ -14,70 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-//Mobile Toggle
-
-function initMobileMenu() {
-  const toggleBtn = document.getElementById("menuToggle"); // match ID here
-  const mobileMenu = document.getElementById("mobileMenu");
-
-  if (toggleBtn && mobileMenu) {
-    toggleBtn.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-  }
-}
-
-// Review Slider
-// Auto-slide reviews
-document.addEventListener("DOMContentLoaded", () => {
-  const slider = document.getElementById("reviewSlider");
-  const total = slider.children.length;
-  let index = 0;
-
-  function showNext() {
-    index = (index + 1) % total;
-    slider.style.transform = `translateX(-${index * 100}%)`;
-  }
-
-  setInterval(showNext, 3000);
-});
-
-//Search Bar
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById("toolSearch");
-    const searchButton = document.getElementById("searchButton");
-    const toolCards = document.querySelectorAll(".tool-card");
-
-    function filterTools() {
-      const query = searchInput.value.toLowerCase().trim();
-      toolCards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        card.style.display = text.includes(query) ? "block" : "none";
-      });
-    }
-
-    // Live filtering on typing
-    searchInput.addEventListener("input", filterTools);
-  });
-
-// Star Rating Star Script 
-
-  const stars = document.querySelectorAll('#starRating span');
-  const ratingText = document.getElementById('ratingValue');
-
-  stars.forEach((star, index) => {
-    star.addEventListener('click', () => {
-      stars.forEach(s => s.classList.remove('selected'));
-      for (let i = 0; i <= index; i++) {
-        stars[i].classList.add('selected');
-      }
-      ratingText.textContent = `You rated this tool ${index + 1} out of 5`;
-    });
-  });
-
-// Follow Button 
-
+// Follow Button
 (function () {
   if (window.followWidgetAppended) return;
   window.followWidgetAppended = true;
@@ -230,19 +167,22 @@ document.addEventListener("DOMContentLoaded", () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+  // Hamburger menu toggle
+document.addEventListener('DOMContentLoaded', () => {
 
-//dark light toggle
-const menuToggle = document.getElementById('menuToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('mobileMenu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  }
 
-  menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
-
-  const toggleDark = () => {
+  // Dark mode toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  themeToggle.addEventListener('click', () => {
     document.documentElement.classList.toggle('dark');
-  };
-
-  document.getElementById('darkModeToggle')?.addEventListener('click', toggleDark);
-  document.getElementById('darkModeToggleMobile')?.addEventListener('click', toggleDark);
-
+    themeIcon.classList.toggle('rotate-180');
+  });
+});
