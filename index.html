@@ -154,21 +154,41 @@
 </div>
     </section>
 
-    <!-- Bug Report -->
-    <section id="report" class="bg-white py-16 px-4 text-center">
-      <div class="max-w-2xl mx-auto">
-        <h2 class="text-2xl text-gray-700 font-semibold mb-4">Report a Bug</h2>
-        <form id="bugForm" class="grid gap-4">
-          <input type="text" placeholder="Your Name" required class="px-4 py-2 rounded border dark:border-gray-600">
-          <input type="email" placeholder="Your Email" required class="px-4 py-2 rounded border dark:border-gray-600">
-          <textarea rows="4" placeholder="Describe the issue..." required class="px-4 py-2 rounded border dark:border-gray-600"></textarea>
-          <button type="submit" class="bg-primary text-white py-2 px-4 rounded hover:bg-red-700">Submit Bug</button>
-        </form>
-        <p id="successMessage" class="mt-4 text-green-500 font-medium hidden">✅ Bug submitted successfully! Thanks for your efforts.</p>
-      </div>
-    </section>
-  </main>
+    <!-- Bug Report Section -->
+<section id="report" class="bg-white dark:bg-gray-900 py-16 px-4 text-center">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="text-2xl text-gray-700 dark:text-gray-200 font-semibold mb-4">Report a Bug</h2>
 
+    <form id="bugForm" class="grid gap-4">
+      <input
+        type="text"
+        placeholder="Your Name"
+        required
+        class="px-4 py-2 rounded border border-gray-300 dark:border-gray-600 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800">
+
+      <input
+        type="email"
+        placeholder="Your Email"
+        required
+        class="px-4 py-2 rounded border border-gray-300 dark:border-gray-600 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800">
+
+      <textarea
+        rows="4"
+        placeholder="Describe the issue..."
+        required
+        class="px-4 py-2 rounded border border-gray-300 dark:border-gray-600 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800"></textarea>
+
+      <button
+        type="submit"
+        class="bg-primary text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">
+        Submit Bug
+      </button>
+    </form>
+
+    <p id="successMessage" class="mt-4 text-green-500 font-medium hidden">✅ Bug submitted successfully! Thanks for your efforts.</p>
+  </div>
+</section>
+    
   <!-- Footer will load here -->
   <div id="footer-container"></div>
 
