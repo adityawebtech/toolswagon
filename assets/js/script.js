@@ -1,24 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const pathSegments = location.pathname.split('/').filter(Boolean);
-  const basePath = pathSegments.length > 1 ? '../'.repeat(pathSegments.length - 1) : './';
-
-  // Load Header
+  // Use absolute paths from root – works on all pages
   const headerPlaceholder = document.getElementById('header-container');
   if (headerPlaceholder) {
-    fetch(`${basePath}components/header.html`)
-      .then(res => res.text())
+    fetch('/components/header.html')
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.text();
+      })
       .then(data => {
         headerPlaceholder.innerHTML = data;
-        initHeaderFeatures?.(); // safe call
+        initHeaderFeatures?.(); // only if it exists
       })
       .catch(err => console.error('Header load error:', err));
   }
 
-  // Load Footer
   const footerPlaceholder = document.getElementById('footer-container');
   if (footerPlaceholder) {
-    fetch(`${basePath}components/footer.html`)
-      .then(res => res.text())
+    fetch('/components/footer.html')
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.text();
+      })
       .then(data => {
         footerPlaceholder.innerHTML = data;
       })
