@@ -1,43 +1,40 @@
+<script>
 document.addEventListener('DOMContentLoaded', () => {
   const words = [
-    `<span class="brand-youtube">YouTube</span>`,
-    `<span class="brand-instagram">Instagram</span>`,
-    `<span class="brand-pinterest">Pinterest</span>`
+    { text: "YOUTUBE", class: "brand-youtube" },
+    { text: "INSTAGRAM", class: "brand-instagram" },
+    { text: "PINTEREST", class: "brand-pinterest" }
   ];
 
-  let currentWord = 0;
-  let currentChar = 0;
   const typingText = document.getElementById('typing-text');
   const cursor = document.getElementById('cursor');
 
-  function type() {
-    const raw = words[currentWord];
-    const temp = document.createElement('div');
-    temp.innerHTML = raw;
-    const plain = temp.textContent;
+  let currentWordIndex = 0;
+  let currentChar = 0;
+  let isErasing = false;
 
-    if (currentChar <= plain.length) {
-      typingText.innerHTML = raw.slice(0, currentChar++);
-      setTimeout(type, 100);
+  function typeLoop() {
+    const wordObj = words[currentWordIndex];
+    const fullText = wordObj.text;
+
+    if (!isErasing && currentChar <= fullText.length) {
+      typingText.innerHTML = `<span class="${wordObj.class}">${fullText.substring(0, currentChar)}</span>`;
+      currentChar++;
+      setTimeout(typeLoop, 120);
+    } else if (!isErasing) {
+      isErasing = true;
+      setTimeout(typeLoop, 1000);
+    } else if (isErasing && currentChar >= 0) {
+      typingText.innerHTML = `<span class="${wordObj.class}">${fullText.substring(0, currentChar)}</span>`;
+      currentChar--;
+      setTimeout(typeLoop, 60);
     } else {
-      setTimeout(erase, 1000);
+      isErasing = false;
+      currentWordIndex = (currentWordIndex + 1) % words.length;
+      setTimeout(typeLoop, 300);
     }
   }
 
-  function erase() {
-    const raw = words[currentWord];
-    const temp = document.createElement('div');
-    temp.innerHTML = raw;
-    const plain = temp.textContent;
-
-    if (currentChar >= 0) {
-      typingText.innerHTML = raw.slice(0, currentChar--);
-      setTimeout(erase, 50);
-    } else {
-      currentWord = (currentWord + 1) % words.length;
-      setTimeout(type, 300);
-    }
-  }
-
-  type();
+  typeLoop();
 });
+</script>
