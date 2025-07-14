@@ -1,12 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const rotator = document.getElementById("brand-rotator");
-  const items = rotator.children;
-  let index = 0;
+  const brandTexts = document.querySelectorAll("#flip-text .brand-text");
+  let current = 0;
 
-  function rotate() {
-    index = (index + 1) % items.length;
-    rotator.style.transform = `translateY(-${index * 48}px)`;
-  }
+  setInterval(() => {
+    brandTexts[current].classList.remove("opacity-100");
+    brandTexts[current].classList.add("opacity-0");
 
-  setInterval(rotate, 2000); // Rotate every 2 seconds
+    current = (current + 1) % brandTexts.length;
+
+    brandTexts[current].classList.remove("opacity-0");
+    brandTexts[current].classList.add("opacity-100");
+  }, 2500);
 });
