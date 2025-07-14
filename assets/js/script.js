@@ -74,36 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Follow Button (unchanged)
-  (function () {
-    if (window.followWidgetAppended) return;
-    window.followWidgetAppended = true;
-
-    const style = document.createElement('style');
-    style.textContent = `/* your follow-us styles */`;
-    document.head.appendChild(style);
-
-    const button = document.createElement('div');
-    button.className = 'follow-button-sticky';
-    button.innerText = 'Follow Us';
-    document.body.appendChild(button);
-
-    const slider = document.createElement('div');
-    slider.className = 'follow-us-slider';
-    slider.innerHTML = `/* your slider HTML */`;
-    document.body.appendChild(slider);
-
-    button.addEventListener('click', () => {
-      slider.classList.add('show');
-      button.style.display = 'none';
-    });
-
-    slider.querySelector('.follow-us-close').addEventListener('click', () => {
-      slider.classList.remove('show');
-      button.style.display = 'block';
-    });
-  })();
-
   // Bug Report Form
   document.getElementById('bugForm')?.addEventListener('submit', function (e) {
     e.preventDefault();
