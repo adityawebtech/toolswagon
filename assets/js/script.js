@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Load Header
   const headerPlaceholder = document.getElementById('header-container');
   if (headerPlaceholder) {
-    fetch('./components/header.html')  // Use relative path
+    fetch('${basePath}/components/header.html')  // Use relative path
       .then(res => res.text())
       .then(data => {
         headerPlaceholder.innerHTML = data;
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Load Footer
   const footerPlaceholder = document.getElementById('footer-container');
   if (footerPlaceholder) {
-    fetch('./components/footer.html')  // Use relative path
+    fetch('${basePath}/components/footer.html')  // Use relative path
       .then(res => res.text())
       .then(data => {
         footerPlaceholder.innerHTML = data;
