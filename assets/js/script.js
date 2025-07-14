@@ -167,8 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+// Hamburger toggle
 document.addEventListener('DOMContentLoaded', () => {
-  // Hamburger toggle
   const menuToggle = document.getElementById('menuToggle');
   const mobileMenu = document.getElementById('mobileMenu');
   menuToggle.addEventListener('click', () => {
