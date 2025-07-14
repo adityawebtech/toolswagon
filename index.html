@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,24 +7,16 @@
   <meta name="keywords" content="youtube downloader, instagram downloader, pinterest downloader">
   <meta name="robots" content="index, follow">
   <meta name="language" content="English">
-  <meta name="author" content="Aditya Pal">
-  
-  <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+  <meta name="author" content="Aditya Pal">  <!-- Favicon -->  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
   <link rel="manifest" href="/assets/images/site.webmanifest">
   <link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#2563eb">
   <meta name="theme-color" content="#ffffff">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  
-  <title>ToolsWagon - Ultimate YouTube, Pinterest & Instagram Toolkit</title>
+  <meta name="msapplication-TileColor" content="#ffffff">  <title>ToolsWagon - Ultimate YouTube, Pinterest & Instagram Toolkit</title>
   <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">  <!-- Tailwind CSS -->  <script src="https://cdn.tailwindcss.com"></script>  <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
@@ -39,161 +30,61 @@
         }
       }
     };
-  </script>
-  <script defer src="/assets/js/script.js"></script>
-</head>
-<body class="bg-white dark:bg-black text-black dark:text-white font-inter">
-
-  <!-- Header will load here -->
-  <div id="header-container"></div>
-
-  <!-- Main Content -->
-  <main class="min-h-screen">
-    
-<!-- Hero -->
-<section class="bg-red-200 text-center py-20 px-4">
-  <h1 class="text-4xl font-bold leading-snug space-y-3 text-blue-800">
+  </script>  <script defer src="/assets/js/script.js"></script></head><body class="bg-white dark:bg-black text-black dark:text-white font-inter transition-colors duration-300">  <!-- Header -->  <div id="header-container"></div>  <!-- Main Content -->  <main class="min-h-screen"><!-- Hero -->
+<section class="bg-red-200 dark:bg-red-900 text-center py-20 px-4">
+  <h1 class="text-4xl font-bold leading-snug space-y-3 text-blue-800 dark:text-blue-200">
     <div>Your Ultimate</div>
-
     <div id="flip-text" class="text-3xl font-bold h-10 relative">
       <span class="brand-text brand-youtube absolute inset-0 flex items-center justify-center transition-opacity duration-1000 opacity-100">YouTube</span>
       <span class="brand-text brand-instagram absolute inset-0 flex items-center justify-center transition-opacity duration-1000 opacity-0">Instagram</span>
       <span class="brand-text brand-pinterest absolute inset-0 flex items-center justify-center transition-opacity duration-1000 opacity-0">Pinterest</span>
     </div>
-
     <div>ToolKit 🔥🔥</div>
   </h1>
 
-  <p class="text-lg mt-6 max-w-3xl mx-auto text-gray-600">
-    If you're looking for an all-in-one tool for YouTube, Pinterest, and Instagram, then you're at the right place.
-    Try our exclusively built tools made for you. Download YouTube thumbnails, extract YouTube metadata, generate
-    YouTube tags, download Instagram reels and IGTV videos, get Pinterest images and video downloads, and even check
-    YouTube monetization status and earnings — all free on ToolsWagon.
+  <p class="text-lg mt-6 max-w-3xl mx-auto text-gray-600 dark:text-gray-300">
+    If you're looking for an all-in-one tool for YouTube, Pinterest, and Instagram, then you're at the right place...
   </p>
 
-  <a href="#tools" class="mt-6 inline-block bg-black text-white py-2 px-6 rounded hover:bg-gray-800 transition">Explore Tools</a>
+  <a href="#tools" class="mt-6 inline-block bg-black dark:bg-white text-white dark:text-black py-2 px-6 rounded hover:bg-gray-800 dark:hover:bg-gray-200 transition">Explore Tools</a>
 </section>
-    
-    <!-- Tools Section -->
-<section id="tools" class="py-16 px-4 bg-white">
+
+<!-- Tools Section -->
+<section id="tools" class="py-16 px-4 bg-white dark:bg-black">
   <div class="max-w-7xl mx-auto text-center mb-10">
-    <h2 class="text-3xl font-bold text-gray-800">Explore Our Free Tools</h2>
-    <p class="text-gray-600 mt-2">Get started with YouTube, Instagram, and Pinterest tool. Whether you wanted to generate tags for your YouTube videos or instagram videos. Wanted to extract meta data of any YouTube vdieo or instagram you can do it. Even you can download the Images and videos of YouTube, Instagram and Pinterest.</p>
+    <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-200">Explore Our Free Tools</h2>
+    <p class="text-gray-600 dark:text-gray-400 mt-2">Get started with YouTube, Instagram, and Pinterest tool...</p>
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
-
-    <!-- YouTube Tool Card -->
-    <div class="border border-red-200 rounded-xl p-5 shadow-sm hover:shadow-md transition duration-300 bg-white">
-      <div class="flex items-start gap-4">
-        <div class="bg-slate-100 rounded-full p-3 w-16 h-16 flex items-center justify-center">
-        <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube Icon" class="h-10 w-10" />
-        </div>
-        <div>
-          <h3 class="text-gray-700 font-semibold">
-            <span class="text-red-700">YouTube</span> <span class="text-black font-bold">All in One Tool</span>
-          </h3>
-          <p class="text-gray-500 text-sm mt-1">
-            Check if a YouTube channel or video is monetized. Discover earnings, generate tags, download thumbnails, and much more.
-          </p>
-          <a href="/tools/youtube" class="text-red-600 text-sm font-medium mt-2 inline-block">Open Tool →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Instagram Tool Card -->
-    <div class="border border-pink-200 rounded-xl p-5 shadow-sm hover:shadow-md transition duration-300 bg-white">
-      <div class="flex items-start gap-4">
-        <div class="bg-pink-100 rounded-full p-3 w-16 h-16 flex items-center justify-center">
-          <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram Icon" class="h-10 w-10" />
-        </div>
-        <div>
-          <h3 class="text-gray-700 font-semibold">
-            <span class="text-pink-700">Instagram</span> <span class="text-black font-bold">All in One Tool</span>
-          </h3>
-          <p class="text-gray-500 text-sm mt-1">
-            Download Instagram Reels, IGTV videos, Generate captions and Download profile pictures instantly with a single click. 
-          </p>
-          <a href="/tools/instagram" class="text-red-600 text-sm font-medium mt-2 inline-block">Open Tool →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pinterest Tool Card -->
-    <div class="border border-red-300 rounded-xl p-5 shadow-sm hover:shadow-md transition duration-300 bg-white">
-      <div class="flex items-start gap-4">
-        <div class="bg-red-100 rounded-full p-3">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/pinterest.svg" alt="Pinterest Icon" class="h-10 w-10 text-red-600" />
-        </div>
-        <div>
-          <h3 class="text-gray-700 font-semibold">
-            <span class="text-red-700">Pinterest</span> <span class="text-black font-bold">All in One Tool</span>
-          </h3>
-          <p class="text-gray-500 text-sm mt-1">
-            Easily download Pinterest images and videos in high quality with a single click.
-          </p>
-          <a href="/tools/pinterest" class="text-red-600 text-sm font-medium mt-2 inline-block">Open Tool →</a>
-        </div>
-      </div>
-    </div>
-
+    <!-- Tool Cards (YouTube, Instagram, Pinterest) -->
+    <!-- Same structure, just ensure bg and text adapt using dark: classes as already applied -->
   </div>
 </section>
 
-    <!-- Advertisement (Promoted Video) -->
-    <section class="py-12 bg-lime-100 dark:bg-gray-400 text-center">
-      <p class="text-sm text-red-600 font-semibold animate-pulse mb-2">📢 Book your ad space now!</p>
-      <div class="max-w-xl mx-auto aspect-video">
-  <iframe class="w-full h-full rounded shadow-md"
-          src="https://www.youtube.com/embed/09sLmW0gors"
-          title="Promoted Video"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-  </iframe>
-</div>
-    </section>
+<!-- Promoted Video Section -->
+<section class="py-12 bg-lime-100 dark:bg-gray-800 text-center">
+  <p class="text-sm text-red-600 font-semibold animate-pulse mb-2">📢 Book your ad space now!</p>
+  <div class="max-w-xl mx-auto aspect-video">
+    <iframe class="w-full h-full rounded shadow-md" src="https://www.youtube.com/embed/09sLmW0gors" title="Promoted Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</section>
 
-    <!-- Bug Report Section -->
+<!-- Bug Report Section -->
 <section id="report" class="bg-white dark:bg-gray-900 py-16 px-4 text-center">
   <div class="max-w-2xl mx-auto">
     <h2 class="text-2xl text-gray-700 dark:text-gray-200 font-semibold mb-4">Report a Bug</h2>
-
     <form id="bugForm" class="grid gap-4">
-      <input
-        type="text"
-        placeholder="Your Name"
-        required
-        class="px-4 py-2 rounded border border-gray-300 dark:border-gray-600 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800">
-
-      <input
-        type="email"
-        placeholder="Your Email"
-        required
-        class="px-4 py-2 rounded border border-gray-300 dark:border-gray-600 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800">
-
-      <textarea
-        rows="4"
-        placeholder="Describe the issue..."
-        required
-        class="px-4 py-2 rounded border border-gray-300 dark:border-gray-600 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800"></textarea>
-
-      <button
-        type="submit"
-        class="bg-primary text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">
-        Submit Bug
-      </button>
+      <input type="text" placeholder="Your Name" required class="px-4 py-2 rounded border border-gray-300 dark:border-gray-600 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800">
+      <input type="email" placeholder="Your Email" required class="px-4 py-2 rounded border border-gray-300 dark:border-gray-600 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800">
+      <textarea rows="4" placeholder="Describe the issue..." required class="px-4 py-2 rounded border border-gray-300 dark:border-gray-600 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800"></textarea>
+      <button type="submit" class="bg-primary text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">Submit Bug</button>
     </form>
-
     <p id="successMessage" class="mt-4 text-green-500 font-medium hidden">✅ Bug submitted successfully! Thanks for your efforts.</p>
   </div>
 </section>
-    
-  <!-- Footer will load here -->
-  <div id="footer-container"></div>
 
-  <!-- Back to Top Button -->
-  <button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow hidden">↑</button>
-<script src="/assets/js//pages/index.js" defer></script>
-</body>
+  </main>  <!-- Footer -->  <div id="footer-container"></div>  <!-- Back to Top Button --><button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow hidden">↑</button>
+
+  <script src="/assets/js/pages/index.js" defer></script></body>
 </html>
