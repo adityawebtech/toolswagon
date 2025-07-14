@@ -45,7 +45,7 @@
 <body class="bg-white dark:bg-black text-black dark:text-white font-inter">
 
   <!-- Header will load here -->
-  <div id="header-placeholder"></div>
+  <div id="header-container"></div>
 
   <!-- Main Content -->
   <main class="min-h-screen">
@@ -104,29 +104,9 @@
   </main>
 
   <!-- Footer will load here -->
-  <div id="footer-placeholder"></div>
+  <div id="footer-container"></div>
 
   <!-- Back to Top Button -->
   <button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow hidden">↑</button>
-
-  <!-- Scripts -->
-  <script>
-    // Bug Report Form
-    document.getElementById('bugForm')?.addEventListener('submit', function (e) {
-      e.preventDefault();
-      document.getElementById('successMessage').classList.remove('hidden');
-      this.reset();
-    });
-
-    // Back to Top Button
-    const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) backToTop.classList.remove('hidden');
-      else backToTop.classList.add('hidden');
-    });
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  </script>
 </body>
 </html>
