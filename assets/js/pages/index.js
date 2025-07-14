@@ -1,32 +1,28 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const typingElement = document.getElementById("typing-text");
-  const words = [" YouTube ", " Instagram ", " Pinterest "];
-  let wordIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
+document.addEventListener('DOMContentLoaded', () => {
+  const words = ['YouTube', 'Instagram', 'Pinterest'];
+  let currentWord = 0;
+  let currentChar = 0;
+  const typingText = document.getElementById('typing-text');
+  const cursor = document.getElementById('cursor');
 
   function type() {
-    const currentWord = words[wordIndex];
-    const visibleText = currentWord.substring(0, charIndex);
-    typingElement.textContent = visibleText;
+    if (!typingText) return;
 
-    if (!isDeleting) {
-      if (charIndex < currentWord.length) {
-        charIndex++;
-        setTimeout(type, 120);
-      } else {
-        isDeleting = true;
-        setTimeout(type, 1000);
-      }
+    if (currentChar <= words[currentWord].length) {
+      typingText.textContent = words[currentWord].slice(0, currentChar++);
+      setTimeout(type, 100);
     } else {
-      if (charIndex > 0) {
-        charIndex--;
-        setTimeout(type, 60);
-      } else {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        setTimeout(type, 300);
-      }
+      setTimeout(erase, 1200);
+    }
+  }
+
+  function erase() {
+    if (currentChar >= 0) {
+      typingText.textContent = words[currentWord].slice(0, currentChar--);
+      setTimeout(erase, 50);
+    } else {
+      currentWord = (currentWord + 1) % words.length;
+      setTimeout(type, 300);
     }
   }
 
