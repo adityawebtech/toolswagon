@@ -1,25 +1,27 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="title" content="Tools Wagon - Access YouTube, Pinterest & Instagram Easily">
-  <meta name="description" content="To download shorts, reels videos, thumbnail, extract and generate tags or keywords you can simply do it with ToolsWagon. ">
+  <meta name="description" content="To download shorts, reels videos, thumbnail, extract and generate tags or keywords you can simply do it with ToolsWagon.">
   <meta name="keywords" content="youtube downloader, instagram downloader, pinterest downloader">
   <meta name="robots" content="index, follow">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="language" content="English">
   <meta name="author" content="Aditya Pal">
-  <link rel="preload" as="image" href="/assets/images/favicon-32x32.png" type="image/png">
+  
+  <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
-  <link rel="manifest" href="/assets/images/site.webmanifest" crossorigin="use-credentials">
+  <link rel="manifest" href="/assets/images/site.webmanifest">
   <link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#2563eb">
-  <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="theme-color" content="#ffffff">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ToolsWagon - Free Online Tools</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  
+  <title>ToolsWagon - Ultimate Social Toolkit</title>
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -30,168 +32,101 @@
             inter: ['Inter', 'sans-serif']
           },
           colors: {
-            primary: '#DC2626',
-            black: '#000000',
-            white: '#ffffff'
-          },
-          transitionProperty: {
-            'height': 'height'
+            primary: '#DC2626'
           }
         }
       }
     };
   </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHNQLH6PNG"></script>
+
+  <!-- Header & Footer Loader -->
+  <script defer src="/assets/js/header.js"></script>
+</head>
+<body class="bg-white dark:bg-black text-black dark:text-white font-inter">
+
+  <!-- Header will load here -->
+  <div id="header-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="min-h-screen">
+    <!-- Hero -->
+    <section class="bg-gradient-to-r from-red-600 to-red-500 text-white text-center py-20 px-4">
+      <h1 class="text-4xl font-bold">Welcome to ToolsWagon</h1>
+      <p class="text-xl mt-2">All-in-one downloader tools for YouTube, Instagram, Pinterest</p>
+      <a href="#tools" class="mt-6 inline-block bg-black text-white py-2 px-6 rounded">Explore Tools</a>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="py-16 px-4 max-w-6xl mx-auto">
+      <h2 class="text-3xl font-semibold text-center mb-10">Popular Tools</h2>
+      <div class="grid gap-8 md:grid-cols-3">
+        <div class="p-6 bg-white dark:bg-gray-800 rounded shadow text-center">
+          <h3 class="text-2xl font-semibold">Instagram Tools</h3>
+          <p class="mt-2">Download reels, stories, IGTV and more.</p>
+          <a href="/tools/instagram" class="mt-4 inline-block text-primary hover:underline">Open Tool →</a>
+        </div>
+        <div class="p-6 bg-white dark:bg-gray-800 rounded shadow text-center">
+          <h3 class="text-2xl font-semibold">Pinterest Tools</h3>
+          <p class="mt-2">Download pins, boards, and images.</p>
+          <a href="/tools/pinterest" class="mt-4 inline-block text-primary hover:underline">Open Tool →</a>
+        </div>
+        <div class="p-6 bg-white dark:bg-gray-800 rounded shadow text-center">
+          <h3 class="text-2xl font-semibold">YouTube Tools</h3>
+          <p class="mt-2">Download videos, thumbnails, tags.</p>
+          <a href="/tools/youtube" class="mt-4 inline-block text-primary hover:underline">Open Tool →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Advertisement (Promoted Video) -->
+    <section class="py-12 bg-gray-100 dark:bg-gray-900 text-center">
+      <p class="text-sm text-red-600 font-semibold animate-pulse mb-2">📢 Book your ad space now!</p>
+      <div class="max-w-xl mx-auto aspect-video">
+        <iframe class="w-full h-full rounded shadow-md"
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="Promoted Video" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Bug Report -->
+    <section id="report" class="bg-white dark:bg-gray-800 py-16 px-4 text-center">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-semibold mb-4">Report a Bug</h2>
+        <form id="bugForm" class="grid gap-4">
+          <input type="text" placeholder="Your Name" required class="px-4 py-2 rounded border dark:bg-gray-700 dark:border-gray-600">
+          <input type="email" placeholder="Your Email" required class="px-4 py-2 rounded border dark:bg-gray-700 dark:border-gray-600">
+          <textarea rows="4" placeholder="Describe the issue..." required class="px-4 py-2 rounded border dark:bg-gray-700 dark:border-gray-600"></textarea>
+          <button type="submit" class="bg-primary text-white py-2 px-4 rounded hover:bg-red-700">Submit Bug</button>
+        </form>
+        <p id="successMessage" class="mt-4 text-green-500 font-medium hidden">✅ Bug submitted successfully!</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer will load here -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow hidden">↑</button>
+
+  <!-- Scripts -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-ZHNQLH6PNG');
-  </script>
-  <script type="text/javascript">
-    (function (d, t) {
-      var g = d.createElement(t),
-        s = d.getElementsByTagName(t)[0];
-      g.src = "https://cdn.pushalert.co/integrate_aa5185f5440830a483ba994933449000.js";
-      s.parentNode.insertBefore(g, s);
-    }(document, "script"));
-  </script>
-</head><body class="font-inter bg-white text-black dark:bg-black dark:text-white min-h-screen flex flex-col">
-  <!-- Header -->
-  <header class="bg-white dark:bg-black shadow sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-      <a href="/" class="text-2xl font-bold text-primary">ToolsWagon</a><!-- Hamburger Button -->
-  <button id="menuToggle" class="md:hidden text-2xl focus:outline-none">☰</button>
-
-  <!-- Desktop Nav -->
-  <nav class="hidden md:flex gap-6">
-    <a href="#trending" class="hover:text-primary">Trending</a>
-    <a href="#tools" class="hover:text-primary">Tools</a>
-    <a href="#report" class="hover:text-primary">Report Bug</a>
-    <a href="#footer" class="hover:text-primary">Contact</a>
-  </nav>
-
-  <div class="hidden md:flex items-center gap-4">
-    <input type="text" placeholder="Search tools..." class="px-3 py-1 rounded border dark:bg-gray-700 dark:border-gray-600">
-    <button id="darkModeToggle" class="text-xl">🌙</button>
-  </div>
-</div>
-
-<!-- Mobile Nav -->
-<div id="mobileMenu" class="md:hidden hidden px-4 pb-4 space-y-2 bg-white dark:bg-black transition-height duration-300">
-  <a href="#trending" class="block hover:text-primary">Trending</a>
-  <a href="#tools" class="block hover:text-primary">Tools</a>
-  <a href="#report" class="block hover:text-primary">Report Bug</a>
-  <a href="#footer" class="block hover:text-primary">Contact</a>
-  <div class="flex gap-2 pt-2">
-    <input type="text" placeholder="Search tools..." class="w-full px-3 py-1 rounded border dark:bg-gray-700 dark:border-gray-600">
-    <button id="mobileDarkModeToggle" class="text-xl">🌙</button>
-  </div>
-</div>
-
-  </header>  <!-- Introduction -->  <section class="py-12 px-4 max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl font-semibold mb-4">Welcome to ToolsWagon</h2>
-    <p class="text-lg text-gray-600 dark:text-gray-300">[Dummy text for ToolsWagon introduction]</p>
-  </section>  <!-- Trending Tools -->  <section id="trending" class="bg-gray-50 dark:bg-gray-800 py-12 px-4 text-center">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl font-semibold mb-4">Trending Tools</h2>
-      <p class="mb-6">Check out the most popular tools of this week.</p>
-    </div>
-  </section>  <!-- Tool Categories -->  <section id="tools" class="py-12 px-4 max-w-6xl mx-auto text-center">
-    <h2 class="text-2xl font-semibold mb-6">Explore Tool Categories</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white dark:bg-gray-700 shadow-xl rounded-lg p-6 text-center">
-        <img src="/assets/images/instagram.png" alt="Instagram Tools" class="w-20 mx-auto mb-4">
-        <h3 class="text-xl font-semibold mb-2">Instagram Tools</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Access various Instagram-related tools here.</p>
-        <a href="/tools/instagram" class="inline-block px-4 py-2 bg-primary text-white rounded hover:bg-red-700">Open Tool</a>
-      </div>
-      <div class="bg-white dark:bg-gray-700 shadow-xl rounded-lg p-6 text-center">
-        <img src="/assets/images/pinterest.png" alt="Pinterest Tools" class="w-20 mx-auto mb-4">
-        <h3 class="text-xl font-semibold mb-2">Pinterest Tools</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Explore all Pinterest utilities and tools here.</p>
-        <a href="/tools/pinterest" class="inline-block px-4 py-2 bg-primary text-white rounded hover:bg-red-700">Open Tool</a>
-      </div>
-      <div class="bg-white dark:bg-gray-700 shadow-xl rounded-lg p-6 text-center">
-        <img src="/assets/images/youtube.png" alt="YouTube Tools" class="w-20 mx-auto mb-4">
-        <h3 class="text-xl font-semibold mb-2">YouTube Tools</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Find helpful tools for YouTube creators here.</p>
-        <a href="/tools/youtube" class="inline-block px-4 py-2 bg-primary text-white rounded hover:bg-red-700">Open Tool</a>
-      </div>
-    </div>
-  </section>  <!-- Why ToolsWagon -->  <section class="bg-gray-100 dark:bg-gray-900 py-12 px-4 text-center">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl font-semibold mb-4">Why Use ToolsWagon.site?</h2>
-      <p class="text-lg text-gray-600 dark:text-gray-300">[Dummy text explaining why to use ToolsWagon]</p>
-    </div>
-  </section>  <!-- Promoted Videos / Ads -->  <section class="py-12 px-4 text-center">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl font-semibold mb-4">Promoted Videos</h2>
-      <div class="text-red-600 font-semibold mb-2 animate-pulse">📢 Book your ads space now!</div>
-      <div class="grid md:grid-cols-3 gap-4">
-        <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-        <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/3JZ_D3ELwOQ" frameborder="0" allowfullscreen></iframe>
-        <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-  </section>  <!-- Report a Bug -->  <section id="report" class="bg-gray-50 dark:bg-gray-800 py-12 px-4 text-center">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-semibold mb-4">Report A Bug</h2>
-      <form id="bugForm" class="grid grid-cols-1 gap-4">
-        <input type="text" placeholder="Your Name" class="px-4 py-2 rounded border dark:bg-gray-700 dark:border-gray-600" required>
-        <input type="email" placeholder="Your Email" class="px-4 py-2 rounded border dark:bg-gray-700 dark:border-gray-600" required>
-        <textarea rows="4" placeholder="Describe the bug..." class="px-4 py-2 rounded border dark:bg-gray-700 dark:border-gray-600" required></textarea>
-        <button type="submit" class="bg-primary text-white py-2 rounded hover:bg-red-700">Submit Bug</button>
-      </form>
-      <p id="successMessage" class="mt-4 text-green-600 font-medium hidden">✅ Bug report submitted successfully!</p>
-    </div>
-  </section>  <!-- Footer -->  <footer id="footer" class="bg-black text-white py-8 px-4 mt-auto">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div>
-        <h4 class="font-semibold mb-2">ToolsWagon.site</h4>
-        <p class="text-sm">© 2025 ToolsWagon. All rights reserved.</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Important Links</h4>
-        <ul class="text-sm space-y-1">
-          <li><a href="#" class="hover:underline">Privacy Policy</a></li>
-          <li><a href="#" class="hover:underline">Terms of Use</a></li>
-          <li><a href="#report" class="hover:underline">Report Bug</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Contact</h4>
-        <p class="text-sm">Email: support@toolswagon.site</p>
-      </div>
-    </div>
-  </footer>  <!-- Back to Top Button --><button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow-lg hidden">↑</button>
-
-  <script>
-    const toggle = document.getElementById('darkModeToggle');
-    const mobileToggle = document.getElementById('mobileDarkModeToggle');
-    toggle?.addEventListener('click', () => document.documentElement.classList.toggle('dark'));
-    mobileToggle?.addEventListener('click', () => document.documentElement.classList.toggle('dark'));
-
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuToggle?.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-      mobileMenu.classList.toggle('block');
-    });
-
+    // Bug Report Form
     document.getElementById('bugForm')?.addEventListener('submit', function (e) {
       e.preventDefault();
       document.getElementById('successMessage').classList.remove('hidden');
       this.reset();
     });
 
+    // Back to Top Button
     const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 300) backToTop.classList.remove('hidden');
       else backToTop.classList.add('hidden');
     });
-    backToTop?.addEventListener('click', () => {
+    backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-  </script></body>
+  </script>
+</body>
 </html>
