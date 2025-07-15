@@ -87,46 +87,46 @@
   <script defer src="/assets/js/script.js"></script>
 
   <script>
-    const API_KEY = "AIzaSyAQLv4HGaSRTCD3FfY2PoycEsjrNzFE0mc"; // Replace with your actual key
+  const BACKEND_URL = "https://d7f350b3-7970-449f-9a2a-badf66ee7242-00-3w438rsq4qzx.pike.replit.dev/meta";
 
-    document.getElementById('metaForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const input = document.getElementById('metaInput').value.trim();
-      const videoId = extractVideoId(input);
-      if (!videoId) return alert("Invalid YouTube URL");
+  document.getElementById('metaForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const input = document.getElementById('metaInput').value.trim();
+    const videoId = extractVideoId(input);
+    if (!videoId) return alert("Invalid YouTube URL");
 
-      const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}`);
+    try {
+      const res = await fetch(`${BACKEND_URL}?videoId=${videoId}`);
       const data = await res.json();
-      if (!data.items || !data.items.length) return alert("No metadata found.");
 
-      const video = data.items[0].snippet;
-      document.getElementById('videoThumb').src = video.thumbnails.medium.url;
-      document.getElementById('videoTitle').textContent = video.title;
-      document.getElementById('videoDesc').textContent = video.description;
-      document.getElementById('videoDate').textContent = new Date(video.publishedAt).toLocaleString();
-      getCategory(video.categoryId);
+      if (!data || !data.title) return alert("No metadata found.");
+
+      // Fill metadata
+      document.getElementById('videoThumb').src = data.thumbnail;
+      document.getElementById('videoTitle').textContent = data.title;
+      document.getElementById('videoDesc').textContent = data.description;
+      document.getElementById('videoDate').textContent = data.publishedAt;
+      document.getElementById('videoCategory').textContent = data.category || 'Unknown';
 
       document.getElementById('metaResults').classList.remove('hidden');
       document.getElementById('metaResults').scrollIntoView({ behavior: 'smooth' });
-    });
 
-    function extractVideoId(url) {
-      const regex = /(?:v=|\/)([0-9A-Za-z_-]{11})/;
-      const match = url.match(regex);
-      return match ? match[1] : null;
+    } catch (err) {
+      console.error("Error fetching metadata:", err);
+      alert("Something went wrong while fetching data.");
     }
+  });
 
-    async function getCategory(id) {
-      const res = await fetch(`https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=IN&key=${API_KEY}`);
-      const data = await res.json();
-      const category = data.items.find(cat => cat.id === id);
-      document.getElementById('videoCategory').textContent = category ? category.snippet.title : 'Unknown';
-    }
+  function extractVideoId(url) {
+    const regex = /(?:v=|\/)([0-9A-Za-z_-]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+  }
 
-    function copyText(id) {
-      const text = document.getElementById(id).textContent;
-      navigator.clipboard.writeText(text);
-    }
-  </script>
+  function copyText(id) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text);
+  }
+</script>
 </body>
 </html>
