@@ -19,7 +19,6 @@
   <section class="py-16 px-4 text-center bg-white dark:bg-gray-900">
     <div class="max-w-3xl mx-auto">
       <div class="mx-auto mb-6 w-20 h-20 rounded-full bg-red-100 flex items-center justify-center">
-        <!-- Meta icon -->
         <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
           <path d="M4.5 12.75l6-6 3 3 6-6M3 21h18M4.5 18.75L12 11.25l3 3 6-6"/>
         </svg>
@@ -41,14 +40,6 @@
       <div>
         <img id="videoThumb" src="" alt="Video Thumbnail" class="rounded shadow w-full max-w-md mx-auto">
       </div>
-
-      <!-- Channel, Views, Likes -->
-      <div class="flex justify-between text-sm text-gray-700 dark:text-gray-300 px-2">
-        <p><strong>Channel:</strong> <span id="channelName">-</span></p>
-        <p><strong>Views:</strong> <span id="viewCount">-</span></p>
-        <p><strong>Likes:</strong> <span id="likeCount">-</span></p>
-      </div>
-
       <div>
         <h2 class="text-xl font-bold text-red-600 mb-2">Title</h2>
         <div class="flex items-start gap-2">
@@ -56,7 +47,6 @@
           <button onclick="copyText('videoTitle')" class="text-sm text-red-600 border px-2 py-1 rounded">Copy</button>
         </div>
       </div>
-
       <div>
         <h2 class="text-xl font-bold text-red-600 mb-2">Description</h2>
         <div class="flex items-start gap-2">
@@ -64,12 +54,10 @@
           <button onclick="copyText('videoDesc')" class="text-sm text-red-600 border px-2 py-1 rounded">Copy</button>
         </div>
       </div>
-
       <div>
         <h2 class="text-xl font-bold text-red-600 mb-2">Uploaded Date & Time</h2>
         <p id="videoDate" class="text-gray-700 dark:text-gray-300"></p>
       </div>
-
       <div>
         <h2 class="text-xl font-bold text-red-600 mb-2">Category</h2>
         <p id="videoCategory" class="text-gray-700 dark:text-gray-300"></p>
@@ -95,6 +83,8 @@
   <button id="backToTop" class="fixed bottom-6 right-6 bg-red-600 text-white p-3 rounded-full shadow hidden">↑</button>
 
   <!-- Script -->
+  <script defer src="/assets/js/script.js"></script>
+
   <script>
     const BACKEND_URL = "https://yt-meta-backend.onrender.com";
 
@@ -113,17 +103,11 @@
           return;
         }
 
-        // Display data
         document.getElementById('videoThumb').src = data.thumbnail;
         document.getElementById('videoTitle').textContent = data.title;
         document.getElementById('videoDesc').textContent = data.description;
         document.getElementById('videoDate').textContent = new Date(data.publishedAt).toLocaleString();
-        document.getElementById('videoCategory').textContent = data.categoryId;
-
-        // Extra fields
-        document.getElementById('channelName').textContent = data.channelTitle || "-";
-        document.getElementById('viewCount').textContent = formatNumber(data.viewCount) + " views";
-        document.getElementById('likeCount').textContent = formatNumber(data.likeCount) + " likes";
+        document.getElementById('videoCategory').textContent = data.categoryId || "N/A";
 
         document.getElementById('metaResults').classList.remove('hidden');
         document.getElementById('metaResults').scrollIntoView({ behavior: 'smooth' });
@@ -142,12 +126,9 @@
 
     function copyText(id) {
       const text = document.getElementById(id).textContent;
-      navigator.clipboard.writeText(text);
-    }
-
-    function formatNumber(num) {
-      if (!num) return "0";
-      return Number(num).toLocaleString();
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Copied!');
+      });
     }
   </script>
 </body>
