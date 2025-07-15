@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
-};
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,23 +17,33 @@ app.get('/api/meta', async (req, res) => {
 
   try {
     const { data } = await axios.get(
-      `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${process.env.YOUTUBE_API_KEY}`
+      `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${process.env.YOUTUBE_API_KEY}`
     );
 
-    if (!data.items || !data.items.length)
+    if (!data.items || !data.items.length) {
       return res.status(404).json({ error: 'Video not found' });
+    }
 
-    const info = data.items[0].snippet;
+    const video = data.items[0];
+    const snippet = video.snippet;
+    const stats = video.statistics;
 
     res.json({
-      thumbnail: info.thumbnails.medium.url,
-      title: info.title,
-      description: info.description,
-      publishedAt: info.publishedAt,
-      categoryId: info.categoryId
+      thumbnail: snippet.thumbnails.medium.url,
+      title: snippet.title,
+      description: snippet.description,
+      publishedAt: snippet.publishedAt,
+      categoryId: snippet.categoryId,
+      channelTitle: snippet.channelTitle,
+      viewCount: stats.viewCount,
+      likeCount: stats.likeCount || '0'
     });
+
   } catch (err) {
-    res.status(500).json({ error: 'Something went wrong', details: err.message });
+    res.status(500).json({
+      error: 'Something went wrong',
+      details: err.response?.data?.error?.message || err.message
+    });
   }
 });
 
