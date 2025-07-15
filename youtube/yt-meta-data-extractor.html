@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>YouTube Meta Data Extractor | Toolswagon</title>
-  <meta name="description" content="Extract thumbnail, title, description, upload date, and category from any YouTube video URL instantly." />
+  <meta name="description" content="Extract thumbnail, title, description, upload date, views, likes, channel name and more from any YouTube video URL instantly." />
   <link rel="stylesheet" href="/assets/css/style.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>body { font-family: 'Poppins', sans-serif; }</style>
 </head>
 <body class="bg-white text-black dark:bg-gray-900 dark:text-white">
-  
+
   <!-- Header -->
   <div id="header-container"></div>
 
@@ -19,7 +19,6 @@
   <section class="py-16 px-4 text-center bg-white dark:bg-gray-900">
     <div class="max-w-3xl mx-auto">
       <div class="mx-auto mb-6 w-20 h-20 rounded-full bg-red-100 flex items-center justify-center">
-        <!-- Meta icon -->
         <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
           <path d="M4.5 12.75l6-6 3 3 6-6M3 21h18M4.5 18.75L12 11.25l3 3 6-6"/>
         </svg>
@@ -38,9 +37,20 @@
   <!-- Results -->
   <section id="metaResults" class="py-12 px-4 hidden bg-white dark:bg-gray-900">
     <div class="max-w-3xl mx-auto space-y-6 text-left">
+
+      <!-- Stats -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-red-50 dark:bg-gray-800 px-4 py-4 rounded shadow">
+        <p><strong>Channel:</strong> <span id="channelTitle" class="text-gray-800 dark:text-white"></span></p>
+        <p><strong>Views:</strong> <span id="viewCount" class="text-gray-800 dark:text-white"></span></p>
+        <p><strong>Likes:</strong> <span id="likeCount" class="text-gray-800 dark:text-white"></span></p>
+      </div>
+
+      <!-- Thumbnail -->
       <div>
         <img id="videoThumb" src="" alt="Video Thumbnail" class="rounded shadow w-full max-w-md mx-auto">
       </div>
+
+      <!-- Title -->
       <div>
         <h2 class="text-xl font-bold text-red-600 mb-2">Title</h2>
         <div class="flex items-start gap-2">
@@ -48,6 +58,8 @@
           <button onclick="copyText('videoTitle')" class="text-sm text-red-600 border px-2 py-1 rounded">Copy</button>
         </div>
       </div>
+
+      <!-- Description -->
       <div>
         <h2 class="text-xl font-bold text-red-600 mb-2">Description</h2>
         <div class="flex items-start gap-2">
@@ -55,14 +67,19 @@
           <button onclick="copyText('videoDesc')" class="text-sm text-red-600 border px-2 py-1 rounded">Copy</button>
         </div>
       </div>
+
+      <!-- Published Date -->
       <div>
         <h2 class="text-xl font-bold text-red-600 mb-2">Uploaded Date & Time</h2>
         <p id="videoDate" class="text-gray-700 dark:text-gray-300"></p>
       </div>
+
+      <!-- Category -->
       <div>
         <h2 class="text-xl font-bold text-red-600 mb-2">Category</h2>
         <p id="videoCategory" class="text-gray-700 dark:text-gray-300"></p>
       </div>
+
     </div>
   </section>
 
@@ -87,43 +104,74 @@
   <script defer src="/assets/js/script.js"></script>
 
   <script>
-  const BACKEND_URL = "https://yt-meta-backend.onrender.com";
+    const BACKEND_URL = "https://yt-meta-backend.onrender.com";
 
-document.getElementById('metaForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const input = document.getElementById('metaInput').value.trim();
-  const videoId = extractVideoId(input);
-  if (!videoId) return alert("Invalid YouTube URL");
+    document.getElementById('metaForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('metaInput').value.trim();
+      const videoId = extractVideoId(input);
+      if (!videoId) return alert("Invalid YouTube URL");
 
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/meta?videoId=${videoId}`);
-    const data = await res.json();
+      try {
+        const res = await fetch(`${BACKEND_URL}/api/meta?videoId=${videoId}`);
+        const data = await res.json();
 
-    if (data.error) {
-      alert(data.error);
-      return;
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+
+        document.getElementById('videoThumb').src = data.thumbnail;
+        document.getElementById('videoTitle').textContent = data.title;
+        document.getElementById('videoDesc').textContent = data.description;
+        document.getElementById('videoDate').textContent = new Date(data.publishedAt).toLocaleString();
+        document.getElementById('videoCategory').textContent = getCategoryName(data.categoryId);
+
+        // New Fields
+        document.getElementById('channelTitle').textContent = data.channelTitle || 'N/A';
+        document.getElementById('viewCount').textContent = data.viewCount || '0';
+        document.getElementById('likeCount').textContent = data.likeCount || '0';
+
+        document.getElementById('metaResults').classList.remove('hidden');
+        document.getElementById('metaResults').scrollIntoView({ behavior: 'smooth' });
+
+      } catch (err) {
+        console.error(err);
+        alert("Something went wrong. Please try again later.");
+      }
+    });
+
+    function extractVideoId(url) {
+      const regex = /(?:v=|\/)([0-9A-Za-z_-]{11})/;
+      const match = url.match(regex);
+      return match ? match[1] : null;
     }
 
-    document.getElementById('videoThumb').src = data.thumbnail;
-    document.getElementById('videoTitle').textContent = data.title;
-    document.getElementById('videoDesc').textContent = data.description;
-    document.getElementById('videoDate').textContent = new Date(data.publishedAt).toLocaleString();
-    document.getElementById('videoCategory').textContent = data.categoryId;
+    function copyText(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => alert("Copied!"));
+    }
 
-    document.getElementById('metaResults').classList.remove('hidden');
-    document.getElementById('metaResults').scrollIntoView({ behavior: 'smooth' });
+    function getCategoryName(id) {
+      const map = {
+        "1": "Film & Animation",
+        "2": "Autos & Vehicles",
+        "10": "Music",
+        "15": "Pets & Animals",
+        "17": "Sports",
+        "19": "Travel & Events",
+        "20": "Gaming",
+        "22": "People & Blogs",
+        "23": "Comedy",
+        "24": "Entertainment",
+        "25": "News & Politics",
+        "26": "Howto & Style",
+        "27": "Education",
+        "28": "Science & Technology",
+      };
+      return map[id] || `Category ID: ${id}`;
+    }
+  </script>
 
-  } catch (err) {
-    console.error(err);
-    alert("Something went wrong. Please try again later.");
-  }
-});
-
-function extractVideoId(url) {
-  const regex = /(?:v=|\/)([0-9A-Za-z_-]{11})/;
-  const match = url.match(regex);
-  return match ? match[1] : null;
-}
-</script>
 </body>
 </html>
