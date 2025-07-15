@@ -87,33 +87,39 @@
   <script defer src="/assets/js/script.js"></script>
 
   <script>
-  const BACKEND_URL = "https://d7f350b3-7970-449f-9a2a-badf66ee7242-00-3w438rsq4qzx.pike.replit.dev/meta";
+  const BACKEND_URL = "https://yt-meta-backend.onrender.com"; // ✅ Replace with your actual Render backend URL
 
   document.getElementById('metaForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const input = document.getElementById('metaInput').value.trim();
     const videoId = extractVideoId(input);
-    if (!videoId) return alert("Invalid YouTube URL");
+
+    if (!videoId) {
+      alert("Invalid YouTube URL");
+      return;
+    }
 
     try {
-      const res = await fetch(`${BACKEND_URL}?videoId=${videoId}`);
+      const res = await fetch(`${BACKEND_URL}/api/meta?videoId=${videoId}`);
       const data = await res.json();
 
-      if (!data || !data.title) return alert("No metadata found.");
+      if (data.error) {
+        alert("❌ " + data.error);
+        return;
+      }
 
-      // Fill metadata
       document.getElementById('videoThumb').src = data.thumbnail;
       document.getElementById('videoTitle').textContent = data.title;
       document.getElementById('videoDesc').textContent = data.description;
       document.getElementById('videoDate').textContent = data.publishedAt;
-      document.getElementById('videoCategory').textContent = data.category || 'Unknown';
+      document.getElementById('videoCategory').textContent = data.category;
 
       document.getElementById('metaResults').classList.remove('hidden');
       document.getElementById('metaResults').scrollIntoView({ behavior: 'smooth' });
 
     } catch (err) {
-      console.error("Error fetching metadata:", err);
-      alert("Something went wrong while fetching data.");
+      alert("Something went wrong. Please try again.");
+      console.error(err);
     }
   });
 
@@ -125,7 +131,9 @@
 
   function copyText(id) {
     const text = document.getElementById(id).textContent;
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(text).then(() => {
+      alert("Copied to clipboard!");
+    });
   }
 </script>
 </body>
