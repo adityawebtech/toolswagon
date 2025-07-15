@@ -23,26 +23,52 @@
         <button id="generateBtn" class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">Generate Thumbnails</button>
       </div>
     </div>
-  </section>  <!-- Thumbnail Results -->  <section id="thumbnailResults" class="py-16 px-4 hidden">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl font-semibold text-center mb-10">Available Thumbnails</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Sample result card -->
-        <div class="bg-white dark:bg-gray-800 rounded shadow p-4">
-          <img id="thumbDefault" src="" alt="Default Thumbnail" class="rounded w-full">
-          <a id="downloadDefault" href="#" download class="block mt-4 bg-red-600 text-white text-center py-2 rounded hover:bg-red-700">Download Default</a>
-        </div>
-        <div class="bg-white dark:bg-gray-800 rounded shadow p-4">
-          <img id="thumbMedium" src="" alt="Medium Thumbnail" class="rounded w-full">
-          <a id="downloadMedium" href="#" download class="block mt-4 bg-red-600 text-white text-center py-2 rounded hover:bg-red-700">Download Medium</a>
-        </div>
-        <div class="bg-white dark:bg-gray-800 rounded shadow p-4">
-          <img id="thumbHigh" src="" alt="High Thumbnail" class="rounded w-full">
-          <a id="downloadHigh" href="#" download class="block mt-4 bg-red-600 text-white text-center py-2 rounded hover:bg-red-700">Download High</a>
-        </div>
+  </section>  
+  
+  <!-- Thumbnail Results -->
+<section id="thumbnail-results" class="py-10 px-4 hidden bg-white dark:bg-gray-900">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-2xl font-semibold text-center text-red-600 mb-8">Generated Thumbnails</h2>
+
+    <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      <!-- Template for Each Resolution -->
+      <div class="text-center" id="thumb-default">
+        <img src="" alt="Default Thumbnail" class="rounded shadow-md w-full h-auto mb-2">
+        <a href="#" download class="inline-block bg-red-600 text-white px-4 py-1 rounded">Download Default</a>
+      </div>
+      <div class="text-center" id="thumb-mq">
+        <img src="" alt="Medium Quality" class="rounded shadow-md w-full h-auto mb-2">
+        <a href="#" download class="inline-block bg-red-600 text-white px-4 py-1 rounded">Download MQ</a>
+      </div>
+      <div class="text-center" id="thumb-hq">
+        <img src="" alt="High Quality" class="rounded shadow-md w-full h-auto mb-2">
+        <a href="#" download class="inline-block bg-red-600 text-white px-4 py-1 rounded">Download HQ</a>
+      </div>
+      <div class="text-center" id="thumb-sd">
+        <img src="" alt="Standard Definition" class="rounded shadow-md w-full h-auto mb-2">
+        <a href="#" download class="inline-block bg-red-600 text-white px-4 py-1 rounded">Download SD</a>
+      </div>
+      <div class="text-center" id="thumb-maxres">
+        <img src="" alt="Max Resolution" class="rounded shadow-md w-full h-auto mb-2">
+        <a href="#" download class="inline-block bg-red-600 text-white px-4 py-1 rounded">Download Maxres</a>
+      </div>
+      <div class="text-center" id="thumb-maxres1">
+        <img src="" alt="Maxres 1" class="rounded shadow-md w-full h-auto mb-2">
+        <a href="#" download class="inline-block bg-red-600 text-white px-4 py-1 rounded">Download Maxres 1</a>
+      </div>
+      <div class="text-center" id="thumb-maxres2">
+        <img src="" alt="Maxres 2" class="rounded shadow-md w-full h-auto mb-2">
+        <a href="#" download class="inline-block bg-red-600 text-white px-4 py-1 rounded">Download Maxres 2</a>
+      </div>
+      <div class="text-center" id="thumb-maxres3">
+        <img src="" alt="Maxres 3" class="rounded shadow-md w-full h-auto mb-2">
+        <a href="#" download class="inline-block bg-red-600 text-white px-4 py-1 rounded">Download Maxres 3</a>
       </div>
     </div>
-  </section>  <!-- Info Sections -->  <section class="py-12 px-4 border-t border-gray-300 dark:border-gray-700">
+  </div>
+</section>  
+  
+  <!-- Info Sections -->  <section class="py-12 px-4 border-t border-gray-300 dark:border-gray-700">
     <div class="max-w-4xl mx-auto space-y-10">
       <div><h2 class="text-xl font-bold text-red-600 mb-2">How to use YouTube Thumbnail Downloader?</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
       <div><h2 class="text-xl font-bold text-red-600 mb-2">About tool: Difference between YouTube Thumbnail Grabber & Downloader</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
@@ -53,25 +79,35 @@
     </div>
   </section>  <!-- Footer -->  <div id="footer-container"></div>  <!-- Back to Top Button --><button id="backToTop" class="fixed bottom-6 right-6 bg-red-600 text-white p-3 rounded-full shadow hidden">↑</button>
 
-  <!-- Script -->  <script defer src="/assets/js/script.js"></script>  <script>
-    document.getElementById('generateBtn').addEventListener('click', () => {
-      const url = document.getElementById('youtubeUrl').value.trim();
-      const videoIdMatch = url.match(/(?:v=|\.be\/|embed\/)([\w-]{11})/);
-      if (!videoIdMatch) return alert("Invalid YouTube URL");
-      const id = videoIdMatch[1];
+  <!-- Script -->  
+  <script defer src="/assets/js/script.js"></script>  
+  
+  <script>
+    function generateThumbnails(videoId) {
+  const resolutions = [
+    { id: "thumb-default", file: "default.jpg" },
+    { id: "thumb-mq", file: "mqdefault.jpg" },
+    { id: "thumb-hq", file: "hqdefault.jpg" },
+    { id: "thumb-sd", file: "sddefault.jpg" },
+    { id: "thumb-maxres", file: "maxresdefault.jpg" },
+    { id: "thumb-maxres1", file: "maxres1.jpg" },
+    { id: "thumb-maxres2", file: "maxres2.jpg" },
+    { id: "thumb-maxres3", file: "maxres3.jpg" }
+  ];
 
-      const thumbs = {
-        thumbDefault: `https://img.youtube.com/vi/${id}/default.jpg`,
-        thumbMedium: `https://img.youtube.com/vi/${id}/mqdefault.jpg`,
-        thumbHigh: `https://img.youtube.com/vi/${id}/hqdefault.jpg`
-      };
+  resolutions.forEach(({ id, file }) => {
+    const imgUrl = `https://img.youtube.com/vi/${videoId}/${file}`;
+    const imgEl = document.querySelector(`#${id} img`);
+    const linkEl = document.querySelector(`#${id} a`);
 
-      Object.entries(thumbs).forEach(([key, url]) => {
-        document.getElementById(key).src = url;
-        document.getElementById('download' + key.replace('thumb', '')).href = url;
-      });
+    if (imgEl && linkEl) {
+      imgEl.src = imgUrl;
+      linkEl.href = imgUrl;
+    }
+  });
 
-      document.getElementById('thumbnailResults').classList.remove('hidden');
-    });
-  </script></body>
+  document.getElementById("thumbnail-results").classList.remove("hidden");
+}
+  </script>
+</body>
 </html>
