@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors'); // ✅ 1. Import cors
 const dotenv = require('dotenv');
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
@@ -7,6 +8,9 @@ if (process.env.NODE_ENV !== 'production') {
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// ✅ 2. Use cors middleware
+app.use(cors());
 
 // Import Routes
 const metaRoute = require('./routes/meta');
