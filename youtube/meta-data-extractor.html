@@ -36,7 +36,7 @@
 
   <!-- Results -->
   <section id="metaResults" class="py-12 px-4 hidden bg-white dark:bg-gray-900">
-    <div class="max-w-3xl mx-auto space-y-6 text-left">
+  <div class="max-w-3xl mx-auto border border-red-500 rounded-lg p-6 space-y-6 text-left shadow-sm bg-white dark:bg-gray-800">
       <div>
         <img id="videoThumb" src="" alt="Video Thumbnail" class="rounded shadow w-full max-w-md mx-auto">
       </div>
@@ -107,7 +107,7 @@
         document.getElementById('videoTitle').textContent = data.title;
         document.getElementById('videoDesc').textContent = data.description;
         document.getElementById('videoDate').textContent = new Date(data.publishedAt).toLocaleString();
-        document.getElementById('videoCategory').textContent = data.categoryId || "N/A";
+        document.getElementById('videoCategory').textContent = `${data.category || "Unknown"} (ID: ${data.categoryId})`;
 
         document.getElementById('metaResults').classList.remove('hidden');
         document.getElementById('metaResults').scrollIntoView({ behavior: 'smooth' });
