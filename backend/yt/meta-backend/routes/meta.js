@@ -31,6 +31,7 @@ router.get('/meta', async (req, res) => {
     });
 
   } catch (err) {
+    console.error("YouTube API Error:", err.response?.data || err.message);
     console.error(err);
     res.status(500).json({
       error: 'Something went wrong',
