@@ -20,7 +20,7 @@ router.get('/meta', async (req, res) => {
     const stats = video.statistics;
 
     res.json({
-      thumbnail: snippet.thumbnails.medium.url,
+      thumbnail: snippet.thumbnails?.medium?.url,
       title: snippet.title,
       description: snippet.description,
       publishedAt: snippet.publishedAt,
@@ -31,6 +31,7 @@ router.get('/meta', async (req, res) => {
     });
 
   } catch (err) {
+    console.error(err);
     res.status(500).json({
       error: 'Something went wrong',
       details: err.response?.data?.error?.message || err.message
