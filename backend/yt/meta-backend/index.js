@@ -1,6 +1,6 @@
 const express = require('express');
 const axios = require('axios');
-const cors = require('cors'); // ✅ 1. Import cors
+const cors = require('cors');
 const dotenv = require('dotenv');
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
@@ -9,22 +9,25 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ 2. Use cors middleware
+// Middleware
 app.use(cors({
   origin: ['https://toolswagon.site']
 }));
+app.use(express.json()); // required for JSON parsing
 
 // Import Routes
 const metaRoute = require('./routes/meta');
 const channelIdRoute = require('./routes/channelId');
+const earningsRoute = require('./routes/earnings'); // ✅ NEW
 
 // Routes
 app.get('/', (req, res) => {
   res.send('YouTube Tools API is running ✅');
 });
 
-app.use('/api', metaRoute);         // /api/meta
-app.use('/api', channelIdRoute);    // /api/channel-id
+app.use('/api', metaRoute);          // /api/meta
+app.use('/api', channelIdRoute);     // /api/channel-id
+app.use('/api', earningsRoute);      // ✅ /api/earnings
 
 // Start Server
 app.listen(PORT, () => {
