@@ -107,7 +107,7 @@
         document.getElementById('videoTitle').textContent = data.title;
         document.getElementById('videoDesc').textContent = data.description;
         document.getElementById('videoDate').textContent = new Date(data.publishedAt).toLocaleString();
-        document.getElementById('videoCategory').textContent = `${data.category || "Unknown"} (ID: ${data.categoryId})`;
+        document.getElementById('videoCategory').textContent = `Category ID: ${data.categoryId || "Unknown"}`;
 
         document.getElementById('metaResults').classList.remove('hidden');
         document.getElementById('metaResults').scrollIntoView({ behavior: 'smooth' });
