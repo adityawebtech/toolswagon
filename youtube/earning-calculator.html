@@ -89,56 +89,59 @@
   <!-- Script -->
   <script defer src="/assets/js/script.js"></script>
   <script>
-    document.getElementById('earningForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const input = document.getElementById('channelInput').value.trim();
+  const BACKEND_URL = "https://yt-meta-backend.onrender.com";
 
-  try {
-    const idRes = await fetch(`${BACKEND_URL}/api/channel-id?url=${encodeURIComponent(input)}`);
-    const idData = await idRes.json();
-    if (idData.error || !idData.channelId) {
-      alert("Failed to extract channel ID.");
-      return;
-    }
+  document.getElementById('earningForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const input = document.getElementById('channelInput').value.trim();
 
-    const res = await fetch(`${BACKEND_URL}/api/earnings?channelId=${idData.channelId}`);
-    const data = await res.json();
-    if (data.error) {
-      alert(data.error);
-      return;
-    }
-
-    // Monthly/Yearly INR (approx conversion from avg USD)
-    document.getElementById('channelName').textContent = data.channelTitle;
-    document.getElementById('monthlyEarning').textContent = `₹ ${(data.avgEarning * 0.08).toFixed(2)} INR`;
-    document.getElementById('yearlyEarning').textContent = `₹ ${(data.avgEarning * 0.08 * 12).toFixed(2)} INR`;
-
-    // Bar Chart
-    const ctx = document.getElementById('earningsChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Low Estimate', 'Average', 'High Estimate'],
-        datasets: [{
-          label: 'Earnings (USD)',
-          data: [data.estimatedEarningsLow, data.avgEarning, data.estimatedEarningsHigh],
-          backgroundColor: ['#f87171', '#facc15', '#4ade80']
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: { y: { beginAtZero: true } }
+    try {
+      const idRes = await fetch(`${BACKEND_URL}/api/channel-id?url=${encodeURIComponent(input)}`);
+      const idData = await idRes.json();
+      if (idData.error || !idData.channelId) {
+        alert("Failed to extract channel ID.");
+        return;
       }
-    });
 
-    document.getElementById('earningResults').classList.remove('hidden');
-    document.getElementById('earningResults').scrollIntoView({ behavior: 'smooth' });
+      const res = await fetch(`${BACKEND_URL}/api/earnings?channelId=${idData.channelId}`);
+      const data = await res.json();
+      if (data.error) {
+        alert(data.error);
+        return;
+      }
 
-  } catch (err) {
-    console.error(err);
-    alert("Something went wrong. Please try again later.");
-  }
-});
-  </script>
+      document.getElementById('channelName').textContent = data.channelTitle;
+      document.getElementById('monthlyEarning').textContent = `₹ ${(data.avgEarning * 0.08).toFixed(2)} INR`;
+      document.getElementById('yearlyEarning').textContent = `₹ ${(data.avgEarning * 0.08 * 12).toFixed(2)} INR`;
+
+      const ctx = document.getElementById('earningsChart').getContext('2d');
+      if (window.currentChart) {
+        window.currentChart.destroy();
+      }
+      window.currentChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Low Estimate', 'Average', 'High Estimate'],
+          datasets: [{
+            label: 'Earnings (USD)',
+            data: [data.estimatedEarningsLow, data.avgEarning, data.estimatedEarningsHigh],
+            backgroundColor: ['#f87171', '#facc15', '#4ade80']
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+
+      document.getElementById('earningResults').classList.remove('hidden');
+      document.getElementById('earningResults').scrollIntoView({ behavior: 'smooth' });
+
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again later.");
+    }
+  });
+</script>
 </body>
 </html>
