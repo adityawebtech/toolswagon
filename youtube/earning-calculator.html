@@ -89,64 +89,56 @@
   <!-- Script -->
   <script defer src="/assets/js/script.js"></script>
   <script>
-    const BACKEND_URL = "https://yt-meta-backend.onrender.com";
-
     document.getElementById('earningForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const input = document.getElementById('channelInput').value.trim();
-      try {
-        const idRes = await fetch(`${BACKEND_URL}/api/channel-id?url=${encodeURIComponent(input)}`);
-        const idData = await idRes.json();
-        if (idData.error || !idData.channelId) {
-          alert("Failed to extract channel ID.");
-          return;
-        }
+  e.preventDefault();
+  const input = document.getElementById('channelInput').value.trim();
 
-        const apiKey = "YOUR_YOUTUBE_API_KEY"; // or fetch this server-side
-        const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=${idData.channelId}&key=${apiKey}`);
-        const data = await res.json();
-        if (!data.items || data.items.length === 0) throw new Error("Channel not found.");
+  try {
+    const idRes = await fetch(`${BACKEND_URL}/api/channel-id?url=${encodeURIComponent(input)}`);
+    const idData = await idRes.json();
+    if (idData.error || !idData.channelId) {
+      alert("Failed to extract channel ID.");
+      return;
+    }
 
-        const channel = data.items[0];
-        const stats = channel.statistics;
-        const snippet = channel.snippet;
+    const res = await fetch(`${BACKEND_URL}/api/earnings?channelId=${idData.channelId}`);
+    const data = await res.json();
+    if (data.error) {
+      alert(data.error);
+      return;
+    }
 
-        const totalViews = Number(stats.viewCount || 0);
-        const monthlyEarning = (totalViews * 0.0015).toFixed(2);
-        const yearlyEarning = (totalViews * 0.018).toFixed(2);
+    // Monthly/Yearly INR (approx conversion from avg USD)
+    document.getElementById('channelName').textContent = data.channelTitle;
+    document.getElementById('monthlyEarning').textContent = `₹ ${(data.avgEarning * 0.08).toFixed(2)} INR`;
+    document.getElementById('yearlyEarning').textContent = `₹ ${(data.avgEarning * 0.08 * 12).toFixed(2)} INR`;
 
-        document.getElementById('channelName').textContent = snippet.title;
-        document.getElementById('monthlyEarning').textContent = `₹ ${monthlyEarning} INR`;
-        document.getElementById('yearlyEarning').textContent = `₹ ${yearlyEarning} INR`;
-
-        // Chart
-        const ctx = document.getElementById('earningsChart').getContext('2d');
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['Estimated Monthly', 'Estimated Yearly'],
-            datasets: [{
-              label: 'Earnings in INR',
-              data: [monthlyEarning, yearlyEarning],
-              backgroundColor: ['#dc2626', '#16a34a']
-            }]
-          },
-          options: {
-            responsive: true,
-            scales: {
-              y: { beginAtZero: true }
-            }
-          }
-        });
-
-        document.getElementById('earningResults').classList.remove('hidden');
-        document.getElementById('earningResults').scrollIntoView({ behavior: 'smooth' });
-
-      } catch (err) {
-        console.error(err);
-        alert("Something went wrong. Please try again later.");
+    // Bar Chart
+    const ctx = document.getElementById('earningsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Low Estimate', 'Average', 'High Estimate'],
+        datasets: [{
+          label: 'Earnings (USD)',
+          data: [data.estimatedEarningsLow, data.avgEarning, data.estimatedEarningsHigh],
+          backgroundColor: ['#f87171', '#facc15', '#4ade80']
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true } }
       }
     });
+
+    document.getElementById('earningResults').classList.remove('hidden');
+    document.getElementById('earningResults').scrollIntoView({ behavior: 'smooth' });
+
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong. Please try again later.");
+  }
+});
   </script>
 </body>
 </html>
