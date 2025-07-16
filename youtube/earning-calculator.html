@@ -1,147 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>YouTube Channel Earning Checker | Toolswagon</title>
-  <meta name="description" content="Check estimated earnings of any YouTube channel based on views and engagement." />
-  <link rel="stylesheet" href="/assets/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouTube Earnings Estimator</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Poppins', sans-serif; }
-    .blink {
-      animation: blink 1s linear infinite;
-    }
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-  </style>
 </head>
-<body class="bg-white text-black dark:bg-gray-900 dark:text-white">
+<body class="bg-gray-50 text-gray-800">
 
-  <!-- Header -->
-  <div id="header-container"></div>
+  <div class="max-w-3xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-4 text-center">📺 YouTube Earnings Estimator</h1>
 
-  <!-- Hero Section -->
-  <section class="py-16 px-4 text-center bg-white dark:bg-gray-900">
-    <div class="max-w-3xl mx-auto">
-      <div class="mx-auto mb-6 w-20 h-20 rounded-full bg-red-100 flex items-center justify-center">
-        <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-          <path d="M4.5 12.75l6-6 3 3 6-6M3 21h18M4.5 18.75L12 11.25l3 3 6-6"/>
-        </svg>
+    <form id="earningForm" class="space-y-4 bg-white p-6 rounded shadow">
+      <input id="channelInput" type="text" placeholder="Enter YouTube Channel or Video URL"
+        class="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-blue-300" required>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <input id="customViews" type="number" placeholder="Optional: Views per month"
+          class="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-blue-300">
+        <input id="customCPM" type="number" step="0.01" placeholder="Optional: CPM ($)"
+          class="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-blue-300">
       </div>
-      <h1 class="text-4xl font-bold text-red-600 mb-2">YouTube Channel Earning Checker</h1>
-      <p class="text-lg text-gray-700 dark:text-gray-300">Paste a YouTube Channel URL and check estimated earnings.</p>
-      <form id="earningForm" class="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
-        <input id="channelInput" type="text" placeholder="Paste YouTube Channel URL..." required
-          class="w-full sm:w-96 px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600">
-        <button type="submit"
-          class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">Check Earnings</button>
-      </form>
+
+      <button type="submit"
+        class="w-full bg-blue-600 text-white p-3 rounded font-semibold hover:bg-blue-700">Estimate Earnings</button>
+    </form>
+
+    <div id="earningResults" class="hidden mt-10 bg-white p-6 rounded shadow space-y-6">
+      <div id="channelName"></div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+        <div class="bg-yellow-100 p-4 rounded shadow">
+          <div class="text-sm text-gray-600">Estimated Daily</div>
+          <div id="dailyEarning" class="text-xl font-bold">-</div>
+        </div>
+        <div class="bg-green-100 p-4 rounded shadow">
+          <div class="text-sm text-gray-600">Estimated Monthly</div>
+          <div id="monthlyEarning" class="text-xl font-bold">-</div>
+        </div>
+        <div class="bg-blue-100 p-4 rounded shadow">
+          <div class="text-sm text-gray-600">Estimated Yearly</div>
+          <div id="yearlyEarning" class="text-xl font-bold">-</div>
+        </div>
+      </div>
+
+      <div id="infoUsed" class="text-sm text-gray-600"></div>
+
+      <canvas id="earningsChart" height="150"></canvas>
     </div>
-  </section>
+  </div>
 
-  <!-- Results Section -->
-  <section id="earningResults" class="py-12 px-4 hidden bg-white dark:bg-gray-900">
-    <div class="text-center mb-6">
-      <div class="border border-black border-dotted p-3 max-w-xl mx-auto rounded text-blue-600 font-semibold blink">
-        <a href="/youtube/monetization-checker.html" target="_blank">Check whether YouTube Channel is Monetized or Not?</a>
-      </div>
-    </div>
-    <div class="max-w-3xl mx-auto border border-red-500 rounded-lg p-6 space-y-6 text-left shadow-sm bg-white dark:bg-gray-800">
-      <div>
-        <h2 class="text-xl font-bold text-red-600 mb-2">Channel Name</h2>
-        <p id="channelName" class="text-gray-700 dark:text-gray-300"></p>
-      </div>
-      <div>
-        <h2 class="text-xl font-bold text-red-600 mb-2">Estimated Monthly Earnings</h2>
-        <p id="monthlyEarning" class="text-green-600 font-semibold text-lg"></p>
-      </div>
-      <div>
-        <h2 class="text-xl font-bold text-red-600 mb-2">Estimated Yearly Earnings</h2>
-        <p id="yearlyEarning" class="text-green-600 font-semibold text-lg"></p>
-      </div>
-      <div>
-        <h2 class="text-xl font-bold text-red-600 mb-2">Earnings Breakdown</h2>
-        <canvas id="earningsChart" class="w-full max-w-xl mx-auto"></canvas>
-      </div>
-    </div>
-  </section>
-
-  <!-- Info Section -->
-  <section class="py-12 px-4 border-t border-gray-300 dark:border-gray-700">
-    <div class="max-w-4xl mx-auto space-y-10">
-      <div><h2 class="text-xl font-bold text-red-600 mb-2">What is a YouTube Earnings Checker?</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
-      <div><h2 class="text-xl font-bold text-red-600 mb-2">How is YouTube Channel Revenue Calculated?</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
-      <div><h2 class="text-xl font-bold text-red-600 mb-2">Is this Accurate?</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
-      <div><h2 class="text-xl font-bold text-red-600 mb-2">Tips to Increase YouTube Channel Income</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <div id="footer-container"></div>
-
-  <!-- Back to Top -->
-  <button id="backToTop" class="fixed bottom-6 right-6 bg-red-600 text-white p-3 rounded-full shadow hidden">↑</button>
-
-  <!-- Script -->
-  <script defer src="/assets/js/script.js"></script>
   <script>
-  const BACKEND_URL = "https://yt-meta-backend.onrender.com";
+    const BACKEND_URL = "https://yt-meta-backend.onrender.com";
 
-  document.getElementById('earningForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const input = document.getElementById('channelInput').value.trim();
+    const currencySymbols = {
+      US: '$', IN: '₹', GB: '£', JP: '¥', CA: '$', AU: '$', EU: '€',
+      DE: '€', FR: '€', IT: '€', ES: '€', default: '$'
+    };
 
-    try {
-      const idRes = await fetch(`${BACKEND_URL}/api/channel-id?url=${encodeURIComponent(input)}`);
-      const idData = await idRes.json();
-      if (idData.error || !idData.channelId) {
-        alert("Failed to extract channel ID.");
-        return;
+    document.getElementById('earningForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const urlInput = document.getElementById('channelInput').value.trim();
+      const customCPM = parseFloat(document.getElementById('customCPM').value);
+      const customViews = parseInt(document.getElementById('customViews').value);
+
+      try {
+        const idRes = await fetch(`${BACKEND_URL}/api/channel-id?url=${encodeURIComponent(urlInput)}`);
+        const idData = await idRes.json();
+        if (!idData.channelId) throw new Error("Invalid or unsupported YouTube URL.");
+
+        const channelRes = await fetch(`${BACKEND_URL}/api/earnings?channelId=${idData.channelId}`);
+        const channelData = await channelRes.json();
+        if (channelData.error) throw new Error(channelData.error);
+
+        const {
+          channelTitle, thumbnail, subscriberCount, totalViews, videoCount,
+          estimatedEarningsLow, estimatedEarningsHigh, avgEarning, country
+        } = channelData;
+
+        const currency = currencySymbols[country] || currencySymbols.default;
+        const usedViewsPerMonth = customViews || totalViews;
+        const usedCPM = customCPM || 1.5;
+
+        const daily = ((usedViewsPerMonth / 30) / 1000 * usedCPM).toFixed(2);
+        const monthly = ((usedViewsPerMonth / 1000) * usedCPM).toFixed(2);
+        const yearly = ((usedViewsPerMonth * 12 / 1000) * usedCPM).toFixed(2);
+
+        document.getElementById('channelName').innerHTML = `
+          <div class="flex items-center gap-4">
+            <img src="${thumbnail}" class="w-12 h-12 rounded-full border" alt="${channelTitle}">
+            <div>
+              <div class="font-semibold">${channelTitle}</div>
+              <div class="text-sm text-gray-500">Country: ${country || 'N/A'}</div>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('dailyEarning').textContent = `${currency} ${daily}`;
+        document.getElementById('monthlyEarning').textContent = `${currency} ${monthly}`;
+        document.getElementById('yearlyEarning').textContent = `${currency} ${yearly}`;
+
+        document.getElementById('infoUsed').innerHTML = `
+          <div><strong>Used Views/Month:</strong> ${usedViewsPerMonth.toLocaleString()}</div>
+          <div><strong>Used CPM:</strong> ${currency} ${usedCPM.toFixed(2)}</div>
+        `;
+
+        const ctx = document.getElementById('earningsChart').getContext('2d');
+        if (window.earningChart) window.earningChart.destroy();
+        window.earningChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Daily', 'Monthly', 'Yearly'],
+            datasets: [{
+              label: `Earnings in ${currency}`,
+              data: [daily, monthly, yearly],
+              backgroundColor: ['#fbbf24', '#4ade80', '#60a5fa']
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: { y: { beginAtZero: true } }
+          }
+        });
+
+        document.getElementById('earningResults').classList.remove('hidden');
+        document.getElementById('earningResults').scrollIntoView({ behavior: 'smooth' });
+
+      } catch (err) {
+        console.error(err);
+        alert("Error: " + err.message);
       }
+    });
+  </script>
 
-      const res = await fetch(`${BACKEND_URL}/api/earnings?channelId=${idData.channelId}`);
-      const data = await res.json();
-      if (data.error) {
-        alert(data.error);
-        return;
-      }
-
-      document.getElementById('channelName').textContent = data.channelTitle;
-      document.getElementById('monthlyEarning').textContent = `₹ ${(data.avgEarning * 0.08).toFixed(2)} INR`;
-      document.getElementById('yearlyEarning').textContent = `₹ ${(data.avgEarning * 0.08 * 12).toFixed(2)} INR`;
-
-      const ctx = document.getElementById('earningsChart').getContext('2d');
-      if (window.currentChart) {
-        window.currentChart.destroy();
-      }
-      window.currentChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Low Estimate', 'Average', 'High Estimate'],
-          datasets: [{
-            label: 'Earnings (USD)',
-            data: [data.estimatedEarningsLow, data.avgEarning, data.estimatedEarningsHigh],
-            backgroundColor: ['#f87171', '#facc15', '#4ade80']
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: { y: { beginAtZero: true } }
-        }
-      });
-
-      document.getElementById('earningResults').classList.remove('hidden');
-      document.getElementById('earningResults').scrollIntoView({ behavior: 'smooth' });
-
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong. Please try again later.");
-    }
-  });
-</script>
 </body>
 </html>
