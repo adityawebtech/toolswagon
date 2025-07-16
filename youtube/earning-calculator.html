@@ -13,6 +13,7 @@
     .blink { animation: blink 1s linear infinite; }
     @keyframes blink { 50% { opacity: 0; } }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-white text-black dark:bg-gray-900 dark:text-white">  <!-- Header -->  <div id="header-container"></div>  <!-- Hero Section -->  <section class="py-16 px-4 text-center bg-white dark:bg-gray-900">
     <div class="max-w-3xl mx-auto">
@@ -128,12 +129,12 @@
   
   <!-- Script -->  
   <script defer src="/assets/js/script.js"></script>  
-  
-  <script>
-  const BACKEND_URL = "https://yt-meta-backend.onrender.com";
 
+<script>
+  const BACKEND_URL = "https://yt-meta-backend.onrender.com";
   const earningForm = document.getElementById('earningForm');
   const input = document.getElementById('channelInput');
+  let myChart; // to destroy previous chart instance
 
   function getCurrencySymbol(country) {
     const currencyMap = {
@@ -168,8 +169,7 @@
     if (!userInput) return alert("Please enter a valid YouTube channel or video URL.");
 
     const videoId = extractVideoId(userInput);
-    let endpoint = '';
-    let query = '';
+    let endpoint = '', query = '';
 
     try {
       if (videoId) {
@@ -186,30 +186,43 @@
       const data = await res.json();
       if (data.error) throw new Error(data.error);
 
-      const container = document.getElementById('earningResults');
       const symbol = getCurrencySymbol(data.country || 'US');
+      const container = document.getElementById('earningResults');
 
+      // Fill Common Fields
       document.getElementById('channelName').textContent = data.title || 'N/A';
+      document.getElementById('channelThumb').src = data.thumbnail || '';
+      document.getElementById('subscriberCount').textContent = parseInt(data.subscriberCount || 0).toLocaleString();
+      document.getElementById('totalViews').textContent = parseInt(data.totalViews || data.viewCount || 0).toLocaleString();
+      document.getElementById('videoCount').textContent = data.videoCount || 'N/A';
+      document.getElementById('countryName').textContent = data.country || 'Unknown';
 
+      // Earnings
       const avg = parseFloat(data.avgEarning || 0);
       const monthly = avg * 30;
       const yearly = avg * 365;
+
+      document.getElementById('earningLow').textContent = `${symbol}${parseFloat(data.estimatedEarningsLow || 0).toFixed(2)}`;
+      document.getElementById('earningAvg').textContent = `${symbol}${avg.toFixed(2)}`;
+      document.getElementById('earningHigh').textContent = `${symbol}${parseFloat(data.estimatedEarningsHigh || 0).toFixed(2)}`;
 
       document.getElementById('dailyEarning').textContent = `${symbol}${avg.toFixed(2)}`;
       document.getElementById('monthlyEarning').textContent = `${symbol}${monthly.toFixed(2)}`;
       document.getElementById('yearlyEarning').textContent = `${symbol}${yearly.toFixed(2)}`;
 
+      // Chart
       const ctx = document.getElementById('earningsChart').getContext('2d');
-      new Chart(ctx, {
+      if (myChart) myChart.destroy();
+      myChart = new Chart(ctx, {
         type: 'bar',
         data: {
           labels: ['Low Estimate', 'Average', 'High Estimate'],
           datasets: [{
             label: `Earnings in ${symbol}`,
             data: [
-              (parseFloat(data.estimatedEarningsLow) * 1).toFixed(2),
-              avg.toFixed(2),
-              (parseFloat(data.estimatedEarningsHigh) * 1).toFixed(2)
+              parseFloat(data.estimatedEarningsLow || 0),
+              avg,
+              parseFloat(data.estimatedEarningsHigh || 0)
             ],
             backgroundColor: ['#f87171', '#facc15', '#4ade80']
           }]
@@ -217,9 +230,7 @@
         options: {
           responsive: true,
           scales: {
-            y: {
-              beginAtZero: true
-            }
+            y: { beginAtZero: true }
           }
         }
       });
