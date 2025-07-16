@@ -30,107 +30,208 @@
           class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">Check Earnings</button>
       </form>
     </div>
-  </section>  <!-- Results Section -->  <section id="earningResults" class="py-12 px-4 hidden bg-white dark:bg-gray-900">
-    <div class="text-center mb-6">
-      <div class="border border-black border-dotted p-3 max-w-xl mx-auto rounded text-blue-600 font-semibold blink">
-        <a href="/youtube/monetization-checker.html" target="_blank">Check whether your YouTube channel is monetized or not?</a>
+  </section>  
+  
+  <!-- Results Section --> 
+  <section id="earningResults" class="py-12 px-4 hidden bg-white dark:bg-gray-900">
+  <div class="text-center mb-6">
+    <div class="border border-black border-dotted p-3 max-w-xl mx-auto rounded text-blue-600 font-semibold blink">
+      <a href="/youtube/monetization-checker.html" target="_blank">Check whether your YouTube channel is monetized or not?</a>
+    </div>
+  </div>
+
+  <div class="max-w-3xl mx-auto border border-red-500 rounded-lg p-6 space-y-8 text-left shadow-sm bg-white dark:bg-gray-800">
+    
+    <!-- Channel Info -->
+    <div class="flex items-center gap-4">
+      <img id="channelThumb" src="" alt="Channel Thumbnail" class="w-20 h-20 rounded-full border shadow" />
+      <div>
+        <h2 class="text-xl font-bold text-red-600 mb-1">Channel Name</h2>
+        <p id="channelName" class="text-gray-700 dark:text-gray-300 font-medium"></p>
       </div>
     </div>
-    <div class="max-w-3xl mx-auto border border-red-500 rounded-lg p-6 space-y-6 text-left shadow-sm bg-white dark:bg-gray-800">
-      <div class="flex gap-4 items-center">
-        <img id="channelThumb" src="" class="w-20 h-20 rounded-full border shadow" alt="Channel Thumbnail" />
-        <div>
-          <h2 class="text-xl font-bold text-red-600 mb-1">Channel Name</h2>
-          <p id="channelName" class="text-gray-700 dark:text-gray-300 font-medium"></p>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <h2 class="text-lg font-semibold text-red-600">Subscribers</h2>
-          <p id="subscriberCount" class="text-gray-800 dark:text-white"></p>
-        </div>
-        <div>
-          <h2 class="text-lg font-semibold text-red-600">Total Views</h2>
-          <p id="totalViews" class="text-gray-800 dark:text-white"></p>
-        </div>
-        <div>
-          <h2 class="text-lg font-semibold text-red-600">Video Count</h2>
-          <p id="videoCount" class="text-gray-800 dark:text-white"></p>
-        </div>
-        <div>
-          <h2 class="text-lg font-semibold text-red-600">Country</h2>
-          <p id="countryName" class="text-gray-800 dark:text-white"></p>
-        </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div>
+        <h3 class="text-lg font-semibold text-red-600">Subscribers</h3>
+        <p id="subscriberCount" class="text-gray-800 dark:text-white"></p>
       </div>
       <div>
-        <h2 class="text-xl font-bold text-red-600 mb-2">Estimated Earnings</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-          <div><p class="font-semibold">Low</p><p id="earningLow" class="text-green-600 font-bold text-lg"></p></div>
-          <div><p class="font-semibold">Average</p><p id="earningAvg" class="text-green-600 font-bold text-lg"></p></div>
-          <div><p class="font-semibold">High</p><p id="earningHigh" class="text-green-600 font-bold text-lg"></p></div>
-        </div>
+        <h3 class="text-lg font-semibold text-red-600">Total Views</h3>
+        <p id="totalViews" class="text-gray-800 dark:text-white"></p>
       </div>
       <div>
-        <h2 class="text-xl font-bold text-red-600 mb-2">Earnings Graph</h2>
-        <canvas id="earningsChart" class="w-full max-w-xl mx-auto"></canvas>
+        <h3 class="text-lg font-semibold text-red-600">Video Count</h3>
+        <p id="videoCount" class="text-gray-800 dark:text-white"></p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-red-600">Country</h3>
+        <p id="countryName" class="text-gray-800 dark:text-white"></p>
       </div>
     </div>
-  </section>  <!-- Info Section -->  <section class="py-12 px-4 border-t border-gray-300 dark:border-gray-700">
+
+    <!-- Estimated Earnings -->
+    <div>
+      <h2 class="text-xl font-bold text-red-600 mb-2">Estimated Earnings (Daily)</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+        <div>
+          <p class="font-semibold">Low</p>
+          <p id="earningLow" class="text-green-600 font-bold text-lg"></p>
+        </div>
+        <div>
+          <p class="font-semibold">Average</p>
+          <p id="earningAvg" class="text-green-600 font-bold text-lg"></p>
+        </div>
+        <div>
+          <p class="font-semibold">High</p>
+          <p id="earningHigh" class="text-green-600 font-bold text-lg"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Converted Earnings -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+      <div>
+        <h3 class="text-lg font-semibold text-red-600">Daily Income</h3>
+        <p id="dailyEarning" class="text-indigo-600 font-bold text-lg"></p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-red-600">Monthly Income</h3>
+        <p id="monthlyEarning" class="text-indigo-600 font-bold text-lg"></p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-red-600">Yearly Income</h3>
+        <p id="yearlyEarning" class="text-indigo-600 font-bold text-lg"></p>
+      </div>
+    </div>
+
+    <!-- Earnings Graph -->
+    <div>
+      <h2 class="text-xl font-bold text-red-600 mb-2">Earnings Graph</h2>
+      <canvas id="earningsChart" class="w-full max-w-xl mx-auto"></canvas>
+    </div>
+  </div>
+  </section>
+  
+  <!-- Info Section -->  <section class="py-12 px-4 border-t border-gray-300 dark:border-gray-700">
     <div class="max-w-4xl mx-auto space-y-10 text-center">
       <div><h2 class="text-xl font-bold text-red-600 mb-2">What is YouTube Channel Earnings?</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
       <div><h2 class="text-xl font-bold text-red-600 mb-2">How do we calculate RPM?</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
       <div><h2 class="text-xl font-bold text-red-600 mb-2">Accuracy of This Tool</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
       <div><h2 class="text-xl font-bold text-red-600 mb-2">Tips to Increase YouTube Revenue</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
     </div>
-  </section>  <!-- Footer -->  <div id="footer-container"></div>
-  <button id="backToTop" class="fixed bottom-6 right-6 bg-red-600 text-white p-3 rounded-full shadow hidden">↑</button>  <!-- Script -->  <script defer src="/assets/js/script.js"></script>  <script>
-    const BACKEND_URL = "https://yt-meta-backend.onrender.com";
+  </section>  
+  <!-- Footer -->  
+  <div id="footer-container"></div>
+  <button id="backToTop" class="fixed bottom-6 right-6 bg-red-600 text-white p-3 rounded-full shadow hidden">↑</button>  
+  
+  <!-- Script -->  
+  <script defer src="/assets/js/script.js"></script>  
+  
+  <script>
+  const BACKEND_URL = "https://yt-meta-backend.onrender.com";
 
-    document.getElementById('earningForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const input = document.getElementById('channelInput').value.trim();
-      try {
-        const idRes = await fetch(`${BACKEND_URL}/api/channel-id?url=${encodeURIComponent(input)}`);
-        const idData = await idRes.json();
-        if (!idData.channelId) return alert("Invalid channel URL");
+  const earningForm = document.getElementById('earningForm');
+  const input = document.getElementById('channelInput');
 
-        const res = await fetch(`${BACKEND_URL}/api/earnings?channelId=${idData.channelId}`);
-        const data = await res.json();
-        if (data.error) return alert(data.error);
+  function getCurrencySymbol(country) {
+    const currencyMap = {
+      'IN': '₹',
+      'US': '$',
+      'GB': '£',
+      'AU': 'A$',
+      'CA': 'C$',
+      'DE': '€',
+      'FR': '€',
+      'JP': '¥',
+      'RU': '₽'
+    };
+    return currencyMap[country] || '$';
+  }
 
-        const symbol = data.country === 'IN' ? '₹' : (data.country === 'US' ? '$' : '$');
-        const multiplier = data.country === 'IN' ? 8 : 1;
+  function extractVideoId(url) {
+    const reg = /(?:v=|\/)([0-9A-Za-z_-]{11})/;
+    const match = url.match(reg);
+    return match ? match[1] : null;
+  }
 
-        document.getElementById('channelThumb').src = data.thumbnail;
-        document.getElementById('channelName').textContent = data.channelTitle;
-        document.getElementById('subscriberCount').textContent = data.subscriberCount;
-        document.getElementById('totalViews').textContent = data.totalViews;
-        document.getElementById('videoCount').textContent = data.videoCount;
-        document.getElementById('countryName').textContent = data.country;
-        document.getElementById('earningLow').textContent = `${symbol} ${(data.estimatedEarningsLow * multiplier).toFixed(2)}`;
-        document.getElementById('earningAvg').textContent = `${symbol} ${(data.avgEarning * multiplier).toFixed(2)}`;
-        document.getElementById('earningHigh').textContent = `${symbol} ${(data.estimatedEarningsHigh * multiplier).toFixed(2)}`;
+  async function fetchChannelId(url) {
+    const res = await fetch(`${BACKEND_URL}/api/channel-id?url=${encodeURIComponent(url)}`);
+    const data = await res.json();
+    return data.channelId;
+  }
 
-        const ctx = document.getElementById('earningsChart').getContext('2d');
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['Low', 'Average', 'High'],
-            datasets: [{
-              label: `Estimated Earnings (${symbol})`,
-              data: [data.estimatedEarningsLow * multiplier, data.avgEarning * multiplier, data.estimatedEarningsHigh * multiplier],
-              backgroundColor: ['#f87171', '#facc15', '#4ade80']
-            }]
-          },
-          options: { responsive: true, scales: { y: { beginAtZero: true } } }
-        });
+  earningForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const userInput = input.value.trim();
+    if (!userInput) return alert("Please enter a valid YouTube channel or video URL.");
 
-        document.getElementById('earningResults').classList.remove('hidden');
-        document.getElementById('earningResults').scrollIntoView({ behavior: 'smooth' });
-      } catch (err) {
-        console.error(err);
-        alert("Something went wrong. Please try again later.");
+    const videoId = extractVideoId(userInput);
+    let endpoint = '';
+    let query = '';
+
+    try {
+      if (videoId) {
+        endpoint = '/api/earnings';
+        query = `videoId=${videoId}`;
+      } else {
+        const channelId = await fetchChannelId(userInput);
+        if (!channelId) throw new Error("Unable to extract channel ID.");
+        endpoint = '/api/earnings';
+        query = `channelId=${channelId}`;
       }
-    });
-  </script></body>
+
+      const res = await fetch(`${BACKEND_URL}${endpoint}?${query}`);
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      const container = document.getElementById('earningResults');
+      const symbol = getCurrencySymbol(data.country || 'US');
+
+      document.getElementById('channelName').textContent = data.title || 'N/A';
+
+      const avg = parseFloat(data.avgEarning || 0);
+      const monthly = avg * 30;
+      const yearly = avg * 365;
+
+      document.getElementById('dailyEarning').textContent = `${symbol}${avg.toFixed(2)}`;
+      document.getElementById('monthlyEarning').textContent = `${symbol}${monthly.toFixed(2)}`;
+      document.getElementById('yearlyEarning').textContent = `${symbol}${yearly.toFixed(2)}`;
+
+      const ctx = document.getElementById('earningsChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Low Estimate', 'Average', 'High Estimate'],
+          datasets: [{
+            label: `Earnings in ${symbol}`,
+            data: [
+              (parseFloat(data.estimatedEarningsLow) * 1).toFixed(2),
+              avg.toFixed(2),
+              (parseFloat(data.estimatedEarningsHigh) * 1).toFixed(2)
+            ],
+            backgroundColor: ['#f87171', '#facc15', '#4ade80']
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      container.classList.remove('hidden');
+      container.scrollIntoView({ behavior: 'smooth' });
+
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong: " + err.message);
+    }
+  });
+</script>
+</body>
 </html>
