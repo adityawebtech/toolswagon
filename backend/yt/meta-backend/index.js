@@ -10,7 +10,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ✅ 2. Use cors middleware
-app.use(cors());
+app.use(cors({
+  origin: ['https://toolswagon.site']
+}));
 
 // Import Routes
 const metaRoute = require('./routes/meta');
