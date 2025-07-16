@@ -73,7 +73,7 @@ app.get('/api/meta', async (req, res) => {
       description: snippet.description,
       publishedAt: snippet.publishedAt,
       categoryId: snippet.categoryId,
-      category: categoryMap[snippet.categoryId] || "Unknown",
+      category: categoryMap[Number(snippet.categoryId)] || "Unknown",
       channelTitle: snippet.channelTitle,
       viewCount: stats.viewCount,
       likeCount: stats.likeCount || '0'
