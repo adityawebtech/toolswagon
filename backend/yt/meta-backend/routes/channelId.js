@@ -6,8 +6,8 @@ router.get('/channel-id', async (req, res) => {
   const url = req.query.url;
   if (!url) return res.status(400).json({ error: 'Missing URL' });
 
-  const usernameMatch = url.match(/youtube\.com\/@([\w\d-_]+)/);
-  const channelIdMatch = url.match(/youtube\.com\/channel\/([\w-]+)/);
+  const usernameMatch = url.match(/youtube\.com\/@([\w\d-_]+)/i);
+  const channelIdMatch = url.match(/youtube\.com\/channel\/([\w-]+)/i);
 
   try {
     let channelId = "";
@@ -16,13 +16,16 @@ router.get('/channel-id', async (req, res) => {
       channelId = channelIdMatch[1];
     } else if (usernameMatch) {
       const username = usernameMatch[1];
+
+      // ✅ Search for channel by handle (not using deprecated forUsername)
       const { data } = await axios.get(
-        `https://www.googleapis.com/youtube/v3/channels?part=id&forUsername=${username}&key=${process.env.YOUTUBE_API_KEY}`
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${username}&key=${process.env.YOUTUBE_API_KEY}`
       );
+
       if (!data.items || !data.items.length)
         return res.status(404).json({ error: 'Channel not found' });
 
-      channelId = data.items[0].id;
+      channelId = data.items[0].snippet.channelId;
     } else {
       return res.status(400).json({ error: 'Invalid YouTube channel URL format' });
     }
