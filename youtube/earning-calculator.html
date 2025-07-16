@@ -1,139 +1,130 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>YouTube Earnings Estimator</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Earnings Calculator</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 text-gray-800">
-
-  <div class="max-w-3xl mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-4 text-center">📺 YouTube Earnings Estimator</h1>
-
-    <form id="earningForm" class="space-y-4 bg-white p-6 rounded shadow">
-      <input id="channelInput" type="text" placeholder="Enter YouTube Channel or Video URL"
-        class="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-blue-300" required>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <input id="customViews" type="number" placeholder="Optional: Views per month"
-          class="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-blue-300">
-        <input id="customCPM" type="number" step="0.01" placeholder="Optional: CPM ($)"
-          class="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-blue-300">
-      </div>
-
-      <button type="submit"
-        class="w-full bg-blue-600 text-white p-3 rounded font-semibold hover:bg-blue-700">Estimate Earnings</button>
+<body class="bg-gray-50 text-gray-900">
+  <!-- Header -->
+  <header class="bg-blue-600 text-white p-4 text-center text-2xl font-bold shadow">
+    YouTube Earnings Calculator
+  </header>  <!-- Alert Box -->  <div class="border border-black p-3 bg-white max-w-xl mx-auto mt-6 rounded">
+    <p class="text-blue-600 font-medium">Check whether your YouTube channel is mentioned or not?</p>
+  </div>  <!-- Input Form -->  <div class="max-w-3xl mx-auto mt-8 p-4 bg-white shadow rounded">
+    <form id="calculatorForm" class="grid gap-4">
+      <input type="text" id="channelId" class="border p-2 rounded" placeholder="Enter YouTube Channel ID (UC...)" />
+      <input type="number" id="viewsPerDay" class="border p-2 rounded" placeholder="Daily Views (optional)" />
+      <input type="number" id="engagementRate" step="0.1" class="border p-2 rounded" placeholder="Engagement Rate % (optional)" />
+      <select id="cpmCategory" class="border p-2 rounded">
+        <option value="3.47">Film & Animation ($3.47 RPM)</option>
+        <option value="11.44">Science & Tech ($11.44 RPM)</option>
+        <option value="9.9">Autos & Vehicles ($9.90 RPM)</option>
+        <option value="5.5">People & Blogs ($5.50 RPM)</option>
+        <option value="4.57">News & Politics ($4.57 RPM)</option>
+        <!-- Add more as needed -->
+      </select>
+      <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Calculate</button>
     </form>
-
-    <div id="earningResults" class="hidden mt-10 bg-white p-6 rounded shadow space-y-6">
-      <div id="channelName"></div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-        <div class="bg-yellow-100 p-4 rounded shadow">
-          <div class="text-sm text-gray-600">Estimated Daily</div>
-          <div id="dailyEarning" class="text-xl font-bold">-</div>
-        </div>
-        <div class="bg-green-100 p-4 rounded shadow">
-          <div class="text-sm text-gray-600">Estimated Monthly</div>
-          <div id="monthlyEarning" class="text-xl font-bold">-</div>
-        </div>
-        <div class="bg-blue-100 p-4 rounded shadow">
-          <div class="text-sm text-gray-600">Estimated Yearly</div>
-          <div id="yearlyEarning" class="text-xl font-bold">-</div>
-        </div>
+  </div>  <!-- Result Section -->  <div id="resultSection" class="max-w-4xl mx-auto mt-10 bg-white p-6 rounded shadow hidden">
+    <h2 class="text-xl font-bold mb-4">Earnings Overview</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <img id="channelThumb" class="rounded w-24 h-24" />
+        <p class="font-semibold" id="channelName"></p>
+        <p>Total Views: <span id="totalViews"></span></p>
+        <p>Subscribers: <span id="subs"></span></p>
+        <p>Videos: <span id="videos"></span></p>
+        <p>Country: <span id="country"></span></p>
       </div>
+      <div>
+        <p>Est. Revenue Range: <span id="revRange"></span></p>
+        <p>Average Earnings: <span id="avgEarning"></span></p>
+        <p>Daily: <span id="dailyEarning"></span></p>
+        <p>Monthly: <span id="monthlyEarning"></span></p>
+        <p>Yearly: <span id="yearlyEarning"></span></p>
+        <p>Views/month: <span id="monthlyViews"></span></p>
+        <p>Views/year: <span id="yearlyViews"></span></p>
+      </div>
+    </div><!-- Chart -->
+<div class="mt-8">
+  <canvas id="earningsChart"></canvas>
+</div>
 
-      <div id="infoUsed" class="text-sm text-gray-600"></div>
+  </div>  <!-- Content Below Result -->  <section class="max-w-4xl mx-auto mt-12 text-center">
+    <h2 class="text-2xl font-bold my-6">📌 What Influences YouTube Earnings?</h2>
+    <p>Content goes here.</p>
+    <h2 class="text-2xl font-bold my-6">📊 Understanding RPM and CPM</h2>
+    <p>Content goes here.</p>
+    <h2 class="text-2xl font-bold my-6">💡 Tips to Increase Your Revenue</h2>
+    <p>Content goes here.</p>
+    <h2 class="text-2xl font-bold my-6">🌍 Global Audience vs Local Views</h2>
+    <p>Content goes here.</p>
+  </section>  <!-- Footer -->  <footer class="mt-16 bg-gray-100 text-center p-4 text-sm text-gray-600">
+    &copy; 2025 YouTube Earnings Tool by Aditya Pal
+  </footer>  <!-- Script -->  <script>
+    const form = document.getElementById('calculatorForm');
+    const resultSection = document.getElementById('resultSection');
 
-      <canvas id="earningsChart" height="150"></canvas>
-    </div>
-  </div>
-
-  <script>
-    const BACKEND_URL = "https://yt-meta-backend.onrender.com";
-
-    const currencySymbols = {
-      US: '$', IN: '₹', GB: '£', JP: '¥', CA: '$', AU: '$', EU: '€',
-      DE: '€', FR: '€', IT: '€', ES: '€', default: '$'
-    };
-
-    document.getElementById('earningForm').addEventListener('submit', async (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      const urlInput = document.getElementById('channelInput').value.trim();
-      const customCPM = parseFloat(document.getElementById('customCPM').value);
-      const customViews = parseInt(document.getElementById('customViews').value);
+      const channelId = document.getElementById('channelId').value.trim();
+      const viewsPerDay = parseFloat(document.getElementById('viewsPerDay').value || 0);
+      const engagement = parseFloat(document.getElementById('engagementRate').value || 0);
+      const rpm = parseFloat(document.getElementById('cpmCategory').value);
 
       try {
-        const idRes = await fetch(`${BACKEND_URL}/api/channel-id?url=${encodeURIComponent(urlInput)}`);
-        const idData = await idRes.json();
-        if (!idData.channelId) throw new Error("Invalid or unsupported YouTube URL.");
+        const res = await fetch(`/api/earnings?channelId=${channelId}`);
+        const data = await res.json();
 
-        const channelRes = await fetch(`${BACKEND_URL}/api/earnings?channelId=${idData.channelId}`);
-        const channelData = await channelRes.json();
-        if (channelData.error) throw new Error(channelData.error);
+        document.getElementById('channelThumb').src = data.thumbnail;
+        document.getElementById('channelName').textContent = data.channelTitle;
+        document.getElementById('totalViews').textContent = data.totalViews.toLocaleString();
+        document.getElementById('subs').textContent = data.subscriberCount.toLocaleString();
+        document.getElementById('videos').textContent = data.videoCount;
+        document.getElementById('country').textContent = data.country;
 
-        const {
-          channelTitle, thumbnail, subscriberCount, totalViews, videoCount,
-          estimatedEarningsLow, estimatedEarningsHigh, avgEarning, country
-        } = channelData;
+        document.getElementById('revRange').textContent = `$${data.estimatedEarningsLow} - $${data.estimatedEarningsHigh}`;
+        document.getElementById('avgEarning').textContent = `$${data.avgEarning}`;
 
-        const currency = currencySymbols[country] || currencySymbols.default;
-        const usedViewsPerMonth = customViews || totalViews;
-        const usedCPM = customCPM || 1.5;
+        const views = viewsPerDay > 0 ? viewsPerDay : data.totalViews / 365;
+        const daily = ((views / 1000) * rpm).toFixed(2);
+        const monthly = (daily * 30).toFixed(2);
+        const yearly = (daily * 365).toFixed(2);
 
-        const daily = ((usedViewsPerMonth / 30) / 1000 * usedCPM).toFixed(2);
-        const monthly = ((usedViewsPerMonth / 1000) * usedCPM).toFixed(2);
-        const yearly = ((usedViewsPerMonth * 12 / 1000) * usedCPM).toFixed(2);
+        document.getElementById('dailyEarning').textContent = `$${daily}`;
+        document.getElementById('monthlyEarning').textContent = `$${monthly}`;
+        document.getElementById('yearlyEarning').textContent = `$${yearly}`;
+        document.getElementById('monthlyViews').textContent = Math.round(views * 30).toLocaleString();
+        document.getElementById('yearlyViews').textContent = Math.round(views * 365).toLocaleString();
 
-        document.getElementById('channelName').innerHTML = `
-          <div class="flex items-center gap-4">
-            <img src="${thumbnail}" class="w-12 h-12 rounded-full border" alt="${channelTitle}">
-            <div>
-              <div class="font-semibold">${channelTitle}</div>
-              <div class="text-sm text-gray-500">Country: ${country || 'N/A'}</div>
-            </div>
-          </div>
-        `;
+        resultSection.classList.remove('hidden');
 
-        document.getElementById('dailyEarning').textContent = `${currency} ${daily}`;
-        document.getElementById('monthlyEarning').textContent = `${currency} ${monthly}`;
-        document.getElementById('yearlyEarning').textContent = `${currency} ${yearly}`;
-
-        document.getElementById('infoUsed').innerHTML = `
-          <div><strong>Used Views/Month:</strong> ${usedViewsPerMonth.toLocaleString()}</div>
-          <div><strong>Used CPM:</strong> ${currency} ${usedCPM.toFixed(2)}</div>
-        `;
-
+        // Chart
         const ctx = document.getElementById('earningsChart').getContext('2d');
-        if (window.earningChart) window.earningChart.destroy();
-        window.earningChart = new Chart(ctx, {
+        new Chart(ctx, {
           type: 'bar',
           data: {
             labels: ['Daily', 'Monthly', 'Yearly'],
             datasets: [{
-              label: `Earnings in ${currency}`,
+              label: 'Estimated Earnings ($)',
               data: [daily, monthly, yearly],
-              backgroundColor: ['#fbbf24', '#4ade80', '#60a5fa']
+              backgroundColor: ['#3B82F6', '#60A5FA', '#93C5FD']
             }]
           },
           options: {
             responsive: true,
-            scales: { y: { beginAtZero: true } }
+            plugins: {
+              legend: { display: false },
+              tooltip: { enabled: true }
+            }
           }
         });
-
-        document.getElementById('earningResults').classList.remove('hidden');
-        document.getElementById('earningResults').scrollIntoView({ behavior: 'smooth' });
-
       } catch (err) {
+        alert('Failed to fetch channel data. Make sure Channel ID is correct.');
         console.error(err);
-        alert("Error: " + err.message);
       }
     });
-  </script>
-
-</body>
+  </script></body>
 </html>
