@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YouTube Channel ID Finder | Toolswagon</title>
+  <meta name="description" content="Find YouTube Channel ID, name, and profile image from any channel URL instantly." />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Poppins', sans-serif; }</style>
+</head>
+<body class="bg-white text-black dark:bg-gray-900 dark:text-white">
+  
+  <!-- Header -->
+  <div id="header-container"></div>
+
+  <!-- Hero Section -->
+  <section class="py-16 px-4 text-center bg-white dark:bg-gray-900">
+    <div class="max-w-3xl mx-auto">
+      <div class="mx-auto mb-6 w-20 h-20 rounded-full bg-red-100 flex items-center justify-center">
+        <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M15.75 9V5.25M8.25 9V5.25M4.5 9h15M3 20.25V9.75a.75.75 0 01.75-.75h16.5a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75H3.75a.75.75 0 01-.75-.75z"/>
+        </svg>
+      </div>
+      <h1 class="text-4xl font-bold text-red-600 mb-2">YouTube Channel ID Finder</h1>
+      <p class="text-lg text-gray-700 dark:text-gray-300">Paste a YouTube channel URL and extract the Channel ID instantly.</p>
+      <form id="channelForm" class="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
+        <input id="channelInput" type="text" placeholder="Paste YouTube Channel URL..." required
+          class="w-full sm:w-96 px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600">
+        <button type="submit"
+          class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">Get Channel ID</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section id="channelResults" class="py-12 px-4 hidden bg-white dark:bg-gray-900">
+    <div class="max-w-3xl mx-auto space-y-6 text-left">
+      <div class="flex items-center gap-4">
+        <img id="channelAvatar" class="w-16 h-16 rounded-full shadow" src="" alt="Channel Avatar">
+        <div>
+          <h2 class="text-xl font-bold text-red-600">Channel Name</h2>
+          <p id="channelName" class="text-gray-700 dark:text-gray-300"></p>
+        </div>
+      </div>
+      <div class="pt-6">
+        <h2 class="text-xl font-bold text-red-600 mb-2">Channel ID</h2>
+        <div class="flex items-start gap-2">
+          <p id="channelId" class="flex-1 break-all"></p>
+          <button onclick="copyText('channelId')" class="text-sm text-red-600 border px-2 py-1 rounded">Copy</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Section -->
+  <section class="py-12 px-4 border-t border-gray-300 dark:border-gray-700">
+    <div class="max-w-4xl mx-auto space-y-10">
+      <div><h2 class="text-xl font-bold text-red-600 mb-2">What is YouTube Channel ID?</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
+      <div><h2 class="text-xl font-bold text-red-600 mb-2">What's the use of YouTube Channel ID?</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
+      <div><h2 class="text-xl font-bold text-red-600 mb-2">Is it safe to extract YouTube Channel ID?</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
+      <div><h2 class="text-xl font-bold text-red-600 mb-2">How to get YouTube Channel ID?</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Back to Top -->
+  <button id="backToTop" class="fixed bottom-6 right-6 bg-red-600 text-white p-3 rounded-full shadow hidden">↑</button>
+
+  <!-- Script -->
+  <script defer src="/assets/js/script.js"></script>
+
+  <script>
+    const BACKEND_URL = "https://yt-meta-backend.onrender.com";
+
+    document.getElementById('channelForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('channelInput').value.trim();
+      if (!input) return alert("Please enter a valid channel URL");
+
+      try {
+        const res = await fetch(`${BACKEND_URL}/api/channel-id?url=${encodeURIComponent(input)}`);
+        const data = await res.json();
+
+        if (data.error || !data.channelId) {
+          alert(data.error || "Unable to extract Channel ID");
+          return;
+        }
+
+        document.getElementById('channelId').textContent = data.channelId;
+        document.getElementById('channelName').textContent = data.channelName || 'Not Found';
+        document.getElementById('channelAvatar').src = data.channelAvatar || '';
+
+        document.getElementById('channelResults').classList.remove('hidden');
+        document.getElementById('channelResults').scrollIntoView({ behavior: 'smooth' });
+
+      } catch (err) {
+        console.error(err);
+        alert("Something went wrong. Please try again later.");
+      }
+    });
+
+    function copyText(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => alert("Copied!"));
+    }
+  </script>
+</body>
+</html>
