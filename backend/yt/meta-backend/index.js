@@ -1,11 +1,15 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors'); // ✅ added
+
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(cors()); // ✅ added
 
 app.get('/', (req, res) => {
   res.send('YouTube Meta Data API is running ✅');
