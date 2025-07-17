@@ -88,7 +88,7 @@
 
         document.getElementById('channelThumb').src = data.thumbnail || "";
         document.getElementById('channelName').textContent = data.channelTitle || "Unknown";
-        document.getElementById('monetizationStatus').textContent = data.isMonetized ? "Congratulations 🎉 This channel is monetized ✅" : Oops!! This channel is Not monetized ❌";
+        document.getElementById('monetizationStatus').textContent = data.isMonetized ? "Congratulations 🎉 This channel is monetized ✅" : "Oops😩 This channel is Not monetized ❌";
 
         document.getElementById('monetizationResults').classList.remove('hidden');
         document.getElementById('monetizationResults').scrollIntoView({ behavior: 'smooth' });
