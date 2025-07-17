@@ -19,6 +19,7 @@ app.use(express.json()); // required for JSON parsing
 const metaRoute = require('./routes/meta');
 const channelIdRoute = require('./routes/channelId');
 const earningsRoute = require('./routes/earnings'); // ✅ NEW
+const monetizationChecker = require('./monetization');
 
 // Routes
 app.get('/', (req, res) => {
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 app.use('/api', metaRoute);          // /api/meta
 app.use('/api', channelIdRoute);     // /api/channel-id
 app.use('/api', earningsRoute);      // ✅ /api/earnings
+app.use('/api', monetizationChecker);
 
 // Start Server
 app.listen(PORT, () => {
