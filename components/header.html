@@ -14,10 +14,20 @@
     <!-- Controls: Language, Theme, Hamburger -->
     <div class="flex items-center gap-4">
 
-    <!-- Google Translate with Flag -->
-<div class="custom-google-translate">
-  <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="w-5 h-3 rounded-sm">
-  <div id="google_translate_element"></div>
+<!-- Language Switcher -->
+<div class="relative group" id="language-selector">
+  <button class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm">
+    <img id="current-flag" src="https://flagcdn.com/w40/gb.png" alt="EN" class="w-5 h-3 rounded-sm">
+    <span id="current-lang" class="text-sm font-medium text-black dark:text-white">EN</span>
+    <svg class="w-4 h-4 text-gray-500 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+
+  <!-- Google Translate Dropdown -->
+  <div id="google_translate_element"
+       class="absolute top-full right-0 mt-1 hidden group-hover:block bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg z-50 text-sm w-max shadow-md p-2">
+  </div>
 </div>
 
       <!-- Dark Mode Toggle -->
