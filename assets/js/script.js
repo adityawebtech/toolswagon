@@ -111,10 +111,13 @@ if (overlayContainer) {
     .catch(err => console.error('Overlay load error:', err));
 }
 
+// Translate 
+
   function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'en',
-    includedLanguages: 'en,hi,fr,es,bn,pt', // English, Hindi, French, Spanish, Bengali, Portuguese
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    includedLanguages: 'en,hi,fr,es,bn,pt',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
   }, 'google_translate_element');
 }
