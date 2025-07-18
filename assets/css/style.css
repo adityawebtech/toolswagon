@@ -49,17 +49,37 @@
   cursor: pointer;
 }
 
-/* Hide unnecessary branding */
-.goog-logo-link,
-.goog-te-gadget span {
-  display: none !important;
-}
 
-.goog-te-banner-frame.skiptranslate,
-body > .goog-te-spinner-pos {
-  display: none !important;
-}
+  .custom-google-translate {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    max-width: fit-content;
+  }
 
-body {
-  top: 0 !important;
-}
+  body.dark .custom-google-translate {
+    background-color: #1f2937; /* dark:bg-gray-800 */
+    border: 1px solid #555;
+  }
+
+  .custom-google-translate select {
+    background-color: transparent;
+    border: none;
+    color: #111;
+    font-size: 14px;
+    padding: 4px;
+    font-weight: 500;
+  }
+
+  body.dark .custom-google-translate select {
+    color: white;
+  }
+
+  .custom-google-translate img {
+    margin-right: 4px;
+  }
+
