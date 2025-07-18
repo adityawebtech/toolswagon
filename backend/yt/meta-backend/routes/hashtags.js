@@ -5,19 +5,21 @@ const stopwords = [
   "the", "is", "at", "which", "on", "and", "a", "an", "of", "in", "to", "for", "with", "that", "this", "by", "from"
 ];
 
-// Hardcoded fallback tags for common keywords (replace with DB/AI later)
 const keywordSuggestions = {
   lofi: [
-    "lofi", "lofibeats", "lofihiphop", "lofivibes", "studybeats", "chillhop", "relaxingmusic", "chillmusic", "vibes", "beats"
-  ],
-  gaming: [
-    "gaming", "gamers", "gameplay", "livestream", "pcgaming", "xbox", "playstation", "gamingsetup", "esports", "gamerlife"
+    "lofi", "lofibeats", "lofihiphop", "lofivibes", "studybeats", "chillhop", "relaxingmusic", "chillmusic", "vibes", "beats",
+    "music", "study", "relax", "lofimusic", "calm", "focus", "backgroundmusic", "lofiart", "latevibes", "aesthetic",
+    "nightvibes", "instrumental", "sleeptunes", "chillvibes", "nostalgia"
   ],
   vlog: [
-    "vlog", "dailyvlog", "travelvlog", "vloggerlife", "vloglife", "indianvlogger", "vlogging", "videoblog", "youtubevlog", "travel"
+    "vlog", "dailyvlog", "travelvlog", "vloggerlife", "vloglife", "indianvlogger", "vlogging", "videoblog", "youtubevlog", "travel",
+    "lifestylevlog", "newvlog", "vlogday", "vlogtrip", "journey", "myvlog", "exploring", "indiavlog", "vloggers", "adventure",
+    "vlogcontent", "personalvlog", "mobilevlog", "reallife", "vloggerslife"
   ],
   motivation: [
-    "motivation", "inspiration", "success", "nevergiveup", "mindset", "goalsetting", "motivationalvideo", "positivity", "selfimprovement"
+    "motivation", "inspiration", "success", "nevergiveup", "mindset", "goalsetting", "motivationalvideo", "positivity", "selfimprovement",
+    "growth", "hustle", "focus", "dailygrind", "winner", "ambition", "workhard", "dreambig", "dedication", "motivated",
+    "mindpower", "selfgrowth", "grindmode", "resilience", "motivationdaily", "lifecoach"
   ]
 };
 
@@ -29,30 +31,43 @@ function extractVideoId(url) {
 router.get('/hashtags', async (req, res) => {
   const { url = "", text = "" } = req.query;
 
-  let base = text.toLowerCase().trim();
-  let hashtags = [];
+  const input = text.toLowerCase().trim();
+  let tags = [];
 
-  // If video URL exists, extract video ID (optional future use)
-  const videoId = extractVideoId(url);
+  const keyword = Object.keys(keywordSuggestions).find(k => input.includes(k));
 
-  // If a known keyword exists
-  const mainKey = Object.keys(keywordSuggestions).find(k => base.includes(k));
-  if (mainKey) {
-    hashtags = keywordSuggestions[mainKey].map(tag => `#${tag}`);
+  if (keyword) {
+    tags = keywordSuggestions[keyword];
   } else {
-    // Basic fallback if unknown keyword
-    const words = base.split(/\s+/).filter(w => !stopwords.includes(w.toLowerCase()) && w.length > 2);
-    const extraSuggestions = [
+    const words = input.split(/\s+/).filter(w => !stopwords.includes(w) && w.length > 2);
+    const extras = [
       ...words,
       ...words.map(w => w + "vibes"),
-      ...words.map(w => w + "shorts"),
-      ...words.map(w => "best" + w),
+      ...words.map(w => "best" + w)
     ];
-    const unique = [...new Set(extraSuggestions.map(w => `#${w.toLowerCase()}`))];
-    hashtags = unique;
+    tags = [...new Set(extras)];
   }
 
-  res.json({ hashtags });
+  // Apply formatting, enforce 25 hashtags and 500-character limit
+  let finalHashtags = [];
+  let totalLength = 0;
+
+  for (const tag of tags) {
+    const formatted = `#${tag.toLowerCase()}`;
+    const extra = formatted.length + (finalHashtags.length > 0 ? 2 : 0); // 2 = ", "
+
+    if (
+      finalHashtags.length < 25 &&
+      totalLength + extra <= 500
+    ) {
+      finalHashtags.push(formatted);
+      totalLength += extra;
+    } else {
+      break;
+    }
+  }
+
+  res.json({ hashtags: finalHashtags });
 });
 
 module.exports = router;
