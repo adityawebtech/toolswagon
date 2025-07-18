@@ -17,34 +17,6 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/style.css">
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            inter: ['Inter', 'sans-serif']
-          },
-          colors: {
-            primary: '#DC2626'
-          }
-        }
-      }
-    };
-  </script>
-  <script defer src="/assets/js/script.js"></script>
-  <script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages: 'en,hi,fr,es,bn,pt',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  }
-</script>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body class="bg-white dark:bg-black text-black dark:text-white font-inter transition-colors duration-300">  <!-- Header will load here -->  <div id="header-container"></div>  <!-- Main Content -->  <main class="min-h-screen"><!-- Hero -->
 <section class="bg-red-200 dark:bg-red-900 text-center py-20 px-4">
@@ -165,8 +137,25 @@
 
   </main>  <!-- Footer will load here -->  <div id="footer-container"></div>  <!-- Back to Top Button --><button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow hidden">↑</button>
 
-  <script src="/assets/js/pages/index.js" defer></script><!-- Google Translate Element (hidden) -->
-<!-- Google Translate Script -->
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="/assets/js/pages/index.js" defer></script>
+    <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif']
+          },
+          colors: {
+            primary: '#DC2626'
+          }
+        }
+      }
+    };
+  </script>
+<script defer src="/assets/js/script.js"></script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
 </body>
 </html>
