@@ -65,40 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
       setDarkMode(isDark);
     });
 
-    // Language Selector
-const langToggle = document.getElementById('langToggle');
-const langMenu = document.getElementById('langMenu');
-
-langToggle?.addEventListener('click', (e) => {
-  e.stopPropagation();
-  langMenu?.classList.toggle('hidden');
-});
-
-document.addEventListener('click', () => {
-  if (!langMenu?.classList.contains('hidden')) {
-    langMenu?.classList.add('hidden');
-  }
-});
-
-// Google Translate function
-function googleTranslateSetLang(lang) {
-  const select = document.querySelector('select.goog-te-combo');
-  if (select) {
-    select.value = lang;
-    select.dispatchEvent(new Event('change'));
-  }
-}
-
-// Language button triggers
-document.querySelectorAll('#langMenu button').forEach(button => {
-  button.addEventListener('click', () => {
-    const text = button.textContent.trim().toLowerCase();
-    if (text.includes('hindi')) googleTranslateSetLang('hi');
-    else if (text.includes('french')) googleTranslateSetLang('fr');
-    else if (text.includes('english')) googleTranslateSetLang('en');
-  });
-});
-
   // Bug Report Form
   document.getElementById('bugForm')?.addEventListener('submit', function (e) {
     e.preventDefault();
