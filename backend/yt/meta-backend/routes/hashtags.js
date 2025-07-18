@@ -3,7 +3,7 @@ const axios = require('axios');
 const router = express.Router();
 
 const extractVideoId = (url) => {
-  const match = url.match(/(?:v=|\\/)([0-9A-Za-z_-]{11})/);
+  const match = url.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
   return match ? match[1] : null;
 };
 
@@ -34,7 +34,7 @@ router.get('/hashtags', async (req, res) => {
 
     if (!queryText) return res.status(400).json({ error: 'No input text provided.' });
 
-    // Simulate AI/ML response
+    // Simulated AI hashtag extraction
     const keywords = queryText
       .split(/\s+/)
       .filter(word => word.length > 4)
