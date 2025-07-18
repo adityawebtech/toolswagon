@@ -65,22 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
       setDarkMode(isDark);
     });
 
-    // Language Selector
-    const langToggle = document.getElementById('langToggle');
-    const langMenu = document.getElementById('langMenu');
-
-    langToggle?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      langMenu?.classList.toggle('hidden');
-    });
-
-    document.addEventListener('click', () => {
-      if (!langMenu?.classList.contains('hidden')) {
-        langMenu?.classList.add('hidden');
-      }
-    });
-  }
-
   // Bug Report Form
   document.getElementById('bugForm')?.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -111,30 +95,41 @@ if (overlayContainer) {
     .catch(err => console.error('Overlay load error:', err));
 }
 
-  // Google Translate Init Function
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'en',
-    includedLanguages: 'en,hi,fr,es,bn,pt', // English, Hindi, French, Spanish, Bengali, Portuguese
+    includedLanguages: 'en,hi,fr,es,bn,pt',
     layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
     autoDisplay: false
   }, 'google_translate_element');
 }
 
-// Toggle Language Dropdown (Optional if you use custom UI)
-document.addEventListener("DOMContentLoaded", () => {
-  const langToggle = document.getElementById("langToggle");
-  const langMenu = document.getElementById("langMenu");
+document.addEventListener('DOMContentLoaded', () => {
+  const flagMap = {
+    'en': { flag: 'https://flagcdn.com/w40/gb.png', label: 'EN' },
+    'hi': { flag: 'https://flagcdn.com/w40/in.png', label: 'HI' },
+    'fr': { flag: 'https://flagcdn.com/w40/fr.png', label: 'FR' },
+    'es': { flag: 'https://flagcdn.com/w40/es.png', label: 'ES' },
+    'bn': { flag: 'https://flagcdn.com/w40/bd.png', label: 'BN' },
+    'pt': { flag: 'https://flagcdn.com/w40/pt.png', label: 'PT' }
+  };
 
-  if (langToggle && langMenu) {
-    langToggle.addEventListener("click", () => {
-      langMenu.classList.toggle("hidden");
-    });
+  const currentFlag = document.getElementById('current-flag');
+  const currentLang = document.getElementById('current-lang');
 
-    document.addEventListener("click", (e) => {
-      if (!langToggle.contains(e.target) && !langMenu.contains(e.target)) {
-        langMenu.classList.add("hidden");
-      }
-    });
-  }
+  const observer = new MutationObserver(() => {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.addEventListener('change', () => {
+        const selectedLang = select.value;
+        const data = flagMap[selectedLang];
+        if (data) {
+          currentFlag.src = data.flag;
+          currentLang.textContent = data.label;
+        }
+      });
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
 });
