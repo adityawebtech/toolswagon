@@ -2,16 +2,29 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
+// Common English stopwords
+const STOPWORDS = new Set([
+  'a', 'an', 'the', 'and', 'or', 'but', 'if', 'in', 'on', 'with', 'to', 'of', 'for',
+  'by', 'is', 'it', 'at', 'as', 'from', 'be', 'this', 'that', 'are', 'was', 'were',
+  'has', 'have', 'had', 'do', 'does', 'did', 'not', 'so', 'such', 'its', 'your',
+  'you', 'we', 'he', 'she', 'they', 'them', 'us', 'can', 'will', 'just', 'than',
+  'out', 'up', 'down', 'over', 'under', 'again', 'about', 'into', 'more', 'less'
+]);
+
 function extractVideoId(url) {
   const match = url.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
   return match ? match[1] : null;
 }
 
 function generateHashtagsFromText(text) {
-  const baseWords = text.toLowerCase().split(/[\s\-_,]+/).filter(w => w.length > 2);
-  const uniqueWords = [...new Set(baseWords)];
+  const words = text
+    .toLowerCase()
+    .split(/[\s\-_,.#!?]+/)
+    .filter(word => word.length > 2 && !STOPWORDS.has(word));
+
+  const uniqueWords = [...new Set(words)];
   const hashtags = uniqueWords.map(word => `#${word}`);
-  return hashtags.slice(0, 20); // Limit max 20 for quality
+  return hashtags.slice(0, 20); // limit to 20 quality hashtags
 }
 
 router.get('/hashtags', async (req, res) => {
@@ -20,8 +33,7 @@ router.get('/hashtags', async (req, res) => {
 
   try {
     let finalText = text;
-    
-    // If YouTube video URL
+
     const videoId = extractVideoId(url);
     if (videoId && apiKey) {
       const ytRes = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
@@ -42,7 +54,6 @@ router.get('/hashtags', async (req, res) => {
       return res.status(400).json({ error: 'No valid text or video title found.' });
     }
 
-    // Generate basic hashtags
     const hashtags = generateHashtagsFromText(finalText);
     return res.json({ hashtags });
 
