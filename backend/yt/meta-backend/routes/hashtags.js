@@ -1,66 +1,37 @@
-const express = require('express');
-const axios = require('axios');
-const router = express.Router();
+const express = require('express'); const axios = require('axios'); const router = express.Router();
 
-// Common English stopwords
-const STOPWORDS = new Set([
-  'a', 'an', 'the', 'and', 'or', 'but', 'if', 'in', 'on', 'with', 'to', 'of', 'for',
-  'by', 'is', 'it', 'at', 'as', 'from', 'be', 'this', 'that', 'are', 'was', 'were',
-  'has', 'have', 'had', 'do', 'does', 'did', 'not', 'so', 'such', 'its', 'your',
-  'you', 'we', 'he', 'she', 'they', 'them', 'us', 'can', 'will', 'just', 'than',
-  'out', 'up', 'down', 'over', 'under', 'again', 'about', 'into', 'more', 'less'
-]);
+// English stopwords for filtering const STOPWORDS = new Set([ 'a', 'an', 'the', 'and', 'or', 'but', 'if', 'in', 'on', 'with', 'to', 'of', 'for', 'by', 'is', 'it', 'at', 'as', 'from', 'be', 'this', 'that', 'are', 'was', 'were', 'has', 'have', 'had', 'do', 'does', 'did', 'not', 'so', 'such', 'its', 'your', 'you', 'we', 'he', 'she', 'they', 'them', 'us', 'can', 'will', 'just', 'than', 'out', 'up', 'down', 'over', 'under', 'again', 'about', 'into', 'more', 'less' ]);
 
-function extractVideoId(url) {
-  const match = url.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
-  return match ? match[1] : null;
+function extractVideoId(url) { const match = url.match(/(?:v=|.be/|embed/|/v/|watch?v=|&v=|?v=)([0-9A-Za-z_-]{11})/); return match ? match[1] : null; }
+
+function generateHashtagsFromText(text) { const words = text .toLowerCase() .split(/[^a-zA-Z0-9]/) .filter(word => word.length > 2 && !STOPWORDS.has(word));
+
+const uniqueWords = [...new Set(words)]; const hashtags = uniqueWords.map(word => #${word}); return hashtags.slice(0, 30); // keep up to 30 clean hashtags }
+
+router.get('/hashtags', async (req, res) => { const { url = '', text = '' } = req.query; const apiKey = process.env.YOUTUBE_API_KEY;
+
+try { let finalText = text; const videoId = extractVideoId(url);
+
+if (videoId && apiKey) {
+  const ytRes = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+    params: {
+      part: 'snippet',
+      id: videoId,
+      key: apiKey
+    }
+  });
+  const video = ytRes.data.items[0];
+  if (video?.snippet?.title) finalText = video.snippet.title;
 }
 
-function generateHashtagsFromText(text) {
-  const words = text
-    .toLowerCase()
-    .split(/[\s\-_,.#!?]+/)
-    .filter(word => word.length > 2 && !STOPWORDS.has(word));
-
-  const uniqueWords = [...new Set(words)];
-  const hashtags = uniqueWords.map(word => `#${word}`);
-  return hashtags.slice(0, 20); // limit to 20 quality hashtags
+if (!finalText) {
+  return res.status(400).json({ error: 'No text found for generating hashtags.' });
 }
 
-router.get('/hashtags', async (req, res) => {
-  const { url = "", text = "" } = req.query;
-  const apiKey = process.env.YOUTUBE_API_KEY;
+const hashtags = generateHashtagsFromText(finalText);
+return res.json({ hashtags });
 
-  try {
-    let finalText = text;
-
-    const videoId = extractVideoId(url);
-    if (videoId && apiKey) {
-      const ytRes = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
-        params: {
-          part: 'snippet',
-          id: videoId,
-          key: apiKey
-        }
-      });
-
-      const video = ytRes.data.items[0];
-      if (video?.snippet?.title) {
-        finalText = video.snippet.title;
-      }
-    }
-
-    if (!finalText) {
-      return res.status(400).json({ error: 'No valid text or video title found.' });
-    }
-
-    const hashtags = generateHashtagsFromText(finalText);
-    return res.json({ hashtags });
-
-  } catch (err) {
-    console.error("Hashtag generation error:", err.message);
-    return res.status(500).json({ error: "Failed to generate hashtags." });
-  }
-});
+} catch (err) { console.error('Hashtag generation error:', err.message); return res.status(500).json({ error: 'Error generating hashtags' }); } });
 
 module.exports = router;
+
