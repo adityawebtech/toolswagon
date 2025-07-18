@@ -1,82 +1,58 @@
 const express = require('express');
 const router = express.Router();
 
-// Basic stopwords for filtering non-informative words
-const STOPWORDS = new Set([
-  "a", "an", "the", "and", "or", "in", "on", "of", "for", "with", "to", "is", "are", "was", "were", "at",
-  "by", "it", "from", "this", "that", "be", "as", "you", "your", "i", "me", "my", "we", "our", "us",
-  "they", "them", "their", "has", "have", "had", "not", "but", "can", "will", "just"
-]);
+const stopwords = [
+  "the", "is", "at", "which", "on", "and", "a", "an", "of", "in", "to", "for", "with", "that", "this", "by", "from"
+];
 
-// Function to extract video ID from different YouTube URL formats
+// Hardcoded fallback tags for common keywords (replace with DB/AI later)
+const keywordSuggestions = {
+  lofi: [
+    "lofi", "lofibeats", "lofihiphop", "lofivibes", "studybeats", "chillhop", "relaxingmusic", "chillmusic", "vibes", "beats"
+  ],
+  gaming: [
+    "gaming", "gamers", "gameplay", "livestream", "pcgaming", "xbox", "playstation", "gamingsetup", "esports", "gamerlife"
+  ],
+  vlog: [
+    "vlog", "dailyvlog", "travelvlog", "vloggerlife", "vloglife", "indianvlogger", "vlogging", "videoblog", "youtubevlog", "travel"
+  ],
+  motivation: [
+    "motivation", "inspiration", "success", "nevergiveup", "mindset", "goalsetting", "motivationalvideo", "positivity", "selfimprovement"
+  ]
+};
+
 function extractVideoId(url) {
-  const regex = /(?:v=|\/(?:embed|shorts|v)\/|youtu\.be\/)([0-9A-Za-z_-]{11})/;
-  const match = url.match(regex);
+  const match = url.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
   return match ? match[1] : null;
 }
 
-// Fallback dummy function to simulate getting title/description from a video ID
-async function getVideoInfo(videoId) {
-  // You can connect your actual YouTube Data API here if needed
-  return {
-    title: "Sample Video Title about Lofi Chill Beats Study Music",
-    description: "Relaxing lofi hip hop chill study beats to relax and focus. Perfect music for studying or sleeping."
-  };
-}
-
-// Function to extract hashtags from a string
-function generateHashtagsFromText(text) {
-  const words = text
-    .toLowerCase()
-    .replace(/[^\w\s]/g, '') // Remove punctuation
-    .split(/\s+/)
-    .filter(word => word.length > 2 && !STOPWORDS.has(word));
-
-  const unique = Array.from(new Set(words));
-  return unique.map(word => `#${word}`);
-}
-
 router.get('/hashtags', async (req, res) => {
-  const { url, text } = req.query;
+  const { url = "", text = "" } = req.query;
 
-  try {
-    let rawText = text;
+  let base = text.toLowerCase().trim();
+  let hashtags = [];
 
-    // If the input is a YouTube URL, extract video ID and fetch its metadata
-    if (url && url.includes('youtube.com') || url.includes('youtu.be')) {
-      const videoId = extractVideoId(url);
-      if (!videoId) return res.status(400).json({ error: 'Invalid YouTube video URL.' });
+  // If video URL exists, extract video ID (optional future use)
+  const videoId = extractVideoId(url);
 
-      const info = await getVideoInfo(videoId);
-      rawText = `${info.title} ${info.description}`;
-    }
-
-    if (!rawText || rawText.trim().length < 3) {
-      return res.status(400).json({ error: 'No valid keyword or video content to process.' });
-    }
-
-    let hashtags = generateHashtagsFromText(rawText);
-
-    // Format hashtags within 500 character limit
-    const finalTags = [];
-    let totalLen = 0;
-
-    for (const tag of hashtags) {
-      const withComma = tag + ', ';
-      if ((totalLen + withComma.length) <= 500) {
-        finalTags.push(tag);
-        totalLen += withComma.length;
-      } else {
-        break;
-      }
-    }
-
-    res.json({ hashtags: finalTags });
-
-  } catch (err) {
-    console.error("Hashtag Generator Error:", err.message);
-    res.status(500).json({ error: 'Something went wrong while generating hashtags.' });
+  // If a known keyword exists
+  const mainKey = Object.keys(keywordSuggestions).find(k => base.includes(k));
+  if (mainKey) {
+    hashtags = keywordSuggestions[mainKey].map(tag => `#${tag}`);
+  } else {
+    // Basic fallback if unknown keyword
+    const words = base.split(/\s+/).filter(w => !stopwords.includes(w.toLowerCase()) && w.length > 2);
+    const extraSuggestions = [
+      ...words,
+      ...words.map(w => w + "vibes"),
+      ...words.map(w => w + "shorts"),
+      ...words.map(w => "best" + w),
+    ];
+    const unique = [...new Set(extraSuggestions.map(w => `#${w.toLowerCase()}`))];
+    hashtags = unique;
   }
+
+  res.json({ hashtags });
 });
 
 module.exports = router;
