@@ -1,71 +1,97 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html><html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YouTube Hashtag Generator | Toolswagon</title>
-  <meta name="description" content="Generate relevant and trending hashtags from YouTube video titles or URLs instantly." />
-  <link rel="stylesheet" href="/assets/css/style.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>body { font-family: 'Poppins', sans-serif; }</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Hashtag Generator</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="bg-white text-black dark:bg-gray-900 dark:text-white">  <!-- Header -->  <div id="header-container"></div>  <!-- Hero Section -->  <section class="py-16 px-4 text-center bg-white dark:bg-gray-900">
-    <div class="max-w-3xl mx-auto">
-      <div class="mx-auto mb-6 w-20 h-20 rounded-full bg-yellow-100 flex items-center justify-center">
-        <svg class="w-10 h-10 text-yellow-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-          <path d="M12 4v16m8-8H4" />
-        </svg>
-      </div>
-      <h1 class="text-4xl font-bold text-yellow-600 mb-2">YouTube Hashtag Generator</h1>
-      <p class="text-lg text-gray-700 dark:text-gray-300">Generate AI-based hashtags from any YouTube video URL or title.</p>
-      <form id="hashtagForm" class="mt-6 flex flex-col gap-4 sm:flex-row justify-center items-center">
-        <input id="hashtagInput" type="text" placeholder="Enter video title or paste YouTube URL..." required
-          class="w-full sm:w-96 px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
-        <button type="submit"
-          class="bg-yellow-600 text-white px-6 py-3 rounded-lg hover:bg-yellow-700 transition">Generate Hashtags</button>
-      </form>
-    </div>
-  </section>  <!-- Result Section -->  <section id="hashtagResults" class="py-12 px-4 hidden">
-    <div class="max-w-3xl mx-auto border border-yellow-500 rounded-lg p-6 shadow bg-white dark:bg-gray-800">
-      <h2 class="text-xl font-bold text-yellow-600 mb-4">Generated Hashtags</h2>
-      <div id="hashtagsDisplay" class="flex flex-wrap gap-2 mb-4 text-sm text-yellow-700"></div>
-      <button onclick="copyHashtags()" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">Copy All</button>
-    </div>
-  </section>  <!-- Info Section -->  <section class="py-12 px-4 border-t border-gray-300 dark:border-gray-700">
-    <div class="max-w-4xl mx-auto space-y-10">
-      <div><h2 class="text-xl font-bold text-yellow-600 mb-2">Why use YouTube hashtags?</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
-      <div><h2 class="text-xl font-bold text-yellow-600 mb-2">How this tool works?</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
-      <div><h2 class="text-xl font-bold text-yellow-600 mb-2">Tips to use hashtags effectively</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
-      <div><h2 class="text-xl font-bold text-yellow-600 mb-2">Best practices from creators</h2><p class="text-gray-700 dark:text-gray-300">Content goes here...</p></div>
-    </div>
-  </section>  <!-- Footer -->  <div id="footer-container"></div>  <!-- Script -->  <script>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">  <!-- Header Include -->  <div id="header-placeholder"></div>  <main class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-red-600 mb-6 text-center">YouTube Hashtag Generator</h1><!-- Tool Form -->
+<form id="hashtagForm" class="space-y-4">
+  <div>
+    <label class="font-semibold text-black dark:text-white">Enter a keyword or YouTube video URL:</label>
+    <input type="text" id="hashtagInput" class="w-full border rounded p-2 dark:bg-gray-800 dark:border-gray-700" placeholder="e.g., Lofi beats or YouTube video URL...">
+  </div>
+  <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700">Generate Hashtags</button>
+</form>
+
+<!-- Results Section -->
+<div id="hashtagResults" class="mt-10 hidden">
+  <h2 class="text-xl font-bold text-red-600 mb-4">Relevant & Trending Hashtags</h2>
+  <textarea id="hashtagsBox" class="w-full h-32 p-3 border rounded dark:bg-gray-800 dark:border-gray-600"></textarea>
+  <div class="flex justify-end mt-4">
+    <button id="copyBtn" class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800">Copy Hashtags</button>
+  </div>
+</div>
+
+<!-- Content Area -->
+<section class="mt-16 space-y-10">
+  <div>
+    <h3 class="text-2xl font-semibold text-red-600">Why Use Hashtags?</h3>
+    <p class="text-gray-700 dark:text-gray-300">Hashtags help improve your video's discoverability by grouping it with similar content. This tool generates trending and relevant hashtags based on real YouTube data.</p>
+  </div>
+  <div>
+    <h3 class="text-2xl font-semibold text-red-600">Keyword & URL Support</h3>
+    <p class="text-gray-700 dark:text-gray-300">You can enter a keyword or a YouTube video URL. Our system intelligently analyzes the input and returns high-performing hashtags.</p>
+  </div>
+  <div>
+    <h3 class="text-2xl font-semibold text-red-600">Trending Hashtag Detection</h3>
+    <p class="text-gray-700 dark:text-gray-300">We use AI and trend analysis to extract hashtags currently being used and ranked by top YouTube creators in your content category.</p>
+  </div>
+  <div>
+    <h3 class="text-2xl font-semibold text-red-600">YouTube Policy Compliance</h3>
+    <p class="text-gray-700 dark:text-gray-300">YouTube only allows a 500-character limit for hashtags. Our tool ensures all hashtags are neatly packed within that limit.</p>
+  </div>
+</section>
+
+  </main>  <!-- Footer Include -->  <div id="footer-placeholder"></div>  <!-- Script -->  <script>
     const BACKEND_URL = "https://yt-meta-backend.onrender.com";
 
     document.getElementById('hashtagForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const input = document.getElementById('hashtagInput').value.trim();
-      const resultBox = document.getElementById('hashtagResults');
-      const tagBox = document.getElementById('hashtagsDisplay');
-
-      tagBox.innerHTML = 'Loading...';
-      resultBox.classList.remove('hidden');
+      const resBox = document.getElementById('hashtagsBox');
 
       try {
-        const res = await fetch(`${BACKEND_URL}/api/hashtags?${input.includes('youtube.com') ? 'url' : 'text'}=${encodeURIComponent(input)}`);
+        const res = await fetch(`${BACKEND_URL}/api/hashtags?url=${encodeURIComponent(input)}&text=${encodeURIComponent(input)}`);
         const data = await res.json();
 
-        if (data.error) throw new Error(data.error);
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
 
-        tagBox.innerHTML = data.hashtags.map(tag => `<span class='bg-yellow-100 text-yellow-800 px-2 py-1 rounded'>${tag}</span>`).join(' ');
+        let hashtags = data.hashtags || [];
+        let formatted = '';
+        for (let tag of hashtags) {
+          if ((formatted + tag + ', ').length <= 500) {
+            formatted += tag + ', ';
+          } else {
+            break;
+          }
+        }
+        resBox.value = formatted.trim().replace(/,$/, '');
 
+        document.getElementById('hashtagResults').classList.remove('hidden');
+        resBox.scrollIntoView({ behavior: 'smooth' });
       } catch (err) {
-        tagBox.innerHTML = `<p class='text-red-600'>Error: ${err.message}</p>`;
+        console.error(err);
+        alert("Something went wrong while generating hashtags.");
       }
     });
 
-    function copyHashtags() {
-      const text = [...document.querySelectorAll('#hashtagsDisplay span')].map(span => span.textContent).join(' ');
-      navigator.clipboard.writeText(text).then(() => alert('Hashtags copied!'));
-    }
-  </script>  <script defer src="/assets/js/script.js"></script></body>
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      const text = document.getElementById('hashtagsBox');
+      text.select();
+      document.execCommand('copy');
+      alert('Hashtags copied to clipboard!');
+    });
+
+    // Load header and footer
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('/components/header.html').then(res => res.text()).then(html => document.getElementById('header-placeholder').innerHTML = html);
+      fetch('/components/footer.html').then(res => res.text()).then(html => document.getElementById('footer-placeholder').innerHTML = html);
+    });
+  </script></body>
 </html>
