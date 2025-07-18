@@ -2,23 +2,29 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
-const extractVideoId = (url) => {
+function extractVideoId(url) {
   const match = url.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
   return match ? match[1] : null;
-};
+}
+
+function generateHashtagsFromText(text) {
+  const baseWords = text.toLowerCase().split(/[\s\-_,]+/).filter(w => w.length > 2);
+  const uniqueWords = [...new Set(baseWords)];
+  const hashtags = uniqueWords.map(word => `#${word}`);
+  return hashtags.slice(0, 20); // Limit max 20 for quality
+}
 
 router.get('/hashtags', async (req, res) => {
-  const { url, text } = req.query;
+  const { url = "", text = "" } = req.query;
   const apiKey = process.env.YOUTUBE_API_KEY;
 
   try {
-    let queryText = text;
-
-    if (url) {
-      const videoId = extractVideoId(url);
-      if (!videoId) return res.status(400).json({ error: 'Invalid YouTube video URL.' });
-
-      const ytRes = await axios.get(`https://www.googleapis.com/youtube/v3/videos`, {
+    let finalText = text;
+    
+    // If YouTube video URL
+    const videoId = extractVideoId(url);
+    if (videoId && apiKey) {
+      const ytRes = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
         params: {
           part: 'snippet',
           id: videoId,
@@ -27,27 +33,22 @@ router.get('/hashtags', async (req, res) => {
       });
 
       const video = ytRes.data.items[0];
-      if (!video) return res.status(404).json({ error: 'Video not found.' });
-
-      queryText = `${video.snippet.title} ${video.snippet.description}`;
+      if (video?.snippet?.title) {
+        finalText = video.snippet.title;
+      }
     }
 
-    if (!queryText) return res.status(400).json({ error: 'No input text provided.' });
+    if (!finalText) {
+      return res.status(400).json({ error: 'No valid text or video title found.' });
+    }
 
-    // Simulated AI hashtag extraction
-    const keywords = queryText
-      .split(/\s+/)
-      .filter(word => word.length > 4)
-      .slice(0, 10)
-      .map(word => '#' + word.replace(/[^a-zA-Z0-9]/g, '').toLowerCase());
-
-    const uniqueHashtags = [...new Set(keywords)];
-
-    res.json({ hashtags: uniqueHashtags.length ? uniqueHashtags : ['#youtube', '#hashtag', '#generator'] });
+    // Generate basic hashtags
+    const hashtags = generateHashtagsFromText(finalText);
+    return res.json({ hashtags });
 
   } catch (err) {
-    console.error('Hashtag Error:', err.message);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Hashtag generation error:", err.message);
+    return res.status(500).json({ error: "Failed to generate hashtags." });
   }
 });
 
