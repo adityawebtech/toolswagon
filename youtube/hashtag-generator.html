@@ -35,18 +35,22 @@
   </section>
 
   <!-- Results -->
-  <section id="hashtagResults" class="py-12 px-4 hidden bg-white dark:bg-gray-900">
-    <div class="max-w-3xl mx-auto border border-red-500 rounded-lg p-6 space-y-6 text-left shadow-sm bg-white dark:bg-gray-800">
-      <div>
-        <h2 class="text-xl font-bold text-red-600 mb-2">Suggested Hashtags</h2>
-        <textarea id="hashtagsBox" class="w-full h-32 p-3 border rounded dark:bg-gray-800 dark:border-gray-600"></textarea>
-        <div class="flex justify-end mt-4">
-          <button id="copyBtn" class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800">Copy Hashtags</button>
-        </div>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Up to 500 characters included as per YouTube policy.</p>
-      </div>
-    </div>
-  </section>
+  <!-- Results Section -->
+<div id="hashtagResults" class="mt-10 hidden">
+  <h2 class="text-xl font-bold text-red-600 mb-4">Relevant & Trending Hashtags</h2>
+  
+  <!-- Styled Hashtags Display -->
+  <div id="hashtagStyledList" class="flex flex-wrap gap-2 mb-4"></div>
+<textarea id="hashtagsBox" class="hidden"></textarea>
+
+  <!-- Raw Hashtags Textarea -->
+  <textarea id="hashtagsBox" class="w-full h-32 p-3 border rounded dark:bg-gray-800 dark:border-gray-600 hidden"></textarea>
+
+  <!-- Copy Button -->
+  <div class="flex justify-end">
+    <button id="copyBtn" class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800">Copy Hashtags</button>
+  </div>
+</div>
 
   <!-- Info Section -->
   <section class="py-12 px-4 border-t border-gray-300 dark:border-gray-700">
@@ -67,60 +71,77 @@
 
   <!-- Scripts -->
   <script>
-    const BACKEND_URL = "https://yt-meta-backend.onrender.com";
+  const BACKEND_URL = "https://yt-meta-backend.onrender.com";
 
-    document.getElementById('hashtagForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const input = document.getElementById('hashtagInput').value.trim();
-      const resBox = document.getElementById('hashtagsBox');
+  document.getElementById('hashtagForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const input = document.getElementById('hashtagInput').value.trim();
+    const resBox = document.getElementById('hashtagsBox');
+    const styledList = document.getElementById('hashtagStyledList');
 
-      try {
-        const res = await fetch(`${BACKEND_URL}/api/hashtags?url=${encodeURIComponent(input)}&text=${encodeURIComponent(input)}`);
-        const data = await res.json();
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/hashtags?url=${encodeURIComponent(input)}&text=${encodeURIComponent(input)}`);
+      const data = await res.json();
 
-        if (data.error) {
-          alert(data.error);
-          return;
-        }
-
-        let hashtags = data.hashtags || [];
-        let formatted = '';
-        for (let tag of hashtags) {
-          if ((formatted + tag + ', ').length <= 500) {
-            formatted += tag + ', ';
-          } else {
-            break;
-          }
-        }
-
-        resBox.value = formatted.trim().replace(/,$/, '');
-        document.getElementById('hashtagResults').classList.remove('hidden');
-        resBox.scrollIntoView({ behavior: 'smooth' });
-      } catch (err) {
-        console.error(err);
-        alert("Something went wrong while generating hashtags.");
+      if (data.error) {
+        alert(data.error);
+        return;
       }
-    });
 
-    document.getElementById('copyBtn').addEventListener('click', () => {
-      const text = document.getElementById('hashtagsBox');
-      text.select();
-      document.execCommand('copy');
-      alert('Hashtags copied to clipboard!');
-    });
+      let hashtags = data.hashtags || [];
+      let formatted = '';
+      let displayed = [];
 
-    // Header & Footer load
-    window.addEventListener('DOMContentLoaded', () => {
-      fetch('/components/header.html').then(res => res.text()).then(html => document.getElementById('header-container').innerHTML = html);
-      fetch('/components/footer.html').then(res => res.text()).then(html => document.getElementById('footer-container').innerHTML = html);
-    });
+      for (let tag of hashtags) {
+        const add = tag + ', ';
+        if ((formatted + add).length <= 500) {
+          formatted += add;
+          displayed.push(tag);
+        } else {
+          break;
+        }
+      }
 
-    // Back to top
-    const topBtn = document.getElementById('backToTop');
-    window.onscroll = () => {
-      topBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
-    };
-    topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-  </script>
+      // Update hidden textarea
+      resBox.value = formatted.trim().replace(/,$/, '');
+
+      // Update visual styled hashtags
+      styledList.innerHTML = '';
+      displayed.forEach(tag => {
+        const span = document.createElement('span');
+        span.textContent = tag;
+        span.className = "px-3 py-1 border border-dotted border-red-600 rounded-full text-sm text-red-600 bg-white dark:bg-gray-900";
+        styledList.appendChild(span);
+      });
+
+      document.getElementById('hashtagResults').classList.remove('hidden');
+      styledList.scrollIntoView({ behavior: 'smooth' });
+
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong while generating hashtags.");
+    }
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const text = document.getElementById('hashtagsBox');
+    text.select();
+    document.execCommand('copy');
+    alert('Hashtags copied to clipboard!');
+  });
+
+  // Header & Footer include
+  window.addEventListener('DOMContentLoaded', () => {
+    fetch('/components/header.html').then(res => res.text()).then(html => document.getElementById('header-container').innerHTML = html);
+    fetch('/components/footer.html').then(res => res.text()).then(html => document.getElementById('footer-container').innerHTML = html);
+  });
+
+  // Back to top
+  const topBtn = document.getElementById('backToTop');
+  window.onscroll = () => {
+    topBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  };
+  topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+      </script>
 </body>
 </html>
