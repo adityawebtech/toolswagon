@@ -128,3 +128,14 @@ if (overlayContainer) {
     })
     .catch(err => console.error('Overlay load error:', err));
 }
+
+
+// Extra JS for Translation 
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,hi,fr',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element_container');
+}
