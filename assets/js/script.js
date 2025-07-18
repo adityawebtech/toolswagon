@@ -111,13 +111,30 @@ if (overlayContainer) {
     .catch(err => console.error('Overlay load error:', err));
 }
 
-// Translate 
-
-  function googleTranslateElementInit() {
+  // Google Translate Init Function
+function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'en',
-    includedLanguages: 'en,hi,fr,es,bn,pt',
+    includedLanguages: 'en,hi,fr,es,bn,pt', // English, Hindi, French, Spanish, Bengali, Portuguese
     layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
     autoDisplay: false
   }, 'google_translate_element');
 }
+
+// Toggle Language Dropdown (Optional if you use custom UI)
+document.addEventListener("DOMContentLoaded", () => {
+  const langToggle = document.getElementById("langToggle");
+  const langMenu = document.getElementById("langMenu");
+
+  if (langToggle && langMenu) {
+    langToggle.addEventListener("click", () => {
+      langMenu.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!langToggle.contains(e.target) && !langMenu.contains(e.target)) {
+        langMenu.classList.add("hidden");
+      }
+    });
+  }
+});
