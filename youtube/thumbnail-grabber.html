@@ -8,7 +8,6 @@
       <meta name="keywords" content="youtube thumbnail downloader, youtube thumbnail grabber, download youtube thumbnail ">
       <meta name="robots" content="index, follow">
       <meta name="author" content="ToolsWagon">
-      <script src="/assets/js/theme-init.js"></script>
       <!-- Google tag (gtag.js) -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHNQLH6PNG"></script>
       <script>
@@ -19,17 +18,26 @@
          gtag('config', 'G-ZHNQLH6PNG');
            
       </script>
-      <script>
-  (function () {
-    const theme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = theme === 'dark' || (!theme && prefersDark);
-    if (isDark) document.documentElement.classList.add('dark');
-  })();
-      </script>
-      <link rel="stylesheet" href="/assets/css/style.css" />
-      <script src="https://cdn.tailwindcss.com"></script>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com">
+</script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif']
+          },
+          colors: {
+            primary: '#DC2626'
+          }
+        }
+      }
+    };
+  </script>
       <style>
          body { font-family: 'Poppins', sans-serif; }
          }
