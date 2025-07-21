@@ -9,28 +9,28 @@
   </url>
 
   <!-- Tool Pages -->
-  <url>
-  <loc>http://toolswagon.site/youtube.html</loc>
-  <priority>0.9</priority>
-  <changefreq>monthly</changefreq>
-</url>
-<url>
-  <loc>http://toolswagon.site/instagram.html</loc>
-  <priority>0.9</priority>
-  <changefreq>monthly</changefreq>
-</url>
-<url>
-  <loc>http://toolswagon.site/pinterest.html</loc>
-  <priority>0.9</priority>
-  <changefreq>monthly</changefreq>
-</url>
 <url>
   <loc>http://toolswagon.site/youtube/thumbnail-grabber.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
 <url>
+  <loc>http://toolswagon.site/youtube/hashtag-generator.html</loc>
+  <priority>0.9</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://toolswagon.site/youtube/tag-generator.html</loc>
+  <priority>0.9</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
   <loc>http://toolswagon.site/youtube/meta-data-extractor.html</loc>
+  <priority>0.9</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://toolswagon.site/pinterest/image-downloader.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
@@ -41,6 +41,11 @@
 </url>
 <url>
   <loc>http://toolswagon.site/instagram/image-downloader.html</loc>
+  <priority>0.9</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://toolswagon.site/instagram/video-downloader.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
