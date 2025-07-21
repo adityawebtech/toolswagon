@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>404 - Page Not Found | Toolswagon</title>
   <meta name="description" content="Oops! The page you're looking for isn't here. Return to Toolswagon's home or try another tool." />
+  <meta name="robots" content="noindex, follow">
   <link rel="stylesheet" href="/assets/css/style.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -20,8 +21,16 @@
     <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" alt="Lost in Space" class="w-64 h-64 mb-6 rounded-lg shadow" />
 
     <h1 class="text-5xl font-bold text-red-600 mb-4">404 - Page Not Found</h1>
+    <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+      Oops! We couldn't find the page you're looking for.
+    </p>
+
+    <!-- Redirect Notice -->
+    <div id="redirectNotice" class="text-center text-sm text-gray-600 dark:text-gray-400 mb-6 hidden">
+      Redirecting you to the correct tool page...
+    </div>
+
     <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
-      Oops! We couldn't find the page you're looking for.<br/>
       But here are some tools you might like:
     </p>
 
@@ -71,6 +80,29 @@
 
   <!-- Main JS -->
   <script defer src="/assets/js/script.js"></script>
+
+  <!-- Redirect Logic -->
+  <script>
+    const redirectMap = {
+      "/tools/youtube-thumbnail-downloader.html": "/youtube/thumbnail-grabber.html",
+      "/tools/word-counter.html": "/youtube/earning-calculator.html",
+      "/tools/json-generator.html": "/youtube/channel-id-finder.html",
+      "/tools/qr-code-generator.html": "/youtube/monetization-checker.html"
+      "/tools/url-encoder-decoder.html": "/youtube/meta-data-extractor.html"
+      "/tools/image-to-base64.html": "/youtube/tags-generator.html"
+      // Add more mappings here
+    };
+
+    const currentPath = window.location.pathname;
+    const redirectTarget = redirectMap[currentPath];
+
+    if (redirectTarget) {
+      document.getElementById("redirectNotice").classList.remove("hidden");
+      setTimeout(() => {
+        window.location.href = redirectTarget;
+      }, 1000); // 1-second delay
+    }
+  </script>
 
 </body>
 </html>
