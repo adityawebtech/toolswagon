@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- Homepage -->
   <url>
@@ -10,57 +10,57 @@
 
   <!-- Tool Pages -->
 <url>
-  <loc>http://toolswagon.site/youtube/thumbnail-grabber.html</loc>
+  <loc>https://toolswagon.site/youtube/thumbnail-grabber.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://toolswagon.site/youtube/hashtag-generator.html</loc>
+  <loc>https://toolswagon.site/youtube/hashtag-generator.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://toolswagon.site/youtube/tag-generator.html</loc>
+  <loc>https://toolswagon.site/youtube/tag-generator.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://toolswagon.site/youtube/meta-data-extractor.html</loc>
+  <loc>https://toolswagon.site/youtube/meta-data-extractor.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://toolswagon.site/pinterest/image-downloader.html</loc>
+  <loc>https://toolswagon.site/pinterest/image-downloader.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://toolswagon.site/pinterest/video-downloader.html</loc>
+  <loc>https://toolswagon.site/pinterest/video-downloader.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://toolswagon.site/instagram/image-downloader.html</loc>
+  <loc>https://toolswagon.site/instagram/image-downloader.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://toolswagon.site/instagram/video-downloader.html</loc>
+  <loc>https://toolswagon.site/instagram/video-downloader.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://toolswagon.site/youtube/earning-calculator.html</loc>
+  <loc>https://toolswagon.site/youtube/earning-calculator.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://toolswagon.site/youtube/monetization-checker.html</loc>
+  <loc>https://toolswagon.site/youtube/monetization-checker.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://toolswagon.site/youtube/channel-id-finder.html</loc>
+  <loc>https://toolswagon.site/youtube/channel-id-finder.html</loc>
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
