@@ -20,7 +20,21 @@
   <link rel="stylesheet" href="/assets/css/style.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif']
+          },
+          colors: {
+            primary: '#DC2626'
+          }
+        }
+      }
+    };
+  </script>
   <style>body { font-family: 'Poppins', sans-serif; }</style>
 </head>
 <body class="bg-white text-black dark:bg-gray-900 dark:text-white">
@@ -286,5 +300,6 @@
   };
   topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
       </script>
+  <script defer src="/assets/js/script.js"></script>
 </body>
 </html>
