@@ -17,16 +17,3 @@
   font-family: Georgia, serif;
   text-transform: uppercase;
 }
-
-a {
-    color: #0000FF;
-    text-decoration: underline;
-  }
-
-  a:hover {
-    color: #98FBCB;
-  }
-
-  a:active {
-    color: #E86100;
-  }
