@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Loading...</title>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+
+  <!-- Header -->
+  <div id="header"></div>
+
+  <!-- Latest Post Marquee -->
+  <div class="bg-blue-50 dark:bg-blue-900 border-b border-blue-200 dark:border-blue-700 py-2">
+    <marquee behavior="scroll" direction="left" class="text-sm text-blue-600 dark:text-blue-200" id="latest-marquee">
+      Latest: Loading...
+    </marquee>
+  </div>
+
+  <!-- Blog Content Layout -->
+  <div class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+    
+    <!-- Main Blog Post -->
+    <main class="md:col-span-3">
+      <article id="post-container" class="prose max-w-none prose-blue dark:prose-invert">
+        <p>Loading post...</p>
+      </article>
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="md:col-span-1 space-y-8">
+
+      <!-- Search -->
+      <div>
+        <h3 class="font-semibold text-lg mb-2">Search</h3>
+        <input type="text" placeholder="Search posts..." class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-500">
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <h3 class="font-semibold text-lg mb-2">Categories</h3>
+        <ul id="category-list" class="space-y-2 text-sm">
+          <li>Loading...</li>
+        </ul>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <script>
+    // Load Header & Footer
+    fetch("/components/header.html").then(res => res.text()).then(data => {
+      document.getElementById("header").innerHTML = data;
+    });
+    fetch("/components/footer.html").then(res => res.text()).then(data => {
+      document.getElementById("footer").innerHTML = data;
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("slug");
+
+    // Load Post from JSON
+    fetch("/blog/posts.json")
+      .then(res => res.json())
+      .then(posts => {
+        const post = posts.find(p => p.slug === slug);
+        if (!post) {
+          document.getElementById("post-container").innerHTML = "<p>Post not found.</p>";
+          return;
+        }
+
+        document.title = post.title;
+        document.getElementById("page-title").textContent = post.title;
+
+        fetch(post.content)
+          .then(res => res.text())
+          .then(html => {
+            document.getElementById("post-container").innerHTML = `
+              <h1 class="text-3xl font-bold mb-2">${post.title}</h1>
+              <p class="text-sm text-gray-500 mb-4">${post.date}</p>
+              <img src="${post.image}" alt="${post.title}" class="w-full rounded mb-6">
+              ${html}
+            `;
+          });
+      });
+
+    // Load Latest Post Title into Marquee
+    fetch("/blog/posts.json")
+      .then(res => res.json())
+      .then(posts => {
+        if (posts.length > 0) {
+          document.getElementById("latest-marquee").innerHTML =
+            `Latest: <a href="/blog/post.html?slug=${posts[0].slug}" class="underline">${posts[0].title}</a>`;
+        }
+      });
+
+    // Load Categories and Count
+    fetch("/blog/categories.json")
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById("category-list");
+        list.innerHTML = "";
+        for (const [category, count] of Object.entries(data)) {
+          list.innerHTML += `<li><a href="/blog/index.html?category=${category}" class="text-blue-600 hover:underline">${category}</a> (${count})</li>`;
+        }
+      });
+  </script>
+</body>
+    </html>
