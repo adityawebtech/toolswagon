@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Blog – ToolsWagon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+
+  <!-- Header -->
+  <div id="header"></div>
+
+  <!-- Blog Listing -->
+  <section class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+    <!-- Blog Cards -->
+    <div class="md:col-span-3 space-y-8" id="blog-list">Loading posts...</div>
+
+    <!-- Sidebar -->
+    <aside class="space-y-8">
+      <!-- Search -->
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Search</h3>
+        <input type="text" id="search" placeholder="Search..." class="w-full px-3 py-2 border rounded">
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Categories</h3>
+        <ul id="category-list" class="text-sm space-y-1"></ul>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <script>
+    // Header & Footer
+    fetch("/components/header.html").then(r => r.text()).then(d => document.getElementById("header").innerHTML = d);
+    fetch("/components/footer.html").then(r => r.text()).then(d => document.getElementById("footer").innerHTML = d);
+
+    // Load posts
+    fetch("/blog/posts.json")
+      .then(r => r.json())
+      .then(posts => {
+        const list = document.getElementById("blog-list");
+        const category = new URLSearchParams(window.location.search).get('category');
+        let filtered = posts;
+
+        if (category) {
+          filtered = posts.filter(p => p.category === category);
+        }
+
+        list.innerHTML = filtered.map(post => `
+          <a href="/blog/post.html?slug=${post.slug}" class="block border border-gray-300 rounded hover:shadow-md transition">
+            <img src="${post.image}" class="w-full h-48 object-cover rounded-t">
+            <div class="p-4">
+              <h2 class="text-xl font-semibold">${post.title}</h2>
+              <p class="text-sm text-gray-500">${post.date}</p>
+              <p class="text-gray-700">${post.excerpt}</p>
+            </div>
+          </a>
+        `).join('');
+      });
+
+    // Load categories
+    fetch("/blog/categories.json")
+      .then(r => r.json())
+      .then(data => {
+        const catList = document.getElementById("category-list");
+        catList.innerHTML = Object.entries(data).map(([name, count]) => `
+          <li><a href="/blog/index.html?category=${name}" class="text-blue-600 hover:underline">${name}</a> (${count})</li>
+        `).join('');
+      });
+  </script>
+</body>
+</html>
