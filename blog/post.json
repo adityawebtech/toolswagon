@@ -1,0 +1,11 @@
+[
+  {
+    "slug": "sample-post",
+    "title": "Sample Blog Post Title",
+    "date": "2025-07-25",
+    "image": "/assets/images/sample.jpg",
+    "excerpt": "This is a short summary of the post.",
+    "content": "/blog/content/sample-post.html",
+    "category": "SEO"
+  }
+]
