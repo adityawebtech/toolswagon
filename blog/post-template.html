@@ -1,0 +1,93 @@
+<!-- blog/post-template.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog Post</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Header -->
+  <div id="header-container"></div>
+
+  <!-- News Trigger -->
+  <div class="bg-red-600 text-white px-4 py-2 text-sm text-center animate-pulse">
+    📢 Latest: <span id="latest-post-title">Loading...</span>
+  </div>
+
+  <!-- Breadcrumb -->
+  <nav class="text-sm px-4 py-3 bg-gray-100 text-gray-600">
+    <a href="/" class="text-red-600 font-medium">Home</a> > 
+    <a href="/blog/" class="text-red-600 font-medium">Blog</a> > 
+    <span id="breadcrumb-title">Post Title</span>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+
+    <!-- Blog Content -->
+    <div class="md:col-span-3">
+      <article id="blog-content" class="prose max-w-full">
+        <!-- Your blog content will load here -->
+      </article>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="hidden md:block">
+      <div class="mb-6">
+        <input type="text" placeholder="Search..." class="w-full border px-3 py-2 rounded-md" />
+      </div>
+
+      <div class="mb-6">
+        <h3 class="text-lg font-semibold border-b pb-2 mb-2">Categories</h3>
+        <ul class="space-y-1 text-sm">
+          <li><a href="#" class="hover:underline">SEO Tools (5)</a></li>
+          <li><a href="#" class="hover:underline">YouTube Tools (3)</a></li>
+          <li><a href="#" class="hover:underline">Productivity (4)</a></li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-100 p-4 rounded-md text-center text-sm text-gray-600">
+        <p>🔔 Ad Placeholder</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer-conatiner"></div>
+
+  <script src="/assets/js/script.js" defer></script>
+  <script defer>
+    // Load Header & Footer
+    fetch("/components/header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header-container").innerHTML = data);
+
+    fetch("/components/footer.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("footer-conatiner").innerHTML = data);
+
+    // Load Blog Content Dynamically
+    const urlParams = new URLSearchParams(window.location.search);
+    const post = urlParams.get('p'); // post slug like `seo-guide`
+
+    if (post) {
+      fetch(`/blog/posts/${post}.html`)
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById("blog-content").innerHTML = data;
+          document.getElementById("breadcrumb-title").innerText = post.replace(/-/g, " ");
+          document.title = post.replace(/-/g, " ") + " | Blog - ToolsWagon";
+        })
+        .catch(() => {
+          document.getElementById("blog-content").innerHTML = "<p>Post not found.</p>";
+        });
+    }
+
+    // Dummy Latest Post
+    document.getElementById("latest-post-title").innerText = "Introducing YouTube Tags Generator!";
+  </script>
+</body>
+</html>
