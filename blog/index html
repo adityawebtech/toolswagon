@@ -9,39 +9,63 @@
 <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200">
 
   <!-- Header -->
-  <div id="header"></div>
+  <div id="header">
+    <header class="bg-blue-600 text-white py-4 px-6">
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold">ToolsWagon</a>
+        <nav class="space-x-4 text-sm">
+          <a href="/" class="hover:underline">Home</a>
+          <a href="/blog/index.html" class="hover:underline font-semibold">Blog</a>
+        </nav>
+      </div>
+    </header>
+  </div>
 
-  <!-- Blog Listing -->
+  <!-- Blog Page Structure -->
   <section class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
 
-    <!-- Blog Cards -->
-    <div class="md:col-span-3 space-y-8" id="blog-list">Loading posts...</div>
+    <!-- Blog Cards Section -->
+    <div class="md:col-span-3 space-y-8" id="blog-list">
+      <!-- Cards will load here -->
+      <div class="border rounded p-6 text-center text-gray-500">Loading blog posts...</div>
+    </div>
 
     <!-- Sidebar -->
     <aside class="space-y-8">
-      <!-- Search -->
+
+      <!-- Search Bar -->
       <div>
         <h3 class="text-lg font-semibold mb-2">Search</h3>
-        <input type="text" id="search" placeholder="Search..." class="w-full px-3 py-2 border rounded">
+        <input type="text" id="search" placeholder="Search..." class="w-full px-3 py-2 border rounded dark:bg-gray-800 dark:text-white">
       </div>
 
       <!-- Categories -->
       <div>
         <h3 class="text-lg font-semibold mb-2">Categories</h3>
-        <ul id="category-list" class="text-sm space-y-1"></ul>
+        <ul id="category-list" class="text-sm space-y-2">
+          <li class="text-gray-500">Loading categories...</li>
+        </ul>
       </div>
+
     </aside>
   </section>
 
   <!-- Footer -->
-  <div id="footer"></div>
+  <div id="footer">
+    <footer class="bg-gray-900 text-white py-6 mt-16">
+      <div class="max-w-7xl mx-auto text-center text-sm">
+        © 2025 ToolsWagon. All rights reserved.
+      </div>
+    </footer>
+  </div>
 
+  <!-- Blog Script -->
   <script>
-    // Header & Footer
-    fetch("/components/header.html").then(r => r.text()).then(d => document.getElementById("header").innerHTML = d);
-    fetch("/components/footer.html").then(r => r.text()).then(d => document.getElementById("footer").innerHTML = d);
+    // Optional: dynamically reload header and footer if you plan to extract them
+    // fetch("/components/header.html").then(r => r.text()).then(d => document.getElementById("header").innerHTML = d);
+    // fetch("/components/footer.html").then(r => r.text()).then(d => document.getElementById("footer").innerHTML = d);
 
-    // Load posts
+    // Load Blog Posts
     fetch("/blog/posts.json")
       .then(r => r.json())
       .then(posts => {
@@ -53,19 +77,23 @@
           filtered = posts.filter(p => p.category === category);
         }
 
-        list.innerHTML = filtered.map(post => `
-          <a href="/blog/post.html?slug=${post.slug}" class="block border border-gray-300 rounded hover:shadow-md transition">
-            <img src="${post.image}" class="w-full h-48 object-cover rounded-t">
-            <div class="p-4">
-              <h2 class="text-xl font-semibold">${post.title}</h2>
-              <p class="text-sm text-gray-500">${post.date}</p>
-              <p class="text-gray-700">${post.excerpt}</p>
-            </div>
-          </a>
-        `).join('');
+        if (filtered.length === 0) {
+          list.innerHTML = `<p class="text-center text-gray-500">No posts found.</p>`;
+        } else {
+          list.innerHTML = filtered.map(post => `
+            <a href="/blog/post.html?slug=${post.slug}" class="block border border-gray-300 rounded hover:shadow-md transition overflow-hidden">
+              <img src="${post.image}" class="w-full h-48 object-cover">
+              <div class="p-4">
+                <h2 class="text-xl font-semibold">${post.title}</h2>
+                <p class="text-sm text-gray-500">${post.date}</p>
+                <p class="text-gray-700">${post.excerpt}</p>
+              </div>
+            </a>
+          `).join('');
+        }
       });
 
-    // Load categories
+    // Load Categories
     fetch("/blog/categories.json")
       .then(r => r.json())
       .then(data => {
@@ -75,5 +103,6 @@
         `).join('');
       });
   </script>
+<script defer src="/assets/js/script.js"></script>
 </body>
 </html>
