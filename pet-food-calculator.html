@@ -21,32 +21,114 @@ body { margin:0; font-family:'Segoe UI',Verdana,sans-serif; color:#222; backgrou
 a { color: var(--link); text-decoration:none; transition:.2s; }
 a:hover { color: var(--link-hover); text-decoration:underline; }
 
-header {
-  background: var(--header-bg); box-shadow:0 4px 22px #212d123c;
-  padding:0; margin:0; min-height:60px;
+.pet-header {
+  background: linear-gradient(90deg,#259c5c 60%, #38c179 100%);
+  box-shadow: 0 2px 10px #304d330b;
+  min-height: 62px;
+  padding: 0;
+  margin: 0;
+  z-index: 31;
 }
-.header-wrap {
-  max-width:940px; margin: 0 auto; display:flex; align-items:center; justify-content:space-between;
-  height:64px; padding:0 1em;
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.3em 0 1em;
+  height: 62px;
+  position: relative;
 }
-.site-title-head {
-  display:flex;align-items:center;gap:0.67em;text-decoration:none;min-width:0;
+.logo-title {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 0.67em;
 }
-.site-title-head span { color:#fff;font-size:1.22em; font-weight:700;white-space:nowrap;letter-spacing:.01em;}
-.logo {
-  width:38px;height:38px;display:inline-block;margin-bottom:-2px;
+.pet-logo-svg { display:inline-block; vertical-align:middle;}
+.site-title {
+  color: #fff;
+  font-size:1.21em;
+  font-weight:700;
+  letter-spacing: .01em;
+  white-space:nowrap;
+  text-shadow: 0 1px 6px #212d1233;
 }
-nav ul {display:flex;gap:1.5em;list-style:none;margin:0;padding:0;}
-nav a {
-  display:inline-block;padding:7px 18px;border-radius:30px;
-  background:transparent;color:#fff;font-size:1.09em;font-weight:500;
-  transition:.18s;}
-nav a.active, nav a:hover, nav a:focus {background:var(--accent); color:#1d3a22;}
-@media (max-width:630px) {
-  .header-wrap{padding:0 0.2em; height:48px;}
-  .site-title-head span{font-size:0.97em;}
-  nav ul{gap:0.7em;}
-  nav a{padding:7px 8px;}
+nav { display:flex; align-items:center; }
+.nav-menu {
+  display:flex;
+  gap:0.9em;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.nav-menu li {
+  display:inline-block;
+}
+.nav-link {
+  display:inline-block;
+  color:#fff;
+  font-size: 1em;
+  padding:6px 16px;
+  font-weight:500;
+  border-radius:23px;
+  background:transparent;
+  transition:.17s;
+  text-decoration:none;
+}
+.nav-link.active,
+.nav-link:hover,
+.nav-link:focus {
+  background:#fbc02d; color:#224530;
+  text-decoration:none;
+}
+.hamburger {
+  display:none;
+  background:none;
+  border:none;
+  flex-direction:column;
+  gap:5px;
+  outline:none;
+  cursor:pointer;
+  margin-left:1em;
+  height:36px;
+  position:relative;
+}
+.hamburger span {
+  display:block;
+  width:30px;
+  height:4px;
+  margin-bottom:4px;
+  border-radius:3px;
+  background:#fff;
+  transition:.25s;
+}
+.nav-menu-mobile {
+  display:none;
+}
+/* Mobile styles */
+@media (max-width: 800px) {
+  .nav-menu { display:none; }
+  .hamburger { display:flex; }
+}
+@media (max-width: 800px) {
+  .nav-menu-mobile {
+    display:none;
+    flex-direction:column;
+    position:absolute;
+    top:60px;right:0;
+    background:#259c5c;
+    box-shadow:0 18px 40px #0002;
+    border-bottom-left-radius:9px;
+    min-width:195px;
+    z-index:35;
+    margin:0; padding:0.6em 0.7em 0.3em 0.7em;
+    list-style:none;
+    gap:0.6em;
+  }
+  .nav-menu-mobile.open { display:flex; }
+  .nav-menu-mobile li {margin:0;}
+  .nav-menu-mobile a.nav-link {width:100%;display:block;font-size:1.11em;text-align:left;}
 }
 main { max-width:850px; margin:0 auto; background:var(--white); border-radius:12px; box-shadow:0 2px 10px #eafbe9cc; padding:1.1em 1.15em 2.1em 1.15em;}
 .section-heading{text-align:center;max-width:740px;margin:2em auto 1.2em auto;padding-top:0.5em;}
@@ -108,29 +190,39 @@ footer{
 </head>
 <body>
 <!-- HEADER -->
-<header>
-  <div class="header-wrap">
-    <a href="/pet-food-calculator.html" class="site-title-head">
-      <svg class="logo" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Pet Logo">
-        <ellipse cx="7" cy="12" rx="5" ry="9" fill="#ffd54f"/>
-        <ellipse cx="41" cy="12" rx="5" ry="9" fill="#fff8e1"/>
-        <ellipse cx="24" cy="22" rx="20" ry="18" fill="#fff"/>
-        <ellipse cx="16.5" cy="19" rx="5" ry="7" fill="#ffe082"/>
-        <ellipse cx="32" cy="27" rx="6" ry="4" fill="#e1bee7"/>
-        <ellipse cx="35" cy="10" rx="3" ry="3" fill="#81d4fa"/>
-        <rect x="19" y="2" width="4" height="14" rx="2" fill="#fff"/>
-        <rect x="25" y="2" width="4" height="14" rx="2" fill="#fff"/>
-        <ellipse cx="24" cy="27" rx="2.5" ry="2" fill="#ffb300"/>
-        <path d="M20 29 Q24 34 28 29" stroke="#555" stroke-width="2" fill="none"/>
+  <header class="pet-header">
+  <div class="header-inner">
+    <a href="/pet-food-calculator.html" class="logo-title">
+      <!-- SVG: stylized pets (dog, cat, rabbit, bird) -->
+      <svg class="pet-logo-svg" width="38" height="38" viewBox="0 0 38 38" fill="none" aria-label="Pets Logo">
+        <ellipse cx="9" cy="15" rx="6" ry="8" fill="#ffe082"/>
+        <ellipse cx="29" cy="15" rx="6" ry="8" fill="#fff8e1"/>
+        <ellipse cx="19" cy="22" rx="14" ry="13" fill="#fff"/>
+        <ellipse cx="13.5" cy="20.5" rx="3.5" ry="4.5" fill="#fbc02d"/>
+        <ellipse cx="24" cy="31" rx="3" ry="2.2" fill="#e1bee7"/>
+        <ellipse cx="30" cy="11.2" rx="1.7" ry="1.6" fill="#81d4fa"/>
+        <rect x="17" y="5" width="2.7" height="9.3" rx="1.1" fill="#fff"/>
+        <rect x="21.5" y="5" width="2.7" height="9.3" rx="1.1" fill="#fff"/>
+        <ellipse cx="19" cy="28" rx="1.5" ry="1.1" fill="#ffb300"/>
+        <path d="M15.9 30.5 Q19 35 22 30.5" stroke="#979797" stroke-width="1.2" fill="none"/>
       </svg>
-      <span>Pet Food Calculator App</span>
+      <span class="site-title">Pet Food Calculator</span>
     </a>
     <nav>
-      <ul>
-        <li><a href="/" >Home</a></li>
-        <li><a href="/pet-food-calculator.html" class="active">Pet Food Calculator</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
+      <ul class="nav-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/pet-food-calculator.html" class="nav-link active">Pet Food Intake Calculator App</a></li>
+        <li><a href="/about" class="nav-link">About</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu-mobile" id="mobileMenu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/pet-food-calculator.html" class="nav-link active">Pet Food Intake Calculator App</a></li>
+        <li><a href="/about" class="nav-link">About</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
       </ul>
     </nav>
   </div>
