@@ -2,7 +2,6 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
-// Route: GET /api/tags?videoId=VIDEO_ID
 router.get('/tags', async (req, res) => {
   const videoId = req.query.videoId;
   if (!videoId) {
@@ -10,9 +9,8 @@ router.get('/tags', async (req, res) => {
   }
 
   try {
-    const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${process.env.YOUTUBE_API_KEY}`
-    );
+    const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${process.env.YOUTUBE_API_KEY}`;
+    const response = await axios.get(apiUrl);
 
     const items = response.data.items;
     if (!items || items.length === 0) {
