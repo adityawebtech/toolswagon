@@ -64,6 +64,11 @@
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
+  <url>
+    <loc>https://toolswagon.site/pet-food-calculator.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   
   <!-- Info / Legal Pages -->
   <url>
