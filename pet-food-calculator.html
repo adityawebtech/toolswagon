@@ -9,7 +9,7 @@
   <style>
 :root {
   --header-bg: linear-gradient(90deg, #259c5c 60%, #38c179 100%);
-  --modern-green: #259c5c; --accent: #fbc02d;
+  --main-color: #259c5c; --accent: #fbc02d;
   --nav-pill-bg: #fff;
   --nav-pill-active: #fbc02d;
   --shadow: 0 3px 20px rgba(50,90,65,0.08);
@@ -265,6 +265,16 @@ section.content-block {
   h1 { font-size: 1.4rem; }
   button { font-size: 1.05em; }
 }
+
+    /* Center all main headings, but override for pet-category below. */
+.section-heading, main h1, main h2, main h3 { text-align:center!important;}
+main h3.pet-category{ text-align:left!important;}
+.section-heading { max-width:750px; margin:1.0em auto 0.15em auto;}
+main {
+  max-width: 750px; margin: 0.5em auto 1.1em auto; background: #fff; border-radius: 18px;
+  box-shadow:0 2px 12px var(--shadow); padding:1.15em 1.1em 1.25em 1.1em;
+}
+    
   </style>
 </head>
 <body>
