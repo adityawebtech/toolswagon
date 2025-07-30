@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pet Food Calculator | ToolsWagon</title>
+  <meta name="description" content="Easily calculate exactly how much food your dog or cat needs, by weight and activity level. The best free pet food calculator for US pet owners.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Structured Data for Rich Results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Pet Food Calculator",
+    "description": "Calculate pet food quantities for dogs and cats based on weight and activity. Free, fast, and designed for US pet owners.",
+    "url": "https://toolswagon.site/pet-food-calculator.html",
+    "applicationCategory": "CalculatorApplication",
+    "operatingSystem": "All",
+    "creator": {
+      "@type": "Organization",
+      "name": "ToolsWagon"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      --main-color: #2e7d32;
+      --accent-color: #fbc02d;
+      --bg: #f7f9fa;
+      --text: #222;
+    }
+    body { background: var(--bg); color: var(--text); margin: 0; font-family: 'Segoe UI',Verdana,sans-serif; }
+    header { background: var(--main-color); color: white; padding: 1.3em 0; text-align: center;}
+    main { max-width: 450px; margin: 2em auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px rgba(44,62,80,.08); padding: 2em; }
+    label { display: block; margin-top: 1em; font-weight: 500; }
+    select, input[type="number"] { width: 100%; padding: .7em; margin-top: .5em; border: 1px solid #bbb; border-radius: 5px; }
+    button { width: 100%; margin-top: 1.7em; padding: .9em; background: var(--accent-color); border: none; border-radius: 5px; font-size: 1.1em; font-weight: bold; color: var(--main-color); cursor: pointer; transition: background .2s;}
+    button:hover { background: #ffd54f;}
+    .result { background: var(--main-color); color: #fff; padding: 1.2em; margin-top: 2em; border-radius: 7px; font-size: 1.1em; text-align: center;}
+    @media (max-width: 520px) {
+      main { padding: 1em; }
+    }
+    footer { text-align: center; padding: 2em 1em 1em 1em; font-size: .94em; color: #6d6d6d;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pet Food Calculator</h1>
+    <p>Find the perfect daily food amount for your furry friend, instantly</p>
+  </header>
+  <main>
+    <form id="calcForm">
+      <label for="pet">Pet Type:</label>
+      <select id="pet" name="pet" required>
+        <option value="">Select</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+      </select>
+
+      <label for="weight">Pet Weight (lbs):</label>
+      <input type="number" id="weight" name="weight" min="1" max="200" step="0.1" required>
+
+      <label for="activity">Activity Level:</label>
+      <select id="activity" name="activity" required>
+        <option value="">Select</option>
+        <option value="low">Low (older, indoors)</option>
+        <option value="normal">Normal</option>
+        <option value="high">High (active, working)</option>
+      </select>
+
+      <button type="submit">Calculate</button>
+    </form>
+    <section id="output"></section>
+    <section style="margin-top:2.5em">
+      <h2 style="font-size:1em;color:#2e7d32;margin:1em 0 .3em 0;">How our Pet Food Calculator Works</h2>
+      <p>
+      Enter your pet’s weight and activity level. We’ll estimate the recommended daily food (in cups and grams), helping your pet stay at a healthy weight. Adjust for your vet's advice or food packaging guidance.
+      </p>
+      <h3 style="font-size:1em;color:#2e7d32;">Why Use Our Calculator?</h3>
+      <ul style="padding-left:1.3em;">
+        <li>✅ Science-based formulas—trusted by US pet owners</li>
+        <li>✅ Works for all dog and cat breeds</li>
+        <li>✅ 100% free, no login or signup required</li>
+        <li>✅ Fast and privacy-friendly—no data saved</li>
+      </ul>
+      <p style="color:#6d6d6d;font-size:.98em;">
+        Always consult your veterinarian for unique pet needs or special dietary cases.<br>
+        <b>Keywords targeted:</b> pet food calculator US, dog feeding calculator, cat food calculator by weight, how much should I feed my dog
+      </p>
+    </section>
+  </main>
+  <footer>
+    © 2025 ToolsWagon. Made for US pet lovers.<br>
+    <a href="https://toolswagon.site/" style="color:#2e7d32;">Home</a>
+  </footer>
+  <script>
+    // Calculation parameters (simplified, based on veterinary science)
+    // Dog: 25-30 kcal/lb/day; Cat: 20-30 kcal/lb/day
+    function calcFood(pet, weight, activity) {
+      let factor = 1;
+      if (pet==="dog") {
+        factor = {low:25, normal:28, high:30}[activity];
+      } else if (pet==="cat") {
+        factor = {low:18, normal:22, high:25}[activity];
+      }
+      const cal = weight * factor;
+      // Assume standard dry food: 350 kcal/cup for dogs, 300 kcal/cup for cats
+      const kcalPerCup = pet==="dog" ? 350 : 300;
+      const cup = (cal/kcalPerCup).toFixed(2); // cups per day
+      const gram = (cal/3.5).toFixed(0);       // since 1g ~ 3.5kcal
+      return {cal: Math.round(cal), cup, gram};
+    }
+
+    document.getElementById("calcForm").onsubmit = function(e) {
+      e.preventDefault();
+      const pet = document.getElementById("pet").value;
+      const weight = parseFloat(document.getElementById("weight").value);
+      const activity = document.getElementById("activity").value;
+      if (!pet || !weight || !activity) return;
+      const {cal, cup, gram} = calcFood(pet, weight, activity);
+      document.getElementById("output").innerHTML = `
+        <div class="result">
+        Recommended daily food: <br>
+        <b>${cup} cups</b> (<b>${gram} grams</b>)<br>
+        • Est. daily calories: <b>${cal} kcal</b>
+        <br><small>(For a ${weight} lb ${pet})</small>
+        </div>
+      `;
+    };
+  </script>
+</body>
+</html>
