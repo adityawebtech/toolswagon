@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Generate SEO-optimized YouTube tags instantly using ToolsWagon's YouTube Tag Generator. Boost video rankings, reach more viewers, and grow your channel faster!" />
+  <title>YouTube Tag Generator – Boost Your Video SEO | ToolsWagon</title>  <!-- Canonical -->  <link rel="canonical" href="https://toolswagon.site/youtube/tags-generator.html" />  <!-- Open Graph (Facebook) -->  <meta property="og:title" content="YouTube Tag Generator – Boost Your Video SEO | ToolsWagon" />
+  <meta property="og:description" content="Generate SEO-rich YouTube tags with one click. Improve your video ranking and discoverability." />
+  <meta property="og:url" content="https://toolswagon.site/youtube/tags-generator.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://toolswagon.site/assets/images/youtube-tags-og.jpg" />  <!-- Twitter Card -->  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="YouTube Tag Generator – Boost Your Video SEO | ToolsWagon" />
+  <meta name="twitter:description" content="Generate SEO-rich YouTube tags with one click. Improve your video ranking and discoverability." />
+  <meta name="twitter:image" content="https://toolswagon.site/assets/images/youtube-tags-og.jpg" />
+  <meta name="twitter:site" content="@toolswagon" />  <!-- Schema Markup -->  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "YouTube Tag Generator",
+      "url": "https://toolswagon.site/youtube/tags-generator.html",
+      "description": "Generate SEO-rich YouTube tags with one click. Improve your video ranking and discoverability.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "ToolsWagon",
+        "url": "https://toolswagon.site",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolswagon.site/assets/images/logo.png"
+        }
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Aditya Pal"
+      }
+    }
+  </script>  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">  <section class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl md:text-4xl font-bold text-center text-red-600 mb-6">YouTube Tags Generator Tool – Boost Your Video SEO</h1><div class="mb-6">
+  <input id="tagInput" type="text" placeholder="Enter YouTube URL or Keywords" class="w-full p-3 border border-gray-300 dark:border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-red-500" />
+  <button onclick="generateTags()" class="mt-4 bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700">Generate Tags</button>
+</div>
+
+<div id="resultSection" class="hidden">
+  <h2 class="text-xl font-semibold mb-4">Suggested Tags:</h2>
+  <div id="tagsContainer" class="flex flex-wrap gap-2"></div>
+</div>
+
+<div class="mt-10 text-sm text-gray-600 dark:text-gray-400">
+  <p>
+    Looking for more optimization tools?
+    <a href="/youtube/hashtag-generator.html" class="text-red-600 underline hover:text-red-800" target="_blank" rel="noopener">YouTube Hashtags Generator</a>,
+    <a href="/youtube/thumbnail-grabber.html" class="text-red-600 underline hover:text-red-800" target="_blank" rel="noopener">Thumbnail Downloader</a>,
+    and
+    <a href="/youtube/tags-generator.html" class="text-red-600 underline hover:text-red-800" target="_blank" rel="noopener">Tags Generator</a>
+    can supercharge your content.
+  </p>
+</div>
+
+  </section>  <script>
+    async function generateTags() {
+      const input = document.getElementById("tagInput").value.trim();
+      if (!input) return alert("Please enter a YouTube URL or keywords!");
+
+      const tagContainer = document.getElementById("tagsContainer");
+      tagContainer.innerHTML = "";
+      document.getElementById("resultSection").classList.add("hidden");
+
+      try {
+        const response = await fetch("https://yt-meta-backend.onrender.com/extract-tags", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ query: input })
+        });
+
+        if (!response.ok) throw new Error("API request failed.");
+
+        const data = await response.json();
+
+        if (!data.tags || data.tags.length === 0) {
+          alert("No tags found for this input.");
+          return;
+        }
+
+        data.tags.forEach(tag => {
+          const tagEl = document.createElement("button");
+          tagEl.className = "bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded text-sm hover:bg-red-600 hover:text-white transition";
+          tagEl.textContent = tag;
+          tagEl.onclick = () => {
+            navigator.clipboard.writeText(tag);
+            tagEl.textContent = "Copied!";
+            setTimeout(() => tagEl.textContent = tag, 1000);
+          };
+          tagContainer.appendChild(tagEl);
+        });
+
+        document.getElementById("resultSection").classList.remove("hidden");
+
+      } catch (err) {
+        console.error(err);
+        alert("Failed to fetch tags. Please try again later.");
+      }
+    }
+  </script></body>
+</html>
