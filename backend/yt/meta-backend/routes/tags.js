@@ -2,66 +2,87 @@ const express = require("express");
 const axios = require("axios");
 const router = express.Router();
 
-const YOUTUBE_API_KEY = process.env.YT_API_KEY;
+const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 
-// Extract video ID from a standard YouTube URL
+function isYouTubeUrl(input) {
+  return /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/.test(input);
+}
+
 function extractVideoId(url) {
-  const match = url.match(
-    /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/
-  );
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/);
   return match ? match[1] : null;
 }
 
-// Limit tags to 500 characters
-function limitTags(tagsArray) {
-  const result = [];
-  let currentLength = 0;
-  for (const tag of tagsArray) {
-    const next = tag.trim();
-    if (currentLength + next.length + 2 > 500) break;
-    result.push(next);
-    currentLength += next.length + 2;
+function generateSmartTags(query) {
+  const baseTags = ["viral", "trending", "2025", "shorts", "video", "song", "music"];
+  const words = query
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9 ]/g, "")
+    .split(" ")
+    .filter(word => word.length > 2);
+
+  let generated = [...new Set([...words, ...words.map(w => w + " song"), ...baseTags])];
+  
+  // Remove duplicates and trim to fit under 500 characters
+  let result = [];
+  let totalLength = 0;
+  for (let tag of generated) {
+    if (totalLength + tag.length + 1 <= 500) {
+      result.push(tag);
+      totalLength += tag.length + 1;
+    }
   }
   return result;
 }
 
-// Simple tag generator using keywords
-function generateSmartTags(query) {
-  const base = query.toLowerCase().split(" ");
-  const extra = [
-    "2025", "viral", "trending", "official", "new", "top", "hits", "shorts", "4k", "remix",
-    "music", "video", "status", "edits", "song", "beats", "instrumental", "reel"
-  ];
-
-  const merged = [...new Set([...base, ...extra, ...base.map(word => `${word} song`)])];
-  return limitTags(merged);
-}
-
 router.post("/extract-tags", async (req, res) => {
   const { query } = req.body;
-
   if (!query || query.trim() === "") {
     return res.status(400).json({ error: "Query is required." });
   }
 
-  // Check if it's a YouTube URL
-  const videoId = extractVideoId(query.trim());
-  if (videoId) {
-    try {
-      const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${YOUTUBE_API_KEY}`;
-      const response = await axios.get(url);
+  try {
+    if (isYouTubeUrl(query)) {
+      const videoId = extractVideoId(query);
+      if (!videoId) {
+        return res.status(400).json({ error: "Invalid YouTube URL." });
+      }
 
-      const tags = response.data?.items?.[0]?.snippet?.tags || [];
-      return res.json({ tags: limitTags(tags) });
-    } catch (error) {
-      console.error("YouTube API Error:", error.message);
-      return res.status(500).json({ error: "Failed to fetch video tags from YouTube API." });
+      // Fetch tags from YouTube video
+      const { data } = await axios.get(`https://www.googleapis.com/youtube/v3/videos`, {
+        params: {
+          part: "snippet",
+          id: videoId,
+          key: YOUTUBE_API_KEY
+        }
+      });
+
+      const video = data.items?.[0];
+      const tags = video?.snippet?.tags || [];
+      const limitedTags = tags.filter(tag => tag.length <= 30); // prevent very long tags
+
+      // Ensure 500 char max
+      let finalTags = [];
+      let charCount = 0;
+      for (let tag of limitedTags) {
+        if (charCount + tag.length + 1 <= 500) {
+          finalTags.push(tag);
+          charCount += tag.length + 1;
+        } else {
+          break;
+        }
+      }
+
+      return res.json({ tags: finalTags });
+    } else {
+      // Generate smart tags from keyword or title
+      const tags = generateSmartTags(query);
+      return res.json({ tags });
     }
+  } catch (err) {
+    console.error("Tag generation error:", err.message);
+    res.status(500).json({ error: "Internal Server Error", details: err.message });
   }
-
-  // Fallback to keyword/title-based tag generation
-  const smartTags = generateSmartTags(query);
-  return res.json({ tags: smartTags });
 });
 
 module.exports = router;
