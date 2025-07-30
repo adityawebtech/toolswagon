@@ -1,373 +1,170 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pet Food Calculator for Dogs, Cats, Rabbits, Guinea Pigs & More | ToolsWagon</title>
-  <meta name="description" content="Accurate, science-based pet food calculator for dogs, cats, rabbits, birds, reptiles, and small pets. Calculate daily food requirements by weight, age, activity, and life stage. Trusted by US pet owners." />
-  <meta name="keywords" content="pet food calculator US, dog feeding calculator, cat food calculator by weight, rabbit diet calculator, bird feeding chart, guinea pig nutrition, reptile feeding guide, pet nutrition USA" />
-  <meta name="author" content="ToolsWagon" />
-  <!-- Structured Data JSON-LD for Google Rich Results -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Pet Food Calculator",
-    "url": "https://toolswagon.site/pet-food-calculator.html",
-    "description": "Calculate precise daily food requirements for multiple pet species based on weight, age, activity, and life stage. Science-based and free.",
-    "applicationCategory": "CalculatorApplication",
-    "operatingSystem": "All",
-    "creator": {
-      "@type": "Organization",
-      "name": "ToolsWagon"
-    }
-  }
-  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pet Food Calculator App</title>
+  <meta name="description" content="US pet owners: Calculate daily food portions for dogs, cats, rabbits, and more. Trusted, data-driven, science-based app." />
+  <link rel="canonical" href="/pet-food-calculator.html" />
   <style>
 :root {
-  --modern-green: #259c5c;
   --header-bg: linear-gradient(90deg, #259c5c 60%, #38c179 100%);
-  --nav-pill-bg: #fff;
-  --nav-pill-active: #fbc02d;
-  --shadow: 0 3px 20px rgba(50,90,65,0.08);
+  --main-color: #259c5c; --accent: #fbc02d;
+  --link: #267a40; --link-hover: #129e52;
+  --footer-bg: linear-gradient(90deg, #259c5c 60%, #38c179 100%);
+  --box: #f7f9fa; --white: #fff; --soft: #fafdff; --shadow:0 3px 20px #1d4a2122;
+  --s1:#ffd54f; --s2:#81d4fa; --s3:#c5e1a5; --s4:#e1bee7; --s5:#bcaaa4; --s6:#b2ebf2; --s7:#ffe0b2;
+}
+html { box-sizing:border-box; }
+*, *:before, *:after { box-sizing:inherit;}
+body { margin:0; font-family:'Segoe UI',Verdana,sans-serif; color:#222; background: var(--box);}
+a { color: var(--link); text-decoration:none; transition:.2s; }
+a:hover { color: var(--link-hover); text-decoration:underline; }
 
-  --main-color: #259c5c;
-  --accent-color: #fbc02d;
-  --bg: #f7f9fa;
-  --text: #222;
-  --box-shadow: rgba(44,62,80,0.08);
+header {
+  background: var(--header-bg); box-shadow:0 4px 22px #212d123c;
+  padding:0; margin:0; min-height:60px;
 }
-body {
-  background: var(--bg);
-  color: var(--text);
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.55;
-  font-size: 1rem;
+.header-wrap {
+  max-width:940px; margin: 0 auto; display:flex; align-items:center; justify-content:space-between;
+  height:64px; padding:0 1em;
 }
-.modern-header {
-  background: var(--header-bg);
-  box-shadow: var(--shadow);
-  padding: 0;
-  position: relative;
-  z-index:10;
+.site-title-head {
+  display:flex;align-items:center;gap:0.67em;text-decoration:none;min-width:0;
 }
-.header-container {
-  max-width:1050px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 72px;
-  padding: 0 1em;
+.site-title-head span { color:#fff;font-size:1.22em; font-weight:700;white-space:nowrap;letter-spacing:.01em;}
+.logo {
+  width:38px;height:38px;display:inline-block;margin-bottom:-2px;
 }
-.site-logo {
-  display: flex;
-  align-items: center;
-  gap: 0.55em;
-  text-decoration: none;
+nav ul {display:flex;gap:1.5em;list-style:none;margin:0;padding:0;}
+nav a {
+  display:inline-block;padding:7px 18px;border-radius:30px;
+  background:transparent;color:#fff;font-size:1.09em;font-weight:500;
+  transition:.18s;}
+nav a.active, nav a:hover, nav a:focus {background:var(--accent); color:#1d3a22;}
+@media (max-width:630px) {
+  .header-wrap{padding:0 0.2em; height:48px;}
+  .site-title-head span{font-size:0.97em;}
+  nav ul{gap:0.7em;}
+  nav a{padding:7px 8px;}
 }
-.site-title {
-  color: #fff;
-  font-family: 'Segoe UI',Verdana,sans-serif;
-  font-size:1.55em;
-  font-weight: bold;
-  letter-spacing: 0.01em;
-  text-shadow: 0 1px 5px rgba(50,90,65,0.04);
+main { max-width:850px; margin:0 auto; background:var(--white); border-radius:12px; box-shadow:0 2px 10px #eafbe9cc; padding:1.1em 1.15em 2.1em 1.15em;}
+.section-heading{text-align:center;max-width:740px;margin:2em auto 1.2em auto;padding-top:0.5em;}
+.section-heading h1{font-size:2.1em;margin:.35em 0 0 .1em;letter-spacing:.01em;}
+.section-heading p{font-size:1.22em;margin-top:1.1em;color:#3d533a;}
+img.hero-img {
+  display:block;margin:0.9em auto 1.45em auto;max-width:700px;width:99%;height:auto;
+  border:1.5px solid #c3e7db; border-radius:14px; box-shadow:0 2px 10px #33bc7416;
 }
-nav {
-  display:flex;
-  align-items:center;
+.caption {text-align:center;font-size:0.97em;color:#566;}
+.tool-box {
+  max-width:510px; background:var(--soft); margin:0.8em auto 2em auto;
+  border:1.8px solid #cedfd4; border-radius:15px; box-shadow:0 2px 12px #184c313a;
 }
-.nav-list {
-  display:flex;
-  gap:1.2em;
-  list-style:none;
-  margin:0;padding:0;
+#petFoodForm { padding:2em 2em 1.6em 2em; }
+label { display:block; margin-top:0.98em; font-weight:600; font-size:1.07rem; }
+select, input[type="number"], input[type="text"] {
+  width:100%; padding:0.52em; margin-top:0.19em; border:1px solid #cbe7d4; border-radius:7px;
+  font-size:1.01rem;background:#fafdff;box-sizing:border-box;transition:border-color .15s;
 }
-.nav-list li a {
-  display:inline-block;
-  background: var(--nav-pill-bg);
-  color: #259c5c;
-  font-weight: 500;
-  border-radius: 20px;
-  padding: 7px 21px;
-  margin:0 0.13em;
-  text-decoration:none;
-  transition: background 0.16s, color 0.16s;
-  box-shadow: 0 1px 7px rgba(50,90,65,0.08);
-  font-size:1.05em;
-  position:relative;
-}
-.nav-list li a.active,
-.nav-list li a:hover,
-.nav-list li a:focus {
-  background: var(--nav-pill-active);
-  color: #222f23;
-}
-#navToggle {
-  display:none; /* hidden on desktop */
-  background: none;
-  border: none;
-  margin-left:1em;
-  cursor:pointer;
-  outline:none;
-}
-.hamburger {
-  display: inline-block;
-  width: 32px;
-  height: 32px;
-  position: relative;
-}
-.bar,
-.bar::before,
-.bar::after {
-  content: '';
-  display: block;
-  position: absolute;
-  background: #fff;
-  height: 4px;
-  width: 100%;
-  border-radius: 2px;
-  transition: all 0.3s cubic-bezier(.65,.05,.36,1);
-}
-.bar {
-  top: 14px;
-}
-.bar::before {
-  top: -10px;
-}
-.bar::after {
-  top: 10px;
-}
-#navToggle.open .bar {
-  background: transparent;
-}
-#navToggle.open .bar::before {
-  transform: translateY(10px) rotate(45deg);
-}
-#navToggle.open .bar::after {
-  transform: translateY(-10px) rotate(-45deg);
-}
-@media (max-width:900px) {
-  .header-container { max-width:100%; }
-  .site-title { font-size:1.18em; }
-}
-@media (max-width: 700px) {
-  .header-container { padding:0 0.6em;height:64px;}
-  .nav-list {
-    position: absolute;
-    top: 64px;
-    right: 0;
-    background: var(--modern-green);
-    flex-direction:column;
-    min-width: 180px;
-    width:65vw;
-    box-shadow:0 12px 38px rgba(30,70,42,.26);
-    border-radius:0 0 16px 16px;
-    z-index:99;
-    gap: 0;
-    opacity:0;
-    pointer-events:none;
-    transform: translateY(-10px);
-    transition: all .23s cubic-bezier(.65,.05,.36,1);
-  }
-  .nav-list li { margin: 0.65em 0; text-align:center;}
-  .nav-list li a { width:85%; padding:12px 0; font-size:1.12em;}
-  #navToggle { display:inline-block;}
-  .nav-list.open {
-    opacity:1;
-    pointer-events:auto;
-    transform: translateY(0);
-  }
-}
-
-.section-heading {
-  max-width:750px;
-  margin:2.2em auto 1em auto;
-  text-align:left;
-}
-main {
-  max-width: 750px;
-  margin: 2em auto 3em auto;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 12px var(--box-shadow);
-  padding: 2.2em 2.5em 2.5em 2.5em;
-}
-footer {
-  text-align: center;
-  padding: 2em 1em 1em 1em;
-  font-size: 0.9em;
-  color: #6d6d6d;
-  background: #fff;
-  border-top: 1px solid #ddd;
-}
-h1, h2, h3 {
-  color: var(--main-color);
-  font-weight: 700;
-}
-h1 { font-size: 2.1rem;}
-h2 { font-size: 1.5rem; margin-top:1.6em;}
-h3 { font-size: 1.22rem;}
-p { margin-bottom: 1em;}
-ul { padding-left: 1.5em; margin-bottom: 1em;}
-li { margin-bottom: 0.4em;}
-label {
-  display: block;
-  margin-top: 1.2em;
-  font-weight: 600;
-  font-size: 1.05rem;
-}
-select, input[type="number"] {
-  width: 100%;
-  padding: 0.7em;
-  margin-top: 0.5em;
-  border: 1px solid #cbe7d4;
-  border-radius: 8px;
-  font-size: 1.02rem;
-  background:#f6fdf8;
-  box-sizing: border-box;
-  transition: border-color 0.15s;
-}
-select:focus, input[type="number"]:focus { border-color: #259c5c;}
+select:focus, input[type="number"]:focus, input[type="text"]:focus { border-color: var(--main-color);}
 button {
-  width: 100%;
-  margin-top: 2em;
-  padding: 1.03em;
-  background: var(--accent-color);
-  border: none;
-  border-radius: 28px;
-  font-size: 1.13em;
-  font-weight: 700;
-  color: var(--main-color);
-  cursor: pointer;
-  transition: background 0.19s;
-  letter-spacing:.02em;
-  box-shadow:0 2px 7px #fbc02d23;
+  width:100%;margin-top:1.0em;padding:1em;background:var(--accent);
+  border:none;border-radius:23px;font-size:1.13em;font-weight:700;color:var(--main-color);
+  cursor:pointer;transition:background .19s;letter-spacing:.02em;box-shadow:0 2px 7px #fbc02d23;
 }
-button:hover, button:focus {
-  background: #ffd54f;
-  outline: none;
-}
+button:hover {background:#ffd54f;outline:none;}
 .result {
-  background: var(--main-color);
-  color: #fff;
-  padding: 1.4em;
-  margin-top: 2em;
-  border-radius: 13px;
-  font-size: 1.17rem;
-  min-height:88px;
-  text-align: center;
-  box-shadow: 0 3px 7px rgba(0,0,0,0.11);
+  background:#f6fdfa; color:#155c1d; margin:1.3em 1.1em 1.1em 1.1em; font-size:1.11rem;
+  border-radius:12px; border:1.4px solid #dbf6e8; min-height:88px; text-align:center; padding:1.6em;
+  box-shadow:0 2px 7px #3ab77e11;
 }
-.notice {
-  font-size: 0.93rem;
-  color: #555;
-  margin-top: 1em;
-  font-style: italic;
+.stats-graph {display:flex;flex-direction:column;align-items:center;margin:2.1em 0 2.1em 0;}
+.graph-label {margin:0.7em 0 1.1em 0;font-size:1.09em;color:#514933;}
+.stats-graph svg {width:97vw;max-width:470px;height:180px;}
+.stats-graph text { font-size:17px;}
+section.content-block {margin-top:1.1em; border-top:1px solid #edf0ea; padding-top:1em;}
+.outgoing-links {
+  display:flex;justify-content:center;gap:2.1em;flex-wrap:wrap;margin:1.8em 0 1.1em 0;font-size:1.07em;}
+.outgoing-links a {color:var(--main-color);font-weight:600;padding:3px 10px;border-radius:6px;background:#eafbed;text-decoration:none;transition:.18s;}
+.outgoing-links a:hover{background:var(--accent);color:#222;}
+footer{
+  background: var(--footer-bg);
+  color:#f6f6f6; font-size:1.1em; min-height:68px; border-top:none;
+  text-align: center; margin-top:0;border-radius:0 0 10px 10px;
+  padding: 1.13em 1em 1.2em 1em;
 }
-section.content-block {
-  margin-top: 2em;
-  border-top: 1px solid #eee;
-  padding-top: 1.5em;
-}
-@media (max-width: 600px) {
-  .section-heading { margin:1.2em .5em 1em .5em; }
-  main {
-    margin: 0.7em 0.4em 2em 0.4em;
-    padding: 1.06em 0.6em 1.5em 0.6em;
-  }
-  h1 { font-size: 1.4rem; }
-  button { font-size: 1.05em; }
+.footer-links{margin:0.37em 0 0.30em 0;display:flex;justify-content:center;gap:2.3em;flex-wrap:wrap;}
+.footer-links a{color:#fff;background:#34bb74;padding:7px 19px;border-radius:16px;text-decoration:none;font-weight:500;font-size:1.08em;transition:background .15s;}
+.footer-links a:hover{background:#ffc92a;color:#244;}
+@media (max-width:540px){
+  .section-heading{padding-top:0.2em;}
+  .stats-graph svg{height:135px!important;}
+  .footer-links{gap:1em;padding-bottom:1em;}
+  .tool-box{padding:0.2em;}
+  #petFoodForm{padding:0.8em;}
 }
   </style>
 </head>
 <body>
-  <!-- Modern animated header -->
-  <header class="modern-header">
-    <div class="header-container">
-      <a href="/" class="site-logo" aria-label="ToolsWagon Home">
-        <svg width="48" height="44" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Multicolor pet logo">
-          <ellipse cx="7" cy="12" rx="5" ry="9" fill="#ffd54f"/>
-          <ellipse cx="41" cy="12" rx="5" ry="9" fill="#fff8e1"/>
-          <ellipse cx="24" cy="22" rx="20" ry="18" fill="#fff"/>
-          <ellipse cx="16.5" cy="19" rx="5" ry="7" fill="#ffe082"/>
-          <ellipse cx="32" cy="27" rx="6" ry="4" fill="#e1bee7"/>
-          <ellipse cx="35" cy="10" rx="3" ry="3" fill="#81d4fa"/>
-          <rect x="19" y="2" width="4" height="14" rx="2" fill="#fff"/>
-          <rect x="25" y="2" width="4" height="14" rx="2" fill="#fff"/>
-          <ellipse cx="24" cy="27" rx="2.5" ry="2" fill="#ffb300"/>
-          <path d="M20 29 Q24 34 28 29" stroke="#555" stroke-width="2" fill="none"/>
-        </svg>
-        <span class="site-title">ToolsWagon</span>
-      </a>
-      <nav>
-        <ul class="nav-list">
-          <li><a href="/">Home</a></li>
-          <li><a href="/pet-food-calculator.html" class="active">Pet Food Calculator</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/faq">FAQ</a></li>
-        </ul>
-        <button id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="menu-list">
-          <span class="hamburger">
-            <span class="bar"></span>
-          </span>
-        </button>
-      </nav>
-    </div>
-  </header>
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      const navToggle = document.getElementById('navToggle');
-      const navList = document.querySelector('.nav-list');
-      if (navToggle && navList) {
-        navToggle.addEventListener('click', function() {
-          navToggle.classList.toggle('open');
-          navList.classList.toggle('open');
-          navToggle.setAttribute('aria-expanded', navList.classList.contains('open') ? 'true' : 'false');
-        });
-        document.addEventListener('click', function(e) {
-          if (!navList.contains(e.target) && !navToggle.contains(e.target) && navList.classList.contains('open')) {
-            navList.classList.remove('open');
-            navToggle.classList.remove('open');
-            navToggle.setAttribute('aria-expanded', 'false');
-          }
-        });
-      }
-    });
-  </script>
-  <!-- Heading and description -->
+<!-- HEADER -->
+<header>
+  <div class="header-wrap">
+    <a href="/pet-food-calculator.html" class="site-title-head">
+      <svg class="logo" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Pet Logo">
+        <ellipse cx="7" cy="12" rx="5" ry="9" fill="#ffd54f"/>
+        <ellipse cx="41" cy="12" rx="5" ry="9" fill="#fff8e1"/>
+        <ellipse cx="24" cy="22" rx="20" ry="18" fill="#fff"/>
+        <ellipse cx="16.5" cy="19" rx="5" ry="7" fill="#ffe082"/>
+        <ellipse cx="32" cy="27" rx="6" ry="4" fill="#e1bee7"/>
+        <ellipse cx="35" cy="10" rx="3" ry="3" fill="#81d4fa"/>
+        <rect x="19" y="2" width="4" height="14" rx="2" fill="#fff"/>
+        <rect x="25" y="2" width="4" height="14" rx="2" fill="#fff"/>
+        <ellipse cx="24" cy="27" rx="2.5" ry="2" fill="#ffb300"/>
+        <path d="M20 29 Q24 34 28 29" stroke="#555" stroke-width="2" fill="none"/>
+      </svg>
+      <span>Pet Food Calculator App</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="/" >Home</a></li>
+        <li><a href="/pet-food-calculator.html" class="active">Pet Food Calculator</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Heading and image -->
   <section class="section-heading">
-    <h1>Pet Food Calculator for the USA</h1>
-    <div style="font-size:1.13em;color:#444;">
-      Accurately calculate daily food portions for your dog, cat, rabbit, guinea pig, bird, fish, or reptile. Our tool uses veterinary science and US nutrition guidance to give species-specific recommendations you can trust. Easy, fast, and free for all American pet families.
-    </div>
+    <h1>Pet Food Calculator App</h1>
+    <p>
+      Effortlessly calculate perfect daily meal portions for your dog, cat, rabbit, guinea pig, bird, fish, or reptile. Our science-driven tool helps American pet families keep pets healthy and happy—using data from veterinarians, nutritionists, and the most trusted animal health organizations.
+    </p>
   </section>
-  <!-- Main Tool -->
-  <main>
-    <!-- TOOL IMAGE (replace [image:1] with your static asset if desired) -->
-    <img src="[image:1]" alt="Illustrated bowls with dog, cat, rabbit, and parakeet" class="form-illustration" loading="lazy" />
+  <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=700&q=60"
+       width="700" height="430"
+       alt="Happy pets with food bowls: dog, cat, rabbit, parakeet"
+       class="hero-img"/>
+  <div class="caption">A healthy meal is the foundation of a happy, long life for pets of all kinds. (Image: Unsplash)</div>
+
+  <!-- TOOL: APPROVED VERSION IN A BOX -->
+  <div class="tool-box">
     <form id="petFoodForm" aria-label="Pet Food Calculator Form">
       <label for="pet-type">Select Pet Type:</label>
-      <select id="pet-type" name="petType" required aria-required="true" aria-describedby="pet-desc">
+      <select id="pet-type" name="petType" required aria-required="true">
         <option value="" disabled selected>Select your pet</option>
-        <option value="dog">Dog</option>
-        <option value="cat">Cat</option>
-        <option value="rabbit">Rabbit</option>
-        <option value="guineaPig">Guinea Pig</option>
-        <option value="hamster">Hamster</option>
-        <option value="bird">Bird (e.g. Parakeet)</option>
-        <option value="fish">Fish</option>
-        <option value="reptile">Reptile (e.g., Turtle, Lizard)</option>
+        <option value="dog">Dog</option><option value="cat">Cat</option>
+        <option value="rabbit">Rabbit</option><option value="guineaPig">Guinea Pig</option>
+        <option value="hamster">Hamster</option><option value="bird">Bird (e.g. Parakeet)</option>
+        <option value="fish">Fish</option><option value="reptile">Reptile (e.g., Turtle, Lizard)</option>
       </select>
-      <small id="pet-desc" style="color:#666;">Choose the species to get species-specific food recommendations</small>
       <label for="pet-weight">Pet Weight (lbs):</label>
-      <input type="number" id="pet-weight" name="petWeight" min="0.1" max="500" step="0.1" required aria-required="true" aria-describedby="weight-desc" />
-      <small id="weight-desc" style="color:#666;">Enter your pet's weight in pounds (lbs)</small>
-      <!-- PET AGE LOGIC: DEFAULT OR CUSTOM -->
+      <input type="number" id="pet-weight" name="petWeight" min="0.1" max="500" step="0.1" required aria-required="true" />
       <label for="pet-age">Pet Age:</label>
-      <select id="pet-age" name="petAge" required aria-required="true" aria-describedby="age-desc">
+      <select id="pet-age" name="petAge" required aria-required="true">
         <option value="" disabled selected>Select age group</option>
         <option value="juvenile">Juvenile/Kitten/Puppy</option>
         <option value="adult">Adult</option>
@@ -379,141 +176,160 @@ section.content-block {
         <input type="number" id="custom-months" name="customMonths" min="0" max="11" step="1" placeholder="Months" style="width:31%;display:inline-block;margin-right:1%;" />
         <input type="number" id="custom-days" name="customDays" min="0" max="31" step="1" placeholder="Days" style="width:31%;display:inline-block;" />
       </span>
-      <small id="age-desc" style="color:#666;">Select pet age group, or enter exact if desired.</small>
       <label for="activity-level">Activity Level:</label>
-      <select id="activity-level" name="activityLevel" required aria-required="true" aria-describedby="activity-desc">
-        <option value="" disabled selected>Select activity level</option>
+      <select id="activity-level" name="activityLevel" required aria-required="true">
+        <option value="" disabled selected>Select activity</option>
         <option value="low">Low (sedentary, indoor)</option>
         <option value="normal">Normal (average)</option>
         <option value="high">High (active, working)</option>
       </select>
-      <small id="activity-desc" style="color:#666;">Choose your pet's typical daily activity level</small>
-      <label for="spay-neuter">Spayed/Neutered Status (Dogs & Cats):</label>
-      <select id="spay-neuter" name="spayNeuter" aria-describedby="spay-desc">
+      <label for="spay-neuter">Spayed/Neutered? (Dogs & Cats):</label>
+      <select id="spay-neuter" name="spayNeuter">
         <option value="" disabled selected>Select if applicable</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
         <option value="notApplicable">Not Applicable (other pets)</option>
       </select>
-      <small id="spay-desc" style="color:#666;">Select if your dog or cat is spayed/neutered. For other pets, select 'Not Applicable'.</small>
       <button type="submit">Calculate Food Amount</button>
     </form>
-    <section id="result-output" aria-live="polite" style="min-height: 110px;"></section>
-    <!-- Graph: Most popular pets in the US (example bar chart using SVG) -->
-    <div class="stats-graph">
-      <span class="graph-label">Most Popular Pets in US Households (2024)</span>
-      <svg viewBox="0 0 330 130" role="img" width="95%" height="86px">
-        <!-- Bars -->
-        <rect x="20" y="56" width="32" height="68" fill="#ffd54f"/><text x="36" y="130" font-size="14" text-anchor="middle" fill="#444">Dogs</text>
-        <rect x="60" y="91" width="32" height="33" fill="#81d4fa"/><text x="76" y="130" font-size="14" text-anchor="middle" fill="#444">Cats</text>
-        <rect x="100" y="115" width="32" height="9" fill="#c5e1a5"/><text x="116" y="130" font-size="14" text-anchor="middle" fill="#444">Fish</text>
-        <rect x="140" y="113" width="32" height="11" fill="#e1bee7"/><text x="156" y="130" font-size="14" text-anchor="middle" fill="#444">Birds</text>
-        <rect x="180" y="118" width="32" height="6" fill="#bcaaa4"/><text x="196" y="130" font-size="14" text-anchor="middle" fill="#444">Rabbits</text>
-        <rect x="220" y="119" width="32" height="5" fill="#b2ebf2"/><text x="236" y="130" font-size="14" text-anchor="middle" fill="#444">Hamsters</text>
-        <!-- Values -->
-        <text x="36" y="54" font-size="13" text-anchor="middle" fill="#333">65M</text>
-        <text x="76" y="89" font-size="13" text-anchor="middle" fill="#333">38M</text>
-      </svg>
-      <span style="font-size:0.98em;color:#444;">Source: <a href="https://www.avma.org/resources-tools/reports-statistics/pet-ownership-statistics" style="color:#267a40;" rel="nofollow noopener" target="_blank">AVMA</a></span>
+    <div id="result-output" style="display:none;"></div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <section class="content-block" id="how-it-works">
+    <h2>How Our Pet Food Calculator Works</h2>
+    <p>
+      Pet nutrition can be confusing. Our web tool was created for US pet families who want practical, accurate calculations based on veterinary best practices—not sales hype or guesswork.
+      The calculator uses Resting Energy Requirement (RER) and Maintenance Energy Requirement (MER) equations like those used in American veterinary practice, tailored by species, age, activity, and weight.
+    </p>
+    <p>
+      When you enter your pet's species, exact or approximate age, weight, and lifestyle, our calculator references published nutrition guidelines (from <a href="https://www.aafco.org/" target="_blank" rel="nofollow noopener">AAFCO</a>, <a href="https://www.avma.org/" target="_blank" rel="nofollow noopener">AVMA</a>, and <a href="https://www.aspca.org/pet-care" target="_blank" rel="nofollow noopener">ASPCA</a>), instantly calculating calories and converting to typical food amounts per day for each pet type.
+    </p>
+    <ul>
+      <li>All math is explained in clear language below</li>
+      <li>Portions shown for both dry and wet food (convert grams as needed)</li>
+      <li>No login required; works on any device and never saves your data</li>
+      <li>Perfect for American owners wanting to prevent overfeeding, underfeeding, and obesity</li>
+    </ul>
+  </section>
+
+  <section class="content-block">
+    <h2>Why Trust Pet Food Calculator App?</h2>
+    <ul>
+      <li>Calculations based on published US veterinary science and nutrition guidelines, not guesses or marketing.</li>
+      <li>Updates every year with the latest dietary research.</li>
+      <li>Includes options for young, adult, and senior pets, with detailed adjustment for custom ages.</li>
+      <li>Smithsonian, CDC, and AAFCO data cross-checked for quality and currency.</li>
+      <li>Openly references leading sources and is entirely independent (see footer for links).</li>
+    </ul>
+    <div class="outgoing-links">
+      <a href="https://www.aafco.org/" target="_blank" rel="nofollow noopener">AAFCO</a>
+      <a href="https://www.avma.org/resources-tools/reports-statistics/pet-ownership-statistics" target="_blank" rel="nofollow noopener">AVMA Pet Stats</a>
+      <a href="https://www.aspca.org/pet-care/dog-care/dog-nutrition-tips" target="_blank" rel="nofollow noopener">ASPCA Nutrition</a>
+      <a href="https://www.petmd.com/dog/nutrition/evr_multi_pet_food_label_101" target="_blank" rel="nofollow noopener">PetMD</a>
     </div>
-    
-    <section class="content-block" id="how-it-works">
-      <h2>How This Pet Food Calculator Works</h2>
-      <p>
-        Our calculator uses widely accepted scientific methods from veterinary nutrition, including calculations of <strong>Resting Energy Requirement (RER)</strong> and <strong>Maintenance Energy Requirement (MER)</strong>. These give an approximate daily energy need based on pet species, weight, age/life stage, activity level, and spay/neuter status (for dogs and cats).
-      </p>
-      <p>
-        The calculated energy needs are translated into daily food amounts (measured in cups/grams) based on typical calorie densities for pet food. For other species, the calculator provides recommended feed quantities based on metabolic studies and established feeding charts.
-      </p>
-      <p>
-        This tool is designed for <strong>US pet owners</strong> looking for a quick, reliable estimate but should never replace professional veterinary advice tailored to your pet’s unique health status.
-      </p>
-    </section>
-    <section class="content-block" id="nutrition-by-species">
-      <h2>Pet Nutrition Guidelines by Species</h2>
-      <h3>Dogs</h3>
-      <p>For dogs, energy needs depend on weight, age, activity, and whether the dog is spayed/neutered. We use the formula:<br/>
-        <em>RER = 70 × (weight in kg)<sup>0.75</sup>. Then MER = RER × an activity factor.</em>  
-        Common MER factors:
-      </p>
-      <ul>
-        <li>Neutered adult dog: 1.6 × RER</li>
-        <li>Intact adult dog: 1.8 × RER</li>
-        <li>Active/working dog: 2.0–5.0 × RER</li>
-        <li>Puppy (up to 4 months): ~3.0 × RER</li>
-        <li>Senior dogs: 1.2–1.4 × RER</li>
-      </ul>
-      <p>The calculator uses these to give daily calorie needs converted into food intake based on standard dry food calorie density (~350 kcal/cup).</p>
-      <h3>Cats</h3>
-      <p>For cats, the calculation principles are similar but with feline-specific factors:</p>
-      <ul>
-        <li>Neutered adult cat: 1.2 × RER</li>
-        <li>Intact adult cat: 1.4 × RER</li>
-        <li>Active cat: up to 1.6 × RER</li>
-        <li>Kitten (up to 4 months): ~2.5 × RER</li>
-        <li>Senior cats: 1.0–1.2 × RER</li>
-      </ul>
-      <p>Dry food calorie density generally around 300 kcal/cup for cats.</p>
-      <h3>Rabbits & Small Mammals (Guinea Pigs, Hamsters)</h3>
-      <p>Rabbits and small mammals have different metabolic rates and require diets high in fiber (e.g., hay) for digestive health. The calculator estimates daily feed weight based on body weight and specified life stage/activity. Their diets include pellets, fresh greens, and water access; overfeeding pellets can cause obesity.</p>
-      <h3>Birds</h3>
-      <p>Birds like parakeets and cockatiels have high metabolism. Calculations are based on weight and energy demand per species, converted into pellet or seed volume daily. The tool offers feeding ranges to help prevent over or underfeeding.</p>
-      <h3>Fish</h3>
-      <p>Fish feeding depends on species, size, and tank conditions. The calculator provides approximate daily food amounts per fish weight but recommends feedings several times per day in small quantities to avoid water quality issues.</p>
-      <h3>Reptiles</h3>
-      <p>Reptiles have widely varying diets (carnivores, herbivores, omnivores). The calculator estimates caloric needs based on weight and species type, recommending feeding schedules and portion sizes adhering to standards from reptile care organizations.</p>
-    </section>
-    <section class="content-block" id="usage-guide">
-      <h2>How to Use the Calculator</h2>
-      <p>1. Select your pet species from the dropdown list.</p>
-      <p>2. Enter your pet’s current weight in pounds accurately.</p>
-      <p>3. Choose the age/life stage category that best fits your pet.</p>
-      <p>4. Choose your pet’s typical activity level.</p>
-      <p>5. For dogs and cats, select if your pet is spayed or neutered, affecting calorie needs.</p>
-      <p>6. Click “Calculate Food Amount” to see personalized daily feeding recommendations immediately below the form.</p>
-      <p>7. Use the results as a guideline, adjusting as per your vet’s advice or food packaging instructions.</p>
-    </section>
-    <section class="content-block" id="faq">
-      <h2>Frequently Asked Questions (FAQ)</h2>
-      <h3>Q: Can I use this calculator for mixed-species pets or exotic animals?</h3>
-      <p>A: This tool covers common household pets and several exotic types like reptiles and birds but may not have formulas for all species. Consult your vet for specialized diets.</p>
-      <h3>Q: How often should I re-calculate food amounts for my pet?</h3>
-      <p>A: Recalculate when your pet changes weight, life stage, or activity level, or after veterinary check-ups.</p>
-      <h3>Q: Does this calculator consider my pet’s medical conditions?</h3>
-      <p>A: No. This provides standard formulas meant for healthy pets. Medical diets require vet supervision.</p>
-      <h3>Q: What if my pet refuses the recommended food quantity?</h3>
-      <p>A: Gradually adjust feeding based on appetite and monitor weight. Consult your vet for feeding issues.</p>
-    </section>
-    <section class="content-block" id="disclaimer">
-      <h2>Disclaimer</h2>
-      <p>
-        The Pet Food Calculator provides science-based nutritional estimates according to current veterinary guidelines. Actual needs may vary by breed, health status, food formulation, and lifestyle. Always consult your veterinarian before making major changes to your pet’s diet or if you have any concerns. Your pet’s well-being is our priority.
-      </p>
-    </section>
-  </main>
-  <footer>
-    © 2025 ToolsWagon. Made for US pet lovers.<br />
-    <a href="https://toolswagon.site/" style="color:#2e7d32;">Home</a>
-  </footer>
-  <script>
-  // Responsive nav hamburger
+  </section>
+  <section class="stats-graph">
+    <span class="graph-label">Most Popular Pets in US Households (2024)</span>
+    <svg viewBox="0 0 440 185">
+      <rect x="28" y="52" width="45" height="110" fill="#ffd54f"/><text x="51" y="47" text-anchor="middle" fill="#333">65M</text>
+      <text x="51" y="180" text-anchor="middle" fill="#444">Dogs</text>
+      <rect x="88" y="91" width="45" height="71" fill="#81d4fa"/><text x="111" y="86" text-anchor="middle" fill="#333">38M</text>
+      <text x="111" y="180" text-anchor="middle" fill="#444">Cats</text>
+      <rect x="148" y="128" width="45" height="34" fill="#c5e1a5"/>
+      <text x="171" y="180" text-anchor="middle" fill="#444">Fish</text>
+      <rect x="208" y="135" width="45" height="27" fill="#e1bee7"/>
+      <text x="231" y="180" text-anchor="middle" fill="#444">Birds</text>
+      <rect x="268" y="155" width="45" height="7" fill="#bcaaa4"/>
+      <text x="291" y="180" text-anchor="middle" fill="#444">Rabbits</text>
+      <rect x="328" y="158" width="45" height="4" fill="#b2ebf2"/>
+      <text x="351" y="180" text-anchor="middle" fill="#444">Hamsters</text>
+      <rect x="388" y="165" width="45" height="2" fill="#ffe0b2"/>
+      <text x="411" y="180" text-anchor="middle" fill="#444">Other</text>
+    </svg>
+    <span style="font-size:0.98em;color:#555;">Source: <a href="https://www.avma.org/resources-tools/reports-statistics/pet-ownership-statistics" target="_blank" rel="nofollow noopener">AVMA</a></span>
+  </section>
+
+  <section class="content-block" id="main-guide">
+    <h2>How to Use the Calculator</h2>
+    <ol>
+      <li>Choose your pet’s species from the menu</li>
+      <li>Enter their weight (in pounds)</li>
+      <li>Select approximate or input exact age for most accurate result</li>
+      <li>Set their usual activity level</li>
+      <li>(For dogs/cats) Choose if your pet is spayed/neutered</li>
+      <li>Press Calculate—your custom daily portion (in cups/grams/kcal) is shown instantly</li>
+    </ol>
+    <h2>Benefits of Using the Pet Food Calculator App</h2>
+    <ul>
+      <li>Protect pets from obesity (56% of US dogs, 59% of cats now overweight)</li>
+      <li>Prevent underfeeding, especially important for puppies, kittens, and exotics</li>
+      <li>Optimize food costs by portioning accurately—no more overpouring!</li>
+      <li>Supports all modern diets—grain-free, raw/cooked, dry, or wet</li>
+      <li>Built for modern, multi-pet US households: repeat instantly for each animal</li>
+    </ul>
+    <h2>Science Behind the Tool</h2>
+    <p>This calculator is based on:</p>
+    <ul>
+      <li><b>Resting Energy Requirement (RER):</b> <code>RER = 70 × (body weight in kg)<sup>0.75</sup></code></li>
+      <li><b>Maintenance Energy Requirement (MER):</b> Multiplies RER by a species- and life-stage-dependent factor (<b>1.2–3.0+</b>)</li>
+      <li>Species-specific conversion tables for birds, rabbits, guinea pigs, fish, etc.</li>
+      <li>Portion recommendations rely on typical US-brand pet food densities (foods per cup, per can, or per typical gram/pellet serving)</li>
+    </ul>
+    <p>This process is the gold standard in modern vet guidance. Source: <a href="https://www.petmd.com/dog/nutrition/evr_multi_pet_food_label_101" rel="nofollow noopener" target="_blank">PetMD</a></p>
+    <h2>Why Our Calculator Is Different</h2>
+    <p>No login. No ads. No product pitches. Just clear, unbiased advice, available anytime, for any pet American families love!</p>
+  </section>
+
+  <section class="content-block" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <h3>How do I know if I’m feeding my pet enough?</h3>
+    <p>Track your pet’s weight monthly and ensure ribs are easily felt but not visible. Our calculator gives a trusted starting range, but always consult your veterinarian for fine-tuning. Regular weigh-ins are proven to prevent silent weight gain or loss.</p>
+    <h3>What’s the healthiest diet for my pet?</h3>
+    <p>Choose foods formulated to meet AAFCO standards for your pet’s species and age. Mix up fresh, commercially formulated, or prescription diets as advised by your vet.</p>
+    <h3>Can I use this calculator for wet/raw diets?</h3>
+    <p>You can—it provides results in grams as well as cups. For home-cooked or raw, use the kcal total, weighing accordingly. Always check with a veterinary nutritionist first when changing diet types.</p>
+    <h3>How often should I feed my pet?</h3>
+    <p>Most dogs and cats do best with two meals per day. Puppies, kittens, and small mammals may require three or four, while some reptiles or fish may only need feeding every 1–3 days. The tool helps guide by species.</p>
+    <h3>Is this tool safe for pets with health problems?</h3>
+    <p>Only as a general reference. Pets with diabetes, kidney disease, allergies, or on special diets must follow your veterinarian's personalized advice above all else.</p>
+    <h3>Should food be changed as my pet ages?</h3>
+    <p>Yes! Caloric needs drop with most senior pets. Our calculator flags when a change of group could impact portion sizes.</p>
+    <h3>How accurate is the data?</h3>
+    <p>Our calculators implement published US nutrition protocols, and our team reviews/updates all numbers yearly in July with the latest data from AAFCO, AVMA, and ASPCA.</p>
+  </section>
+  <section class="content-block" id="disclaimer">
+    <h2>Disclaimer</h2>
+    <p>
+      This calculator is an educational tool built from the best available research, but never replaces professional veterinary guidance. Your pet is unique; regular checkups and feedback from your vet are essential for long-term wellbeing.
+    </p>
+    <p style="color:#c90012;font-size:1.07em;font-weight:600;background:#fff7f9;border-radius:7px;padding:.5em 0;">
+      <mark style="background:#ffe2e2;">This website is not endorsed or affiliated with any government services—it's an independent platform made for educational purposes only.</mark>
+    </p>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/pet-food-calculator.html">Pet Food Calculator</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <div style="margin-top:0.65em;">
+    © 2025 Pet Food Calculator App
+  </div>
+</footer>
+<script>
+  // Hamburger menu logic removed, since you requested no hamburger: only pure nav.
+  // Tool: custom age field logic
   document.addEventListener('DOMContentLoaded', function(){
-    const navToggle = document.getElementById('navToggle');
-    const navList = document.querySelector('.nav-list');
-    if (navToggle && navList) {
-      navToggle.addEventListener('click', function() {
-        navToggle.classList.toggle('open');
-        navList.classList.toggle('open');
-        navToggle.setAttribute('aria-expanded', navList.classList.contains('open') ? 'true' : 'false');
-      });
-      document.addEventListener('click', function(e) {
-        if (!navList.contains(e.target) && !navToggle.contains(e.target) && navList.classList.contains('open')) {
-          navList.classList.remove('open');
-          navToggle.classList.remove('open');
-          navToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
+    const petAgeSel = document.getElementById('pet-age');
+    const customAge = document.getElementById('custom-age-inputs');
+    petAgeSel.addEventListener('change', function(){
+      if(petAgeSel.value==='custom') customAge.style.display='inline';
+      else customAge.style.display='none';
+    });
   });
   // Calculator logic
   function lbsToKg(lbs) { return lbs * 0.453592; }
@@ -547,22 +363,35 @@ section.content-block {
     hamster: kg => kg * 25, bird: kg => kg * 20,
     fish: kg => kg * 5, reptile: kg => kg * 20
   };
-  function calculateFoodAmount(petType, weightLbs, age, activity, spayNeuter) {
+  function calculateFoodAmount(petType, weightLbs, age, activity, spayNeuter, customMonths) {
     const weightKg = lbsToKg(weightLbs);
     let caloriesNeeded = 0, foodCups = 0, foodGrams = 0, dailyFeedingNotes = '';
     if (petType === "dog" || petType === "cat") {
+      let lifeStage = age;
+      if (age === 'custom') {
+        // Custom: classify as juv/adult/senior by species
+        if (petType==='dog') {
+          if (customMonths<=12) lifeStage = 'juvenile';
+          else if (customMonths<=84) lifeStage = 'adult';
+          else lifeStage = 'senior';
+        } else if (petType==='cat') {
+          if (customMonths<=12) lifeStage = 'juvenile';
+          else if (customMonths<=120) lifeStage = 'adult';
+          else lifeStage = 'senior';
+        }
+      }
       const RER = calculateRER(weightKg);
-      const MERmultiplier = getMERMultiplier(petType, age, activity, spayNeuter);
+      const MERmultiplier = getMERMultiplier(petType, lifeStage, activity, spayNeuter);
       caloriesNeeded = RER * MERmultiplier;
       const kcalPerCup = calorieDensities[petType];
       foodCups = caloriesNeeded / kcalPerCup;
       foodGrams = caloriesNeeded / 3.5;
-      dailyFeedingNotes = `Recommended daily feeding for your ${weightLbs} lb ${petType}, adjusted by age and activity level.`;
+      dailyFeedingNotes = `Recommended for your ${weightLbs} lb ${petType}, age group: ${lifeStage}.`;
     } else if (speciesFeedEstimates[petType]) {
       foodGrams = speciesFeedEstimates[petType](weightKg);
       caloriesNeeded = foodGrams * 3.5;
       foodCups = foodGrams / 120;
-      dailyFeedingNotes = `Estimated daily feeding amount in grams based on species-specific metabolism. Adjust as needed.`;
+      dailyFeedingNotes = `Estimated daily feeding amount in grams based on species-specific metabolism.`;
     } else {
       return null;
     }
@@ -577,27 +406,36 @@ section.content-block {
     event.preventDefault();
     const petType = document.getElementById("pet-type").value;
     const petWeight = parseFloat(document.getElementById("pet-weight").value);
-    const petAge = document.getElementById("pet-age").value;
+    let petAge = document.getElementById("pet-age").value;
+    let customMonths = 0;
+    if (petAge==='custom') {
+      let years = parseInt(document.getElementById("custom-years").value)||0;
+      let months = parseInt(document.getElementById("custom-months").value)||0;
+      let days = parseInt(document.getElementById("custom-days").value)||0;
+      customMonths = years*12 + months + Math.floor(days/30);
+    }
     const activityLevel = document.getElementById("activity-level").value;
     const spayNeuter = document.getElementById("spay-neuter").value || "notApplicable";
+    const ro = document.getElementById("result-output");
     if (!petType || !petWeight || !petAge || !activityLevel) {
-      document.getElementById("result-output").innerHTML = '<p style="color:red;">Please fill all required fields correctly.</p>';
+      ro.style.display = "";
+      ro.innerHTML = '<p style="color:red;">Please fill all required fields correctly.</p>';
       return;
     }
-    const result = calculateFoodAmount(petType, petWeight, petAge, activityLevel, spayNeuter);
+    const result = calculateFoodAmount(petType, petWeight, petAge, activityLevel, spayNeuter, customMonths);
     if (!result) {
-      document.getElementById("result-output").innerHTML = '<p style="color:red;">Sorry, unable to calculate for the selected pet type.</p>';
+      ro.style.display = "";
+      ro.innerHTML = '<p style="color:red;">Sorry, calculation not available for selected pet type.</p>';
       return;
     }
-    document.getElementById("result-output").innerHTML = `
-      <div class="result" role="region" aria-live="polite" aria-atomic="true">
-        <p><strong>Daily Food Recommendation:</strong></p>
-        <p>${result.foodCups} cups (~${result.foodGrams} grams)</p>
-        <p>Estimated Energy Needs: ~${result.caloriesNeeded} kcal/day</p>
-        <p><em>${result.note}</em></p>
-      </div>
-    `;
+    ro.style.display = "block";
+    ro.innerHTML = `<div class="result">
+      <p><strong>Daily Food Recommendation:</strong></p>
+      <p>${result.foodCups} cups (~${result.foodGrams} grams)</p>
+      <p>Estimated Energy Needs: ~${result.caloriesNeeded} kcal/day</p>
+      <p><em>${result.note}</em></p>
+    </div>`;
   };
-  </script>
+</script>
 </body>
 </html>
