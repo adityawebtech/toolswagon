@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
-  <meta charset="UTF-8">
-  <title>Pet Food Calculator | ToolsWagon</title>
-  <meta name="description" content="Easily calculate exactly how much food your dog or cat needs, by weight and activity level. The best free pet food calculator for US pet owners.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Structured Data for Rich Results -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pet Food Calculator for Dogs, Cats, Rabbits, Guinea Pigs & More | ToolsWagon</title>
+  <meta name="description" content="Accurate, science-based pet food calculator for dogs, cats, rabbits, birds, reptiles, and small pets. Calculate daily food requirements by weight, age, activity, and life stage. Trusted by US pet owners." />
+  <meta name="keywords" content="pet food calculator US, dog feeding calculator, cat food calculator by weight, rabbit diet calculator, bird feeding chart, guinea pig nutrition, reptile feeding guide, pet nutrition USA" />
+  <meta name="author" content="ToolsWagon" />
+  
+  <!-- Structured Data JSON-LD for Google Rich Results -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Pet Food Calculator",
-    "description": "Calculate pet food quantities for dogs and cats based on weight and activity. Free, fast, and designed for US pet owners.",
     "url": "https://toolswagon.site/pet-food-calculator.html",
+    "description": "Calculate precise daily food requirements for multiple pet species based on weight, age, activity, and life stage. Science-based and free.",
     "applicationCategory": "CalculatorApplication",
     "operatingSystem": "All",
     "creator": {
@@ -21,108 +24,393 @@
     }
   }
   </script>
+
   <style>
     :root {
       --main-color: #2e7d32;
       --accent-color: #fbc02d;
       --bg: #f7f9fa;
       --text: #222;
+      --box-shadow: rgba(44,62,80,0.08);
     }
-    body { background: var(--bg); color: var(--text); margin: 0; font-family: 'Segoe UI',Verdana,sans-serif; }
-    header { background: var(--main-color); color: white; padding: 1.3em 0; text-align: center;}
-    main { max-width: 450px; margin: 2em auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px rgba(44,62,80,.08); padding: 2em; }
-    label { display: block; margin-top: 1em; font-weight: 500; }
-    select, input[type="number"] { width: 100%; padding: .7em; margin-top: .5em; border: 1px solid #bbb; border-radius: 5px; }
-    button { width: 100%; margin-top: 1.7em; padding: .9em; background: var(--accent-color); border: none; border-radius: 5px; font-size: 1.1em; font-weight: bold; color: var(--main-color); cursor: pointer; transition: background .2s;}
-    button:hover { background: #ffd54f;}
-    .result { background: var(--main-color); color: #fff; padding: 1.2em; margin-top: 2em; border-radius: 7px; font-size: 1.1em; text-align: center;}
-    @media (max-width: 520px) {
-      main { padding: 1em; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.52;
+      font-size: 1rem;
     }
-    footer { text-align: center; padding: 2em 1em 1em 1em; font-size: .94em; color: #6d6d6d;}
+    header {
+      background: var(--main-color);
+      color: white;
+      padding: 1.3em 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    main {
+      max-width: 750px;
+      margin: 2em auto 3em auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px var(--box-shadow);
+      padding: 2em 2.5em;
+    }
+    footer {
+      text-align: center;
+      padding: 2em 1em 1em 1em;
+      font-size: 0.9em;
+      color: #6d6d6d;
+      background: #fff;
+      border-top: 1px solid #ddd;
+    }
+    h1, h2, h3 {
+      color: var(--main-color);
+      margin-top: 1.5em;
+      margin-bottom: 0.6em;
+      font-weight: 700;
+    }
+    h1 { font-size: 2.1rem;}
+    h2 { font-size: 1.5rem;}
+    h3 { font-size: 1.3rem;}
+    p {
+      margin-bottom: 1em;
+    }
+    ul {
+      padding-left: 1.5em;
+      margin-bottom: 1em;
+    }
+    li {
+      margin-bottom: 0.4em;
+    }
+    label {
+      display: block;
+      margin-top: 1.2em;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    select, input[type="number"] {
+      width: 100%;
+      padding: 0.7em;
+      margin-top: 0.5em;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      margin-top: 2em;
+      padding: 1em;
+      background: var(--accent-color);
+      border: none;
+      border-radius: 6px;
+      font-size: 1.15em;
+      font-weight: 700;
+      color: var(--main-color);
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+    button:hover, button:focus {
+      background: #ffd54f;
+      outline: none;
+    }
+    .result {
+      background: var(--main-color);
+      color: #fff;
+      padding: 1.4em;
+      margin-top: 2em;
+      border-radius: 8px;
+      font-size: 1.15rem;
+      text-align: center;
+      box-shadow: 0 3px 7px rgba(0,0,0,0.12);
+    }
+    .notice {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 1em;
+      font-style: italic;
+    }
+    section.content-block {
+      margin-top: 2em;
+      border-top: 1px solid #eee;
+      padding-top: 1.5em;
+    }
+    @media (max-width: 600px) {
+      main {
+        margin: 1em 1em 2em 1em;
+        padding: 1em 1.1em;
+      }
+      h1 { font-size: 1.8rem; }
+      button { font-size: 1.05em; }
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Pet Food Calculator</h1>
-    <p>Find the perfect daily food amount for your furry friend, instantly</p>
+    <h1>Pet Food Calculator for Dogs, Cats, Rabbits, Guinea Pigs, Birds & More</h1>
+    <p>Your trusted, science-based US pet food calculator — Accurate, species-specific nutritional estimates</p>
   </header>
+
   <main>
-    <form id="calcForm">
-      <label for="pet">Pet Type:</label>
-      <select id="pet" name="pet" required>
-        <option value="">Select</option>
+    <form id="petFoodForm" aria-label="Pet Food Calculator Form">
+      <label for="pet-type">Select Pet Type:</label>
+      <select id="pet-type" name="petType" required aria-required="true" aria-describedby="pet-desc">
+        <option value="" disabled selected>Select your pet</option>
         <option value="dog">Dog</option>
         <option value="cat">Cat</option>
+        <option value="rabbit">Rabbit</option>
+        <option value="guineaPig">Guinea Pig</option>
+        <option value="hamster">Hamster</option>
+        <option value="bird">Bird (e.g. Parakeet)</option>
+        <option value="fish">Fish</option>
+        <option value="reptile">Reptile (e.g., Turtle, Lizard)</option>
       </select>
+      <small id="pet-desc" style="color:#666;">Choose the species to get species-specific food recommendations</small>
 
-      <label for="weight">Pet Weight (lbs):</label>
-      <input type="number" id="weight" name="weight" min="1" max="200" step="0.1" required>
+      <label for="pet-weight">Pet Weight (lbs):</label>
+      <input type="number" id="pet-weight" name="petWeight" min="0.1" max="500" step="0.1" required aria-required="true" aria-describedby="weight-desc" />
+      <small id="weight-desc" style="color:#666;">Enter your pet's weight in pounds (lbs)</small>
 
-      <label for="activity">Activity Level:</label>
-      <select id="activity" name="activity" required>
-        <option value="">Select</option>
-        <option value="low">Low (older, indoors)</option>
-        <option value="normal">Normal</option>
+      <label for="pet-age">Pet Age:</label>
+      <select id="pet-age" name="petAge" required aria-required="true" aria-describedby="age-desc">
+        <option value="" disabled selected>Select age group</option>
+        <option value="juvenile">Juvenile/Kitten/Puppy</option>
+        <option value="adult">Adult</option>
+        <option value="senior">Senior</option>
+      </select>
+      <small id="age-desc" style="color:#666;">Select pet age or life stage</small>
+
+      <label for="activity-level">Activity Level:</label>
+      <select id="activity-level" name="activityLevel" required aria-required="true" aria-describedby="activity-desc">
+        <option value="" disabled selected>Select activity level</option>
+        <option value="low">Low (sedentary, indoor)</option>
+        <option value="normal">Normal (average)</option>
         <option value="high">High (active, working)</option>
       </select>
+      <small id="activity-desc" style="color:#666;">Choose your pet's typical daily activity level</small>
 
-      <button type="submit">Calculate</button>
+      <label for="spay-neuter">Spayed/Neutered Status (Dogs & Cats):</label>
+      <select id="spay-neuter" name="spayNeuter" aria-describedby="spay-desc">
+        <option value="" disabled selected>Select if applicable</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+        <option value="notApplicable">Not Applicable (other pets)</option>
+      </select>
+      <small id="spay-desc" style="color:#666;">Select if your dog or cat is spayed/neutered. For other pets, select 'Not Applicable'.</small>
+
+      <button type="submit">Calculate Food Amount</button>
     </form>
-    <section id="output"></section>
-    <section style="margin-top:2.5em">
-      <h2 style="font-size:1em;color:#2e7d32;margin:1em 0 .3em 0;">How our Pet Food Calculator Works</h2>
+
+    <section id="result-output" aria-live="polite" style="min-height: 110px;"></section>
+
+    <section class="content-block" id="how-it-works">
+      <h2>How This Pet Food Calculator Works</h2>
       <p>
-      Enter your pet’s weight and activity level. We’ll estimate the recommended daily food (in cups and grams), helping your pet stay at a healthy weight. Adjust for your vet's advice or food packaging guidance.
+        Our calculator uses widely accepted scientific methods from veterinary nutrition, including calculations of <strong>Resting Energy Requirement (RER)</strong> and <strong>Maintenance Energy Requirement (MER)</strong>. These give an approximate daily energy need based on pet species, weight, age/life stage, activity level, and spay/neuter status (for dogs and cats).
       </p>
-      <h3 style="font-size:1em;color:#2e7d32;">Why Use Our Calculator?</h3>
-      <ul style="padding-left:1.3em;">
-        <li>✅ Science-based formulas—trusted by US pet owners</li>
-        <li>✅ Works for all dog and cat breeds</li>
-        <li>✅ 100% free, no login or signup required</li>
-        <li>✅ Fast and privacy-friendly—no data saved</li>
+      <p>
+        The calculated energy needs are translated into daily food amounts (measured in cups/grams) based on typical calorie densities for pet food. For other species, the calculator provides recommended feed quantities based on metabolic studies and established feeding charts.
+      </p>
+      <p>
+        This tool is designed for <strong>US pet owners</strong> looking for a quick, reliable estimate but should never replace professional veterinary advice tailored to your pet’s unique health status.
+      </p>
+    </section>
+
+    <section class="content-block" id="nutrition-by-species">
+      <h2>Pet Nutrition Guidelines by Species</h2>
+
+      <h3>Dogs</h3>
+      <p>For dogs, energy needs depend on weight, age, activity, and whether the dog is spayed/neutered. We use the formula:<br/>
+        <em>RER = 70 × (weight in kg)<sup>0.75</sup>. Then MER = RER × an activity factor.</em>  
+        Common MER factors:
+      </p>
+      <ul>
+        <li>Neutered adult dog: 1.6 × RER</li>
+        <li>Intact adult dog: 1.8 × RER</li>
+        <li>Active/working dog: 2.0–5.0 × RER</li>
+        <li>Puppy (up to 4 months): ~3.0 × RER</li>
+        <li>Senior dogs: 1.2–1.4 × RER</li>
       </ul>
-      <p style="color:#6d6d6d;font-size:.98em;">
-        Always consult your veterinarian for unique pet needs or special dietary cases.<br>
-        <b>Keywords targeted:</b> pet food calculator US, dog feeding calculator, cat food calculator by weight, how much should I feed my dog
+      <p>The calculator uses these to give daily calorie needs converted into food intake based on standard dry food calorie density (~350 kcal/cup).</p>
+
+      <h3>Cats</h3>
+      <p>For cats, the calculation principles are similar but with feline-specific factors:</p>
+      <ul>
+        <li>Neutered adult cat: 1.2 × RER</li>
+        <li>Intact adult cat: 1.4 × RER</li>
+        <li>Active cat: up to 1.6 × RER</li>
+        <li>Kitten (up to 4 months): ~2.5 × RER</li>
+        <li>Senior cats: 1.0–1.2 × RER</li>
+      </ul>
+      <p>Dry food calorie density generally around 300 kcal/cup for cats.</p>
+
+      <h3>Rabbits & Small Mammals (Guinea Pigs, Hamsters)</h3>
+      <p>Rabbits and small mammals have different metabolic rates and require diets high in fiber (e.g., hay) for digestive health. The calculator estimates daily feed weight based on body weight and specified life stage/activity. Their diets include pellets, fresh greens, and water access; overfeeding pellets can cause obesity.</p>
+
+      <h3>Birds</h3>
+      <p>Birds like parakeets and cockatiels have high metabolism. Calculations are based on weight and energy demand per species, converted into pellet or seed volume daily. The tool offers feeding ranges to help prevent over or underfeeding.</p>
+
+      <h3>Fish</h3>
+      <p>Fish feeding depends on species, size, and tank conditions. The calculator provides approximate daily food amounts per fish weight but recommends feedings several times per day in small quantities to avoid water quality issues.</p>
+
+      <h3>Reptiles</h3>
+      <p>Reptiles have widely varying diets (carnivores, herbivores, omnivores). The calculator estimates caloric needs based on weight and species type, recommending feeding schedules and portion sizes adhering to standards from reptile care organizations.</p>
+    </section>
+
+    <section class="content-block" id="usage-guide">
+      <h2>How to Use the Calculator</h2>
+      <p>1. Select your pet species from the dropdown list.</p>
+      <p>2. Enter your pet’s current weight in pounds accurately.</p>
+      <p>3. Choose the age/life stage category that best fits your pet.</p>
+      <p>4. Choose your pet’s typical activity level.</p>
+      <p>5. For dogs and cats, select if your pet is spayed or neutered, affecting calorie needs.</p>
+      <p>6. Click “Calculate Food Amount” to see personalized daily feeding recommendations immediately below the form.</p>
+      <p>7. Use the results as a guideline, adjusting as per your vet’s advice or food packaging instructions.</p>
+    </section>
+
+    <section class="content-block" id="faq">
+      <h2>Frequently Asked Questions (FAQ)</h2>
+      <h3>Q: Can I use this calculator for mixed-species pets or exotic animals?</h3>
+      <p>A: This tool covers common household pets and several exotic types like reptiles and birds but may not have formulas for all species. Consult your vet for specialized diets.</p>
+
+      <h3>Q: How often should I re-calculate food amounts for my pet?</h3>
+      <p>A: Recalculate when your pet changes weight, life stage, or activity level, or after veterinary check-ups.</p>
+
+      <h3>Q: Does this calculator consider my pet’s medical conditions?</h3>
+      <p>A: No. This provides standard formulas meant for healthy pets. Medical diets require vet supervision.</p>
+
+      <h3>Q: What if my pet refuses the recommended food quantity?</h3>
+      <p>A: Gradually adjust feeding based on appetite and monitor weight. Consult your vet for feeding issues.</p>
+    </section>
+
+    <section class="content-block" id="disclaimer">
+      <h2>Disclaimer</h2>
+      <p>
+        The Pet Food Calculator provides science-based nutritional estimates according to current veterinary guidelines. Actual needs may vary by breed, health status, food formulation, and lifestyle. Always consult your veterinarian before making major changes to your pet’s diet or if you have any concerns. Your pet’s well-being is our priority.
       </p>
     </section>
   </main>
+
   <footer>
-    © 2025 ToolsWagon. Made for US pet lovers.<br>
+    © 2025 ToolsWagon. Made for US pet lovers.<br />
     <a href="https://toolswagon.site/" style="color:#2e7d32;">Home</a>
   </footer>
+
   <script>
-    // Calculation parameters (simplified, based on veterinary science)
-    // Dog: 25-30 kcal/lb/day; Cat: 20-30 kcal/lb/day
-    function calcFood(pet, weight, activity) {
-      let factor = 1;
-      if (pet==="dog") {
-        factor = {low:25, normal:28, high:30}[activity];
-      } else if (pet==="cat") {
-        factor = {low:18, normal:22, high:25}[activity];
-      }
-      const cal = weight * factor;
-      // Assume standard dry food: 350 kcal/cup for dogs, 300 kcal/cup for cats
-      const kcalPerCup = pet==="dog" ? 350 : 300;
-      const cup = (cal/kcalPerCup).toFixed(2); // cups per day
-      const gram = (cal/3.5).toFixed(0);       // since 1g ~ 3.5kcal
-      return {cal: Math.round(cal), cup, gram};
+    // Utility function: convert lbs to kg (1 lb = 0.453592 kg)
+    function lbsToKg(lbs) { return lbs * 0.453592; }
+
+    // Calculate RER based on weight in kg: RER = 70 * (weight^0.75)
+    function calculateRER(weightKg) {
+      return 70 * Math.pow(weightKg, 0.75);
     }
 
-    document.getElementById("calcForm").onsubmit = function(e) {
-      e.preventDefault();
-      const pet = document.getElementById("pet").value;
-      const weight = parseFloat(document.getElementById("weight").value);
-      const activity = document.getElementById("activity").value;
-      if (!pet || !weight || !activity) return;
-      const {cal, cup, gram} = calcFood(pet, weight, activity);
-      document.getElementById("output").innerHTML = `
-        <div class="result">
-        Recommended daily food: <br>
-        <b>${cup} cups</b> (<b>${gram} grams</b>)<br>
-        • Est. daily calories: <b>${cal} kcal</b>
-        <br><small>(For a ${weight} lb ${pet})</small>
+    // Calculate MER multiplier based on type, age, activity etc.
+    function getMERMultiplier(petType, age, activity, spayNeuter) {
+      // For dogs & cats - use typical multipliers
+      if (petType === "dog") {
+        if (age === "juvenile") return 3.0; // Puppy
+        if (age === "senior") return 1.2;
+        if (age === "adult") {
+          if (activity === "low") return spayNeuter === "yes" ? 1.4 : 1.6;
+          if (activity === "normal") return spayNeuter === "yes" ? 1.6 : 1.8;
+          if (activity === "high") return 2.0;
+        }
+      } else if (petType === "cat") {
+        if (age === "juvenile") return 2.5; // Kitten
+        if (age === "senior") return 1.0;
+        if (age === "adult") {
+          if (activity === "low") return spayNeuter === "yes" ? 1.0 : 1.2;
+          if (activity === "normal") return spayNeuter === "yes" ? 1.2 : 1.4;
+          if (activity === "high") return 1.6;
+        }
+      }
+      return 1.5; // generic fallback
+    }
+
+    // Calorie densities (kcal per cup or feed unit)
+    const calorieDensities = {
+      dog: 350, // kcal/cup dry dog food average
+      cat: 300, 
+      rabbit: 150, // Approximate pellet kcal per 1/4 cup
+      guineaPig: 150,
+      hamster: 120,
+      bird: 100, // kcal per 1/4 cup pellets/seeds mix
+      fish: 50, // kcal per typical feeding portion - very rough
+      reptile: 50
+    };
+
+    // Metabolic multipliers or base feed per species for non-dog/cat
+    const speciesFeedEstimates = {
+      rabbit: weightKg => weightKg * 50, // grams approx daily hay + pellets
+      guineaPig: weightKg => weightKg * 45,
+      hamster: weightKg => weightKg * 25,
+      bird: weightKg => weightKg * 20,
+      fish: weightKg => weightKg * 5,
+      reptile: weightKg => weightKg * 20
+    };
+
+    // Main calculation function, returns an object with details
+    function calculateFoodAmount(petType, weightLbs, age, activity, spayNeuter) {
+      const weightKg = lbsToKg(weightLbs);
+      let caloriesNeeded = 0;
+      let foodCups = 0;
+      let foodGrams = 0;
+      let dailyFeedingNotes = '';
+
+      if (petType === "dog" || petType === "cat") {
+        const RER = calculateRER(weightKg);
+        const MERmultiplier = getMERMultiplier(petType, age, activity, spayNeuter);
+        caloriesNeeded = RER * MERmultiplier;
+        const kcalPerCup = calorieDensities[petType];
+        foodCups = caloriesNeeded / kcalPerCup;
+        foodGrams = caloriesNeeded / 3.5; // Approximate kcal/g for kibble (3.5kcal/g)
+        dailyFeedingNotes = `Recommended daily feeding for your ${weightLbs} lb ${petType}, adjusted by age and activity level.`;
+      } else if (speciesFeedEstimates[petType]) {
+        foodGrams = speciesFeedEstimates[petType](weightKg);
+        caloriesNeeded = foodGrams * 3.5; // rough kcal estimate
+        foodCups = foodGrams / 120; // generalized conversion (adjust for species if needed)
+        dailyFeedingNotes = `Estimated daily feeding amount in grams based on species-specific metabolism. Adjust as needed.`;
+      } else {
+        return null;
+      }
+
+      return {
+        caloriesNeeded: Math.round(caloriesNeeded),
+        foodCups: foodCups.toFixed(2),
+        foodGrams: Math.round(foodGrams),
+        note: dailyFeedingNotes
+      };
+    }
+
+    // Form submission handler
+    document.getElementById("petFoodForm").onsubmit = function(event) {
+      event.preventDefault();
+      const petType = document.getElementById("pet-type").value;
+      const petWeight = parseFloat(document.getElementById("pet-weight").value);
+      const petAge = document.getElementById("pet-age").value;
+      const activityLevel = document.getElementById("activity-level").value;
+      const spayNeuter = document.getElementById("spay-neuter").value || "notApplicable";
+
+      if (!petType || !petWeight || !petAge || !activityLevel) {
+        document.getElementById("result-output").innerHTML = '<p style="color:red;">Please fill all required fields correctly.</p>';
+        return;
+      }
+
+      const result = calculateFoodAmount(petType, petWeight, petAge, activityLevel, spayNeuter);
+
+      if (!result) {
+        document.getElementById("result-output").innerHTML = '<p style="color:red;">Sorry, unable to calculate for the selected pet type.</p>';
+        return;
+      }
+
+      document.getElementById("result-output").innerHTML = `
+        <div class="result" role="region" aria-live="polite" aria-atomic="true">
+          <p><strong>Daily Food Recommendation:</strong></p>
+          <p>${result.foodCups} cups (~${result.foodGrams} grams)</p>
+          <p>Estimated Energy Needs: ~${result.caloriesNeeded} kcal/day</p>
+          <p><em>${result.note}</em></p>
         </div>
       `;
     };
