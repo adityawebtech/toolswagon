@@ -23,13 +23,27 @@
     }
   }
   </script>
-      <style>
+  <style>
 :root {
   --modern-green: #259c5c;
   --header-bg: linear-gradient(90deg, #259c5c 60%, #38c179 100%);
   --nav-pill-bg: #fff;
   --nav-pill-active: #fbc02d;
   --shadow: 0 3px 20px rgba(50,90,65,0.08);
+
+  --main-color: #259c5c;
+  --accent-color: #fbc02d;
+  --bg: #f7f9fa;
+  --text: #222;
+  --box-shadow: rgba(44,62,80,0.08);
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.55;
+  font-size: 1rem;
 }
 .modern-header {
   background: var(--header-bg);
@@ -167,101 +181,170 @@ nav {
     transform: translateY(0);
   }
 }
-</style>
+
+.section-heading {
+  max-width:750px;
+  margin:2.2em auto 1em auto;
+  text-align:left;
+}
+main {
+  max-width: 750px;
+  margin: 2em auto 3em auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px var(--box-shadow);
+  padding: 2.2em 2.5em 2.5em 2.5em;
+}
+footer {
+  text-align: center;
+  padding: 2em 1em 1em 1em;
+  font-size: 0.9em;
+  color: #6d6d6d;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+h1, h2, h3 {
+  color: var(--main-color);
+  font-weight: 700;
+}
+h1 { font-size: 2.1rem;}
+h2 { font-size: 1.5rem; margin-top:1.6em;}
+h3 { font-size: 1.22rem;}
+p { margin-bottom: 1em;}
+ul { padding-left: 1.5em; margin-bottom: 1em;}
+li { margin-bottom: 0.4em;}
+label {
+  display: block;
+  margin-top: 1.2em;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+select, input[type="number"] {
+  width: 100%;
+  padding: 0.7em;
+  margin-top: 0.5em;
+  border: 1px solid #cbe7d4;
+  border-radius: 8px;
+  font-size: 1.02rem;
+  background:#f6fdf8;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+select:focus, input[type="number"]:focus { border-color: #259c5c;}
+button {
+  width: 100%;
+  margin-top: 2em;
+  padding: 1.03em;
+  background: var(--accent-color);
+  border: none;
+  border-radius: 28px;
+  font-size: 1.13em;
+  font-weight: 700;
+  color: var(--main-color);
+  cursor: pointer;
+  transition: background 0.19s;
+  letter-spacing:.02em;
+  box-shadow:0 2px 7px #fbc02d23;
+}
+button:hover, button:focus {
+  background: #ffd54f;
+  outline: none;
+}
+.result {
+  background: var(--main-color);
+  color: #fff;
+  padding: 1.4em;
+  margin-top: 2em;
+  border-radius: 13px;
+  font-size: 1.17rem;
+  min-height:88px;
+  text-align: center;
+  box-shadow: 0 3px 7px rgba(0,0,0,0.11);
+}
+.notice {
+  font-size: 0.93rem;
+  color: #555;
+  margin-top: 1em;
+  font-style: italic;
+}
+section.content-block {
+  margin-top: 2em;
+  border-top: 1px solid #eee;
+  padding-top: 1.5em;
+}
+@media (max-width: 600px) {
+  .section-heading { margin:1.2em .5em 1em .5em; }
+  main {
+    margin: 0.7em 0.4em 2em 0.4em;
+    padding: 1.06em 0.6em 1.5em 0.6em;
+  }
+  h1 { font-size: 1.4rem; }
+  button { font-size: 1.05em; }
+}
+  </style>
 </head>
 <body>
-  <!-- MODERN PETS HEADER -->
-<header class="modern-header">
-  <div class="header-container">
-    <!-- SVG PET LOGO -->
-    <a href="/" class="site-logo" aria-label="ToolsWagon Home">
-      <svg width="48" height="44" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Multicolor pet logo">
-        <!-- Dog Ear -->
-        <ellipse cx="7" cy="12" rx="5" ry="9" fill="#ffd54f"/>
-        <!-- Cat Ear -->
-        <ellipse cx="41" cy="12" rx="5" ry="9" fill="#fff8e1"/>
-        <!-- Face -->
-        <ellipse cx="24" cy="22" rx="20" ry="18" fill="#fff"/>
-        <!-- Dog Face Spot -->
-        <ellipse cx="16.5" cy="19" rx="5" ry="7" fill="#ffe082"/>
-        <!-- Cat Whisker Patch -->
-        <ellipse cx="32" cy="27" rx="6" ry="4" fill="#e1bee7"/>
-        <!-- Bird Head (Parakeet) -->
-        <ellipse cx="35" cy="10" rx="3" ry="3" fill="#81d4fa"/>
-        <!-- Bunny Ear Left -->
-        <rect x="19" y="2" width="4" height="14" rx="2" fill="#fff"/>
-        <!-- Bunny Ear Right -->
-        <rect x="25" y="2" width="4" height="14" rx="2" fill="#fff"/>
-        <!-- Nose -->
-        <ellipse cx="24" cy="27" rx="2.5" ry="2" fill="#ffb300"/>
-        <!-- Smile -->
-        <path d="M20 29 Q24 34 28 29" stroke="#555" stroke-width="2" fill="none"/>
-      </svg>
-      <span class="site-title">ToolsWagon</span>
-    </a>
-    <!-- NAVIGATION BAR -->
-    <nav>
-      <ul class="nav-list">
-        <li><a href="/">Home</a></li>
-        <li><a href="/pet-food-calculator.html" class="active">Pet Food Calculator</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/faq">FAQ</a></li>
-      </ul>
-      <button id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="menu-list">
-        <span class="hamburger">
-          <span class="bar"></span>
-        </span>
-      </button>
-    </nav>
-  </div>
-</header>
-  
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-  const navToggle = document.getElementById('navToggle');
-  const navList = document.querySelector('.nav-list');
-  if (navToggle && navList) {
-    navToggle.addEventListener('click', function() {
-      navToggle.classList.toggle('open');
-      navList.classList.toggle('open');
-      navToggle.setAttribute('aria-expanded', navList.classList.contains('open') ? 'true' : 'false');
-    });
-    // close on outside click
-    document.addEventListener('click', function(e) {
-      if (!navList.contains(e.target) && !navToggle.contains(e.target) && navList.classList.contains('open')) {
-        navList.classList.remove('open');
-        navToggle.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-  }
-});
-</script>
-
-  <!-- Responsive menu JS -->
+  <!-- Modern animated header -->
+  <header class="modern-header">
+    <div class="header-container">
+      <a href="/" class="site-logo" aria-label="ToolsWagon Home">
+        <svg width="48" height="44" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Multicolor pet logo">
+          <ellipse cx="7" cy="12" rx="5" ry="9" fill="#ffd54f"/>
+          <ellipse cx="41" cy="12" rx="5" ry="9" fill="#fff8e1"/>
+          <ellipse cx="24" cy="22" rx="20" ry="18" fill="#fff"/>
+          <ellipse cx="16.5" cy="19" rx="5" ry="7" fill="#ffe082"/>
+          <ellipse cx="32" cy="27" rx="6" ry="4" fill="#e1bee7"/>
+          <ellipse cx="35" cy="10" rx="3" ry="3" fill="#81d4fa"/>
+          <rect x="19" y="2" width="4" height="14" rx="2" fill="#fff"/>
+          <rect x="25" y="2" width="4" height="14" rx="2" fill="#fff"/>
+          <ellipse cx="24" cy="27" rx="2.5" ry="2" fill="#ffb300"/>
+          <path d="M20 29 Q24 34 28 29" stroke="#555" stroke-width="2" fill="none"/>
+        </svg>
+        <span class="site-title">ToolsWagon</span>
+      </a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/pet-food-calculator.html" class="active">Pet Food Calculator</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/faq">FAQ</a></li>
+        </ul>
+        <button id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="menu-list">
+          <span class="hamburger">
+            <span class="bar"></span>
+          </span>
+        </button>
+      </nav>
+    </div>
+  </header>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var navToggler = document.getElementById('navToggler');
-      var navList = document.querySelector('.nav-list');
-      if (navToggler && navList) {
-        navToggler.addEventListener('click', function() {
-          navList.classList.toggle('show');
+    document.addEventListener('DOMContentLoaded', function(){
+      const navToggle = document.getElementById('navToggle');
+      const navList = document.querySelector('.nav-list');
+      if (navToggle && navList) {
+        navToggle.addEventListener('click', function() {
+          navToggle.classList.toggle('open');
+          navList.classList.toggle('open');
+          navToggle.setAttribute('aria-expanded', navList.classList.contains('open') ? 'true' : 'false');
         });
         document.addEventListener('click', function(e) {
-          if (navList.classList.contains('show') && !navList.contains(e.target) && e.target !== navToggler) {
-            navList.classList.remove('show');
+          if (!navList.contains(e.target) && !navToggle.contains(e.target) && navList.classList.contains('open')) {
+            navList.classList.remove('open');
+            navToggle.classList.remove('open');
+            navToggle.setAttribute('aria-expanded', 'false');
           }
         });
       }
     });
   </script>
-  <!-- MAIN PAGE HEADING & SHORT DESCRIPTION -->
+  <!-- Heading and description -->
   <section class="section-heading">
     <h1>Pet Food Calculator for the USA</h1>
-    <div style="font-size:1.12em;color:#444;">
+    <div style="font-size:1.13em;color:#444;">
       Accurately calculate daily food portions for your dog, cat, rabbit, guinea pig, bird, fish, or reptile. Our tool uses veterinary science and US nutrition guidance to give species-specific recommendations you can trust. Easy, fast, and free for all American pet families.
     </div>
   </section>
+  <!-- Main Tool -->
   <main>
     <form id="petFoodForm" aria-label="Pet Food Calculator Form">
       <label for="pet-type">Select Pet Type:</label>
@@ -386,65 +469,108 @@ document.addEventListener('DOMContentLoaded', function(){
     <a href="https://toolswagon.site/" style="color:#2e7d32;">Home</a>
   </footer>
   <script>
-    // Responsive nav
-    document.addEventListener('DOMContentLoaded', function() {
-      var navToggler = document.getElementById('navToggler');
-      var navList = document.querySelector('.nav-list');
-      if (navToggler && navList) {
-        navToggler.addEventListener('click', function() {
-          navList.classList.toggle('show');
-        });
-        document.addEventListener('click', function(e) {
-          if (navList.classList.contains('show') && !navList.contains(e.target) && e.target !== navToggler) {
-            navList.classList.remove('show');
-          }
-        });
-      }
-    });
-    // Calculator logic:
-    function lbsToKg(lbs) { return lbs * 0.453592; }
-    function calculateRER(weightKg) { return 70 * Math.pow(weightKg, 0.75); }
-    function getMERMultiplier(petType, age, activity, spayNeuter) {
-      if (petType === "dog") {
-        if (age === "juvenile") return 3.0;
-        if (age === "senior") return 1.2;
-        if (age === "adult") {
-          if (activity === "low") return spayNeuter === "yes" ? 1.4 : 1.6;
-          if (activity === "normal") return spayNeuter === "yes" ? 1.6 : 1.8;
-          if (activity === "high") return 2.0;
+  // Responsive nav hamburger
+  document.addEventListener('DOMContentLoaded', function(){
+    const navToggle = document.getElementById('navToggle');
+    const navList = document.querySelector('.nav-list');
+    if (navToggle && navList) {
+      navToggle.addEventListener('click', function() {
+        navToggle.classList.toggle('open');
+        navList.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', navList.classList.contains('open') ? 'true' : 'false');
+      });
+      document.addEventListener('click', function(e) {
+        if (!navList.contains(e.target) && !navToggle.contains(e.target) && navList.classList.contains('open')) {
+          navList.classList.remove('open');
+          navToggle.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
         }
-      } else if (petType === "cat") {
-        if (age === "juvenile") return 2.5;
-        if (age === "senior") return 1.0;
-        if (age === "adult") {
-          if (activity === "low") return spayNeuter === "yes" ? 1.0 : 1.2;
-          if (activity === "normal") return spayNeuter === "yes" ? 1.2 : 1.4;
-          if (activity === "high") return 1.6;
-        }
-      }
-      return 1.5;
+      });
     }
-    const calorieDensities = {
-      dog: 350, cat: 300, rabbit: 150, guineaPig: 150,
-      hamster: 120, bird: 100, fish: 50, reptile: 50
+  });
+  // Calculator logic
+  function lbsToKg(lbs) { return lbs * 0.453592; }
+  function calculateRER(weightKg) { return 70 * Math.pow(weightKg, 0.75); }
+  function getMERMultiplier(petType, age, activity, spayNeuter) {
+    if (petType === "dog") {
+      if (age === "juvenile") return 3.0;
+      if (age === "senior") return 1.2;
+      if (age === "adult") {
+        if (activity === "low") return spayNeuter === "yes" ? 1.4 : 1.6;
+        if (activity === "normal") return spayNeuter === "yes" ? 1.6 : 1.8;
+        if (activity === "high") return 2.0;
+      }
+    } else if (petType === "cat") {
+      if (age === "juvenile") return 2.5;
+      if (age === "senior") return 1.0;
+      if (age === "adult") {
+        if (activity === "low") return spayNeuter === "yes" ? 1.0 : 1.2;
+        if (activity === "normal") return spayNeuter === "yes" ? 1.2 : 1.4;
+        if (activity === "high") return 1.6;
+      }
+    }
+    return 1.5;
+  }
+  const calorieDensities = {
+    dog: 350, cat: 300, rabbit: 150, guineaPig: 150,
+    hamster: 120, bird: 100, fish: 50, reptile: 50
+  };
+  const speciesFeedEstimates = {
+    rabbit: kg => kg * 50, guineaPig: kg => kg * 45,
+    hamster: kg => kg * 25, bird: kg => kg * 20,
+    fish: kg => kg * 5, reptile: kg => kg * 20
+  };
+  function calculateFoodAmount(petType, weightLbs, age, activity, spayNeuter) {
+    const weightKg = lbsToKg(weightLbs);
+    let caloriesNeeded = 0, foodCups = 0, foodGrams = 0, dailyFeedingNotes = '';
+    if (petType === "dog" || petType === "cat") {
+      const RER = calculateRER(weightKg);
+      const MERmultiplier = getMERMultiplier(petType, age, activity, spayNeuter);
+      caloriesNeeded = RER * MERmultiplier;
+      const kcalPerCup = calorieDensities[petType];
+      foodCups = caloriesNeeded / kcalPerCup;
+      foodGrams = caloriesNeeded / 3.5;
+      dailyFeedingNotes = `Recommended daily feeding for your ${weightLbs} lb ${petType}, adjusted by age and activity level.`;
+    } else if (speciesFeedEstimates[petType]) {
+      foodGrams = speciesFeedEstimates[petType](weightKg);
+      caloriesNeeded = foodGrams * 3.5;
+      foodCups = foodGrams / 120;
+      dailyFeedingNotes = `Estimated daily feeding amount in grams based on species-specific metabolism. Adjust as needed.`;
+    } else {
+      return null;
+    }
+    return {
+      caloriesNeeded: Math.round(caloriesNeeded),
+      foodCups: foodCups.toFixed(2),
+      foodGrams: Math.round(foodGrams),
+      note: dailyFeedingNotes
     };
-    const speciesFeedEstimates = {
-      rabbit: kg => kg * 50, guineaPig: kg => kg * 45,
-      hamster: kg => kg * 25, bird: kg => kg * 20,
-      fish: kg => kg * 5, reptile: kg => kg * 20
-    };
-    function calculateFoodAmount(petType, weightLbs, age, activity, spayNeuter) {
-      const weightKg = lbsToKg(weightLbs);
-      let caloriesNeeded = 0, foodCups = 0, foodGrams = 0, dailyFeedingNotes = '';
-      if (petType === "dog" || petType === "cat") {
-        const RER = calculateRER(weightKg);
-        const MERmultiplier = getMERMultiplier(petType, age, activity, spayNeuter);
-        caloriesNeeded = RER * MERmultiplier;
-        const kcalPerCup = calorieDensities[petType];
-        foodCups = caloriesNeeded / kcalPerCup;
-        foodGrams = caloriesNeeded / 3.5;
-        dailyFeedingNotes = `Recommended daily feeding for your ${weightLbs} lb ${petType}, adjusted by age and activity level.`;
-      } else if (speciesFeedEstimates[petType]) {
-        foodGrams = speciesFeedEstimates[petType](weightKg);
-        caloriesNeeded = foodGrams * 3.5;
-        foodCups = foo
+  }
+  document.getElementById("petFoodForm").onsubmit = function(event) {
+    event.preventDefault();
+    const petType = document.getElementById("pet-type").value;
+    const petWeight = parseFloat(document.getElementById("pet-weight").value);
+    const petAge = document.getElementById("pet-age").value;
+    const activityLevel = document.getElementById("activity-level").value;
+    const spayNeuter = document.getElementById("spay-neuter").value || "notApplicable";
+    if (!petType || !petWeight || !petAge || !activityLevel) {
+      document.getElementById("result-output").innerHTML = '<p style="color:red;">Please fill all required fields correctly.</p>';
+      return;
+    }
+    const result = calculateFoodAmount(petType, petWeight, petAge, activityLevel, spayNeuter);
+    if (!result) {
+      document.getElementById("result-output").innerHTML = '<p style="color:red;">Sorry, unable to calculate for the selected pet type.</p>';
+      return;
+    }
+    document.getElementById("result-output").innerHTML = `
+      <div class="result" role="region" aria-live="polite" aria-atomic="true">
+        <p><strong>Daily Food Recommendation:</strong></p>
+        <p>${result.foodCups} cups (~${result.foodGrams} grams)</p>
+        <p>Estimated Energy Needs: ~${result.caloriesNeeded} kcal/day</p>
+        <p><em>${result.note}</em></p>
+      </div>
+    `;
+  };
+  </script>
+</body>
+</html>
