@@ -9,7 +9,10 @@
   <style>
 :root {
   --header-bg: linear-gradient(90deg, #259c5c 60%, #38c179 100%);
-  --main-color: #259c5c; --accent: #fbc02d;
+  --modern-green: #259c5c; --accent: #fbc02d;
+  --nav-pill-bg: #fff;
+  --nav-pill-active: #fbc02d;
+  --shadow: 0 3px 20px rgba(50,90,65,0.08);
   --link: #267a40; --link-hover: #129e52;
   --footer-bg: linear-gradient(90deg, #259c5c 60%, #38c179 100%);
   --box: #f7f9fa; --white: #fff; --soft: #fafdff; --shadow:0 3px 20px #1d4a2122;
@@ -21,114 +24,143 @@ body { margin:0; font-family:'Segoe UI',Verdana,sans-serif; color:#222; backgrou
 a { color: var(--link); text-decoration:none; transition:.2s; }
 a:hover { color: var(--link-hover); text-decoration:underline; }
 
-.pet-header {
-  background: linear-gradient(90deg,#259c5c 60%, #38c179 100%);
-  box-shadow: 0 2px 10px #304d330b;
-  min-height: 62px;
+.modern-header {
+  background: var(--header-bg);
+  box-shadow: var(--shadow);
   padding: 0;
-  margin: 0;
-  z-index: 31;
+  position: relative;
+  z-index:10;
 }
-.header-inner {
-  max-width: 900px;
+.header-container {
+  max-width:1050px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.3em 0 1em;
-  height: 62px;
-  position: relative;
+  height: 72px;
+  padding: 0 1em;
 }
-.logo-title {
+.site-logo {
   display: flex;
   align-items: center;
+  gap: 0.55em;
   text-decoration: none;
-  gap: 0.67em;
 }
-.pet-logo-svg { display:inline-block; vertical-align:middle;}
 .site-title {
   color: #fff;
-  font-size:1.21em;
-  font-weight:700;
-  letter-spacing: .01em;
-  white-space:nowrap;
-  text-shadow: 0 1px 6px #212d1233;
+  font-family: 'Segoe UI',Verdana,sans-serif;
+  font-size:1.55em;
+  font-weight: bold;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 5px rgba(50,90,65,0.04);
 }
-nav { display:flex; align-items:center; }
-.nav-menu {
+nav {
   display:flex;
-  gap:0.9em;
+  align-items:center;
+}
+.nav-list {
+  display:flex;
+  gap:1.2em;
   list-style:none;
-  margin:0;
-  padding:0;
+  margin:0;padding:0;
 }
-.nav-menu li {
+.nav-list li a {
   display:inline-block;
-}
-.nav-link {
-  display:inline-block;
-  color:#fff;
-  font-size: 1em;
-  padding:6px 16px;
-  font-weight:500;
-  border-radius:23px;
-  background:transparent;
-  transition:.17s;
+  background: var(--nav-pill-bg);
+  color: #259c5c;
+  font-weight: 500;
+  border-radius: 20px;
+  padding: 7px 21px;
+  margin:0 0.13em;
   text-decoration:none;
-}
-.nav-link.active,
-.nav-link:hover,
-.nav-link:focus {
-  background:#fbc02d; color:#224530;
-  text-decoration:none;
-}
-.hamburger {
-  display:none;
-  background:none;
-  border:none;
-  flex-direction:column;
-  gap:5px;
-  outline:none;
-  cursor:pointer;
-  margin-left:1em;
-  height:36px;
+  transition: background 0.16s, color 0.16s;
+  box-shadow: 0 1px 7px rgba(50,90,65,0.08);
+  font-size:1.05em;
   position:relative;
 }
-.hamburger span {
-  display:block;
-  width:30px;
-  height:4px;
-  margin-bottom:4px;
-  border-radius:3px;
-  background:#fff;
-  transition:.25s;
+.nav-list li a.active,
+.nav-list li a:hover,
+.nav-list li a:focus {
+  background: var(--nav-pill-active);
+  color: #222f23;
 }
-.nav-menu-mobile {
-  display:none;
+#navToggle {
+  display:none; /* hidden on desktop */
+  background: none;
+  border: none;
+  margin-left:1em;
+  cursor:pointer;
+  outline:none;
 }
-/* Mobile styles */
-@media (max-width: 800px) {
-  .nav-menu { display:none; }
-  .hamburger { display:flex; }
+.hamburger {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  position: relative;
 }
-@media (max-width: 800px) {
-  .nav-menu-mobile {
-    display:none;
+.bar,
+.bar::before,
+.bar::after {
+  content: '';
+  display: block;
+  position: absolute;
+  background: #fff;
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(.65,.05,.36,1);
+}
+.bar {
+  top: 14px;
+}
+.bar::before {
+  top: -10px;
+}
+.bar::after {
+  top: 10px;
+}
+#navToggle.open .bar {
+  background: transparent;
+}
+#navToggle.open .bar::before {
+  transform: translateY(10px) rotate(45deg);
+}
+#navToggle.open .bar::after {
+  transform: translateY(-10px) rotate(-45deg);
+}
+@media (max-width:900px) {
+  .header-container { max-width:100%; }
+  .site-title { font-size:1.18em; }
+}
+@media (max-width: 700px) {
+  .header-container { padding:0 0.6em;height:64px;}
+  .nav-list {
+    position: absolute;
+    top: 64px;
+    right: 0;
+    background: var(--modern-green);
     flex-direction:column;
-    position:absolute;
-    top:60px;right:0;
-    background:#259c5c;
-    box-shadow:0 18px 40px #0002;
-    border-bottom-left-radius:9px;
-    min-width:195px;
-    z-index:35;
-    margin:0; padding:0.6em 0.7em 0.3em 0.7em;
-    list-style:none;
-    gap:0.6em;
+    min-width: 180px;
+    width:65vw;
+    box-shadow:0 12px 38px rgba(30,70,42,.26);
+    border-radius:0 0 16px 16px;
+    z-index:99;
+    gap: 0;
+    opacity:0;
+    pointer-events:none;
+    transform: translateY(-10px);
+    transition: all .23s cubic-bezier(.65,.05,.36,1);
   }
-  .nav-menu-mobile.open { display:flex; }
-  .nav-menu-mobile li {margin:0;}
-  .nav-menu-mobile a.nav-link {width:100%;display:block;font-size:1.11em;text-align:left;}
+  .nav-list li { margin: 0.65em 0; text-align:center;}
+  .nav-list li a { width:85%; padding:12px 0; font-size:1.12em;}
+  #navToggle { display:inline-block;}
+  .nav-list.open {
+    opacity:1;
+    pointer-events:auto;
+    transform: translateY(0);
+  }
+}
+    
 }
 main { max-width:850px; margin:0 auto; background:var(--white); border-radius:12px; box-shadow:0 2px 10px #eafbe9cc; padding:1.1em 1.15em 2.1em 1.15em;}
 .section-heading{text-align:center;max-width:740px;margin:2em auto 1.2em auto;padding-top:0.5em;}
@@ -190,40 +222,48 @@ footer{
 </head>
 <body>
 <!-- HEADER -->
-  <header class="pet-header">
-  <div class="header-inner">
-    <a href="/pet-food-calculator.html" class="logo-title">
-      <!-- SVG: stylized pets (dog, cat, rabbit, bird) -->
-      <svg class="pet-logo-svg" width="38" height="38" viewBox="0 0 38 38" fill="none" aria-label="Pets Logo">
-        <ellipse cx="9" cy="15" rx="6" ry="8" fill="#ffe082"/>
-        <ellipse cx="29" cy="15" rx="6" ry="8" fill="#fff8e1"/>
-        <ellipse cx="19" cy="22" rx="14" ry="13" fill="#fff"/>
-        <ellipse cx="13.5" cy="20.5" rx="3.5" ry="4.5" fill="#fbc02d"/>
-        <ellipse cx="24" cy="31" rx="3" ry="2.2" fill="#e1bee7"/>
-        <ellipse cx="30" cy="11.2" rx="1.7" ry="1.6" fill="#81d4fa"/>
-        <rect x="17" y="5" width="2.7" height="9.3" rx="1.1" fill="#fff"/>
-        <rect x="21.5" y="5" width="2.7" height="9.3" rx="1.1" fill="#fff"/>
-        <ellipse cx="19" cy="28" rx="1.5" ry="1.1" fill="#ffb300"/>
-        <path d="M15.9 30.5 Q19 35 22 30.5" stroke="#979797" stroke-width="1.2" fill="none"/>
+  <!-- MODERN PETS HEADER -->
+<header class="modern-header">
+  <div class="header-container">
+    <!-- SVG PET LOGO -->
+    <a href="/pet-food-calculator.html" class="site-logo" aria-label="Pet Food Intake Calculator App">
+      <svg width="48" height="44" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Multicolor pet logo">
+        <!-- Dog Ear -->
+        <ellipse cx="7" cy="12" rx="5" ry="9" fill="#ffd54f"/>
+        <!-- Cat Ear -->
+        <ellipse cx="41" cy="12" rx="5" ry="9" fill="#fff8e1"/>
+        <!-- Face -->
+        <ellipse cx="24" cy="22" rx="20" ry="18" fill="#fff"/>
+        <!-- Dog Face Spot -->
+        <ellipse cx="16.5" cy="19" rx="5" ry="7" fill="#ffe082"/>
+        <!-- Cat Whisker Patch -->
+        <ellipse cx="32" cy="27" rx="6" ry="4" fill="#e1bee7"/>
+        <!-- Bird Head (Parakeet) -->
+        <ellipse cx="35" cy="10" rx="3" ry="3" fill="#81d4fa"/>
+        <!-- Bunny Ear Left -->
+        <rect x="19" y="2" width="4" height="14" rx="2" fill="#fff"/>
+        <!-- Bunny Ear Right -->
+        <rect x="25" y="2" width="4" height="14" rx="2" fill="#fff"/>
+        <!-- Nose -->
+        <ellipse cx="24" cy="27" rx="2.5" ry="2" fill="#ffb300"/>
+        <!-- Smile -->
+        <path d="M20 29 Q24 34 28 29" stroke="#555" stroke-width="2" fill="none"/>
       </svg>
-      <span class="site-title">Pet Food Calculator</span>
+      <span class="site-title">Pet Food Cal.</span>
     </a>
+    <!-- NAVIGATION BAR -->
     <nav>
-      <ul class="nav-menu">
-        <li><a href="/" class="nav-link">Home</a></li>
-        <li><a href="/pet-food-calculator.html" class="nav-link active">Pet Food Intake Calculator App</a></li>
-        <li><a href="/about" class="nav-link">About</a></li>
-        <li><a href="/contact" class="nav-link">Contact</a></li>
+      <ul class="nav-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/pet-food-calculator.html" class="active">Pet Food Calculator</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/contact.html">FAQ</a></li>
       </ul>
-      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <button id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="menu-list">
+        <span class="hamburger">
+          <span class="bar"></span>
+        </span>
       </button>
-      <ul class="nav-menu-mobile" id="mobileMenu">
-        <li><a href="/" class="nav-link">Home</a></li>
-        <li><a href="/pet-food-calculator.html" class="nav-link active">Pet Food Intake Calculator App</a></li>
-        <li><a href="/about" class="nav-link">About</a></li>
-        <li><a href="/contact" class="nav-link">Contact</a></li>
-      </ul>
     </nav>
   </div>
 </header>
@@ -414,6 +454,26 @@ footer{
 </footer>
 <script>
   // Hamburger menu logic removed, since you requested no hamburger: only pure nav.
+ document.addEventListener('DOMContentLoaded', function(){
+  const navToggle = document.getElementById('navToggle');
+  const navList = document.querySelector('.nav-list');
+  if (navToggle && navList) {
+    navToggle.addEventListener('click', function() {
+      navToggle.classList.toggle('open');
+      navList.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', navList.classList.contains('open') ? 'true' : 'false');
+    });
+    // close on outside click
+    document.addEventListener('click', function(e) {
+      if (!navList.contains(e.target) && !navToggle.contains(e.target) && navList.classList.contains('open')) {
+        navList.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+});
+  
   // Tool: custom age field logic
   document.addEventListener('DOMContentLoaded', function(){
     const petAgeSel = document.getElementById('pet-age');
