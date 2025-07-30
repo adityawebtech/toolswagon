@@ -21,6 +21,7 @@ const channelIdRoute = require('./routes/channelId');
 const earningsRoute = require('./routes/earnings'); // ✅ NEW
 const monetizationChecker = require('./routes/monetization');
 const hashtagRoute = require('./routes/hashtags');
+const tagsRoute = require('./routes/tags');
 
 // Routes
 app.get('/', (req, res) => {
@@ -32,6 +33,7 @@ app.use('/api', channelIdRoute);     // /api/channel-id
 app.use('/api', earningsRoute);      // ✅ /api/earnings
 app.use('/api', monetizationChecker);
 app.use('/api', hashtagRoute);
+app.use('/api', tagsRoute);
 
 // Start Server
 app.listen(PORT, () => {
