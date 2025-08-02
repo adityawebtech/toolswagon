@@ -1,6 +1,6 @@
 // Blinking Try Tool Button Scroll-to-Tool
     document.getElementById('tryToolBtn').onclick = function() {
-      var section = document.getElementById('declarationForm');
+      var section = document.getElementById('toolSection');
       if(section) section.scrollIntoView({behavior: "smooth", block:"center"});
     };
 
