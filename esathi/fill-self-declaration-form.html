@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UP स्वप्रमाणित घोषणा-पत्र</title>
+  <style>
+    body { font-family: "Noto Sans Devanagari", Mangal, "Arial Unicode MS", Arial, sans-serif; margin:0; background: #f5f6fa;}
+    /* Header/Navbar */
+    .main-header {
+      width: 100%;
+      background: #097671;
+      color: #fff;
+      box-shadow: 0 2px 6px #bbb;
+      margin-bottom: 0.5em;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 25px;
+    }
+    .navbar-brand {
+      font-size: 23px;
+      font-weight: 750;
+      letter-spacing: 1px;
+    }
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 23px;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-menu li a {
+      color: #e1fffb;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-menu li a:hover {
+      color: #64f7d2;
+    }
+    .hamburger {
+      background: #0c635e;
+      color: #fff;
+      font-size: 25px;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 8px;
+      cursor: pointer;
+      display: none;
+    }
+    /* Main container */
+    .container { max-width: 950px; margin: 15px auto; background:#fff; border-radius:8px; box-shadow:0 1px 6px #ccc; padding: 18px; }
+    h2 { text-align:center; margin:0 0 20px 0;}
+    .instructions {
+      background: #e2fff5;
+      padding: 9px 15px;
+      border-radius: 5px;
+      font-size: 15px;
+      margin-bottom: 13px;
+      line-height:1.7;
+    }
+    form { display:flex; flex-wrap:wrap; gap:13px; }
+    .field { flex:1 0 260px; min-width:170px; }
+    .field label { font-weight:600; display:block; margin-bottom:4px;}
+    .field input, .field textarea {
+      width: 98%; font-size:15px; padding:6.5px; border: 1px solid #bbb; border-radius: 4px; margin-bottom: 2px; background:#fafcff;}
+    .field input[type="file"] { padding:3px;}
+    #preview-signature { width:120px; margin:10px 0; display:none; border:1px solid #ddd; border-radius:3px;}
+    .btn { background:#097671; color:#fff; border-radius:4px; border:0; padding:9px 18px; font-size:16px; cursor:pointer;}
+    .btn:active { background:#064d4b; }
+    .output-block { text-align:center; margin-top:22px;}
+    #result-img { max-width:98%; border:1px solid #b8b8b8; margin-top:12px;}
+    /* Progress area style */
+    #progress-bar-area {text-align:center; margin-top:15px; }
+    /* Footer */
+    .site-footer {
+      background: #097671;
+      color: #e6f5fa;
+      text-align: center;
+      padding: 16px 12px 14px 12px;
+      font-size: 15.2px;
+      margin-top: 25px;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 0.5px 10px #abd7df2e;
+    }
+    /* Responsive */
+    @media (max-width: 700px) {
+      .navbar { padding: 9px 8px; }
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0; right: 0;
+        background: #097671;
+        flex-direction: column;
+        gap: 0;
+        border-top: 1px solid #058981;
+        box-shadow: 0 4px 6px #bbb9;
+        z-index: 10;
+      }
+      .nav-menu.active { display: flex; }
+      .nav-menu li { border-bottom: 1px solid #0ea595; }
+      .nav-menu li:last-child { border-bottom: none; }
+      .hamburger { display: block; }
+      .container { max-width: 100vw; padding:5px; }
+      .field { min-width:97vw; }
+      label, .instructions { font-size:15px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <nav class="navbar">
+      <span class="navbar-brand">UP घोषणा-पत्र</span>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <h2>
+      स्वप्रमाणित घोषणा-पत्र (Self Declaration Form – UP)<br>
+      <span style="font-size:15.5px;color:#1a465c;">ऑनलाइन फॉर्म भरें, हिंदी-इंग्लिश, मोबाइल-फ्रेंडली</span>
+    </h2>
+    <div class="instructions">
+      <b>निर्देश (Instructions):</b><br>
+      1. सभी प्रविष्टियाँ (Name, पिता का नाम आदि) हिंदी/English में भरें।<br>
+      2. हस्ताक्षर (Signature) JPG/PNG फ़ाइल अपलोड करें। सफेद बैकग्राउंड अपने-आप ट्रांसपेरेंट (हट) हो जाएगा।<br>
+      3. "Generate & Download" बटन से इमेज (&lt;100KB) तुरंत डाउनलोड करें।
+      <br>
+      <span style="color:#a43;font-size:14px;">
+        कृपया जानकारी ध्यानपूर्वक भरें! (Fill details correctly, it will be printed onto the official form.)
+      </span>
+    </div>
+    <form id="declarationForm" autocomplete="off">
+      <div class="field">
+        <label>नाम (Name):</label>
+        <input type="text" name="name" maxlength="45" required>
+      </div>
+      <div class="field">
+        <label>पिता का नाम (Father's Name):</label>
+        <input type="text" name="father" maxlength="45" required>
+      </div>
+      <div class="field">
+        <label>आयु (Age):</label>
+        <input type="number" name="age" min="1" max="120" required>
+      </div>
+      <div class="field">
+        <label>व्यवसाय (Occupation):</label>
+        <input type="text" name="occupation" maxlength="35" required>
+      </div>
+      <div class="field" style="flex-basis: 95%;">
+        <label>निवासी/पूरा पता (Address):</label>
+        <textarea name="address" rows="2" maxlength="85" required></textarea>
+      </div>
+      <div class="field">
+        <label>स्थल (Place):</label>
+        <input type="text" name="place" maxlength="35" required>
+      </div>
+      <div class="field">
+        <label>दिनांक (Date):</label>
+        <input type="date" name="date" required>
+      </div>
+      <div class="field">
+        <label>हस्ताक्षर (Signature - JPG/PNG):<br><span style="font-weight:400;">(सफेद बैकग्राउंड हटेगा)</span></label>
+        <input type="file" accept="image/png,image/jpeg" id="signatureInput" required>
+        <img id="preview-signature" src="" alt="Signature Preview">
+      </div>
+      <div class="field">
+        <label>आवेदक का नाम (Applicant Name):</label>
+        <input type="text" name="applicant_name" maxlength="45" required>
+      </div>
+      <div style="flex-basis:100%;margin-top:13px;text-align:center;">
+        <button class="btn" type="submit">Generate & Download</button>
+      </div>
+    </form>
+    <!-- Progress bar area -->
+    <div id="progress-bar-area" style="display:none;text-align:center;margin-top:15px;">
+      <button id="progress-btn" class="btn" type="button" disabled>
+        <span id="progress-text">Processing... 15s</span>
+      </button>
+    </div>
+    <div class="output-block" id="output" style="display: none;">
+      <h3>डाउनलोड करें (Download):</h3>
+      <a id="download-link" href="#" download="UP-Declaration.jpg" class="btn">Download Image</a>
+      <div><img id="result-img" src=""></div>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div>
+      &copy; 2025 UP Self Declaration Portal &mdash; Powered by ToolsWagon
+    </div>
+  </footer>
+  <script>
+    // Navbar hamburger toggle
+    document.getElementById('hamburger').onclick = function() {
+      document.getElementById('navMenu').classList.toggle('active');
+    };
+
+    let signatureImage=null;
+    function makeSignatureTransparent(file, callback) {
+      const img = new Image(); img.onload = function() {
+        const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
+        cv.width = img.width; cv.height = img.height;
+        ctx.drawImage(img,0,0);
+        let imgd = ctx.getImageData(0,0,cv.width,cv.height);
+        let d = imgd.data;
+        for(let i=0;i<d.length;i+=4) {
+          if(d[i]>240 && d[i+1]>240 && d[i+2]>240){ d[i+3]=0; }
+        }
+        ctx.putImageData(imgd,0,0);
+        callback(cv);
+      }; img.src = URL.createObjectURL(file);
+    }
+    document.getElementById("signatureInput").addEventListener("change",function(e){
+      const file = e.target.files[0];
+      if(!file) return;
+      makeSignatureTransparent(file, function(canvas){
+        signatureImage=canvas;
+        let el=document.getElementById('preview-signature');
+        el.src=canvas.toDataURL();
+        el.style.display="block";
+      });
+    });
+
+    // Coordinates (provided by user) used below
+    function drawFormOnImage(ctx, fields, w, h) {
+      ctx.font='19px "Noto Sans Devanagari", Mangal, "Arial Unicode MS", Arial, sans-serif';
+      ctx.fillStyle="#191919";
+      ctx.textBaseline="top";
+      // Name [318, 566]
+      ctx.fillText(fields.name, 316, 558);
+      // Father Name [810, 559]
+      ctx.fillText(fields.father, 808, 555);
+      // Age [218, 618]
+      ctx.fillText(fields.age, 218, 613);
+      // Occupation [482, 613]
+      ctx.fillText(fields.occupation, 482, 609);
+      // Address [723, 605] (first line), [166, 659] (second line), with word/hyphen logic
+      ctx.font = '18px "Noto Sans Devanagari", Mangal, Arial, sans-serif';
+      let addr = fields.address.trim();
+      let maxChars = 38;
+      if (addr.length <= maxChars) {
+        ctx.fillText(addr, 723, 605);
+      } else {
+        // Try breaking at last space before maxChars
+        let breakIndex = addr.lastIndexOf(" ", maxChars);
+        let line1, line2;
+        if (breakIndex === -1) {
+          line1 = addr.substring(0, maxChars - 1) + "-";
+          line2 = addr.substring(maxChars - 1);
+        } else {
+          line1 = addr.substring(0, breakIndex);
+          line2 = addr.substring(breakIndex + 1);
+          if (
+            addr.charAt(breakIndex + 1) !== " " &&
+            breakIndex < addr.length - 1 &&
+            !/\s/.test(addr.charAt(breakIndex)) &&
+            !line1.endsWith(" ")
+          ) {
+            line1 += "-";
+          }
+        }
+        ctx.fillText(line1, 723, 605);
+        ctx.fillText(line2, 166, 659);
+      }
+      ctx.font='19px "Noto Sans Devanagari", Mangal, Arial, sans-serif';
+      // Place [240,1011]
+      ctx.fillText(fields.place, 238, 1007);
+      // Date [246,1064], convert to dd-mm-yyyy
+      let dateStr = fields.date ? fields.date.split('-').reverse().join('-') : '';
+      ctx.fillText(dateStr, 246, 1055);
+      // Applicant Name [883,1060]
+      ctx.fillText(fields.applicant_name, 883, 1050);
+      // Signature [934,1004]
+      if(signatureImage) {
+        let sw=160, sh=45;
+        let aspect=signatureImage.width/signatureImage.height;
+        if(aspect>sw/sh) sh=sw/aspect;
+        else sw=sh*aspect;
+        ctx.globalAlpha=0.94;
+        ctx.drawImage(signatureImage, 922, 980, sw, sh);
+        ctx.globalAlpha=1.0;
+      }
+    }
+
+    document.getElementById("declarationForm").addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!signatureImage){ alert("कृपया हस्ताक्षर अपलोड करें | Please upload signature."); return; }
+      let f = {};
+      for(const el of e.target.elements) if(el.name) f[el.name]=el.value;
+      const img = new Image();
+      img.onload = function(){
+        const w=img.naturalWidth, h=img.naturalHeight;
+        const c = document.createElement('canvas');
+        c.width=w; c.height=h;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img,0,0,w,h);
+        drawFormOnImage(ctx, f, w, h);
+        let q=0.95, out=c.toDataURL('image/jpeg', q);
+        while(out.length/1.38>98*1024 && q>0.40) {
+          q-=0.08;
+          out = c.toDataURL('image/jpeg',q);
+        }
+        // Show progress bar, hide output
+        document.getElementById("output").style.display="none";
+        document.getElementById("progress-bar-area").style.display="block";
+        let timer = 15;
+        let progressText = document.getElementById('progress-text');
+        progressText.textContent = "Processing... " + timer + "s";
+        const interval = setInterval(function(){
+          timer--;
+          progressText.textContent = "Processing... " + timer + "s";
+          if(timer <= 0){
+            clearInterval(interval);
+            document.getElementById("progress-bar-area").style.display="none";
+            document.getElementById("output").style.display="block";
+          }
+        }, 1000);
+        // Filename logic
+        let applicantNameClean = (f.applicant_name || "user").replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g,"");
+        let websitePart = "www.toolswagon.site";
+        let downloadFileName = `${websitePart}_${applicantNameClean}_self-declaration.jpg`;
+        document.getElementById("download-link").setAttribute("download", downloadFileName);
+        document.getElementById("download-link").href = out;
+        document.getElementById("result-img").src = out;
+      };
+      img.onerror = function() {
+        alert('⚠️ फॉर्म टेम्पलेट इमेज लोड नहीं हो पाई!\nCheck this path:\nhttps://adityawebtech.github.io/url-shortner/sdf.jpg');
+      };
+      img.src = "https://adityawebtech.github.io/url-shortner/sdf.jpg";
+    });
+    document.getElementById('declarationForm').addEventListener('input', function(){
+      document.getElementById("output").style.display="none";
+    });
+  </script>
+</body>
+</html>
