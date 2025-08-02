@@ -1,9 +1,3 @@
-// Blinking Try Tool Button Scroll-to-Tool
-    document.getElementById('tryToolBtn').onclick = function() {
-      var section = document.getElementById('toolSection');
-      if(section) section.scrollIntoView({behavior: "smooth", block:"start"});
-    };
-
 // Side nav hamburger + backdrop logic
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
