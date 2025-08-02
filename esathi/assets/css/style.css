@@ -107,7 +107,7 @@ body { font-family: "Noto Sans Devanagari", Mangal, "Arial Unicode MS", Arial, s
     }
     /* For desktop menu, hide off-canvas, just for completeness */
     @media (min-width: 701px) {
-      .hamburger { display: block; }
+   .hamburger { display: none; }
     }
     /* Main container */
     .container { max-width: 950px; margin: 15px auto; background:#fff; border-radius:8px; box-shadow:0 1px 6px #ccc; padding: 18px; }
