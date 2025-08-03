@@ -74,9 +74,24 @@ body { font-family: "Noto Sans Devanagari", Mangal, "Arial Unicode MS", Arial, s
   transition: background 0.2s;
   box-shadow: 0 2px 8px #04786533;
 }
-
 .hamburger:active {
   background: #095048;
+}
+
+/* Backdrop for mobile menu */
+.nav-backdrop {
+  content: "";
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #1e353d40;
+  z-index: 199;
+}
+.nav-backdrop.active {
+  display: block;
 }
 
 /* Common nav-menu styles */
@@ -106,16 +121,32 @@ body { font-family: "Noto Sans Devanagari", Mangal, "Arial Unicode MS", Arial, s
     border-top-left-radius: 26px;
     border-bottom-left-radius: 10px;
   }
-
   .nav-menu.active {
     right: 0;
   }
-
-  .hamburger {
+  .nav-menu li {
+    border-bottom: 1px solid #23b5ae33;
+    padding: 0 0 0 25px;
+  }
+  .nav-menu li:last-child {
+    border-bottom: none;
+  }
+  .nav-menu li a {
+    color: #e1fffb;
+    text-decoration: none;
+    font-size: 19px;
+    font-weight: 600;
+    padding: 18px 0 17px 0;
     display: block;
+    transition: color 0.22s, background 0.15s;
+    border-radius: 4px;
+  }
+  .nav-menu li a:hover {
+    color: #64f7d2;
+    background: #0a8e7e25;
   }
 
-  .nav-backdrop.active {
+  .hamburger {
     display: block;
   }
 
@@ -130,7 +161,6 @@ body { font-family: "Noto Sans Devanagari", Mangal, "Arial Unicode MS", Arial, s
   .hamburger {
     display: none;
   }
-
   .nav-menu {
     display: flex;
     flex-direction: row;
@@ -143,12 +173,10 @@ body { font-family: "Noto Sans Devanagari", Mangal, "Arial Unicode MS", Arial, s
     padding: 0;
     box-shadow: none;
   }
-
   .nav-menu li {
     border-bottom: none;
     padding: 0;
   }
-
   .nav-menu li a {
     color: #ffffff;
     text-decoration: none;
@@ -158,29 +186,15 @@ body { font-family: "Noto Sans Devanagari", Mangal, "Arial Unicode MS", Arial, s
     transition: color 0.22s, background 0.15s;
     border-radius: 4px;
   }
-
   .nav-menu li a:hover {
     color: #64f7d2;
     background: #0a8e7e25;
   }
-
   .nav-backdrop {
     display: none !important;
   }
 }
 
-/* Backdrop for mobile menu */
-.nav-backdrop {
-  content: "";
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #1e353d40;
-  z-index: 200;
-}
     /* Main container */
     .container { max-width: 950px; margin: 15px auto; background:#fff; border-radius:8px; box-shadow:0 1px 6px #ccc; padding: 18px; }
     h2 { text-align:center; margin:0 0 20px 0;}
