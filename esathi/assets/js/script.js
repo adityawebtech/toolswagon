@@ -123,15 +123,15 @@
         }, 1000);
         let applicantNameClean = (f.applicant_name || "user").replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g,"");
         let websitePart = "www.toolswagon.site";
-        let downloadFileName = `${websitePart}_${applicantNameClean}_self-declaration.jpg`;
+        let downloadFileName = `${websitePart}-${applicantNameClean}-self-declaration.jpg`;
         document.getElementById("download-link").setAttribute("download", downloadFileName);
         document.getElementById("download-link").href = out;
         document.getElementById("result-img").src = out;
       };
       img.onerror = function() {
-        alert('⚠️ फॉर्म टेम्पलेट इमेज लोड नहीं हो पाई!\nCheck this path:\nhttps://adityawebtech.github.io/url-shortner/sdf.jpg');
+        alert('⚠️ फॉर्म टेम्पलेट इमेज लोड नहीं हो पाई!\nCheck this path:\nhttps://adityawebtech.github.io/toolswagon/esathi/assets/images/sdf.jpg');
       };
-      img.src = "https://adityawebtech.github.io/url-shortner/sdf.jpg";
+      img.src = "https://adityawebtech.github.io/toolswagon/esathi/assets/images/sdf.jpg";
     });
     document.getElementById('declarationForm').addEventListener('input', function(){
       document.getElementById("output").style.display="none";
