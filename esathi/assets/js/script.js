@@ -129,10 +129,10 @@
         document.getElementById("result-img").src = out;
       };
       img.onerror = function() {
-        alert('⚠️ फॉर्म टेम्पलेट इमेज लोड नहीं हो पाई!\nCheck this path:\nhttps://adityawebtech.github.io/toolswagon/esathi/assets/images/sdf.jpg');
+        alert('⚠️ फॉर्म टेम्पलेट इमेज लोड नहीं हो पाई!\nCheck this path:\nhttps://toolswagon/esathi/assets/images/sdf.jpg');
       };
       img.crossOrigin = "anonymous";
-      img.src = "https://adityawebtech.github.io/toolswagon/esathi/assets/images/sdf.jpg";
+      img.src = "https://toolswagon/esathi/assets/images/sdf.jpg";
     });
     document.getElementById('declarationForm').addEventListener('input', function(){
       document.getElementById("output").style.display="none";
