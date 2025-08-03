@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 body { font-family: "Noto Sans Devanagari", Mangal, "Arial Unicode MS", Arial, sans-serif; margin:0; background: #f5f6fa;}
 .blinking-button-wrapper {
   text-align: center;
