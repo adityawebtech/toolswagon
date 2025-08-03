@@ -1,28 +1,32 @@
 body { font-family: "Noto Sans Devanagari", Mangal, "Arial Unicode MS", Arial, sans-serif; margin:0; background: #f5f6fa;}
+.blinking-button-wrapper {
+  text-align: center;
+  margin: 20px 0;
+}
+
 .blinking-button {
   display: inline-block;
-  padding: 12px 24px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-align: center;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
   color: white;
   background: linear-gradient(45deg, #2563eb, #1e40af);
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   text-decoration: none;
-  animation: blink 1s infinite;
+  animation: blink 1.2s infinite;
   transition: transform 0.2s ease;
-  box-shadow: 0 0 10px rgba(37, 99, 235, 0.6);
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.5);
 }
 
 .blinking-button:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(30, 64, 175, 0.7);
+  box-shadow: 0 0 12px rgba(30, 64, 175, 0.6);
 }
 
 @keyframes blink {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  50% { opacity: 0.5; }
 }
 
 /* Header/Navbar */
