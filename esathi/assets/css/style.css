@@ -1,7 +1,9 @@
 html {
   scroll-behavior: smooth;
 }
+
 body { font-family: "Noto Sans Devanagari", Mangal, "Arial Unicode MS", Arial, sans-serif; margin:0; background: #f5f6fa;}
+
 .blinking-button-wrapper {
   text-align: center;
   margin: 10px 0 0;
@@ -186,7 +188,7 @@ body { font-family: "Noto Sans Devanagari", Mangal, "Arial Unicode MS", Arial, s
       color: #097671;
       font-size: 23px;
       font-weight: 800;
-      margin: 3px 0 7px 0;
+      margin: 0 0 7px 0;
     }
     .tool-info-wrapper ul, .tool-info-wrapper ol { margin-bottom: 10px; }
     .tool-info-wrapper li { margin-bottom: 4px; }
