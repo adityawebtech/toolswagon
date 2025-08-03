@@ -131,6 +131,7 @@
       img.onerror = function() {
         alert('⚠️ फॉर्म टेम्पलेट इमेज लोड नहीं हो पाई!\nCheck this path:\nhttps://adityawebtech.github.io/toolswagon/esathi/assets/images/sdf.jpg');
       };
+      img.crossOrigin = "anonymous";
       img.src = "https://adityawebtech.github.io/toolswagon/esathi/assets/images/sdf.jpg";
     });
     document.getElementById('declarationForm').addEventListener('input', function(){
