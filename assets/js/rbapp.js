@@ -192,13 +192,17 @@ class ResumeBuilder {
     }
 
     setupDynamicSections() {
-        document.querySelectorAll('.add-item').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const target = e.target.dataset.target;
+    // Event delegation ensures "Add" always works even on dynamic elements
+    document.body.addEventListener('click', (e) => {
+        const btn = e.target.closest('.add-item');
+        if (btn) {
+            const target = btn.dataset.target;
+            if (target) {
                 this.addDynamicItem(target);
-            });
-        });
-    }
+            }
+        }
+    });
+}
 
     addDynamicItem(section) {
         const item = this.createEmptyItem(section);
@@ -314,35 +318,33 @@ class ResumeBuilder {
 
     // --- PDF GENERATION --- Only called from Download Button!
     async downloadPDF() {
-        const overlay = document.getElementById('loadingOverlay');
-        overlay.classList.remove('hidden');
-        try {
-            // This assumes you have the preview rendered in a div of id="resumePreview"
-            // You may use jsPDF's html() method
-            let { firstName, lastName } = this.resumeData.personalInfo;
-            let filename = `${firstName.trim()}-${lastName.trim()}-resume.pdf`;
-            // Await jsPDF html rendering
-            const preview = document.getElementById('resumePreview');
-            if (!preview) {
-                alert('Could not find resume preview element.');
-                return;
-            }
-            // Use jsPDF html, requires jsPDF v2.5+
-            const doc = new window.jspdf.jsPDF('p', 'pt', 'a4');
-            await doc.html(preview, {
-                callback: function (doc) {
-                    doc.save(filename);
-                },
-                x: 20,
-                y: 20,
-                width: 555,
-                windowWidth: 900 // You can adjust
-            });
-        } catch (err) {
-            alert('PDF generation failed: ' + err);
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.classList.remove('hidden');
+    try {
+        let { firstName, lastName } = this.resumeData.personalInfo;
+        let filename = `${firstName.trim()}-${lastName.trim()}-resume.pdf`;
+        const preview = document.getElementById('resumePreview');
+        if (!preview) {
+            alert('Could not find resume preview element.');
+            overlay.classList.add('hidden');
+            return;
         }
-        overlay.classList.add('hidden');
+        const doc = new window.jspdf.jsPDF('p', 'pt', 'a4');
+        await doc.html(preview, {
+            callback: function(doc) {
+                doc.save(filename);
+            },
+            x: 20,
+            y: 20,
+            width: 555,
+            windowWidth: 900,
+            html2canvas: window.html2canvas // explicit, for CDN global
+        });
+    } catch (err) {
+        alert('PDF generation failed: ' + err);
     }
+    overlay.classList.add('hidden');
+}
 
     // --- Auto-save, load, storage ---
     saveToStorage() {
