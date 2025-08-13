@@ -1,215 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>ATS-Friendly Resume Builder</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>ATS Resume Builder — Responsive & Themed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --main-bg: #f7f7fc;
+      --card-bg: #fff;
+      --main-c: #222;
+      --accent: #0066cc;
+      --border: #e2e2e2;
+      --h1-size: 2rem;
+      --h2-size: 1.15rem;
+    }
+    /* Theme Minimal */
+    .theme-minimal { --main-bg:#f7f7fc; --card-bg:#fff; --main-c:#222; --accent:#0066cc; }
+    /* Theme Modern */
+    .theme-modern { --main-bg:#202032; --card-bg:#26264f; --main-c:#fff; --accent:#4fd4cf; }
+    /* Theme Creative */
+    .theme-creative { --main-bg:#ffe5e0; --card-bg:#fff; --main-c:#232; --accent:#ff6f61; }
+    /* Theme Classic */
+    .theme-classic { --main-bg:#efefef; --card-bg:#fbfbff; --main-c:#2a2d29; --accent:#1c3c66; }
 
-<style>
     body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        display: flex;
-        height: 100vh;
+      background: var(--main-bg);
+      margin: 0; font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      color: var(--main-c);
     }
-    /* Sidebar form */
-    #form-section {
-        width: 35%;
-        padding: 15px;
-        overflow-y: auto;
-        background: #f4f4f4;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    .container { display: flex; flex-wrap: wrap; }
+    .form-section, .preview-section {
+      box-sizing: border-box;
+      padding: 20px;
+      width: 100%;
     }
-    /* Resume preview section */
-    #preview-section {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        background: #eaeaea;
-        overflow-y: auto;
-        padding: 20px;
+    @media (min-width: 900px) {
+      .form-section { width: 35%; max-width: 400px; border-right:1px solid var(--border);}
+      .preview-section { width:65%; }
     }
+    .form-section {background:var(--main-bg);}
+    .form-section h2 { margin-top:0;}
+    .form-section label {display:block;margin-top:12px;}
+    .form-section input, .form-section textarea, .form-section select {
+      width:100%; box-sizing:border-box; padding:7px; margin-top:2px; border:1px solid var(--border); border-radius:3px;}
+    .form-section button {padding:5px 12px;margin:9px 3px 0 0; background:var(--accent);color:#fff;font-weight:600;border:none;border-radius:3px;cursor:pointer;}
+    .form-section .section-block {margin-bottom:13px;}
+    .form-section .add-field {font-size:0.9rem;color:var(--accent);background:none;border:none;cursor:pointer;}
+
+    .preview-section {display:flex;justify-content:center;align-items:flex-start;}
     .resume {
-        background: white;
-        width: 794px; /* A4 width at 96 DPI */
-        min-height: 1123px; /* A4 height */
-        padding: 20mm;
-        box-sizing: border-box;
+      width:100%; max-width:550px; background:var(--card-bg); padding:32px 26px; border-radius:11px; box-shadow:0 4px 18px rgba(40,40,80,.07);
+      min-height:814px;
+      margin:20px auto; box-sizing: border-box;
+      font-size:1.05rem;
     }
-    .theme-default { color: #000; }
-    .theme-blue { color: #004c99; }
-    .theme-green { color: #006400; }
+    .resume h1 {font-size:var(--h1-size);margin-bottom:5px;}
+    .resume h2 {font-size:var(--h2-size);color:var(--accent);margin-bottom:2px;text-transform:uppercase;margin-top:22px;}
+    .resume ul {padding-left: 18px;margin:0;}
+    .resume .field-group label {display:none;}
+    .badge {display:inline-block;background:var(--accent);color:var(--card-bg);padding:2px 8px;border-radius:10px;font-size:0.95rem;margin:3px 4px 3px 0;}
 
-    h1, h2, h3 {
-        margin: 5px 0;
-        border-bottom: 1px solid #ccc;
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .container {flex-direction:column;}
+      .preview-section {padding:15px;}
+      .resume {min-width:0;width:100%;max-width:100%;}
     }
-    ul { padding-left: 20px; }
-
-    button { margin-top: 10px; }
-    label { display: block; margin-top: 10px; }
-    input, textarea, select {
-        width: 100%;
-        padding: 5px;
-        box-sizing: border-box;
-        margin-top: 5px;
+    @media (max-width: 600px) {
+      .resume {padding:13px 5px;}
     }
-</style>
+  </style>
 </head>
-<body>
+<body class="theme-minimal">
+<div class="container">
+  <div class="form-section">
+    <h2>Build Your Resume</h2>
+    <label>Name: <input type="text" id="name" placeholder="Full name" oninput="updatePreview()"></label>
+    <label>Title/Profession: <input type="text" id="title" placeholder="e.g. Software Engineer" oninput="updatePreview()"></label>
+    <label>Email: <input type="email" id="email" placeholder="your@email.com" oninput="updatePreview()"></label>
+    <label>Phone: <input type="text" id="phone" placeholder="+91-....." oninput="updatePreview()"></label>
+    <label>Location: <input type="text" id="location" placeholder="City, Country" oninput="updatePreview()"></label>
+    <label>LinkedIn: <input type="text" id="linkedin" placeholder="linkedin.com/in/you" oninput="updatePreview()"></label>
+    <label>Portfolio/Website: <input type="text" id="website" placeholder="portfolio.com" oninput="updatePreview()"></label>
+    <label>Summary: <textarea id="summary" rows="3" placeholder="Brief professional summary" oninput="updatePreview()"></textarea></label>
 
-<!-- Form Section -->
-<div id="form-section">
-    <h2>Resume Builder</h2>
-    <label>Name: <input type="text" id="name"></label>
-    <label>Title/Position: <input type="text" id="title"></label>
-    <label>Email: <input type="text" id="email"></label>
-    <label>Phone: <input type="text" id="phone"></label>
-    <label>Summary: <textarea id="summary"></textarea></label>
-
-    <h3>Work Experience</h3>
-    <div id="work-experience"></div>
-    <button onclick="addWork()">Add Work Experience</button>
-
-    <h3>Education</h3>
-    <div id="education"></div>
-    <button onclick="addEducation()">Add Education</button>
-
-    <h3>Skills</h3>
-    <div id="skills"></div>
-    <button onclick="addSkill()">Add Skill</button>
-
-    <label>Theme:
-        <select id="theme" onchange="updatePreview()">
-            <option value="theme-default">Default</option>
-            <option value="theme-blue">Blue</option>
-            <option value="theme-green">Green</option>
-        </select>
-    </label>
-
-    <button onclick="downloadPDF()">Download PDF</button>
-</div>
-
-<!-- Preview Section -->
-<div id="preview-section">
-    <div id="resume-preview" class="resume theme-default">
-        <h1 id="prev-name">Your Name</h1>
-        <h3 id="prev-title">Your Title</h3>
-        <p id="prev-contact">Email | Phone</p>
-        <h2>Summary</h2>
-        <p id="prev-summary"></p>
-        <h2>Work Experience</h2>
-        <ul id="prev-work"></ul>
-        <h2>Education</h2>
-        <ul id="prev-education"></ul>
-        <h2>Skills</h2>
-        <ul id="prev-skills"></ul>
+    <!-- Work Experience -->
+    <div class="section-block">
+      <h3>Work Experience</h3>
+      <div id="work-experience"></div>
+      <button type="button" onclick="addWork()">Add Work Experience</button>
+      <button class="add-field" type="button" onclick="addExtra('work')">+ Add a custom field</button>
     </div>
+    <!-- Education -->
+    <div class="section-block">
+      <h3>Education</h3>
+      <div id="education"></div>
+      <button type="button" onclick="addEducation()">Add Education</button>
+      <button class="add-field" type="button" onclick="addExtra('edu')">+ Add a custom field</button>
+    </div>
+    <!-- Skills -->
+    <div class="section-block">
+      <h3>Skills</h3>
+      <div id="skills"></div>
+      <button type="button" onclick="addSkill()">Add Skill</button>
+    </div>
+    <!-- Certifications -->
+    <div class="section-block">
+      <h3>Certifications</h3>
+      <div id="certs"></div>
+      <button type="button" onclick="addCert()">Add Certification</button>
+    </div>
+    <!-- Projects -->
+    <div class="section-block">
+      <h3>Projects</h3>
+      <div id="projects"></div>
+      <button type="button" onclick="addProj()">Add Project</button>
+    </div>
+    <!-- Achievements -->
+    <div class="section-block">
+      <h3>Achievements</h3>
+      <div id="achievements"></div>
+      <button type="button" onclick="addAch()">Add Achievement</button>
+    </div>
+    <!-- Theme Switcher -->
+    <label>Theme:
+      <select id="theme" onchange="switchTheme()">
+        <option value="theme-minimal">Minimal</option>
+        <option value="theme-modern">Modern</option>
+        <option value="theme-creative">Creative</option>
+        <option value="theme-classic">Classic</option>
+      </select>
+    </label>
+    <button onclick="downloadPDF()">Download PDF</button>
+  </div>
+  <div class="preview-section">
+    <div id="resume-preview" class="resume">
+      <h1 id="prev-name">Your Name</h1>
+      <h2 id="prev-title">Title</h2>
+      <div id="prev-contact"></div>
+      <div id="prev-links"></div>
+      <h2>Summary</h2>
+      <p id="prev-summary"></p>
+      <h2>Work Experience</h2>
+      <ul id="prev-work"></ul>
+      <h2>Education</h2>
+      <ul id="prev-education"></ul>
+      <h2>Skills</h2>
+      <div id="prev-skills"></div>
+      <h2>Certifications</h2>
+      <ul id="prev-certs"></ul>
+      <h2>Projects</h2>
+      <ul id="prev-projects"></ul>
+      <h2>Achievements</h2>
+      <ul id="prev-achievements"></ul>
+    </div>
+  </div>
 </div>
-
-<!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-let workCount = 0, eduCount = 0, skillCount = 0;
+let workCount=0, eduCount=0, skillCount=0, certCount=0, projCount=0, achCount=0;
 
-function addWork() {
-    const id = workCount++;
-    document.getElementById('work-experience').innerHTML +=
-        `<div>
-            <input placeholder="Job Title" onchange="updatePreview()"
-                   id="work-title-${id}">
-            <input placeholder="Company" onchange="updatePreview()"
-                   id="work-company-${id}">
-            <input placeholder="Years" onchange="updatePreview()"
-                   id="work-years-${id}">
-            <textarea placeholder="Details" onchange="updatePreview()"
-                      id="work-details-${id}"></textarea>
-        </div>`;
+// -- Work --
+function addWork(){
+  const id=workCount++;
+  document.getElementById("work-experience").innerHTML+=
+  `<div data-id="${id}">
+    <input placeholder="Job Title" onchange="updatePreview()" id="work-title-${id}">
+    <input placeholder="Company" onchange="updatePreview()" id="work-company-${id}">
+    <input placeholder="Years" onchange="updatePreview()" id="work-years-${id}">
+    <textarea placeholder="Details" onchange="updatePreview()" id="work-details-${id}"></textarea>
+    <button type="button" onclick="removeItem(this)">Remove</button>
+  </div>`;
+}
+function addExtra(section){
+  let container, n;
+  if(section==='work'){
+    container=document.getElementById("work-experience");
+    n="workExtra"+Math.random().toString(36).slice(2,8);
+    container.innerHTML+=
+      `<input placeholder="Custom Field" onchange="updatePreview()" id="${n}">`;
+  }
+  else if(section==='edu'){
+    container=document.getElementById("education");
+    n="eduExtra"+Math.random().toString(36).slice(2,8);
+    container.innerHTML+=
+      `<input placeholder="Custom Field" onchange="updatePreview()" id="${n}">`;
+  }
+  updatePreview();
+}
+// -- Education --
+function addEducation(){
+  const id=eduCount++;
+  document.getElementById("education").innerHTML+=
+  `<div data-id="${id}">
+    <input placeholder="Degree" onchange="updatePreview()" id="edu-degree-${id}">
+    <input placeholder="Institution" onchange="updatePreview()" id="edu-inst-${id}">
+    <input placeholder="Years" onchange="updatePreview()" id="edu-years-${id}">
+    <button type="button" onclick="removeItem(this)">Remove</button>
+  </div>`;
+}
+// -- Skills --
+function addSkill(){
+  const id=skillCount++;
+  document.getElementById("skills").innerHTML+=
+  `<div data-id="${id}">
+    <input placeholder="Skill" onchange="updatePreview()" id="skill-${id}">
+    <button type="button" onclick="removeItem(this)">Remove</button>
+  </div>`;
+}
+// -- Certifications --
+function addCert(){
+  const id=certCount++;
+  document.getElementById("certs").innerHTML+=
+  `<div data-id="${id}">
+    <input placeholder="Certification" onchange="updatePreview()" id="cert-${id}">
+    <input placeholder="Year" onchange="updatePreview()" id="cert-year-${id}">
+    <button type="button" onclick="removeItem(this)">Remove</button>
+  </div>`;
+}
+// -- Projects --
+function addProj(){
+  const id=projCount++;
+  document.getElementById("projects").innerHTML+=
+  `<div data-id="${id}">
+    <input placeholder="Project Title" onchange="updatePreview()" id="proj-title-${id}">
+    <input placeholder="Link" onchange="updatePreview()" id="proj-link-${id}">
+    <textarea placeholder="Description" onchange="updatePreview()" id="proj-desc-${id}"></textarea>
+    <button type="button" onclick="removeItem(this)">Remove</button>
+  </div>`;
+}
+// -- Achievements --
+function addAch(){
+  const id=achCount++;
+  document.getElementById("achievements").innerHTML+=
+  `<div data-id="${id}">
+    <input placeholder="Achievement" onchange="updatePreview()" id="ach-${id}">
+    <button type="button" onclick="removeItem(this)">Remove</button>
+  </div>`;
+}
+// Remove item
+function removeItem(btn) {
+  btn.parentElement.remove();
+  updatePreview();
 }
 
-function addEducation() {
-    const id = eduCount++;
-    document.getElementById('education').innerHTML +=
-        `<div>
-            <input placeholder="Degree" onchange="updatePreview()"
-                   id="edu-degree-${id}">
-            <input placeholder="Institution" onchange="updatePreview()"
-                   id="edu-inst-${id}">
-            <input placeholder="Years" onchange="updatePreview()"
-                   id="edu-years-${id}">
-        </div>`;
-}
-
-function addSkill() {
-    const id = skillCount++;
-    document.getElementById('skills').innerHTML +=
-        `<div>
-            <input placeholder="Skill" onchange="updatePreview()"
-                   id="skill-${id}">
-        </div>`;
-}
-
+// Preview logic (mobile & desktop)
 function updatePreview() {
-    document.getElementById('prev-name').innerText = document.getElementById('name').value || "Your Name";
-    document.getElementById('prev-title').innerText = document.getElementById('title').value || "Your Title";
-    document.getElementById('prev-contact').innerText =
-        (document.getElementById('email').value || "Email") + " | " +
-        (document.getElementById('phone').value || "Phone");
-    document.getElementById('prev-summary').innerText = document.getElementById('summary').value;
+  document.getElementById('prev-name').innerText = document.getElementById('name').value || "Your Name";
+  document.getElementById('prev-title').innerText = document.getElementById('title').value || "Title";
+  document.getElementById('prev-contact').innerText =
+    (document.getElementById('email').value||"Email") + " | " +
+    (document.getElementById('phone').value||"Phone") +
+    ((document.getElementById('location').value)? " | "+document.getElementById('location').value : "");
+  let links = "";
+  links += (document.getElementById('linkedin').value)? "<span class='badge'>LinkedIn</span> "+document.getElementById('linkedin').value+"<br>" : "";
+  links += (document.getElementById('website').value)? "<span class='badge'>Portfolio</span> "+document.getElementById('website').value+"<br>" : "";
+  document.getElementById('prev-links').innerHTML = links;
 
-    // Work preview
-    let workHTML = "";
-    for (let i=0;i<workCount;i++) {
-        const title = document.getElementById(`work-title-${i}`)?.value || "";
-        const company = document.getElementById(`work-company-${i}`)?.value || "";
-        const years = document.getElementById(`work-years-${i}`)?.value || "";
-        const details = document.getElementById(`work-details-${i}`)?.value || "";
-        if (title || company || years || details) {
-            workHTML += `<li><strong>${title}</strong> at ${company} (${years})<br>${details}</li>`;
-        }
+  document.getElementById('prev-summary').innerText = document.getElementById('summary').value;
+
+  // Work
+  let workHTML="";
+  for(let i=0;i<workCount;i++){
+    let t=document.getElementById(`work-title-${i}`);
+    if(t){
+      let title=t.value||"",comp=document.getElementById(`work-company-${i}`)?.value||"",
+      years=document.getElementById(`work-years-${i}`)?.value||"",
+      det=document.getElementById(`work-details-${i}`)?.value||"";
+      workHTML+=`<li><strong>${title}</strong> at ${comp} (${years})<br>${det}</li>`;
     }
-    document.getElementById('prev-work').innerHTML = workHTML;
+  }
+  document.getElementById('prev-work').innerHTML = workHTML;
 
-    // Education preview
-    let eduHTML = "";
-    for (let i=0;i<eduCount;i++) {
-        const degree = document.getElementById(`edu-degree-${i}`)?.value || "";
-        const inst = document.getElementById(`edu-inst-${i}`)?.value || "";
-        const years = document.getElementById(`edu-years-${i}`)?.value || "";
-        if (degree || inst || years) {
-            eduHTML += `<li>${degree} - ${inst} (${years})</li>`;
-        }
+  // Education
+  let eduHTML="";
+  for(let i=0;i<eduCount;i++){
+    let deg=document.getElementById(`edu-degree-${i}`);
+    if(deg){
+      let degree=deg.value||"",inst=document.getElementById(`edu-inst-${i}`)?.value||"",
+      years=document.getElementById(`edu-years-${i}`)?.value||"";
+      eduHTML+=`<li>${degree} - ${inst} (${years})</li>`;
     }
-    document.getElementById('prev-education').innerHTML = eduHTML;
+  }
+  document.getElementById('prev-education').innerHTML = eduHTML;
 
-    // Skills preview
-    let skillHTML = "";
-    for (let i=0;i<skillCount;i++) {
-        const skill = document.getElementById(`skill-${i}`)?.value || "";
-        if (skill) skillHTML += `<li>${skill}</li>`;
-    }
-    document.getElementById('prev-skills').innerHTML = skillHTML;
+  // Skills
+  let skillHTML="";
+  for(let i=0;i<skillCount;i++){
+    let s=document.getElementById(`skill-${i}`);
+    if(s&&s.value)skillHTML+=`<span class="badge">${s.value}</span>`;
+  }
+  document.getElementById('prev-skills').innerHTML = skillHTML;
 
-    // Theme update
-    document.getElementById('resume-preview').className =
-        "resume " + document.getElementById('theme').value;
+  // Certifications
+  let certHTML="";
+  for(let i=0;i<certCount;i++){
+    let c=document.getElementById(`cert-${i}`), y=document.getElementById(`cert-year-${i}`);
+    if(c)certHTML+=`<li>${c.value} (${y?.value||''})</li>`;
+  }
+  document.getElementById('prev-certs').innerHTML = certHTML;
+
+  // Projects
+  let projHTML="";
+  for(let i=0;i<projCount;i++){
+    let t=document.getElementById(`proj-title-${i}`),l=document.getElementById(`proj-link-${i}`),d=document.getElementById(`proj-desc-${i}`);
+    if(t)projHTML+=`<li><strong>${t.value}</strong> <a href="${l?.value||'#'}" target="_blank">${l?.value||""}</a><br>${d?.value||""}</li>`;
+  }
+  document.getElementById('prev-projects').innerHTML = projHTML;
+
+  // Achievements
+  let achHTML="";
+  for(let i=0;i<achCount;i++){
+    let a=document.getElementById(`ach-${i}`);
+    if(a&&a.value) achHTML+=`<li>${a.value}</li>`;
+  }
+  document.getElementById('prev-achievements').innerHTML = achHTML;
 }
 
-function downloadPDF() {
-    const element = document.getElementById('resume-preview');
-    html2pdf().set({
-        margin: 0,
-        filename: 'resume.pdf',
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    }).from(element).save();
+// Theme Switcher
+function switchTheme(){
+  document.body.className = document.getElementById('theme').value;
 }
 
-// Initial default fields
-addWork();
-addEducation();
-addSkill();
+// PDF Download
+function downloadPDF(){
+  let element=document.getElementById('resume-preview');
+  html2pdf().set({
+    margin:0,
+    filename:'resume.pdf',
+    html2canvas:{scale:2},
+    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+  }).from(element).save();
+}
+
+// Initial defaults
+addWork();addEducation();addSkill();addCert();addProj();addAch();
+updatePreview();
 </script>
 </body>
 </html>
