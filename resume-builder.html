@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ATS-Friendly Resume Builder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        display: flex;
+        height: 100vh;
+    }
+    /* Sidebar form */
+    #form-section {
+        width: 35%;
+        padding: 15px;
+        overflow-y: auto;
+        background: #f4f4f4;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+    /* Resume preview section */
+    #preview-section {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background: #eaeaea;
+        overflow-y: auto;
+        padding: 20px;
+    }
+    .resume {
+        background: white;
+        width: 794px; /* A4 width at 96 DPI */
+        min-height: 1123px; /* A4 height */
+        padding: 20mm;
+        box-sizing: border-box;
+    }
+    .theme-default { color: #000; }
+    .theme-blue { color: #004c99; }
+    .theme-green { color: #006400; }
+
+    h1, h2, h3 {
+        margin: 5px 0;
+        border-bottom: 1px solid #ccc;
+    }
+    ul { padding-left: 20px; }
+
+    button { margin-top: 10px; }
+    label { display: block; margin-top: 10px; }
+    input, textarea, select {
+        width: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+        margin-top: 5px;
+    }
+</style>
+</head>
+<body>
+
+<!-- Form Section -->
+<div id="form-section">
+    <h2>Resume Builder</h2>
+    <label>Name: <input type="text" id="name"></label>
+    <label>Title/Position: <input type="text" id="title"></label>
+    <label>Email: <input type="text" id="email"></label>
+    <label>Phone: <input type="text" id="phone"></label>
+    <label>Summary: <textarea id="summary"></textarea></label>
+
+    <h3>Work Experience</h3>
+    <div id="work-experience"></div>
+    <button onclick="addWork()">Add Work Experience</button>
+
+    <h3>Education</h3>
+    <div id="education"></div>
+    <button onclick="addEducation()">Add Education</button>
+
+    <h3>Skills</h3>
+    <div id="skills"></div>
+    <button onclick="addSkill()">Add Skill</button>
+
+    <label>Theme:
+        <select id="theme" onchange="updatePreview()">
+            <option value="theme-default">Default</option>
+            <option value="theme-blue">Blue</option>
+            <option value="theme-green">Green</option>
+        </select>
+    </label>
+
+    <button onclick="downloadPDF()">Download PDF</button>
+</div>
+
+<!-- Preview Section -->
+<div id="preview-section">
+    <div id="resume-preview" class="resume theme-default">
+        <h1 id="prev-name">Your Name</h1>
+        <h3 id="prev-title">Your Title</h3>
+        <p id="prev-contact">Email | Phone</p>
+        <h2>Summary</h2>
+        <p id="prev-summary"></p>
+        <h2>Work Experience</h2>
+        <ul id="prev-work"></ul>
+        <h2>Education</h2>
+        <ul id="prev-education"></ul>
+        <h2>Skills</h2>
+        <ul id="prev-skills"></ul>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+let workCount = 0, eduCount = 0, skillCount = 0;
+
+function addWork() {
+    const id = workCount++;
+    document.getElementById('work-experience').innerHTML +=
+        `<div>
+            <input placeholder="Job Title" onchange="updatePreview()"
+                   id="work-title-${id}">
+            <input placeholder="Company" onchange="updatePreview()"
+                   id="work-company-${id}">
+            <input placeholder="Years" onchange="updatePreview()"
+                   id="work-years-${id}">
+            <textarea placeholder="Details" onchange="updatePreview()"
+                      id="work-details-${id}"></textarea>
+        </div>`;
+}
+
+function addEducation() {
+    const id = eduCount++;
+    document.getElementById('education').innerHTML +=
+        `<div>
+            <input placeholder="Degree" onchange="updatePreview()"
+                   id="edu-degree-${id}">
+            <input placeholder="Institution" onchange="updatePreview()"
+                   id="edu-inst-${id}">
+            <input placeholder="Years" onchange="updatePreview()"
+                   id="edu-years-${id}">
+        </div>`;
+}
+
+function addSkill() {
+    const id = skillCount++;
+    document.getElementById('skills').innerHTML +=
+        `<div>
+            <input placeholder="Skill" onchange="updatePreview()"
+                   id="skill-${id}">
+        </div>`;
+}
+
+function updatePreview() {
+    document.getElementById('prev-name').innerText = document.getElementById('name').value || "Your Name";
+    document.getElementById('prev-title').innerText = document.getElementById('title').value || "Your Title";
+    document.getElementById('prev-contact').innerText =
+        (document.getElementById('email').value || "Email") + " | " +
+        (document.getElementById('phone').value || "Phone");
+    document.getElementById('prev-summary').innerText = document.getElementById('summary').value;
+
+    // Work preview
+    let workHTML = "";
+    for (let i=0;i<workCount;i++) {
+        const title = document.getElementById(`work-title-${i}`)?.value || "";
+        const company = document.getElementById(`work-company-${i}`)?.value || "";
+        const years = document.getElementById(`work-years-${i}`)?.value || "";
+        const details = document.getElementById(`work-details-${i}`)?.value || "";
+        if (title || company || years || details) {
+            workHTML += `<li><strong>${title}</strong> at ${company} (${years})<br>${details}</li>`;
+        }
+    }
+    document.getElementById('prev-work').innerHTML = workHTML;
+
+    // Education preview
+    let eduHTML = "";
+    for (let i=0;i<eduCount;i++) {
+        const degree = document.getElementById(`edu-degree-${i}`)?.value || "";
+        const inst = document.getElementById(`edu-inst-${i}`)?.value || "";
+        const years = document.getElementById(`edu-years-${i}`)?.value || "";
+        if (degree || inst || years) {
+            eduHTML += `<li>${degree} - ${inst} (${years})</li>`;
+        }
+    }
+    document.getElementById('prev-education').innerHTML = eduHTML;
+
+    // Skills preview
+    let skillHTML = "";
+    for (let i=0;i<skillCount;i++) {
+        const skill = document.getElementById(`skill-${i}`)?.value || "";
+        if (skill) skillHTML += `<li>${skill}</li>`;
+    }
+    document.getElementById('prev-skills').innerHTML = skillHTML;
+
+    // Theme update
+    document.getElementById('resume-preview').className =
+        "resume " + document.getElementById('theme').value;
+}
+
+function downloadPDF() {
+    const element = document.getElementById('resume-preview');
+    html2pdf().set({
+        margin: 0,
+        filename: 'resume.pdf',
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    }).from(element).save();
+}
+
+// Initial default fields
+addWork();
+addEducation();
+addSkill();
+</script>
+</body>
+</html>
