@@ -2,144 +2,198 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ATS Resume Builder — Responsive & Themed</title>
+  <title>Resume Builder — Your Templates & Modern Themes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    /* Root theme variables */
     :root {
-      --main-bg: #f7f7fc;
+      --main-bg: #f4f6fc;
+      --accent: #2c78e4;
       --card-bg: #fff;
-      --main-c: #222;
-      --accent: #0066cc;
-      --border: #e2e2e2;
-      --h1-size: 2rem;
-      --h2-size: 1.15rem;
+      --border: #e2e2ec;
+      --headline: #222;
+      --font-main: 'Segoe UI', 'Arial', sans-serif;
+      --font-alt: 'Roboto', 'Arial', sans-serif;
     }
-    /* Theme Minimal */
-    .theme-minimal { --main-bg:#f7f7fc; --card-bg:#fff; --main-c:#222; --accent:#0066cc; }
-    /* Theme Modern */
-    .theme-modern { --main-bg:#202032; --card-bg:#26264f; --main-c:#fff; --accent:#4fd4cf; }
-    /* Theme Creative */
-    .theme-creative { --main-bg:#ffe5e0; --card-bg:#fff; --main-c:#232; --accent:#ff6f61; }
-    /* Theme Classic */
-    .theme-classic { --main-bg:#efefef; --card-bg:#fbfbff; --main-c:#2a2d29; --accent:#1c3c66; }
+    /* Theme: Don Draper */
+    .theme-draper { 
+      --main-bg: #f8fafb; --accent: #222; --card-bg: #fff; --border: #ddd; --headline: #222;
+      font-family: 'Arial', serif;
+    }
+    /* Theme: Michael Harris */
+    .theme-harris {
+      --main-bg: #eef2f6; --accent: #212144; --card-bg: #fff; --border: #bbb; --headline: #212144;
+      font-family: 'Roboto', sans-serif;
+    }
+    /* Theme: Prateek Dixit */
+    .theme-dixit {
+      --main-bg: #fff; --accent: #b08968; --card-bg: #faf6f0; --border: #decec2; --headline: #b08968;
+      font-family: 'Avenir', 'Arial', sans-serif;
+    }
+    /* Theme: Sherlock Holmes */
+    .theme-holmes {
+      --main-bg: #233043; --accent: #a67c52; --card-bg: #233043; --border: #a67c52; --headline: #a67c52;
+      font-family: 'Georgia', serif;
+      color: #fff;
+    }
+    /* Theme: Minimal */
+    .theme-minimal { 
+      --main-bg: #fcfcff; --accent: #2c78e4; --card-bg: #fff; --border: #e2e2ec; --headline: #222;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+    }
+    /* Theme: Modern */
+    .theme-modern { 
+      --main-bg: #21244a; --accent: #4fd4cf; --card-bg: #23244f; --border: #31335f; --headline: #fff;
+      font-family: 'Roboto', sans-serif;
+      color: #fff;
+    }
+    /* Theme: Classic */
+    .theme-classic { 
+      --main-bg: #f1ecde; --accent: #102547; --card-bg: #fff; --border: #c4b38b; --headline: #102547;
+      font-family: 'Times New Roman', serif;
+    }
+    /* Theme: Creative */
+    .theme-creative { 
+      --main-bg: #ffe5e0; --accent: #ff6f61; --card-bg: #fff; --border: #ffe5e0; --headline: #ff6f61;
+      font-family: 'Avenir', sans-serif;
+    }
 
+    /* Layout styles */
     body {
       background: var(--main-bg);
-      margin: 0; font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      font-family: var(--font-main);
       min-height: 100vh;
-      color: var(--main-c);
+      color: var(--headline);
+      transition: background 0.2s;
     }
-    .container { display: flex; flex-wrap: wrap; }
+    .container { display: flex; flex-wrap: wrap; min-height: 100vh;}
     .form-section, .preview-section {
       box-sizing: border-box;
-      padding: 20px;
+      padding: 18px;
       width: 100%;
     }
-    @media (min-width: 900px) {
-      .form-section { width: 35%; max-width: 400px; border-right:1px solid var(--border);}
-      .preview-section { width:65%; }
+    @media (min-width: 800px) {
+      .form-section { width: 33%; max-width:370px; border-right:2px solid var(--border);}
+      .preview-section { width: 67%; }
     }
-    .form-section {background:var(--main-bg);}
-    .form-section h2 { margin-top:0;}
-    .form-section label {display:block;margin-top:12px;}
+    .form-section {
+      background: var(--main-bg);
+    }
+    .form-section h2 { margin-top: 0;}
+    .form-section label {display:block;margin-top:12px;font-weight:500;}
     .form-section input, .form-section textarea, .form-section select {
-      width:100%; box-sizing:border-box; padding:7px; margin-top:2px; border:1px solid var(--border); border-radius:3px;}
-    .form-section button {padding:5px 12px;margin:9px 3px 0 0; background:var(--accent);color:#fff;font-weight:600;border:none;border-radius:3px;cursor:pointer;}
+      width:100%; box-sizing:border-box; padding:7px; margin-top:2px; border:1px solid var(--border); border-radius:3px;
+      background:var(--card-bg); font-size:1rem;
+    }
+    .form-section button {padding:7px 14px;margin:9px 5px 0 0;background:var(--accent);color:#fff;border:none;border-radius:3px;cursor:pointer;}
     .form-section .section-block {margin-bottom:13px;}
-    .form-section .add-field {font-size:0.9rem;color:var(--accent);background:none;border:none;cursor:pointer;}
+    .form-section .add-field {font-size:0.95rem;color:var(--accent);background:none;border:none;cursor:pointer;}
 
     .preview-section {display:flex;justify-content:center;align-items:flex-start;}
     .resume {
-      width:100%; max-width:550px; background:var(--card-bg); padding:32px 26px; border-radius:11px; box-shadow:0 4px 18px rgba(40,40,80,.07);
-      min-height:814px;
-      margin:20px auto; box-sizing: border-box;
+      width:100%; max-width:650px; background:var(--card-bg); padding:36px 28px; border-radius:13px; box-shadow:0 4px 24px rgba(60,60,120,.10);
+      min-height:820px;
+      margin:22px auto; box-sizing:border-box;
       font-size:1.05rem;
+      transition:background .2s,color .2s;
     }
-    .resume h1 {font-size:var(--h1-size);margin-bottom:5px;}
-    .resume h2 {font-size:var(--h2-size);color:var(--accent);margin-bottom:2px;text-transform:uppercase;margin-top:22px;}
-    .resume ul {padding-left: 18px;margin:0;}
-    .resume .field-group label {display:none;}
-    .badge {display:inline-block;background:var(--accent);color:var(--card-bg);padding:2px 8px;border-radius:10px;font-size:0.95rem;margin:3px 4px 3px 0;}
+    .resume h1 {
+      font-size:2.15rem;
+      margin-bottom:3px; color:var(--accent);
+      font-family: var(--font-alt);
+    }
+    .resume h2 {
+      font-size:1.12rem;
+      color:var(--accent);
+      margin-bottom:2px;
+      text-transform:uppercase;
+      font-weight:600;
+      margin-top:20px;
+    }
+    .resume ul {padding-left: 17px;margin:0;}
+    .resume .badge {display:inline-block;background:var(--accent);color:var(--card-bg);padding:2px 9px;border-radius:9px;font-size:0.98rem;margin:3px 4px 5px 0;}
+    .resume .contact-row {font-size:.97rem;margin-bottom:6px;color:var(--headline);}
+    .resume .links-row {font-size:.97rem;margin-bottom:9px;}
+    .resume li {margin-bottom:6px;}
+    .resume .section {margin-bottom:3px;}
 
-    /* Responsive adjustments */
-    @media (max-width: 900px) {
+    @media (max-width: 800px) {
       .container {flex-direction:column;}
-      .preview-section {padding:15px;}
-      .resume {min-width:0;width:100%;max-width:100%;}
+      .preview-section {padding:12px;}
+      .resume {width:100%;max-width:100%;padding:13px 5px;}
     }
     @media (max-width: 600px) {
-      .resume {padding:13px 5px;}
+      .resume {padding:10px 2px;}
+      .form-section {padding:11px;}
     }
   </style>
 </head>
 <body class="theme-minimal">
 <div class="container">
   <div class="form-section">
-    <h2>Build Your Resume</h2>
+    <h2>ATS Resume Builder</h2>
+    <label>Template/Theme:
+      <select id="theme" onchange="switchTheme()">
+        <option value="theme-minimal">Minimal (Default)</option>
+        <option value="theme-draper">Don Draper</option>
+        <option value="theme-harris">Michael Harris</option>
+        <option value="theme-dixit">Prateek Dixit</option>
+        <option value="theme-holmes">Sherlock Holmes</option>
+        <option value="theme-modern">Modern</option>
+        <option value="theme-classic">Classic</option>
+        <option value="theme-creative">Creative</option>
+      </select>
+    </label>
     <label>Name: <input type="text" id="name" placeholder="Full name" oninput="updatePreview()"></label>
-    <label>Title/Profession: <input type="text" id="title" placeholder="e.g. Software Engineer" oninput="updatePreview()"></label>
-    <label>Email: <input type="email" id="email" placeholder="your@email.com" oninput="updatePreview()"></label>
-    <label>Phone: <input type="text" id="phone" placeholder="+91-....." oninput="updatePreview()"></label>
+    <label>Title/Profession: <input type="text" id="title" placeholder="Software Engineer" oninput="updatePreview()"></label>
+    <label>Email: <input type="email" id="email" placeholder="you@email.com" oninput="updatePreview()"></label>
+    <label>Phone: <input type="text" id="phone" placeholder="+91-..." oninput="updatePreview()"></label>
     <label>Location: <input type="text" id="location" placeholder="City, Country" oninput="updatePreview()"></label>
-    <label>LinkedIn: <input type="text" id="linkedin" placeholder="linkedin.com/in/you" oninput="updatePreview()"></label>
+    <label>LinkedIn: <input type="text" id="linkedin" placeholder="linkedin.com/in/..." oninput="updatePreview()"></label>
     <label>Portfolio/Website: <input type="text" id="website" placeholder="portfolio.com" oninput="updatePreview()"></label>
-    <label>Summary: <textarea id="summary" rows="3" placeholder="Brief professional summary" oninput="updatePreview()"></textarea></label>
-
-    <!-- Work Experience -->
+    <label>Summary: <textarea id="summary" rows="3" placeholder="Short professional overview..." oninput="updatePreview()"></textarea></label>
     <div class="section-block">
       <h3>Work Experience</h3>
       <div id="work-experience"></div>
-      <button type="button" onclick="addWork()">Add Work Experience</button>
-      <button class="add-field" type="button" onclick="addExtra('work')">+ Add a custom field</button>
+      <button type="button" onclick="addWork()">+ Add Work Experience</button>
+      <button class="add-field" type="button" onclick="addExtra('work')">+ Add custom field</button>
     </div>
-    <!-- Education -->
     <div class="section-block">
       <h3>Education</h3>
       <div id="education"></div>
-      <button type="button" onclick="addEducation()">Add Education</button>
-      <button class="add-field" type="button" onclick="addExtra('edu')">+ Add a custom field</button>
+      <button type="button" onclick="addEducation()">+ Add Education</button>
+      <button class="add-field" type="button" onclick="addExtra('edu')">+ Add custom field</button>
     </div>
-    <!-- Skills -->
     <div class="section-block">
       <h3>Skills</h3>
       <div id="skills"></div>
-      <button type="button" onclick="addSkill()">Add Skill</button>
+      <button type="button" onclick="addSkill()">+ Add Skill</button>
     </div>
-    <!-- Certifications -->
     <div class="section-block">
       <h3>Certifications</h3>
       <div id="certs"></div>
-      <button type="button" onclick="addCert()">Add Certification</button>
+      <button type="button" onclick="addCert()">+ Add Certification</button>
     </div>
-    <!-- Projects -->
     <div class="section-block">
       <h3>Projects</h3>
       <div id="projects"></div>
-      <button type="button" onclick="addProj()">Add Project</button>
+      <button type="button" onclick="addProj()">+ Add Project</button>
     </div>
-    <!-- Achievements -->
     <div class="section-block">
       <h3>Achievements</h3>
       <div id="achievements"></div>
-      <button type="button" onclick="addAch()">Add Achievement</button>
+      <button type="button" onclick="addAch()">+ Add Achievement</button>
     </div>
-    <!-- Theme Switcher -->
-    <label>Theme:
-      <select id="theme" onchange="switchTheme()">
-        <option value="theme-minimal">Minimal</option>
-        <option value="theme-modern">Modern</option>
-        <option value="theme-creative">Creative</option>
-        <option value="theme-classic">Classic</option>
-      </select>
-    </label>
-    <button onclick="downloadPDF()">Download PDF</button>
+    <button onclick="loadPreset()" style="background:var(--border);color:var(--accent);margin-top:15px;">Load Demo/Famous Template</button>
+    <button onclick="downloadPDF()">Download as PDF</button>
   </div>
   <div class="preview-section">
     <div id="resume-preview" class="resume">
       <h1 id="prev-name">Your Name</h1>
       <h2 id="prev-title">Title</h2>
-      <div id="prev-contact"></div>
-      <div id="prev-links"></div>
+      <div id="prev-contact" class="contact-row"></div>
+      <div id="prev-links" class="links-row"></div>
       <h2>Summary</h2>
       <p id="prev-summary"></p>
       <h2>Work Experience</h2>
@@ -175,21 +229,17 @@ function addWork(){
 }
 function addExtra(section){
   let container, n;
+  n=Math.random().toString(36).slice(2,8);
   if(section==='work'){
     container=document.getElementById("work-experience");
-    n="workExtra"+Math.random().toString(36).slice(2,8);
-    container.innerHTML+=
-      `<input placeholder="Custom Field" onchange="updatePreview()" id="${n}">`;
+    container.innerHTML+=`<input placeholder="Custom Field" onchange="updatePreview()" id="workExtra-${n}">`;
   }
-  else if(section==='edu'){
+  if(section==='edu'){
     container=document.getElementById("education");
-    n="eduExtra"+Math.random().toString(36).slice(2,8);
-    container.innerHTML+=
-      `<input placeholder="Custom Field" onchange="updatePreview()" id="${n}">`;
+    container.innerHTML+=`<input placeholder="Custom Field" onchange="updatePreview()" id="eduExtra-${n}">`;
   }
   updatePreview();
 }
-// -- Education --
 function addEducation(){
   const id=eduCount++;
   document.getElementById("education").innerHTML+=
@@ -200,7 +250,6 @@ function addEducation(){
     <button type="button" onclick="removeItem(this)">Remove</button>
   </div>`;
 }
-// -- Skills --
 function addSkill(){
   const id=skillCount++;
   document.getElementById("skills").innerHTML+=
@@ -209,7 +258,6 @@ function addSkill(){
     <button type="button" onclick="removeItem(this)">Remove</button>
   </div>`;
 }
-// -- Certifications --
 function addCert(){
   const id=certCount++;
   document.getElementById("certs").innerHTML+=
@@ -219,7 +267,6 @@ function addCert(){
     <button type="button" onclick="removeItem(this)">Remove</button>
   </div>`;
 }
-// -- Projects --
 function addProj(){
   const id=projCount++;
   document.getElementById("projects").innerHTML+=
@@ -230,7 +277,6 @@ function addProj(){
     <button type="button" onclick="removeItem(this)">Remove</button>
   </div>`;
 }
-// -- Achievements --
 function addAch(){
   const id=achCount++;
   document.getElementById("achievements").innerHTML+=
@@ -239,13 +285,12 @@ function addAch(){
     <button type="button" onclick="removeItem(this)">Remove</button>
   </div>`;
 }
-// Remove item
 function removeItem(btn) {
   btn.parentElement.remove();
   updatePreview();
 }
 
-// Preview logic (mobile & desktop)
+// Responsive preview
 function updatePreview() {
   document.getElementById('prev-name').innerText = document.getElementById('name').value || "Your Name";
   document.getElementById('prev-title').innerText = document.getElementById('title').value || "Title";
@@ -257,7 +302,6 @@ function updatePreview() {
   links += (document.getElementById('linkedin').value)? "<span class='badge'>LinkedIn</span> "+document.getElementById('linkedin').value+"<br>" : "";
   links += (document.getElementById('website').value)? "<span class='badge'>Portfolio</span> "+document.getElementById('website').value+"<br>" : "";
   document.getElementById('prev-links').innerHTML = links;
-
   document.getElementById('prev-summary').innerText = document.getElementById('summary').value;
 
   // Work
@@ -271,6 +315,9 @@ function updatePreview() {
       workHTML+=`<li><strong>${title}</strong> at ${comp} (${years})<br>${det}</li>`;
     }
   }
+  // Extra fields
+  const extraWorkFields = document.querySelectorAll("[id^=workExtra-]");
+  extraWorkFields.forEach((f)=>{ if(f.value)workHTML+=`<li>${f.value}</li>`; });
   document.getElementById('prev-work').innerHTML = workHTML;
 
   // Education
@@ -283,6 +330,9 @@ function updatePreview() {
       eduHTML+=`<li>${degree} - ${inst} (${years})</li>`;
     }
   }
+  // Extra fields
+  const extraEduFields = document.querySelectorAll("[id^=eduExtra-]");
+  extraEduFields.forEach((f)=>{ if(f.value)eduHTML+=`<li>${f.value}</li>`; });
   document.getElementById('prev-education').innerHTML = eduHTML;
 
   // Skills
@@ -321,6 +371,7 @@ function updatePreview() {
 // Theme Switcher
 function switchTheme(){
   document.body.className = document.getElementById('theme').value;
+  updatePreview();
 }
 
 // PDF Download
@@ -334,8 +385,104 @@ function downloadPDF(){
   }).from(element).save();
 }
 
-// Initial defaults
-addWork();addEducation();addSkill();addCert();addProj();addAch();
+// Template presets — load sample data matching your styles
+function loadPreset(){
+  const sel = document.getElementById('theme').value;
+  // Clear existing inputs
+  document.getElementById('name').value="";
+  document.getElementById('title').value="";
+  document.getElementById('email').value="";
+  document.getElementById('phone').value="";
+  document.getElementById('location').value="";
+  document.getElementById('linkedin').value="";
+  document.getElementById('website').value="";
+  document.getElementById('summary').value="";
+  ["work-experience","education","skills","certs","projects","achievements"].forEach(id=>{document.getElementById(id).innerHTML="";})
+  workCount=eduCount=skillCount=certCount=projCount=achCount=0;
+  // Now fill sample values by template
+  switch(sel){
+    case 'theme-draper':
+      document.getElementById('name').value="Don Draper";
+      document.getElementById('title').value="ATS Templates Specialist";
+      document.getElementById('email').value="don.draper@example.com";
+      document.getElementById('phone').value="+1-202-555-0173";
+      document.getElementById('location').value="New York, USA";
+      document.getElementById('linkedin').value="linkedin.com/in/don-draper";
+      document.getElementById('website').value="twitter.com/don_draper";
+      document.getElementById('summary').value = "Experienced ATS Templates Specialist with a demonstrated history in advertising. Skilled in ATS systems, graphic design, typography, and leadership. Strong professional with a Bachelor's Degree in Graphic Design and an Associate's Degree in Advertising.";
+      addWork();document.getElementById('work-title-0').value="Senior ATS Templates Specialist";document.getElementById('work-company-0').value="Sterling Cooper & Partners";document.getElementById('work-years-0').value="2012–2020";document.getElementById('work-details-0').value="Developed and implemented ATS-friendly resume templates. Led a junior team.";
+      addWork();document.getElementById('work-title-1').value="ATS Templates Specialist";document.getElementById('work-company-1').value="Sterling Cooper Draper Pryce";document.getElementById('work-years-1').value="2007–2011";document.getElementById('work-details-1').value="Created ATS-friendly resume templates. Collaborated with creative team on visual design.";
+      addEducation();document.getElementById('edu-degree-0').value="Bachelor's in Graphic Design";document.getElementById('edu-inst-0').value="City College of NY";document.getElementById('edu-years-0').value="1949";
+      addEducation();document.getElementById('edu-degree-1').value="Associate's in Advertising";document.getElementById('edu-inst-1').value="City College of NY";document.getElementById('edu-years-1').value="1947";
+      addSkill();document.getElementById('skill-0').value="ATS Systems";
+      addSkill();document.getElementById('skill-1').value="Typography";
+      addSkill();document.getElementById('skill-2').value="Graphic Design";
+      addSkill();document.getElementById('skill-3').value="Leadership";
+      break;
+    case 'theme-harris':
+      document.getElementById('name').value="Michael Harris";
+      document.getElementById('title').value="Digital Marketing Manager";
+      document.getElementById('email').value="michael.harris@email.com";
+      document.getElementById('phone').value="+61 412 345 678";
+      document.getElementById('location').value="Sydney, Australia";
+      document.getElementById('linkedin').value="linkedin.com/in/michaelharris";
+      document.getElementById('summary').value = "Results-oriented marketing professional with over 5 years of experience in digital marketing, brand strategy, and content creation. Proven ability to drive brand growth, increase online engagement, and deliver data-driven results.";
+      addWork();document.getElementById('work-title-0').value="Marketing Manager";document.getElementById('work-company-0').value="XYZ Corporation";document.getElementById('work-years-0').value="2022–Present";document.getElementById('work-details-0').value="Lead a team of 5 executing digital marketing strategies. Achieved a 35% increase in website traffic and 50% boost in social media.";
+      addWork();document.getElementById('work-title-1').value="Digital Marketing Specialist";document.getElementById('work-company-1').value="ABC Solutions";document.getElementById('work-years-1').value="2018–2021";document.getElementById('work-details-1').value="Developed SEO/SEM strategies increasing traffic by 25%. Managed ad campaigns and content.";
+      addEducation();document.getElementById('edu-degree-0').value="Bachelor of Marketing";document.getElementById('edu-inst-0').value="University of Sydney";document.getElementById('edu-years-0').value="2018";
+      addSkill();document.getElementById('skill-0').value="SEO & SEM";
+      addSkill();document.getElementById('skill-1').value="Google Analytics";
+      addSkill();document.getElementById('skill-2').value="Social Media Marketing";
+      addSkill();document.getElementById('skill-3').value="Content Creation";
+      addSkill();document.getElementById('skill-4').value="Copywriting";
+      addCert();document.getElementById('cert-0').value="Google Analytics Certified";document.getElementById('cert-year-0').value="";
+      addCert();document.getElementById('cert-1').value="Facebook Blueprint";document.getElementById('cert-year-1').value="";
+      addCert();document.getElementById('cert-2').value="HubSpot Inbound Marketing";document.getElementById('cert-year-2').value="";
+      break;
+    case 'theme-dixit':
+      document.getElementById('name').value="Prateek Dixit";
+      document.getElementById('title').value="Business Services";
+      document.getElementById('email').value="dixit.prathik67@gmail.com";
+      document.getElementById('phone').value="9717172170";
+      document.getElementById('location').value="A1 Pul Prehladpur";
+      document.getElementById('summary').value = "Seeking a challenging position in a reputable organization to expand and utilize my learning, skills, and knowledge. Possess excellent sales and communication skills and an eye for detail.";
+      addWork();document.getElementById('work-title-0').value="Service Business Executive";document.getElementById('work-company-0').value="Serviclue Business Services";document.getElementById('work-years-0').value="2020–2024";document.getElementById('work-details-0').value="";
+      addWork();document.getElementById('work-title-1').value="Operations Assistant";document.getElementById('work-company-1').value="Reboot Xp";document.getElementById('work-years-1').value="2024–2025";document.getElementById('work-details-1').value="";
+      addEducation();document.getElementById('edu-degree-0').value="10th, CBSE";document.getElementById('edu-inst-0').value="CBSE";document.getElementById('edu-years-0').value="2012";
+      addEducation();document.getElementById('edu-degree-1').value="12th, NIOS";document.getElementById('edu-inst-1').value="NIOS";document.getElementById('edu-years-1').value="2016";
+      addSkill();document.getElementById('skill-0').value="Communication";
+      addSkill();document.getElementById('skill-1').value="Teamwork";
+      addSkill();document.getElementById('skill-2').value="Organization";
+      break;
+    case 'theme-holmes':
+      document.getElementById('name').value="Sherlock Holmes";
+      document.getElementById('title').value="ATS Format Specialist";
+      document.getElementById('email').value="sherlock.holmes@detective.com";
+      document.getElementById('phone').value="+44 20 7224 3688";
+      document.getElementById('location').value="221B Baker Street, London";
+      document.getElementById('linkedin').value="linkedin.com/in/sherlockholmes";
+      document.getElementById('website').value="twitter.com/sherlockholmes";
+      document.getElementById('summary').value = "Highly analytical and detail-oriented professional with a background in solving complex problems. Proven ability to think logically and apply advanced research skills.";
+      addWork();document.getElementById('work-title-0').value="Private Detective";document.getElementById('work-company-0').value="Self-Employed";document.getElementById('work-years-0').value="1881–1904";document.getElementById('work-details-0').value="Solved complex cases using analytical skills and logical reasoning. Developed advanced research and information gathering skills.";
+      addWork();document.getElementById('work-title-1').value="Consultant";document.getElementById('work-company-1').value="Scotland Yard";document.getElementById('work-years-1').value="1881–1904";document.getElementById('work-details-1').value="Assisted in solving complex criminal cases. Provided expert advice and insights based on evidence analysis.";
+      addEducation();document.getElementById('edu-degree-0').value="Bachelor's in Chemistry";document.getElementById('edu-inst-0').value="Cambridge";document.getElementById('edu-years-0').value="1878";
+      addEducation();document.getElementById('edu-degree-1').value="Diploma in Criminology";document.getElementById('edu-inst-1').value="London";document.getElementById('edu-years-1').value="1880";
+      addSkill();document.getElementById('skill-0').value="Analytical Thinking";
+      addSkill();document.getElementById('skill-1').value="Research";
+      addSkill();document.getElementById('skill-2').value="Logical Reasoning";
+      addSkill();document.getElementById('skill-3').value="Problem Solving";
+      addSkill();document.getElementById('skill-4').value="Observation Skills";
+      break;
+    default:
+      // Minimal/Modern/Creative/Classic: add empty default sections
+      addWork();addEducation();addSkill();
+      break;
+  }
+  updatePreview();
+}
+
+// Initial default fields
+addWork();addEducation();addSkill();
 updatePreview();
 </script>
 </body>
