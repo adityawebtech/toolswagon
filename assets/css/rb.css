@@ -1710,3 +1710,11 @@ select.form-control {
     height: 297mm;
   }
 }
+
+/* Ensure hidden works for overlay (and everywhere!) */
+.hidden {
+  display: none !important;
+}
+.loading-overlay.hidden {
+  display: none !important;
+}
