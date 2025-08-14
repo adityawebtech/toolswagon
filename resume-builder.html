@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder Pro - Create Professional Resumes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-spinner"></div>
+        <p>Generating PDF...</p>
+    </div>
+
+    <!-- Homepage - Template Gallery -->
+    <main id="homepage" class="homepage">
+        <header class="homepage-header">
+            <div class="container">
+                <h1 class="homepage-title">Resume Builder Pro</h1>
+                <p class="homepage-subtitle">Create professional, ATS-optimized resumes with 10 unique templates</p>
+            </div>
+        </header>
+
+        <section class="template-gallery">
+            <div class="container">
+                <h2 class="section-title">Choose Your Template</h2>
+                <div class="template-filters">
+                    <button class="filter-btn active" data-filter="all">All Templates</button>
+                    <button class="filter-btn" data-filter="modern">Modern</button>
+                    <button class="filter-btn" data-filter="creative">Creative</button>
+                    <button class="filter-btn" data-filter="professional">Professional</button>
+                    <button class="filter-btn" data-filter="minimalist">Minimalist</button>
+                    <button class="filter-btn" data-filter="classic">Classic</button>
+                </div>
+                <div id="templates-grid" class="templates-grid">
+                    <!-- Templates will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Resume Builder Interface -->
+    <main id="builder" class="builder hidden">
+        <!-- Builder Header -->
+        <header class="builder-header">
+            <div class="builder-nav">
+                <button id="back-to-templates" class="btn btn--secondary">← Templates</button>
+                <div class="builder-title">
+                    <h1>Resume Builder</h1>
+                    <span id="current-template-name"></span>
+                </div>
+                <div class="builder-actions">
+                    <button id="save-resume" class="btn btn--outline">💾 Save</button>
+                    <button id="load-resume" class="btn btn--outline">📁 Load</button>
+                    <button id="import-data" class="btn btn--outline">📥 Import</button>
+                    <button id="export-data" class="btn btn--outline">📤 Export</button>
+                    <button id="export-pdf" class="btn btn--primary">📄 Export PDF</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="builder-content">
+            <!-- Left Panel - Form Editor -->
+            <div class="builder-sidebar">
+                <div class="sidebar-tabs">
+                    <button class="tab-btn active" data-tab="content">📝 Content</button>
+                    <button class="tab-btn" data-tab="customize">🎨 Customize</button>
+                    <button class="tab-btn" data-tab="sections">📋 Sections</button>
+                </div>
+
+                <!-- Content Tab -->
+                <div id="content-tab" class="tab-content active">
+                    <div class="form-sections" id="form-sections">
+                        <!-- Personal Information -->
+                        <div class="form-section" data-section="personal">
+                            <div class="section-header">
+                                <span class="section-icon">👤</span>
+                                <h3>Personal Information</h3>
+                                <div class="section-controls">
+                                    <span class="drag-handle">⋮⋮</span>
+                                </div>
+                            </div>
+                            <div class="section-content">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Full Name *</label>
+                                        <input type="text" class="form-control" name="fullName" placeholder="John Doe" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Job Title *</label>
+                                        <input type="text" class="form-control" name="jobTitle" placeholder="Software Engineer" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Email *</label>
+                                        <input type="email" class="form-control" name="email" placeholder="john@example.com" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Phone</label>
+                                        <input type="tel" class="form-control" name="phone" placeholder="+1 (555) 123-4567">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Location</label>
+                                        <input type="text" class="form-control" name="location" placeholder="City, State">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">LinkedIn</label>
+                                        <input type="url" class="form-control" name="linkedin" placeholder="linkedin.com/in/username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Website</label>
+                                    <input type="url" class="form-control" name="website" placeholder="https://yourwebsite.com">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Professional Summary -->
+                        <div class="form-section" data-section="summary">
+                            <div class="section-header">
+                                <span class="section-icon">📝</span>
+                                <h3>Professional Summary</h3>
+                                <div class="section-controls">
+                                    <span class="drag-handle">⋮⋮</span>
+                                    <button class="toggle-section" title="Toggle section">👁️</button>
+                                </div>
+                            </div>
+                            <div class="section-content">
+                                <div class="form-group">
+                                    <label class="form-label">Summary</label>
+                                    <textarea class="form-control" name="summary" rows="4" placeholder="Write a compelling professional summary that highlights your key achievements, skills, and career goals..." maxlength="500"></textarea>
+                                    <div class="char-count">0/500 characters</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Work Experience -->
+                        <div class="form-section" data-section="experience">
+                            <div class="section-header">
+                                <span class="section-icon">💼</span>
+                                <h3>Work Experience</h3>
+                                <div class="section-controls">
+                                    <span class="drag-handle">⋮⋮</span>
+                                    <button class="add-item btn btn--sm">+ Add Experience</button>
+                                </div>
+                            </div>
+                            <div class="section-content">
+                                <div id="experience-list" class="items-list">
+                                    <!-- Experience items will be added here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Education -->
+                        <div class="form-section" data-section="education">
+                            <div class="section-header">
+                                <span class="section-icon">🎓</span>
+                                <h3>Education</h3>
+                                <div class="section-controls">
+                                    <span class="drag-handle">⋮⋮</span>
+                                    <button class="add-item btn btn--sm">+ Add Education</button>
+                                </div>
+                            </div>
+                            <div class="section-content">
+                                <div id="education-list" class="items-list">
+                                    <!-- Education items will be added here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="form-section" data-section="skills">
+                            <div class="section-header">
+                                <span class="section-icon">⚡</span>
+                                <h3>Skills</h3>
+                                <div class="section-controls">
+                                    <span class="drag-handle">⋮⋮</span>
+                                    <button class="add-item btn btn--sm">+ Add Skill</button>
+                                    <button class="toggle-section" title="Toggle section">👁️</button>
+                                </div>
+                            </div>
+                            <div class="section-content">
+                                <div id="skills-list" class="items-list">
+                                    <!-- Skills will be added here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Projects -->
+                        <div class="form-section" data-section="projects">
+                            <div class="section-header">
+                                <span class="section-icon">🚀</span>
+                                <h3>Projects</h3>
+                                <div class="section-controls">
+                                    <span class="drag-handle">⋮⋮</span>
+                                    <button class="add-item btn btn--sm">+ Add Project</button>
+                                    <button class="toggle-section" title="Toggle section">👁️</button>
+                                </div>
+                            </div>
+                            <div class="section-content">
+                                <div id="projects-list" class="items-list">
+                                    <!-- Project items will be added here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Certifications -->
+                        <div class="form-section" data-section="certifications">
+                            <div class="section-header">
+                                <span class="section-icon">🏆</span>
+                                <h3>Certifications</h3>
+                                <div class="section-controls">
+                                    <span class="drag-handle">⋮⋮</span>
+                                    <button class="add-item btn btn--sm">+ Add Certification</button>
+                                    <button class="toggle-section" title="Toggle section">👁️</button>
+                                </div>
+                            </div>
+                            <div class="section-content">
+                                <div id="certifications-list" class="items-list">
+                                    <!-- Certification items will be added here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Custom Section Button -->
+                    <div class="custom-section-controls">
+                        <button id="add-custom-section" class="btn btn--outline btn--full-width">➕ Add Custom Section</button>
+                    </div>
+                </div>
+
+                <!-- Customize Tab -->
+                <div id="customize-tab" class="tab-content">
+                    <div class="customization-panel">
+                        <div class="customize-section">
+                            <h4>Template Style</h4>
+                            <div id="template-thumbnails" class="template-thumbnails">
+                                <!-- Template thumbnails will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="customize-section">
+                            <h4>Color Scheme</h4>
+                            <div id="color-palettes" class="color-palettes">
+                                <!-- Color palettes will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="customize-section">
+                            <h4>Typography</h4>
+                            <div class="form-group">
+                                <label class="form-label">Font Family</label>
+                                <select id="font-selector" class="form-control">
+                                    <!-- Font options will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Font Size</label>
+                                <input type="range" id="font-size-control" min="12" max="16" value="14" class="range-input">
+                                <span class="range-value">14px</span>
+                            </div>
+                        </div>
+                        
+                        <div class="customize-section">
+                            <h4>Layout</h4>
+                            <div class="layout-controls">
+                                <div class="form-group">
+                                    <label class="form-label">Margins</label>
+                                    <input type="range" id="margin-control" min="10" max="40" value="20" class="range-input">
+                                    <span class="range-value">20px</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Line Height</label>
+                                    <input type="range" id="line-height-control" min="1.2" max="2" step="0.1" value="1.5" class="range-input">
+                                    <span class="range-value">1.5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sections Tab -->
+                <div id="sections-tab" class="tab-content">
+                    <div class="sections-manager">
+                        <h4>Section Visibility</h4>
+                        <div id="section-visibility" class="section-toggles">
+                            <!-- Section visibility toggles will be populated -->
+                        </div>
+                        
+                        <h4>Section Order</h4>
+                        <p class="help-text">Drag sections in the Content tab to reorder them</p>
+                        
+                        <h4>Custom Sections</h4>
+                        <div id="custom-sections-list" class="custom-sections">
+                            <!-- Custom sections will be listed here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Live Preview -->
+            <div class="builder-preview">
+                <div class="preview-header">
+                    <div class="preview-controls">
+                        <button id="mobile-toggle" class="btn btn--sm mobile-only">📱 Form</button>
+                        <button id="zoom-out" class="btn btn--sm">−</button>
+                        <span id="zoom-level">100%</span>
+                        <button id="zoom-in" class="btn btn--sm">+</button>
+                        <button id="reset-zoom" class="btn btn--sm">Reset</button>
+                    </div>
+                </div>
+                <div class="preview-container">
+                    <div id="resume-preview" class="resume-preview">
+                        <!-- Resume preview will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- Save/Load Modal -->
+    <div id="save-load-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Save Resume</h3>
+                <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="save-form" class="modal-form">
+                    <div class="form-group">
+                        <label class="form-label">Resume Name</label>
+                        <input type="text" id="resume-name" class="form-control" placeholder="My Resume">
+                    </div>
+                </div>
+                <div id="load-list" class="saved-resumes hidden">
+                    <!-- Saved resumes will be listed here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-cancel" class="btn btn--secondary">Cancel</button>
+                <button id="modal-confirm" class="btn btn--primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Section Modal -->
+    <div id="custom-section-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Custom Section</h3>
+                <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Section Name</label>
+                    <input type="text" id="custom-section-name" class="form-control" placeholder="e.g., Volunteer Work, Publications, Awards">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Section Icon</label>
+                    <input type="text" id="custom-section-icon" class="form-control" placeholder="🌟" maxlength="2">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Section Type</label>
+                    <select id="custom-section-type" class="form-control">
+                        <option value="list">List Items (like Experience/Education)</option>
+                        <option value="text">Simple Text</option>
+                        <option value="skills">Skills/Tags</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="custom-section-cancel" class="btn btn--secondary">Cancel</button>
+                <button id="custom-section-add" class="btn btn--primary">Add Section</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import/Export Modal -->
+    <div id="import-export-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="import-export-title">Import Data</h3>
+                <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="import-content">
+                    <div class="form-group">
+                        <label class="form-label">Upload JSON File</label>
+                        <input type="file" id="import-file" class="form-control" accept=".json">
+                    </div>
+                    <p class="help-text">Or paste JSON data:</p>
+                    <textarea id="import-text" class="form-control" rows="8" placeholder="Paste your resume data JSON here..."></textarea>
+                </div>
+                <div id="export-content" class="hidden">
+                    <p>Copy the JSON data below to backup your resume:</p>
+                    <textarea id="export-text" class="form-control" rows="8" readonly></textarea>
+                    <button id="copy-export" class="btn btn--outline">📋 Copy to Clipboard</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="import-export-cancel" class="btn btn--secondary">Cancel</button>
+                <button id="import-export-confirm" class="btn btn--primary">Import</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
